@@ -10,6 +10,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
         <title>THIÊN ĐƯỜNG LÀM ĐẸP</title>
+        <link rel="icon" href="https://cdn01.beelancer.vn/blog/wp-content/uploads/2021/07/Maquillaje-Nina-Maquillaje-Nina-Nina-Pintada-A-Mano-Ojos-De-Nina-PNG-y-PSD-para-Descargar-Gratis-_-Pngtree.jpg" type="image/x-icon">
         <link href="/public/frontend/css/bootstrap.min.css" rel="stylesheet">
         <link href="/public/frontend/css/font-awesome.min.css" rel="stylesheet">
         <!-- Fonts -->
@@ -66,7 +67,7 @@
                                 <path d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v13.5zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
                               </svg>
                               <div class=" text-lg font-semibold"><a class="nav-link" href="introduce">Introduce</a></div>
-                            </div>
+                        </div>
                     </li>
                     <li class="nav-item dropdown ml-2">
                         <div class="flex items-center">

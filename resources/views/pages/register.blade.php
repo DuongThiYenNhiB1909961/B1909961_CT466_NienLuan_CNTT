@@ -36,11 +36,6 @@
             </div>
             <button type="submit" class="btn btn-danger">Register</button>
         </form>
-        
-
-            <footer class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0 pt-5">
-                ThienDuongLamDep_2023
-            </footer>
     </div>
 </div>
 @endsection
