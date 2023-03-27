@@ -30,7 +30,8 @@ class ProductController extends Controller
         ->orderby('product_id','desc')->get();
         // ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
         // ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
-        // ->orderby('tb_product.product_id','desc')->get();
+        // ->orderby('product_id','desc')->get();
+
         $manager_product = view('admin.all_product')->with('all_product',$all_product);
         return view('admin_layout')->with('admin.all_product',$manager_product);
     }
@@ -80,7 +81,7 @@ class ProductController extends Controller
 
         $edit_product = DB::table('tb_product')->where('product_id',$product_id)->get();
         $manager_product = view('admin.edit_product')->with('edit_product',$edit_product)->with('cate_product',$cate_product)
-            ->with('bran_product',$brand_product);
+            ->with('brand_product',$brand_product);
 
         return view('admin_layout')->with('admin.edit_product',$manager_product);
     }

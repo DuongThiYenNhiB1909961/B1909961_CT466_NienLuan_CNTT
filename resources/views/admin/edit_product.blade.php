@@ -54,7 +54,7 @@
                             </select>
                         </div>
 
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Thương hiệu</label>
                             <select name="product_brand" class="form-control input-sm m-bot15">
                                 @foreach ($brand_product as $key => $brand)
@@ -65,7 +65,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                        </div> --}}
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Hiển thị</label>
                             <select name="product_status" class="form-control input-sm m-bot15">
