@@ -28,7 +28,7 @@
         <script src="resources/js/morris.js"></script>
     </head>
 <body>
-<section id="container">
+<section id="container rounded">
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->

@@ -46,6 +46,8 @@
               <th>Giá mỹ phẩm</th>
               <th>Hình ảnh mỹ phẩm</th>
               <th>Mô tả mỹ phẩm</th>
+              <th>Danh mục</th>
+              <th>Thương Hiệu</th>
               
               <th>Hiển thị</th>
               <th style="width:30px;"></th>
@@ -59,6 +61,8 @@
               <td>{{$pro->product_price}}</td>
               <td><img src="public/uploads/product/{{$pro->product_image}}" height="100" width="100"></td>
               <td>{{$pro->product_desc}}</td>
+              <td>{{$pro->category_name}}</td>
+              <td>{{$pro->brand_name}}</td>
 
               <td><span class="text-ellipsis">
               <?php

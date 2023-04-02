@@ -42,7 +42,7 @@
                             <label for="exampleInputPassword1">Danh mục mỹ phẩm</label>
                             <select name="product_cate" class="form-control input-sm m-bot15">
                                 @foreach ($cate_product as $key => $cate)
-                                    <option value="0">{{$cate->category_name}}</option>
+                                    <option value="{{$cate->id}}">{{$cate->category_name}}</option>
                                 @endforeach
                                 
                             </select>
@@ -51,7 +51,7 @@
                             <label for="exampleInputPassword1">Thương hiệu</label>
                             <select name="product_brand" class="form-control input-sm m-bot15">
                                 @foreach ($brand_product as $key => $brand)
-                                <option value="0">{{$brand->brand_name}}</option>
+                                <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                                 @endforeach
                             </select>
                         </div>

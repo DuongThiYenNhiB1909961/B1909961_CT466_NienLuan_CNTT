@@ -71,4 +71,21 @@ class CategoryProduct extends Controller
         Session::put('message','Xóa danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
     }
+
+    // show_category
+    public function show_category($category_id){
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
+        $category_by_id = DB::table('tb_product')->join('tb_category_product','tb_product.category_id','=','tb_category_product.id')
+        ->where('tb_product.category_id',$category_id)->get();
+        return view('pages.show_cate')->with('category',$cate_product)->with('brand',$brand_product)->with('category_by_id',$category_by_id);
+    }
+    // show_brand
+    public function show_brand($brand_id){
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
+        $brand_by_id = DB::table('tb_product')->join('tb_brand','tb_product.brand_id','=','tb_brand.id')
+        ->where('tb_product.brand_id',$brand_id)->get();
+        return view('pages.show_brand')->with('category',$cate_product)->with('brand',$brand_product)->with('brand_by_id',$brand_by_id);
+    }
 }

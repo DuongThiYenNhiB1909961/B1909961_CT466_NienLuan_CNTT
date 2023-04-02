@@ -27,10 +27,10 @@ class ProductController extends Controller
     public function all_product(){
         $this->AuthLogin();
         $all_product = DB::table('tb_product')
-        ->orderby('product_id','desc')->get();
-        // ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
-        // ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
         // ->orderby('product_id','desc')->get();
+        ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
+        ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
+        ->orderby('product_id','desc')->get();
 
         $manager_product = view('admin.all_product')->with('all_product',$all_product);
         return view('admin_layout')->with('admin.all_product',$manager_product);
@@ -115,5 +115,16 @@ class ProductController extends Controller
         DB::table('tb_product')->where('product_id',$product_id)->delete();
         Session::put('message','Xóa thương hiệu sản phẩm thành công');
         return Redirect::to('all-product');
+    }
+    // product_detail
+    public function product_detail($product_id){
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
+        $detail_product = DB::table('tb_product')
+        ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
+        ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
+        ->where('tb_product.product_id',$product_id)->get();
+
+        return view('pages.product_detail')->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product);
     }
 }

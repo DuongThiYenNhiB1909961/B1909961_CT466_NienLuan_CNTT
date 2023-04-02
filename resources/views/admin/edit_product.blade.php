@@ -44,10 +44,10 @@
                             <label for="exampleInputPassword1">Danh mục mỹ phẩm</label>
                             <select name="product_cate" class="form-control input-sm m-bot15">
                                 @foreach ($cate_product as $key => $cate)
-                                    @if($cate->category_id=$pro->category_id)
-                                    <option selected value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+                                    @if($cate->id=$pro->category_id)
+                                    <option selected value="{{$cate->id}}">{{$cate->category_name}}</option>
                                     @else
-                                    <option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
+                                    <option value="{{$cate->id}}">{{$cate->category_name}}</option>
                                     @endif
                                 @endforeach
                                 
@@ -58,10 +58,10 @@
                             <label for="exampleInputPassword1">Thương hiệu</label>
                             <select name="product_brand" class="form-control input-sm m-bot15">
                                 @foreach ($brand_product as $key => $brand)
-                                    @if($brand->brand_id=$pro->brand_id)
-                                    <option selected value="{{$brand->brand_id}}">{{$brand->brand_name}}</option>
+                                    @if($brand->id=$pro->brand_id)
+                                    <option selected value="{{$brand->id}}">{{$brand->brand_name}}</option>
                                     @else
-                                    <option value="{{$brand->brand_id}}">{{$brand->brand_name}}</option>
+                                    <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                                     @endif
                                 @endforeach
                             </select>
