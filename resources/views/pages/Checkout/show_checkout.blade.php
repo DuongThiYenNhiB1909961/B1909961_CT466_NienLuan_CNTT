@@ -2,12 +2,6 @@
 @section('contact')
 <section id="cart_items">
     <div class="container">
-        <div class="breadcrumbs">
-            <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li class="active">Check out</li>
-            </ol>
-        </div><!--/breadcrums-->
         <?php
                     $customer_id = Session::get('customer_id');
                     if($customer_id != NULL)
@@ -15,13 +9,13 @@
                 ?>
                 <div class="register-req text-danger">
                     <p>Vui lòng kiểm tra thông tin để thanh toán giỏ hàng và xem lại lịch sử mua hàng</p>
-                </div><!--/register-req-->
+                </div>
                 <?php
                     }else{
                 ?>
                 <div class="register-req text-danger">
                     <p>Vui lòng đăng ký hoặc đăng nhập để thanh toán giỏ hàng và xem lại lịch sử mua hàng</p>
-                </div><!--/register-req-->
+                </div>
                 <?php
                 }
                 ?>
@@ -33,7 +27,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="bill-to">
-                                <h4>Thông tin mua hàng</h4>
+                                <h4><b class="text-danger">Thông tin mua hàng</b> </h4>
                                 <div class="form-one">
                                     
                                         <div class="form-row">
@@ -71,7 +65,7 @@
                         </div>
                         <div class="col-sm-6">
                                 <div class="order-message">
-                                    <h4>Ghi chú đơn hàng</h4>
+                                    <h4><b class="text-danger"> Ghi chú đơn hàng</b></h4>
                                     <textarea name="shipping_note" placeholder="Ghi chú đơn hàng của bạn" rows="14" columns="14" ></textarea>
                                 </div>
                         </div>	
@@ -79,21 +73,6 @@
                 </form>				
             
         </div>
-        <div class="review-payment">
-            <h2>Đơn hàng của bạn</h2>
-        </div>
-
-        {{-- <div class="payment-options">
-                <span>
-                    <label><input type="checkbox"> Direct Bank Transfer</label>
-                </span>
-                <span>
-                    <label><input type="checkbox"> Check Payment</label>
-                </span>
-                <span>
-                    <label><input type="checkbox"> Paypal</label>
-                </span>
-            </div> --}}
     </div>
 </section>
 @endsection

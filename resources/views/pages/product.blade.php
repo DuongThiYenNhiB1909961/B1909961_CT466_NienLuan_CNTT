@@ -13,7 +13,8 @@
                                     <div>
                                         <h6 style="font-size: 15px text-alight">{{$product->product_desc}}</h6>
                                     </div>
-                                    <div><h5 class="text-danger mt-2"><b>{{number_format($product->product_price).'đ'}}</h6></b></div>
+
+                                    <div ><h5 class="text-danger mt-2"><b class="price">{{number_format($product->product_price).'đ'}}</h6></b></div>
                                     
                                     {{-- <a href="#" class="btn btn-default add-to-cart">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="text-success" viewBox="0 0 16 16">

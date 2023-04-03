@@ -93,7 +93,7 @@ class ProductController extends Controller
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
-        // $data['brand_id'] = $request->product_brand;
+        $data['brand_id'] = $request->product_brand;
         $data['product_status'] = $request->product_status;
         $get_image = $request->file('product_image');
         if($get_image){
