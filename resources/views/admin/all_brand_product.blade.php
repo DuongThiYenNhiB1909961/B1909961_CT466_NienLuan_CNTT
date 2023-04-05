@@ -3,7 +3,7 @@
 <div class="table-agile-info">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Liệt kê danh mục sản phẩm
+        Liệt kê xuất xứ mỹ phẩm
       </div>
       <div class="row w3-res-tb">
         <div class="col-sm-5 m-b-xs">
@@ -42,7 +42,7 @@
                   <input type="checkbox"><i></i>
                 </label>
               </th>
-              <th>Tên danh mục</th>
+              <th>Nơi xuất xứ</th>
               <th>Hiển thị</th>
               <th style="width:30px;"></th>
             </tr>

@@ -4,7 +4,7 @@
     <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Thêm mỹ phẩm
+                    cập nhật mỹ phẩm
                 </header>
                 
                 <div class="panel-body">
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Thương hiệu</label>
+                            <label for="exampleInputPassword1">Xuất xứ</label>
                             <select name="product_brand" class="form-control input-sm m-bot15">
                                 @foreach ($brand_product as $key => $brand)
                                     @if($brand->id==$pro->brand_id)

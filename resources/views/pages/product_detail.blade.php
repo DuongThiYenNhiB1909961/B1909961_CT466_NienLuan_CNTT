@@ -7,7 +7,7 @@
         
             @foreach($detail_product as $key => $product)
             <div class="row">
-                <div class="col-sm text-center mt-1" >
+                <div class=" col-sm text-center mt-1" >
                     <img class="rounded mt-1" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" height="100%" width="100%">
                                     
                 </div>
@@ -57,7 +57,7 @@
            
         </div>
         <div class="text-right bg-warning rounded-lg">
-            <h5 class="mt-3"><b class="text-white mr-2"><u> THƯƠNG HIỆU</u></b></h5>
+            <h5 class="mt-3"><b class="text-white mr-2"><u> Xuất xứ</u></b></h5>
             <div class="panel panel-default mt-3">
                 @foreach($brand as $key => $brand)
                 <div class="panel-heading">

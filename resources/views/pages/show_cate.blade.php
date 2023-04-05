@@ -2,12 +2,12 @@
 @section('show')
 <div class="row">
     <div class="col-sm-9">
-        <h2 class="text-center text-warning"><b>Danh Mục Mỹ Phẩm</b></h2>
+        <h2 class="text-center text-warning"><b>DANH MỤC MỸ PHẨM</b></h2>
         <hr>
         <div class="row">
             @foreach($category_by_id as $key => $product)
             
-                <div class="col-sm-3 rounded-lg border border-danger text-center mt-1" >
+                <div class=" img col-sm-3 rounded-lg border border-danger text-center mt-1" >
                                 <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
                                     <img class="rounded mt-1" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" height="180px" width="180px">
                                     <div>
@@ -40,7 +40,7 @@
            
         </div>
         <div>
-            <h5 class="mt-5 text-center"><b class="text-warning">THƯƠNG HIỆU MỸ PHẨM</b><hr></h5>
+            <h5 class="mt-5 text-center"><b class="text-warning">XUẤT XỨ MỸ PHẨM</b><hr></h5>
             <div class="panel panel-default mt-3">
                 @foreach($brand as $key => $brand)
                 <div class="panel-heading">

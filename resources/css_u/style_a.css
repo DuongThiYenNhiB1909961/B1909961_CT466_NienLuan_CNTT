@@ -13,7 +13,7 @@ html, body{
 	font-family: 'Roboto', sans-serif;
     font-size: 100%;
     overflow-x: hidden;
-    background: url(../images/bg.jpg) no-repeat 0px 0px;
+    background: url(../images/bg2.jpg) no-repeat 0px 0px;
 	background-size:cover;
 }
 body a{
@@ -30,7 +30,7 @@ h1,h2,h3,h4,h5,h6{
 p{
 	margin:0;
 }
-.text-danger{
+.mt-2{
     position: relative;
 }
 .price{
@@ -48,7 +48,8 @@ body a:hover{
     width:240px;
     height:100%;
     position:fixed;
-    background:rgba(223, 220, 220, 0.78);
+    background:url(../images/bgad1.jpg) no-repeat 0px 0px;
+	background-size:cover;
     -webkit-transition:all .3s ease-in-out;
     -moz-transition:all .3s ease-in-out;
     -o-transition:all .3s ease-in-out;
@@ -212,11 +213,12 @@ ul.sidebar-menu li a.active i {
     transition:all .3s ease-in-out;
 }
 .footer {
-    background: #a1e68d;
+    background: url(../images/bgad1.jpg) no-repeat 0px 0px;
+	background-size:cover;
     padding: 20px;
 }
 .footer p {
-    color: #93d696;
+    color: #d4ebd5;
     letter-spacing: 1px;
 }
 .footer p a {
@@ -229,7 +231,8 @@ ul.sidebar-menu li a.active i {
     left:0;
     right:0;
     z-index:1002;
-    background:rgb(199, 240, 180);
+    background:url(../images/bgad1.jpg) no-repeat 0px 0px;
+	background-size:cover;
     -webkit-transition:all .3s ease-in-out;
     -moz-transition:all .3s ease-in-out;
     -o-transition:all .3s ease-in-out;
@@ -249,7 +252,8 @@ ul.sidebar-menu li a.active i {
     width:100%;
 }
 .brand {
-    background:#89d879;
+    background:url(../images/bgad1.jpg) no-repeat 0px 0px;
+	background-size:cover;
     float:left;
     width:240px;
     height:80px;
@@ -2147,7 +2151,7 @@ ul.inbox-pagination li {
 }
 .fileinput-button {
     border:1px solid #e6e6e6;
-    background:#eeeeee;
+    background:#eeb0b0;
 }
 .inbox-body .modal .modal-body input,.inbox-body .modal .modal-body textarea {
     border:1px solid #e6e6e6;
@@ -2427,7 +2431,7 @@ input.ggg{
     font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    background: #f0bcb4;
+    background: #ad8b86;
     color: white;
     border: none;
     outline: none;

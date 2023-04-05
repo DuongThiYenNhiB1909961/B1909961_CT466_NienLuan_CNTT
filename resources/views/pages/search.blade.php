@@ -34,7 +34,7 @@
            
         </div>
         <div class="text-right bg-warning rounded-lg">
-            <h5 class="mt-3"><b class="text-white mr-2"><u> THƯƠNG HIỆU</u></b></h5>
+            <h5 class="mt-3"><b class="text-white mr-2"><u> Xuất xứ</u></b></h5>
             <div class="panel panel-default mt-3">
                 @foreach($brand as $key => $brand)
                 <div class="panel-heading">

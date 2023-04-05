@@ -4,7 +4,7 @@
     <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Cập nhật danh mục sản phẩm
+                    Cập nhật danh mục mỹ phẩm
                 </header>
                 
                 <div class="panel-body">

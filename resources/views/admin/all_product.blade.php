@@ -47,7 +47,7 @@
               <th>Hình ảnh mỹ phẩm</th>
               <th>Mô tả mỹ phẩm</th>
               <th>Danh mục</th>
-              <th>Thương Hiệu</th>
+              <th>Xuất xứ</th>
               
               <th>Hiển thị</th>
               <th style="width:30px;"></th>

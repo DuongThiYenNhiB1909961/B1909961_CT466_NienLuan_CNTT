@@ -11,9 +11,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
         <title>THIÊN ĐƯỜNG LÀM ĐẸP</title>
         <link rel="icon" href="https://cdn01.beelancer.vn/blog/wp-content/uploads/2021/07/Maquillaje-Nina-Maquillaje-Nina-Nina-Pintada-A-Mano-Ojos-De-Nina-PNG-y-PSD-para-Descargar-Gratis-_-Pngtree.jpg" type="image/x-icon">
-        <link href="/resources/css/style.css" rel="stylesheet">
-        {{-- <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/resources/css/font-awesome.min.css" rel="stylesheet"> --}}
+        <link href="resources/css_u/style.css" rel='stylesheet' type='text/css' />
+        <link href="resources/css/style-responsive.css" rel="stylesheet"/>
+        {{-- <link href="resources/css/bootstrap.min.css" rel='stylesheet' type='text/css' /> --}}
+        {{-- <link href="/resources/css/font-awesome.min.css" rel="stylesheet"> --}}
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- Styles -->
@@ -183,20 +184,12 @@
                   </ul>
                 </div>
               </nav>
-            <div class="col-sm-4">
+            <div class="col-sm-4 bg-light">
             <form action="{{URL::to('/search')}}" method="POST">
                 {{csrf_field()}}
-                    {{-- <input name="keywords_submit" type="text" class="form-control" placeholder="Bạn cần tìm mỹ phẩm" id="inputEmail4">
-                    <button name="search_items" type="submit" class="btn btn-danger btn-sm">Tìm</button> --}}
-                    {{-- <div class="input-group">
-                        <input name="keywords_submit" type="text" class="input-sm form-control" placeholder="Bạn cần tìm mỹ phẩm">
-                        <span class="input-group-btn">
-                          <button name="search_items" class="btn btn-sm btn-default" type="button">Go!</button>
-                        </span>
-                    </div> --}}
-                    <ul class="nav pull-right top-menu mt-3">
+                    <ul class="nav pull-right top-menu mt-2">
                         <li>
-                            <input name="keywords_submit" type="text" class="form-control search" placeholder="Bạn cần tìm mỹ phẩm">
+                            <input name="keywords_submit" type="text" class="form-control search" placeholder="Bạn tìm mỹ phẩm?">
                         </li>
                     </ul>
             </form>
@@ -210,7 +203,7 @@
         @yield('register')
         @yield('product')
         @yield('show')
-        <footer class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0 pt-2">
+        <footer class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0 pt-2 mt-2 rouded">
             ThienDuongLamDep_2023
         </footer>
     </body>

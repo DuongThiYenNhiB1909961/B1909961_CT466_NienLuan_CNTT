@@ -4,7 +4,7 @@
     <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Thêm danh mục sản phẩm
+                    Thêm danh mục mỹ phẩm
                 </header>
                 
                 <div class="panel-body">
@@ -34,7 +34,7 @@
                             </select>
                         </div>
                         
-                        <button type="submit"name="add_category_product" class="btn btn-info">Thêm danh mục</button>
+                        <button type="submit"name="add_category_product" class="btn btn-info">Thêm danh mục mỹ phẩm</button>
                     </form>
                     </div>
 

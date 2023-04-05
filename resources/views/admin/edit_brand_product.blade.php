@@ -4,7 +4,7 @@
     <div class="col-lg-12">
             <section class="panel">
                 <header class="panel-heading">
-                    Cập nhật danh mục sản phẩm
+                    Cập nhật xuất xứ của mỹ phẩm
                 </header>
                 
                 <div class="panel-body">
@@ -20,18 +20,18 @@
                         <form role="form" action="{{URL::to('/update-brand-product/'.$edit_value->id)}}" method="post">
                             {{csrf_field()}}
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tên danh mục</label>
+                            <label for="exampleInputEmail1">Tên xuất xứ</label>
                             <input type="text" value="{{$edit_value->brand_name}}" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Mô tả danh mục</label>
+                            <label for="exampleInputPassword1">Mô tả xuất xứ</label>
                             <textarea style="resize: none" rows="7" class="form-control" name="brand_product_desc" id="exampleInputPassword1">
                             {{$edit_value->brand_desc}}
                             </textarea>
                         </div>
                         
                         
-                        <button type="submit"name="update_brand_product" class="btn btn-info">Cập nhật danh mục</button>
+                        <button type="submit"name="update_brand_product" class="btn btn-info">Cập nhật xuất xứ mỹ phẩm</button>
                     </form>
                     </div>
                     @endforeach

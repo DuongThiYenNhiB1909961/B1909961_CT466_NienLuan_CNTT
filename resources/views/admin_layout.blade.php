@@ -11,7 +11,8 @@
         <link rel="stylesheet" href="resources/css/bootstrap.min.css" >
         <!-- //bootstrap-css -->
         <!-- Custom CSS -->
-        <link href="resources/css/style.css" rel='stylesheet' type='text/css' />
+        {{-- <link href="resources/css/style_a.css" rel='stylesheet' type='text/css' /> --}}
+        <link href="resources/css_u/style_a.css" rel='stylesheet' type='text/css' />
         <link href="resources/css/style-responsive.css" rel="stylesheet"/>
         <!-- font CSS -->
         <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -90,27 +91,27 @@
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
-                        <span>Danh mục sản phẩm</span>
+                        <span>Danh mục mỹ phẩm</span>
                     </a>
                     <ul class="sub">
-						<li><a href="add-category-product">Thêm danh mục sản phẩm</a></li>
-						<li><a href="all-category-product">Liệt kê danh mục sản phẩm</a></li>
+						<li><a href="add-category-product">Thêm danh mục mỹ phẩm</a></li>
+						<li><a href="all-category-product">Liệt kê danh mục mỹ phẩm</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
-                        <span>Thương hiệu sản phẩm</span>
+                        <span>Xuất xứ mỹ phẩm</span>
                     </a>
                     <ul class="sub">
-						<li><a href="add-brand-product">Thêm thương hiệu sản phẩm</a></li>
-						<li><a href="all-brand-product">Liệt kê thương hiệu sản phẩm</a></li>
+						<li><a href="add-brand-product">Thêm nơi sản xuất mỹ phẩm</a></li>
+						<li><a href="all-brand-product">Liệt kê nơi sản xuất mỹ phẩm</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
-                        <span>Mỹ phẩm</span>
+                        <span>Danh sách mỹ phẩm</span>
                     </a>
                     <ul class="sub">
 						<li><a href="add-product">Thêm mỹ phẩm</a></li>
@@ -147,7 +148,7 @@
 </section>
 <!--main content end-->
 </section>
-<script src="resources/js/bootstrap.js"></script>
+{{-- <script src="resources/js/bootstrap.js"></script> --}}
 <script src="resources/js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="resources/js/scripts.js"></script>
 <script src="resources/js/jquery.slimscroll.js"></script>
