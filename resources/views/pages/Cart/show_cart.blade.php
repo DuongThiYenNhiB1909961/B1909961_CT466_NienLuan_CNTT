@@ -3,7 +3,7 @@
 <div class="table-agile-info">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h5 class="text-white text-center"><b>GIỎ HÀNG</b></h5> 
+        <h5 class="text-danger text-center"><b>GIỎ HÀNG</b></h5> 
       </div>
       <div class="table-responsive">
         <?php

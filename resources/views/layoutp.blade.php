@@ -44,7 +44,7 @@
                 text-decoration:none;
                 outline:none;
             }
-            h6{
+            .card-title{
                 color: #db8605;
             }
         </style>
