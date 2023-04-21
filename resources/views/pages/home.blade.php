@@ -17,15 +17,15 @@
                 <div class="carousel-item active">
                     <img style="height: 12cm" src="https://bizweb.dktcdn.net/100/376/405/articles/nhuong-quyen-gia-cong-my-pham-blog-coanmy-5.jpg?v=1596804339223" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5 class="text-dark">Makeup</h5>
-                        <p class="text-dark" >Trang điểm sẽ làm cho bản thân xinh đẹp, tự tin và yêu kiều hơn.</p>
+                        <h5 class="text-white">Makeup</h5>
+                        <p class="text-white" >Trang điểm sẽ làm cho bản thân xinh đẹp, tự tin và yêu kiều hơn.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img style="height: 12cm"  src="https://images.summitmedia-digital.com/preview/images/2019/10/22/serums-for-overnight-repair-nm.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block text-black">
-                        <h5 class="text-dark">Tinh dầu</h5>
-                        <p class="text-dark">Tinh dầu giúp cải thiện tình trạng da kém, làm căn bóng và mịn màn hơn.</p>
+                        <h5 class="text-white">Tinh dầu</h5>
+                        <p class="text-white">Tinh dầu giúp cải thiện tình trạng da kém, làm căn bóng và mịn màn hơn.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
