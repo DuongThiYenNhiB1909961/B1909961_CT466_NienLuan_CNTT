@@ -3,11 +3,15 @@ h1, h2, h3 {margin: 0;}
 ul, ol {margin: 0;}
 p {margin: 0;}
 
-html, body, header, footer{
-	font-family: 'Roboto', sans-serif;
-    font-size: 100%;
+html, body{
     overflow-x: hidden;
-    background: url(../images/bg3.jpg) no-repeat 0px 0px;
+    background: url(../images/bg1.jpg) no-repeat 0px 0px;
+	background-size:cover;
+    margin: 0;
+    font-size:1.125rem;
+}
+header, footer{
+    background: url(../images/hoa.jpg) no-repeat 0px 0px;
 	background-size:cover;
     margin: 0;
 }
@@ -18,9 +22,9 @@ html, body, header, footer{
     -ms-transition: all .3s ease;
     -o-transition: all .3s ease;
     transition: all .3s ease;
-    border: 1px solid #8b5c7e;
+    border: 1px solid #ca86b7;
     box-shadow: none;
-    background: #8b5c7e url(../images/search-icon.png) no-repeat 10px 8px;
+    background: #dd7eb5 url(../images/search-icon.png) no-repeat 10px 8px;
     padding: 0 5px 0 30px;
     color: #fff;
     border-radius: 100px;
@@ -39,22 +43,62 @@ html, body, header, footer{
     color:#c8c8c8;
     font-weight: 300;
 }
+body a:hover{
+	text-decoration:none;
+}
 .todo-search:focus{
     width:100% !important;
-}
-.header {
-    left:0;
-    right:0;
-    z-index:1002;
-    background:rgb(158, 194, 141);
-    -webkit-transition:all .3s ease-in-out;
-    -moz-transition:all .3s ease-in-out;
-    -o-transition:all .3s ease-in-out;
-    transition:all .3s ease-in-out;
 }
 .merge-header {
     margin-right:240px;
 }
 .img{
     background-color:antiquewhite;
+}
+h1,h2,h3,h4,h5,h6,p{
+	margin:0;			   
+}
+.brand {
+    background:url(../images/hoa.jpg) no-repeat 0px 0px;
+	background-size:cover;
+    float:left;
+    width:240px;
+    height:80px;
+    position:relative;
+}
+a.logo {
+    font-size:32px;
+    color:#fff;
+    float:left;
+    margin:20px 0 0 25px;
+    text-transform:uppercase;
+}
+a.logo:hover,a.logo:focus {
+    text-decoration:none;
+    outline:none;
+}
+a.logo span {
+    color: #FF6C60;
+}
+ul.sidebar-menu li a span {
+    display:inline-block;
+}
+ul.sidebar-menu li a {
+    color:#fff;
+    text-decoration:none;
+    display:block;
+    padding:18px 0 18px 25px;
+    font-size:12px;
+    outline:none;
+    -webkit-transition:all 0.3s ease;
+    -moz-transition:all 0.3s ease;
+    -o-transition:all 0.3s ease;
+    -ms-transition:all 0.3s ease;
+    transition:all 0.3s ease;
+}
+.color-text{
+    color: rgb(175, 6, 161);
+}
+h6{
+    color: #db8605;
 }

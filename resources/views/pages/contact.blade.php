@@ -4,7 +4,7 @@
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 ">
         <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-            <img src="https://printgo.vn/uploads/media/772948/thiet-ke-logo-my-pham-10_1584438206.jpg" class="h-30 w-auto text-gray-700 sm:h-20">
+            <img src="resources/images/logo.jpg" class="h-30 w-auto text-gray-700 sm:h-20">
             <i class="justify-center pt-4 font-semibold text-danger" ><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></i>
         </div>
         <div class="bg-warning rounded">

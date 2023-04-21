@@ -4,7 +4,7 @@
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-            <img src="https://printgo.vn/uploads/media/772948/thiet-ke-logo-my-pham-10_1584438206.jpg" class="h-30 w-auto text-gray-700 sm:h-20">
+            <img src="resources/images/logo.jpg" class="h-30 w-auto text-gray-700 sm:h-20">
             <i class="justify-center pt-4 font-semibold text-danger" ><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></i>
         </div>
         <div id="carouselExampleCaptions" class="carousel slide pt-2" data-ride="carousel">
@@ -17,22 +17,22 @@
                 <div class="carousel-item active">
                     <img style="height: 12cm" src="https://bizweb.dktcdn.net/100/376/405/articles/nhuong-quyen-gia-cong-my-pham-blog-coanmy-5.jpg?v=1596804339223" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Makeup</h5>
-                        <p>Trang điểm sẽ làm cho bản thân xinh đẹp, tự tin và yêu kiều hơn.</p>
+                        <h5 class="text-dark">Makeup</h5>
+                        <p class="text-dark" >Trang điểm sẽ làm cho bản thân xinh đẹp, tự tin và yêu kiều hơn.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img style="height: 12cm"  src="https://images.summitmedia-digital.com/preview/images/2019/10/22/serums-for-overnight-repair-nm.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block text-black">
-                        <h5 class="text-black">Tinh dầu</h5>
-                        <p class="text-black">Tinh dầu giúp cải thiện tình trạng da kém, làm căn bóng và mịn màn hơn.</p>
+                        <h5 class="text-dark">Tinh dầu</h5>
+                        <p class="text-dark">Tinh dầu giúp cải thiện tình trạng da kém, làm căn bóng và mịn màn hơn.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img style="height: 12cm" src="https://ann.com.vn/wp-content/uploads/17027-286547389-1485387881893221-14277493048240233-n.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Mask</h5>
-                        <p>Mặt nạ giúp da được cấp ẩm làm da luôn tươi tắn, căng nước.</p>
+                        <h5 class="text-dark">Mask</h5>
+                        <p class="text-dark">Mặt nạ giúp da được cấp ẩm làm da luôn tươi tắn, căng nước.</p>
                     </div>
                 </div>
             </div>

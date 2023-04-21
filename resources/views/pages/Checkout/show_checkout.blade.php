@@ -65,8 +65,9 @@
                         </div>
                         <div class="col-sm-6">
                                 <div class="order-message">
-                                    <h4><b class="text-danger"> Ghi chú đơn hàng</b></h4>
-                                    <textarea name="shipping_note" placeholder="Ghi chú đơn hàng của bạn" rows="14" columns="14" ></textarea>
+                                    <h4><b class="text-danger "> Ghi chú đơn hàng</b></h4>
+                                    {{-- <input type="text" name="shipping_note" class="form-control" id="inputEmail4" rows="14" placeholder="Ghi chú đơn hàng của bạn"> --}}
+                                    <textarea name="shipping_note" placeholder="Ghi chú đơn hàng của bạn" rows="12" columns="14" ></textarea>
                                 </div>
                         </div>	
                     </div>

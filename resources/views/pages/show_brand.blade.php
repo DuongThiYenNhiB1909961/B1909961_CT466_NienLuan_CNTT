@@ -1,48 +1,57 @@
-@extends('layout')
-@section('show')
-<div class="row">
-    <div class="col-sm-9">
+@extends('layoutp')
+@section('content')
+
         <h2 class="text-center text-warning"><b>XUẤT XỨ MỸ PHẨM</b></h2>
         <hr>
+<div class="row">
+    <div class="col-sm-10">
         <div class="row">
             @foreach($brand_by_id as $key => $product)
             
-                <div class="img col-sm-3 rounded-lg border border-danger text-center mt-1" >
+                <div class="mr-2 mb-2" >
                                 <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
-                                    <img class="rounded mt-1" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" height="180px" width="180px">
-                                    <div>
-                                        <h6 style="font-size: 15px">{{$product->product_desc}}</h6>
-                                    </div>
-                                    <div><h5 class="text-warning mt-2"><b>{{number_format($product->product_price).'đ'}}</h6></b></div>
+                                    <div class="card" style="width: 15rem; height: 22rem;">
+                                        <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top" alt="">
+                                        <div class="card-body">
+                                            <h6 class="card-title"><b>{{$product->product_name}}</b></h6>
+                                            <b><p class="card-text text-danger">{{number_format($product->product_price).'đ'}}</p></b>
+                                        </div>
+                                      </div>
                                 </a>
                 </div>
         
             @endforeach
         </div>
     </div>
-    <div class="col-sm-3">
-        <div>
-            <h5 class="text-center"><b class="text-warning">DANH MỤC MỸ PHẨM</b><hr></h5>
-            <div class="panel panel-default mt-3">
-                @foreach($category as $key => $cate)
-                <div class="panel-heading">
-                    <h6 class="panel-title"><a href="{{URL::to('/category/'.$cate->id)}}" class="text-decoration-none">{{$cate->category_name}}</a></h6>
+        <div class="col-sm-2">
+            <div class="text-center mt-1">
+                <h5><b class="text-danger mr-2 text-center"> 
+                    Danh Mục
+                </b></h5>
+                <hr>
+                <div class="panel panel-default mt-3">
+                    @foreach($category as $key => $cate)
+                    <div class="panel-heading">
+                        <h6 class="panel-title mr-2" style="color: rgb(175, 6, 161);"><a href="{{URL::to('category/'.$cate->id)}}" class="text-decoration-none"><b>{{$cate->category_name}}</b></a></h6>
+                    </div>
+                    <hr>
+                     @endforeach
                 </div>
-                 @endforeach
+               
             </div>
-           
-        </div>
-        <div>
-            <h5 class="mt-5 text-center"><b class="text-warning">XUẤT XỨ MỸ PHẨM</b><hr></h5>
-            <div class="panel panel-default mt-3">
-                @foreach($brand as $key => $brand)
-                <div class="panel-heading">
-                    <h6 class="panel-title"><a href="{{URL::to('/brand/'.$brand->id)}}" class="text-decoration-none">{{$brand->brand_name}}</a></h6>
+            <div class="text-center mt-5">
+                <h5><b class="text-danger mr-2">Xuất Xứ</b></h5>
+                <hr>
+                <div class="panel panel-default mt-3">
+                    @foreach($brand as $key => $brand)
+                    <div class="panel-heading">
+                        <h6 class="panel-title mr-2" style="color: rgb(175, 6, 161);"><a href="{{URL::to('brand/'.$brand->id)}}" class="text-decoration-none"><b>{{$brand->brand_name}}</b></a></h6>
+                    </div>
+                    <hr>
+                    @endforeach
                 </div>
-                @endforeach
+                
             </div>
-            
         </div>
     </div>
-</div>
 @endsection

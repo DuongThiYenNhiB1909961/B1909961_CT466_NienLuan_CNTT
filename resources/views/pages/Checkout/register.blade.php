@@ -22,7 +22,7 @@
                     <label for="inputPassword4">Password</label>
                     <input type="password" name="customer_password" class="form-control" id="inputPassword4">
                 </div>
-                <div class="form-row">
+                <div class="form-group col-md-6">
                         <label for="inputnumber">Telephone</label>
                         <input type="text" name="customer_phone" class="form-control" id="inputnumber" placeholder="0978 978 789">
                 </div>
