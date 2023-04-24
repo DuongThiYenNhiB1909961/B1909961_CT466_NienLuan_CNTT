@@ -1,5 +1,5 @@
 @extends('admin_layout')
-@section('edit_brand_product')
+@section('edit_category_product')
 <div class="row">
     <div class="col-lg-12">
             <section class="panel">

@@ -34,7 +34,7 @@
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="index.html" class="logo">
+    <a href="#" class="logo">
         Admin
     </a>
     <div class="sidebar-toggle-box">
@@ -82,7 +82,7 @@
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="active" href="{(URL::to('/dashboard'))}">
+                    <a class="active" href="#">
                         <i class="fa fa-dashboard"></i>
                         <span>Tổng quan</span>
                     </a>

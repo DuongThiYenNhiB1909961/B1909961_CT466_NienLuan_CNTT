@@ -13,7 +13,7 @@
                                     <div class="card" style="width: 15rem; height: 22rem;">
                                         <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top" alt="">
                                         <div class="card-body">
-                                            <h6 class="card-title "><b>{{$product->product_name}}</b></h6>
+                                            <h6 class="card-title "><b>{{$product->product_desc}}</b></h6>
                                             <b><p class="card-text text-danger">{{number_format($product->product_price).'đ'}}</p></b>
                                         </div>
                                       </div>

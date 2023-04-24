@@ -13,7 +13,7 @@
                                     <div class="card" style="width: 15rem; height: 22rem;">
                                         <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top" alt="">
                                         <div class="card-body">
-                                            <h6 class="card-title "><b>{{$product->product_name}}</b></h6>
+                                            <h6 class="card-title "><b>{{$product->product_desc}}</b></h6>
                                             <b><p class="card-text text-danger">{{number_format($product->product_price).'đ'}}</p></b>
                                         </div>
                                       </div>
@@ -25,7 +25,7 @@
     </div>
     <div class="col-sm-2">
         <div class="text-center mt-1">
-            <h5 class="rounded-lg bg-white" ><b class="text-danger mr-2 text-center"> 
+            <h5 ><b class="text-danger mr-2 text-center"> 
                 Danh Mục
             </b></h5>
             <div class="panel panel-default mt-3">
@@ -39,7 +39,7 @@
            
         </div>
         <div class="text-center mt-5">
-            <h5 class="mt-3 rounded-lg bg-white"><b class="text-danger mr-2">Xuất Xứ</b></h5>
+            <h5 ><b class="text-danger mr-2">Xuất Xứ</b></h5>
             <div class="panel panel-default mt-3">
                 @foreach($brand as $key => $brand)
                 <div class="panel-heading">

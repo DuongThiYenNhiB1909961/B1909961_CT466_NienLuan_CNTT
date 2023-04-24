@@ -13,20 +13,20 @@
                                 </div>
                                 <div class="col-sm">
                                     <div class="text-danger">
-                                        <h6 style="font-size: 15px text-alight"><b>{{$product->product_desc}}</b></h6>
+                                        <h5><b style="font-size: 30px text-alight">{{$product->product_desc}}</b></h5>
                                     </div>
                                     <div>
                                         <h6 style="font-size: 15px text-alight">{{$product->product_content}}</h6>
                                     </div>
                                     <div>
-                                        <h6 style="font-size: 15px text-alight"><b>Danh mục: </b> {{$product->category_name}}</h6>
+                                        <h6 style="font-size: 15px text-alight"><b>Danh mục: </b><b class="text-danger"> {{$product->category_name}}</b></h6>
                                     </div>
                                     <div>
-                                        <h6 style="font-size: 15px text-alight"><b>Xuất xứ:</b>  {{$product->brand_name}}</h6>
+                                        <h6 style="font-size: 15px text-alight"><b>Xuất xứ: </b><b class="text-danger">{{$product->brand_name}}</b></h6>
                                     </div>
                                     <form action="{{URL::to('/save-cart')}}" method="POST">
                                         {{csrf_field()}}
-                                        <div><h5 class="text-danger mt-2"><b>{{number_format($product->product_price).'đ'}}</h6></b></div>
+                                        <div><h5 class="text-danger mt-2" style="font-size: 30px"><b>{{number_format($product->product_price).'đ'}}</h5></b></div>
                 
                                         <label for=""><b>Số lượng:</b>  </label>
                                         <input type="number" name="qty" min="1" max="10" value="1">
