@@ -71,8 +71,78 @@
                                 </div>
                         </div>	
                     </div>
-                </form>				
-            
+                </form>	
+                <h4 class="text-danger text-center"><b>XEM LẠI GIỎ HÀNG</b></h4> 			
+                <div class="table-responsive">
+                    <?php
+                        $content = Cart::content();
+                        
+                    ?>
+                    <table class="table table-striped b-t b-light rounded-lg">
+                      <thead >
+                        <tr class="bg-warning text-white ">
+                          <th>Tên mỹ phẩm</th>
+                          <th>Hình ảnh</th>
+                          <th>Giá</th>
+                          <th>Số lượng</th>
+                          <th>Tổng tiền</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($content as $v_content)
+                           <tr>
+                          <td class="cart_name">{{$v_content->name}}</td>
+                          <td><img src="{{URL::to('public/uploads/product/'.$v_content->options->image)}}" height="100" width="100"></td>
+                          <td class="cart_price">{{number_format($v_content->price).'đ'}}</td>
+                          <td class="cart_quantity">
+                                <input class="cart_quantity_input" type="number" name="cart_quantity" value="{{$v_content->qty}}" min="1" max="10">
+                        </td>
+                            
+                          <td class="cart_total">
+                            <p>
+                                <?php
+                                    $subtotal = $v_content->price * $v_content->qty;
+                                    echo number_format($subtotal).'đ';
+                                ?>
+                            </p>
+                          </td>
+                    
+                        </tr> 
+                        @endforeach
+                        
+                      </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row bg-warning rounded-lg text-white">
+                              <div class="col-sm-6"><b>Tổng số lượng:</b>  <span class="text-right"></span></div>
+                              <div class="col-sm-6 text-right">
+                                <span>{{Cart::count() }} cái</span>
+                              </div>
+                            </div>
+                            <div class="row bg-warning rounded-lg mt-1 text-white">
+                                <div class="col-sm-6"><b>Tổng thanh toán:</b>  <span class="text-right"></span></div>
+                                <div class="col-sm-6 text-right"><span>{{Cart::total().'đ'}}</span></div>
+                            </div>
+                            <div class="row bg-warning rounded-lg mt-1 text-white">
+                                <div class="col-sm-6"><b>Thuế:</b> <span class="text-right"></span></div>
+                                <div class="col-sm-6 text-right"><span>{{Cart::tax().'đ'}}</span></div>
+                            </div>
+                            <div class="row bg-warning rounded-lg mt-1 text-white">
+                                <div class="col-sm-6"><b>Phí vận chuyển: </b><span class="text-right"></span></div>
+                                <div class="col-sm-6  text-right">0đ</div>
+                            </div>
+                            <div class="row bg-warning rounded-lg mt-1 text-white">
+                                <div class="col-sm-6"><b>Thành tiền: </b><span class="text-right"></span></div>
+                                <div class="col-sm-6  text-right"><span>{{Cart::total().'đ'}}</span></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                  </div>
         </div>
     </div>
 </section>
