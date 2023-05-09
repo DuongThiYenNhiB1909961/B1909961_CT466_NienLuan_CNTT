@@ -87,5 +87,6 @@ Route::get('/checkout', [CheckOutController::class, 'checkout']);
 Route::post('/save-checkout', [CheckOutController::class, 'save_checkout']);
 Route::get('/login',[CheckOutController::class, 'login']);
 Route::get('/logout', [CheckOutController::class, 'logout']);
+Route::get('/change',[CheckOutController::class, 'change']);
 Route::get('/pill',[CheckOutController::class, 'pill']);
 Route::post('/checkout-by', [CheckOutController::class, 'checkout_by']);
