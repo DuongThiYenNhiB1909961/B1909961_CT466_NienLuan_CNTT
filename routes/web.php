@@ -28,13 +28,13 @@ Route::get('/product', [IndexController::class, 'product']);
 
 // Show_cate
 Route::get('/category/{category_id}', [CategoryProduct::class, 'show_category']);
-Route::get('/brand/{brand_id}', [CategoryProduct::class, 'show_brand']);
+Route::get('/brand/{brand_id}', [BrandProduct::class, 'show_brand']);
 
 // admin
 Route::get('/admin',[AdminController::class, 'index']);
 Route::get('/manage',[AdminController::class, 'manage']);
 Route::post('/dashboard',[AdminController::class, 'dashboard']);
-Route::get('/logout',[AdminController::class, 'logout']);
+Route::get('/logoutad',[AdminController::class, 'logoutad']);
 
 //CategoryProduct
 Route::get('/add-category-product',[CategoryProduct::class, 'add_category_product']);
@@ -76,12 +76,18 @@ Route::get('/product-detail/{product_id}', [ProductController::class, 'product_d
 
 // cart
 Route::post('/save-cart', [CartController::class, 'save_cart']);
+Route::post('/add-cart-ajax', [CartController::class, 'add_cart_ajax']);
+Route::post('/update-cart', [CartController::class, 'update_cart']);
 Route::post('/update-cart-quantity', [CartController::class, 'update_cart_quantity']);
 Route::get('/show-cart', [CartController::class, 'show_cart']);
+Route::get('/show-cart-ajax', [CartController::class, 'show_cart_ajax']);
 Route::get('/delete-cart/{rowId}', [CartController::class, 'delete_cart']);
+Route::get('/del-product/{session_id}',[CartController::class, 'delete_product']);
+Route::get('/del-all-product',[CartController::class, 'delete_all_product']);
 
 // CHeckout
 Route::get('/login-checkout', [CheckOutController::class, 'login_checkout']);
+Route::get('/register', [CheckOutController::class, 'register']);
 Route::post('/add-customer', [CheckOutController::class, 'add_customer']);
 Route::get('/checkout', [CheckOutController::class, 'checkout']);
 Route::post('/save-checkout', [CheckOutController::class, 'save_checkout']);
@@ -90,3 +96,19 @@ Route::get('/logout', [CheckOutController::class, 'logout']);
 Route::get('/change',[CheckOutController::class, 'change']);
 Route::get('/pill',[CheckOutController::class, 'pill']);
 Route::post('/checkout-by', [CheckOutController::class, 'checkout_by']);
+
+//Order
+Route::get('/manage-order',[CheckOutController::class, 'manage_order']);
+Route::get('/view-order/{order_id}',[CheckOutController::class, 'view_order']);
+
+//login facebook
+Route::get('/login-facebook',[AdminController::class, 'login_facebook']);
+Route::get('/admin/callback', [AdminController::class, 'callback_facebook']);
+
+//login gg
+Route::get('/login-google',[AdminController::class, 'login_google']);
+Route::get('/google/callback', [AdminController::class, 'callback_google']);
+
+//login customer gg
+Route::get('/login-customer-google',[CheckOutController::class, 'login_customer_google']);
+Route::get('/customer/google/callback', [CheckOutController::class, 'callback_customer_google']);

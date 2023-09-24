@@ -1,5 +1,5 @@
 @extends('admin_layout')
-@section('edit_category_product')
+@section('content')
 <div class="row">
     <div class="col-lg-12">
             <section class="panel">
@@ -29,7 +29,12 @@
                             {{$edit_value->category_desc}}
                             </textarea>
                         </div>
-                        
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Từ khóa danh mục</label>
+                            <textarea style="resize: none" rows="7" class="form-control" name="category_product_keywords" id="exampleInputPassword1">
+                            {{$edit_value->meta_keywords}}
+                            </textarea>
+                        </div>
                         
                         <button type="submit"name="update_category_product" class="btn btn-info">Cập nhật danh mục</button>
                     </form>

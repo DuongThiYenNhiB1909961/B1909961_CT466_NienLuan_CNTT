@@ -20,11 +20,13 @@
                             {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nơi Xuất Xứ</label>
-                            <input type="text" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
+                            <input type="text" data-validation="length" data-validation-length="min3" 
+                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả</label>
-                            <textarea style="resize: none" rows="7" class="form-control" name="brand_product_desc" id="exampleInputPassword1" placeholder="Mô tả danh mục"></textarea>
+                            <textarea style="resize: none" rows="7" data-validation="length" data-validation-length="min10"
+                            data-validation-error-msg="Lam on dien it nhat 10 ky tu" class="form-control" name="brand_product_desc" id="ckeditor4" placeholder="Mô tả danh mục"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Hiển thị</label>

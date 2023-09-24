@@ -1,4 +1,4 @@
-@extends('layout')
+{{-- @extends('layout')
 @section('login')
 <div class=" relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
@@ -33,6 +33,7 @@
                   <div class=" text-lg font-semibold"><a class="nav-link" href="login_gg">Login by google</a></div>
             </div>
         </form>
+        <a href="{{url('/login-facebook')}}">Login Facebook</a>
     </div>
 </div>
-@endsection
+@endsection --}}

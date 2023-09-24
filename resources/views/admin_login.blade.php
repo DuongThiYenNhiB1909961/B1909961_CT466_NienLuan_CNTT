@@ -62,17 +62,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" name="admin_email" class="form-control" id="inputEmail4" placeholder="Vui long dien email">
+                    <input type="email" name="admin_email" class="form-control" id="inputEmail4" placeholder="Vui long dien email" required>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword4">Password</label>
-                    <input type="password" name="admin_password" class="form-control" id="inputPassword4" placeholder="Vui long dien password">
+                    <input type="password" name="admin_password" class="form-control" id="inputPassword4" placeholder="Vui long dien password" required>
                 </div>
                 <span><input class="form-check-input" type="checkbox" />Remember Me</span>
                 <h6><a href="#">Forgot Password?</a></h6>
-    
+                
                 <input type="submit" class="btn btn-danger" value="Sign In" name="login">
             </form>
+            <a href="login-facebook">Login Facebook</a>
+            <a href="login-google">Login Google</a>
         </div>
     </div>
 </div>

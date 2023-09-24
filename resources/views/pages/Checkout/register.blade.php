@@ -12,19 +12,20 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Tên khách hàng</label>
-                    <input type="text" name="customer_name" class="form-control" id="inputName" placeholder="Họ tên khách hàng">
+                    <input type="text" name="customer_name" class="form-control" id="inputName" placeholder="Họ tên khách hàng" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" name="customer_email" class="form-control" id="inputEmail4" placeholder="examp@gmail.com">
+                    <input type="email" name="customer_email" class="form-control" id="inputEmail4" placeholder="examp@gmail.com" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPassword4">Password</label>
-                    <input type="password" name="customer_password" class="form-control" id="inputPassword4">
+                    <input type="password" name="customer_password" class="form-control" id="inputPassword4" required>
                 </div>
                 <div class="form-group col-md-6">
                         <label for="inputnumber">Telephone</label>
-                        <input type="text" name="customer_phone" class="form-control" id="inputnumber" placeholder="0978 978 789">
+                        <input type="text" name="customer_phone" class="form-control" id="inputnumber" placeholder="0978978789" required
+                        pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
                 </div>
             </div>
                 
@@ -36,8 +37,17 @@
                         </label>
                     </div>
                 </div>
+                {{-- <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
+                <br/>
+                @if($errors->has('g-recaptcha-response'))
+                <span class="invalid-feedback" style='display:block'>
+                <strong>{{$errors->first('g-recaptcha-response')}}</strong>
+                </span>
+                @endif --}}
+
                 <button type="submit" class="btn btn-danger">Register</button>
         </form>
     </div>
 </div>
+{{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
 @endsection

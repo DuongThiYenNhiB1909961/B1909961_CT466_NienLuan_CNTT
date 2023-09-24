@@ -1,5 +1,5 @@
 @extends('admin_layout')
-@section('edit_product')
+@section('content')
 <div class="row">
     <div class="col-lg-12">
             <section class="panel">
@@ -24,7 +24,15 @@
                             <input type="text" name="product_name" class="form-control" id="exampleInputEmail1" value="{{$pro->product_name}}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Giá mỹ phẩm</label>
+                            <label for="exampleInputEmail1">Từ khóa mỹ phẩm</label>
+                            <input type="text" name="meta_keywords" class="form-control" id="exampleInputEmail1" value="{{$pro->meta_keywords}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Giá mua mỹ phẩm</label>
+                            <input type="text" name="product_price_buy" class="form-control" id="exampleInputEmail1" value="{{$pro->product_price_buy}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Giá bán mỹ phẩm</label>
                             <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" value="{{$pro->product_price}}">
                         </div>
                         <div class="form-group">

@@ -1,6 +1,6 @@
 @extends('layout')
 @section('introduce')
-<div class="pt-1 relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+<div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
@@ -16,13 +16,13 @@
             </div>
             <div class="col ">
                 <img src="https://image-us.eva.vn/upload/2-2022/images/2022-06-09/cham-soc-da-mat-dung-cach-tai-nha-giup-da-sach-mun-min-mang-cham-soc-da-mat-1-1654749278-530-width680height383.jpg"
-                    class="img-thumbnail w-100 h-100">
+                    class="img-thumbnail w-100 h-100 shadow">
             </div>
         </div>
         <div class=" row mt-3">
             <div class="col ">
                 <img src="https://i.ytimg.com/vi/rciWsH6u2YU/maxresdefault.jpg"
-                    class="img-thumbnail w-100 h-100">
+                    class="img-thumbnail w-100 h-100 shadow">
             </div>
             <div class="col text-center mt-2">
                 <b>
@@ -41,13 +41,13 @@
             </div>
             <div class="col ">
                 <img src="https://komeco.vn/wp-content/uploads/2020/06/lao-hoa-da-la-gi-1024x576.jpg"
-                    class="img-thumbnail w-100 h-100">
+                    class="img-thumbnail w-100 h-100 shadow">
             </div>
         </div>
         <div class=" row mt-3">
             <div class="col ">
                 <img src="https://cdyhn.vn/wp-content/uploads/2021/04/viec-lam-luong-cao-nganh-lam-dep.jpg"
-                    class="img-thumbnail w-100 h-70">
+                    class="img-thumbnail w-100 h-70 shadow">
             </div>
             <div class="col text-center mt-2">
                 <b>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-            <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 shadow">
 
                 
             </div>

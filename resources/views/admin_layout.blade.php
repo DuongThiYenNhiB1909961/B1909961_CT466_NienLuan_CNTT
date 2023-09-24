@@ -1,32 +1,32 @@
 <!DOCTYPE html>
     <head>
         <title>Manage</title>
-        <link rel="icon" href="https://cdn01.beelancer.vn/blog/wp-content/uploads/2021/07/Maquillaje-Nina-Maquillaje-Nina-Nina-Pintada-A-Mano-Ojos-De-Nina-PNG-y-PSD-para-Descargar-Gratis-_-Pngtree.jpg" type="image/x-icon">        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="{{asset('https://cdn01.beelancer.vn/blog/wp-content/uploads/2021/07/Maquillaje-Nina-Maquillaje-Nina-Nina-Pintada-A-Mano-Ojos-De-Nina-PNG-y-PSD-para-Descargar-Gratis-_-Pngtree.jpg')}}" type="image/x-icon">        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         
         <!-- bootstrap-css -->
-        <link rel="stylesheet" href="resources/css/bootstrap.min.css" >
+        <link rel="stylesheet" href="{{asset('resources/css/bootstrap.min.css')}}" >
         <!-- //bootstrap-css -->
         <!-- Custom CSS -->
         {{-- <link href="resources/css/style_a.css" rel='stylesheet' type='text/css' /> --}}
-        <link href="resources/css_u/style_a.css" rel='stylesheet' type='text/css' />
-        <link href="resources/css/style-responsive.css" rel="stylesheet"/>
+        <link href="{{asset('resources/css/style_a.css')}}" rel='stylesheet' type='text/css' />
+        <link href="{{asset('resources/css/style-responsive.css')}}" rel="stylesheet"/>
         <!-- font CSS -->
-        <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+        <link href="{{asset('//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic')}}" rel='stylesheet' type='text/css'>
         <!-- font-awesome icons -->
-        <link rel="stylesheet" href="resources/css/font.css" type="text/css"/>
-        <link href="resources/css/font-awesome.css" rel="stylesheet"> 
-        <link rel="stylesheet" href="resources/css/morris.css" type="text/css"/>
+        <link rel="stylesheet" href="{{asset('resources/css/font.css')}}" type="text/css"/>
+        <link href="{{asset('resources/css/font-awesome.css')}}" rel="stylesheet"> 
+        <link rel="stylesheet" href="{{asset('resources/css/morris.css')}}" type="text/css"/>
         <!-- calendar -->
-        <link rel="stylesheet" href="resources/css/monthly.css">
+        <link rel="stylesheet" href="{{asset('resources/css/monthly.css')}}">
         <!-- //calendar -->
         <!-- //font-awesome icons -->
-        <script src="resources/js/jquery2.0.3.min.js"></script>
-        <script src="resources/js/raphael-min.js"></script>
-        <script src="resources/js/morris.js"></script>
+        <script src="{{asset('resources/js/jquery2.0.3.min.js')}}"></script>
+        <script src="{{asset('resources/js/raphael-min.js')}}"></script>
+        <script src="{{asset('resources/js/morris.js')}}"></script>
     </head>
 <body>
 <section id="container rounded">
@@ -54,7 +54,12 @@
                 <img alt="" src="resources/images/4.png">
                 <span class="username">
                     <?php
+                    if(Session::get('login_normal')){
                         $name = Session::get('admin_name');
+                    }else {
+                        $name = Auth::user()->admin_name;
+                    }
+                        
                         if($name){
                             echo $name;
                         }
@@ -65,8 +70,9 @@
             <ul class="dropdown-menu extended logout">
                 <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="logout"><i class="fa fa-key"></i> Log Out</a></li>
+                
             </ul>
+            
         </li>
         <!-- user login dropdown end -->
        
@@ -118,7 +124,32 @@
 						<li><a href="all-product">Liệt kê mỹ phẩm</a></li>
                     </ul>
                 </li>
-                
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Đơn Hàng</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="manage-order">Quản Lý Đơn Hàng</a></li>
+						
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Mã giảm giá</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="add-coupon">Thêm mã giảm</a></li>
+						<li><a href="all-coupon">Liệt kê mã giảm</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="logoutad">
+                        <i class="fa fa-key"></i>
+                         Log Out
+                    </a>
+                </li>
             </ul>            </div>
         <!-- sidebar menu end-->
     </div>
@@ -128,6 +159,7 @@
 <section id="main-content">
 	<section class="wrapper">
 		@yield('dashboard')
+        @yield('content')
         @yield('add_category_product')
         @yield('edit_category_product')
         @yield('all_category_product')
@@ -137,6 +169,8 @@
         @yield('add_product')
         @yield('all_product')
         @yield('edit_product')
+        @yield('manage_order')
+        @yield('view_order')
     </section>
  <!-- footer -->
 		  <div class="footer">
@@ -149,12 +183,26 @@
 <!--main content end-->
 </section>
 {{-- <script src="resources/js/bootstrap.js"></script> --}}
-<script src="resources/js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="resources/js/scripts.js"></script>
-<script src="resources/js/jquery.slimscroll.js"></script>
-<script src="resources/js/jquery.nicescroll.js"></script>
+<script src="{{asset('resources/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+<script src="{{asset('resources/js/scripts.js')}}"></script>
+<script src="{{asset('resources/js/jquery.slimscroll.js')}}"></script>
+<script src="{{asset('resources/js/jquery.nicescroll.js')}}"></script>
+<script src="{{asset('//cdn.ckeditor.com/4.22.1/standard/ckeditor.js')}}"></script>
+<script>
+    CKEDITOR.replace('ckeditor1');
+    CKEDITOR.replace('ckeditor2');
+    CKEDITOR.replace('ckeditor3');
+    CKEDITOR.replace('ckeditor4');
+    // CKEDITOR.replace('ckeditor5');
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<script type="text/javascript">
+        $.validate({
+
+        });
+</script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-<script src="resources/js/jquery.scrollTo.js"></script>
+{{-- <script src="resources/js/jquery.scrollTo.js"></script> --}}
 <!-- morris JavaScript -->	
 <script>
 	$(document).ready(function() {
@@ -212,7 +260,7 @@
 	});
 	</script>
 <!-- calendar -->
-	<script type="text/javascript" src="resources/js/monthly.js"></script>
+	<script type="text/javascript" src="{{asset('resources/js/monthly.js')}}"></script>
 	<script type="text/javascript">
 		$(window).load( function() {
 

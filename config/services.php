@@ -31,4 +31,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' =>[
+        'client_id' => '551099233785412',
+        'client_secret' => 'e50a22881787f384b7f37d03c8d068a1',
+        'redirect' => 'http://nhiduongcosmetic.com/My_Project_NL/admin/callback'
+    ],
+
+    'google' =>[
+        'client_id' => '335097500661-de6rn692cuq8kvbnsrde6ri4llrral4e.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://nhiduongcosmetic.com/My_Project_NL/google/callback'
+    ],
 ];

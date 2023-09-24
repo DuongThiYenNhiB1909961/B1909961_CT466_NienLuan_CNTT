@@ -11,12 +11,16 @@ session_start();
 class ProductController extends Controller
 {
     public function AuthLogin(){
-        $admin_id = Session::get('admin_id');
-        if($admin_id){
-            return Redirect::to('dashboard');
+        if(Session::get('login_normal')){
+            $admin_id = Session::get('admin_id');
         }else{
-            return Redirect::to('admin')->send();
-        }
+            $admin_id = Auth::id();
+        }   
+            if($admin_id){
+                return Redirect::to('dashboard');
+            }else{
+                return Redirect::to('admin')->send();
+            }
     }
     public function add_product(){
         $this->AuthLogin();
@@ -39,7 +43,9 @@ class ProductController extends Controller
         $this->AuthLogin();
         $data = array();
         $data['product_name'] = $request->product_name;
+        $data['meta_keywords'] = $request->meta_keywords;
         $data['product_price'] = $request->product_price;
+        $data['product_price_buy'] = $request->product_price_buy;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
@@ -89,7 +95,9 @@ class ProductController extends Controller
         $this->AuthLogin();
         $data = array();
         $data['product_name'] = $request->product_name;
+        $data['meta_keywords'] = $request->meta_keywords;
         $data['product_price'] = $request->product_price;
+        $data['product_price_buy'] = $request->product_price_buy;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
@@ -117,14 +125,20 @@ class ProductController extends Controller
         return Redirect::to('all-product');
     }
     // product_detail
-    public function product_detail($product_id){
+    public function product_detail($product_id, Request $request){
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
         $detail_product = DB::table('tb_product')
         ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
         ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
         ->where('tb_product.product_id',$product_id)->get();
+        foreach($detail_product as $key => $val){
+            $meta_desc = $val->product_desc;
+            $meta_keywords = $val->meta_keywords;
+            $meta_title = $val->product_name;
+            $url_canonical = $request->url(); 
+        }
 
-        return view('pages.product_detail')->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product);
+        return view('pages.product_detail')->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
 }

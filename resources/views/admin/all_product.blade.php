@@ -43,6 +43,7 @@
                 </label>
               </th>
               <th>Tên mỹ phẩm</th>
+              <th>Từ khóa mỹ phẩm</th>
               <th>Giá mỹ phẩm</th>
               <th>Hình ảnh mỹ phẩm</th>
               <th>Mô tả mỹ phẩm</th>
@@ -58,6 +59,7 @@
                <tr>
               <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
               <td>{{$pro->product_name}}</td>
+              <td>{{$pro->meta_keywords}}</td>
               <td>{{$pro->product_price}}</td>
               <td><img src="public/uploads/product/{{$pro->product_image}}" height="100" width="100"></td>
               <td>{{$pro->product_desc}}</td>
@@ -79,7 +81,7 @@
               </span></td>
               <td>
                 <a href="{{URL::to('/edit-product/'.$pro->product_id)}}" class="active" ui-toggle-class="">
-                    <i class="fa fa-pencil-square text-success text-active"></i>
+                    <i class="fa fa-pencil-square text-success text-active"></i></a>
                 <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{URL::to('/delete-product/'.$pro->product_id)}}" class="active" ui-toggle-class="">
                     <i class="fa fa-times text-danger text"></i></a>
               </td>

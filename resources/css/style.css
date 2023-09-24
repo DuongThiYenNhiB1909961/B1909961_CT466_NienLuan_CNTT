@@ -5,13 +5,15 @@ p {margin: 0;}
 
 html, body{
     overflow-x: hidden;
-    background: url(../images/bg1.jpg) no-repeat 0px 0px;
+    background: #eee;
+    padding: 5px 5px;
 	background-size:cover;
     margin: 0;
     font-size:1.125rem;
 }
 header, footer{
-    background: url(../images/hoa.jpg) no-repeat 0px 0px;
+    background: #eee;
+    padding: 5px 0 10px;
 	background-size:cover;
     margin: 0;
 }
@@ -24,7 +26,7 @@ header, footer{
     transition: all .3s ease;
     border: 1px solid #ca86b7;
     box-shadow: none;
-    background: #dd7eb5 url(../images/search-icon.png) no-repeat 10px 8px;
+    background: rgb(233, 136, 25) url(../images/search-icon.png) no-repeat 10px 8px;
     padding: 0 5px 0 30px;
     color: #fff;
     border-radius: 100px;
@@ -40,7 +42,7 @@ header, footer{
     -ms-transition:all .3s ease;
     -o-transition:all .3s ease;
     transition:all .3s ease;
-    color:#c8c8c8;
+    color:#3e8b77;
     font-weight: 300;
 }
 body a:hover{
@@ -59,7 +61,7 @@ h1,h2,h3,h4,h5,h6,p{
 	margin:0;			   
 }
 .brand {
-    background:url(../images/hoa.jpg) no-repeat 0px 0px;
+    /* background:url(../images/hoa.jpg) no-repeat 0px 0px; */
 	background-size:cover;
     float:left;
     width:240px;

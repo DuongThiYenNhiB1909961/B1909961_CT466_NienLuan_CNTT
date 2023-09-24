@@ -5,17 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use Auth;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 class BrandProduct extends Controller
 {
     public function AuthLogin(){
-        $admin_id = Session::get('admin_id');
-        if($admin_id){
-            return Redirect::to('dashboard');
+        if(Session::get('login_normal')){
+            $admin_id = Session::get('admin_id');
         }else{
-            return Redirect::to('admin')->send();
-        }
+            $admin_id = Auth::id();
+        }   
+            if($admin_id){
+                return Redirect::to('dashboard');
+            }else{
+                return Redirect::to('admin')->send();
+            }
     }
     public function add_brand_product(){
         $this->AuthLogin();
@@ -70,5 +75,19 @@ class BrandProduct extends Controller
         DB::table('tb_brand')->where('id',$id)->delete();
         Session::put('message','Xóa thương hiệu sản phẩm thành công');
         return Redirect::to('all-brand-product');
+    }
+    // show_brand
+    public function show_brand($brand_id, Request $request){
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
+        $brand_by_id = DB::table('tb_product')->join('tb_brand','tb_product.brand_id','=','tb_brand.id')
+        ->where('tb_product.brand_id',$brand_id)->get();
+        foreach($brand_by_id as $key => $val){
+            $meta_desc = $val->brand_desc;
+            $meta_keywords = $val->brand_keywords;
+            $meta_title = $val->brand_name;
+            $url_canonical = $request->url(); 
+        }
+        return view('pages.show_brand')->with('category',$cate_product)->with('brand',$brand_product)->with('brand_by_id',$brand_by_id)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
     }
 }

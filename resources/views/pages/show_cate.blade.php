@@ -1,14 +1,14 @@
-@extends('layoutp')
+@extends('layout')
 @section('content')
 
         <h2 class="text-center text-warning"><b>DANH MỤC MỸ PHẨM</b></h2>
         <hr>
 <div class="row">
     <div class="col-sm-10">
-        <div class="row">
+        <div class="row ml-3">
             @foreach($category_by_id as $key => $product)
             
-                <div class="mr-4 mb-2" >
+                <div class="ml-3 mb-3 shadow" >
                                 <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
                                     <div class="card" style="width: 15rem; height: 22rem;">
                                         <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top" alt="">
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="col-sm-2">
-        <div class="text-center mt-1">
+        <div class="text-center mt-1 shadow">
             <h5><b class="text-danger mr-2 text-center"> 
                 Danh Mục
             </b></h5>
@@ -39,7 +39,7 @@
             </div>
            
         </div>
-        <div class="text-center mt-5">
+        <div class="text-center mt-5 shadow">
             <h5 ><b class="text-danger mr-2">Xuất Xứ</b></h5>
             <hr>
             <div class="panel panel-default mt-3">
