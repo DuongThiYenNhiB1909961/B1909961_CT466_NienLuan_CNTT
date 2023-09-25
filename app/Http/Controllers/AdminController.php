@@ -156,11 +156,4 @@ class AdminController extends Controller
         Session::put('admin_id',null);
         return Redirect::to('/admin');
     }
-    public function add_coupon(){
-        return view('admin.coupon.add_coupon');
-    }
-    public function all_coupon(){
-        $coupon = Coupon::orderby('coupon_id','DESC')->get();
-    	return view('admin.coupon.list_coupon')->with(compact('coupon'));
-    }
 }
