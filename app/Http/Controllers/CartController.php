@@ -99,7 +99,7 @@ class CartController extends Controller
         if($cart==true){
             // Session::destroy();
             Session::forget('cart');
-            Session::forget('coupon');
+            Session::forget('coupon'); 
             return redirect()->back()->with('message','Đã xóa tất cả sản phẩm');
         }
         else{

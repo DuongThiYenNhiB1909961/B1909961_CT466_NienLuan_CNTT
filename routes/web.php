@@ -8,6 +8,7 @@ use App\Http\Controllers\BrandProduct;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\CouponController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -112,3 +113,12 @@ Route::get('/google/callback', [AdminController::class, 'callback_google']);
 //login customer gg
 Route::get('/login-customer-google',[CheckOutController::class, 'login_customer_google']);
 Route::get('/customer/google/callback', [CheckOutController::class, 'callback_customer_google']);
+
+//coupon
+Route::post('/check-coupon',[CouponController::class, 'check_coupon']);
+
+Route::get('/add-coupon',[CouponController::class, 'add_coupon']);
+Route::post('/add-coupon-code',[CouponController::class, 'add_coupon_code']);
+Route::get('/all-coupon',[CouponController::class, 'all_coupon']);
+Route::get('/delete-coupon/{coupon_id}',[CouponController::class, 'delete_coupon']);
+Route::get('/del-coupon',[CouponController::class, 'del_coupon']);

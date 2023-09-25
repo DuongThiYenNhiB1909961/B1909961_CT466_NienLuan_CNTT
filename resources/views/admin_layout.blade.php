@@ -140,8 +140,8 @@
                         <span>Mã giảm giá</span>
                     </a>
                     <ul class="sub">
-						<li><a href="add-coupon">Thêm mã giảm</a></li>
-						<li><a href="all-coupon">Liệt kê mã giảm</a></li>
+						<li><a href="add-coupon">Thêm mã giảm giá</a></li>
+						<li><a href="all-coupon">Liệt kê mã giảm giá</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
