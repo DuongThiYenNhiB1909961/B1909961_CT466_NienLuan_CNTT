@@ -124,17 +124,20 @@ class AdminController extends Controller
     }
     public function dashboard(Request $request){
         $data = $request->all();
+
         $admin_email = $data['admin_email'];
         $admin_password = md5($data['admin_password']);
         $login = Login::where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
-        $login_count = $login->count();
-        if($login_count){
-            Session::put('admin_name',$login->admin_name);
-            Session::put('admin_id', $login->admin_id);
-            return Redirect::to('/manage');
+        if($login){
+            $login_count = $login->count();
+            if($login_count>0){
+                Session::put('admin_email',$login->admin_email);
+                Session::put('admin_id',$login->admin_id);
+                return Redirect::to('/manage');
+            }
         }else{
-            Session::put('message','Mat khau hoac email sai. Vui long nhap lai');
-            return Redirect::to('/admin'); 
+                Session::put('message','Mật khẩu hoặc tài khoản bị sai.Làm ơn nhập lại');
+                return Redirect::to('/admin');
         }
         // $admin_email = $request->admin_email;
         // $admin_password = md5($request->admin_password);

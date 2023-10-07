@@ -104,3 +104,8 @@ ul.sidebar-menu li a {
 .card-title{
     color: #db8605;
 }
+.delivery{
+        position: block;
+        padding:100px 0px 0px 0px;
+        float: center;
+}

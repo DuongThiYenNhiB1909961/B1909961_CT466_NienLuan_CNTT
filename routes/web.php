@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\DeliveryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,6 +98,9 @@ Route::get('/logout', [CheckOutController::class, 'logout']);
 Route::get('/change',[CheckOutController::class, 'change']);
 Route::get('/pill',[CheckOutController::class, 'pill']);
 Route::post('/checkout-by', [CheckOutController::class, 'checkout_by']);
+Route::post('/select-delivery-checkout',[CheckOutController::class, 'select_delivery_checkout']);
+Route::post('/fee-feeship', [CheckOutController::class, 'fee_feeship']);
+Route::get('/del-fee', [CheckOutController::class, 'del_fee']);
 
 //Order
 Route::get('/manage-order',[CheckOutController::class, 'manage_order']);
@@ -122,3 +126,10 @@ Route::post('/add-coupon-code',[CouponController::class, 'add_coupon_code']);
 Route::get('/all-coupon',[CouponController::class, 'all_coupon']);
 Route::get('/delete-coupon/{coupon_id}',[CouponController::class, 'delete_coupon']);
 Route::get('/del-coupon',[CouponController::class, 'del_coupon']);
+
+// delivery
+Route::get('/delivery',[DeliveryController::class, 'delivery']);
+Route::post('/select-delivery',[DeliveryController::class, 'select_delivery']);
+Route::post('/add-delivery',[DeliveryController::class, 'add_delivery']);
+Route::post('/update-delivery',[DeliveryController::class, 'update_delivery']);
+Route::post('/select-feeship',[DeliveryController::class, 'select_feeship']);

@@ -73,55 +73,7 @@
             </tr> 
 
             @endforeach
-            <tr class="shadow">
-              
-              <td colspan="3">
-                <ul>
-                  <li>Tổng tiền hàng <p class="text-right">{{number_format($total,0,',','.')}}đ</p></li>
-                  <li>Thuế <span></span></li>
-                  <li>Phí Vận Chuyển <span></span></li>
-                  @if(Session::get('coupon'))
-                  <li>
-                    
-                      @foreach(Session::get('coupon') as $key => $cou)
-                        @if($cou['coupon_condition']==1)
-                           Mã giảm <p class="text-right">{{$cou['coupon_number']}}%</p> 
-                          <p>
-                            @php 
-                            $totalCoupon = ($total*$cou['coupon_number'])/100;
-                            echo '<p><li>Tổng giảm:','<p class="text-right">'.number_format($totalCoupon,0,',','.').'đ</p>','</li></p>';
-                            $total_coupon = $total - $totalCoupon;
-                            @endphp
-                          </p>
-                          <p><li>Tổng tiền phải thanh toán <p class="text-right">{{number_format($total-$total_coupon,0,',','.')}}đ</p></li></p>
-                        @elseif($cou['coupon_condition']==2)
-                        <p class="text-right">Mã giảm {{number_format($cou['coupon_number'],0,',','.')}}K</p>
-                          <p>
-                            @php 
-                            $total_coupon = $total - $cou['coupon_number'];
-                     
-                            @endphp
-                          </p>
-                          <p><li>Tổng tiền phải thanh toán <p class="text-right">{{number_format($total_coupon,0,',','.')}}đ</p></li></p>
-                        @endif
-                      @endforeach
-                  </li>
-                  @elseif(Session::get('coupon')==null)
-                  <li>Tổng tiền phải thanh toán <p class="text-right">{{number_format($total,0,',','.')}}đ</p></li>
-                  @endif
-                </ul>
-              </td>
-              <td colspan="4">
-                <div class="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-danger bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
-                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                  </svg>
-                  <div class=" text-lg font-semibold"><a class="text-danger nav-link" href="{{asset('/checkout')}}"><b>Checkout</b> </a></div>
-                </div>
-              </td>
-            </tr>
+
             @else
             <tr>
               <th colspan="6">
@@ -137,21 +89,25 @@
             @endif
           </tbody>
         </form>
-        @if(Session::get('cart'))
-        <tr>
-          <td colspan="6">
-            <form method="POST" action="{{url('/check-coupon')}}">
-              @csrf
-                <input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
-                <input type="submit" class="btn btn-default check_coupon text-danger" name="check_coupon" value="Tính mã giảm giá">
-                @if(Session::get('coupon'))
-	              <a class="btn btn-default check_out text-danger" href="{{url('/del-coupon')}}"><b>Xóa mã khuyến mãi</b></a>
-								@endif         
-            </form>
-          </td>
-        </tr>
-        @endif
-        </table>
+        
+      </table>
+      <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+          <div class="text-right"><b class="text-danger">Tổng tiền hàng:      {{number_format($total,0,',','.')}}đ</b></div>
+           
+          <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-danger bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
+                  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                </svg>
+                <div class=" text-lg font-semibold"><a class="text-danger nav-link" href="{{asset('/checkout')}}"><b>Checkout</b> </a></div>
+          </div>
+        </div>
+      
+      </div>
       </div>
     </div>
 </div>

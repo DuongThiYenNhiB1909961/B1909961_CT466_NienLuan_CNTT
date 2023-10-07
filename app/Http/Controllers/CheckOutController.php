@@ -8,6 +8,10 @@ use App\Models\Social;
 use App\Models\Login;
 use App\Models\SocialCustomers;
 use App\Models\Customer;
+use App\Models\City;
+use App\Models\District;
+use App\Models\Wards;
+use App\Models\Feeship;
 use Socialite;
 use Cart;
 use Session;
@@ -19,7 +23,52 @@ use Validator;
 session_start();
 class CheckOutController extends Controller
 {
+    public function del_fee(){
+        Session::forget('fee');
+        return redirect()->back();
+    }
+    public function fee_feeship(Request $request){
+        $data = $request->all();
+        if($data['matp']){
+            $feeship = Feeship::where('fee_matp',$data['matp'])->where('fee_maqh',$data['maqh'])->where('fee_xaid',$data['xaid'])->get();
+            if($feeship){
+                $count_feeship = $feeship->count();
+                if($count_feeship>0){
+                     foreach($feeship as $key => $fee){
+                        Session::put('fee',$fee->fee_feeship);
+                        Session::save();
+                    }
+                }else{ 
+                    Session::put('fee',25000);
+                    Session::save();
+                }
+            }
+           
+        }
+    }
+    public function select_delivery_checkout(Request $request){
+        $data = $request->all();
+    	if($data['action']){
+    		$output = '';
+    		if($data['action']=="city"){
+    			$select_district = District::where('matp',$data['ma_id'])->orderby('maqh','ASC')->get();
+    				$output.='<option>---Chọn quận huyện---</option>';
+    			foreach($select_district as $key => $qh){
+    				$output.='<option value="'.$qh->maqh.'">'.$qh->name_quanhuyen.'</option>';
+    			}
+
+    		}else{
+
+    			$select_wards = Wards::where('maqh',$data['ma_id'])->orderby('xaid','ASC')->get();
+    			$output.='<option>---Chọn xã phường---</option>';
+    			foreach($select_wards as $key => $ward){
+    				$output.='<option value="'.$ward->xaid.'">'.$ward->name_xaphuong.'</option>';
+    			}
+    		}
+    		echo $output;
+    	}
     
+    }
 
     public function login_customer_google(){
         config(['services.google.redirect' => env('GOOGLE_CLIENT_URL')]);
@@ -140,7 +189,8 @@ class CheckOutController extends Controller
 
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
-        return view('pages.Checkout.show_checkout')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
+        $city = City::orderby('matp','ASC')->get();
+        return view('pages.Checkout.show_checkout')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('city',$city);
     }
     public function save_checkout(Request $request){
         $data = array();
@@ -215,25 +265,29 @@ class CheckOutController extends Controller
         $meta_title = "Đăng nhập, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        // $data = $request->all();
-        $data = $request->validate([
-        'customer_email' => 'required',
-        'customer_password' => 'required',
-        'g-recaptcha-response' => new Captcha(), //dòng kiểm tra Captcha
-        ]);
+        $data = $request->all();
+        //$data = $request->validate([
+          //  'customer_email' => 'required',
+            //'customer_password' => 'required',
+            //'g-recaptcha-response' => new Captcha(), //dòng kiểm tra Captcha
+            //]);
+        
 
         $customer_email = $data['customer_email'];
         $customer_password = $data['customer_password'];
-        $login = Customer::where('customer_email',$customer_email)->where('customer_password',$customer_password)->first();
-        $login_count = $login->count();
-        if($login_count){
-            Session::put('customer_name',$login->customer_name);
-            Session::put('customer_id', $login->customer_id);
-            return Redirect::to('/checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
+        $login = Customer::where('customer_email',$customer_email)->where('customer_password',$customer_password)->first();      
+        if($login){
+            $login_count = $login->count();
+            if($login_count>0){
+                Session::put('customer_name',$login->customer_name);
+                Session::put('customer_id', $login->customer_id);
+                return Redirect::to('/checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
+            }
         }else{
             Session::put('message','Mat khau hoac email sai. Vui long nhap lai');
             return Redirect::to('/login-checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);; 
         }
+        
 
         // $customer_email = $request->customer_email;
         // $customer_password = $request->customer_password;
