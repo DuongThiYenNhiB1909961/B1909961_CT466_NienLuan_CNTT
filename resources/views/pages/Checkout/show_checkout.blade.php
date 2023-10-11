@@ -132,7 +132,7 @@
                               </div>
                             
                            <div class="delivery">
-                            <input type="submit" value="" name="fee_feeship" class="btn btn-sm fee_feeship">
+                            <input type="submit" value="Tính Phí" name="fee_feeship" class="btn btn-danger btn-sm fee_feeship">
                            </div>
                             
                             </form>
