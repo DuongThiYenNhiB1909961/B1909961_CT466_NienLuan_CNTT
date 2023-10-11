@@ -17,7 +17,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
         <title>{{$meta_title}}</title>
         <link rel="icon" href="https://cdn01.beelancer.vn/blog/wp-content/uploads/2021/07/Maquillaje-Nina-Maquillaje-Nina-Nina-Pintada-A-Mano-Ojos-De-Nina-PNG-y-PSD-para-Descargar-Gratis-_-Pngtree.jpg" type="image/x-icon">
-        <link href="{{asset('resources/css/style.css')}}" rel='stylesheet' type='text/css' />
+        <link href="" rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" href="{{asset('resources/css/style.css')}}">
         <link href="{{asset('resources/css/style-responsive.css')}}" rel="stylesheet"/>
         <link href="{{asset('resources/css/animate.css')}}" rel="stylesheet"/>
         <!-- Fonts -->
@@ -286,26 +287,13 @@
                         _token:_token},
                     success:function(data){
                         swal("Good job!", "Đã thêm sản phẩm vào giỏ hàng", "success");
-                        // swal({
-                        //         title: "Đã thêm sản phẩm vào giỏ hàng",
-                        //         text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
-                        //         showCancelButton: true,
-                        //         cancelButtonText: "Xem tiếp",
-                        //         confirmButtonClass: "btn-success",
-                        //         confirmButtonText: "Đi đến giỏ hàng",
-                        //         closeOnConfirm: false
-                        //     },
-                        //     function() {
-                        //         window.location.href = '{{url('/show-cart-ajax')}}';
-                        //     });
-
                     } 
 
                 });
             });
         });
         </script>
-        <script>
+        <script type="text/javascript">
             $(document).ready(function(){
                 $('.choose').on('change',function(){
                 var action = $(this).attr('id');
@@ -329,14 +317,14 @@
             }); 
             });
         </script>
-        <script>
+        <script type="text/javascript">
             $(document).ready(function(){
-                $('.fee_feeship').click(function(){
+                $('.fee_feeship').on('click',function(){
                     var matp = $('.city').val();
                     var maqh = $('.district').val();
                     var xaid = $('.wards').val();
                     var _token = $('input[name="_token"]').val();
-                    if(matp == '' && maqh == '' && xaid == ''){
+                    if(matp == '' || maqh == '' || xaid == ''){
                         alert('Vui lòng chọn đầy đủ địa chỉ cần vận chuyển');
                     }else{
                     $.ajax({
@@ -349,6 +337,48 @@
                     });
                 }
                 }); 
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.send_order').click(function(){
+                    
+                    var shipping_name = $('.shipping_name').val();
+                    var shipping_email = $('.shipping_email').val();
+                    var shipping_address = $('.shipping_address').val();
+                    var shipping_phone = $('.shipping_phone').val();
+                    var shipping_note = $('.shipping_note').val();
+                    var shipping_method = $('.payment_select').val();
+                    var order_fee = $('.order_fee').val();
+                    var order_coupon = $('.order_coupon').val();
+                    var _token = $('input[name="_token"]').val();
+                    if(shipping_name == '' || shipping_email == '' || shipping_address == '' || shipping_phone == '' || shipping_note == ''
+                    || shipping_method == ''){
+                        alert('Vui lòng điền đầy đủ thông tin nhận hàng');
+                    }else{
+                        $.ajax({
+                            url: '{{url('/confirm-order')}}',
+                            method: 'POST',
+                            data:{
+                                shipping_name:shipping_name,
+                                shipping_email:shipping_email,
+                                shipping_address:shipping_address,
+                                shipping_phone:shipping_phone,
+                                shipping_note:shipping_note,
+                                order_fee:order_fee,
+                                order_coupon:order_coupon,
+                                shipping_method:shipping_method,
+                                _token:_token},
+                                success:function(data){
+                                    swal("Good job!", "Đặt hàng thành công", "success");
+                                }
+                        });
+                        window.setTimeout(function(){ 
+                            location.reload();
+                        } ,3000);
+                    }
+                    
+                });
             });
         </script>
     </body>

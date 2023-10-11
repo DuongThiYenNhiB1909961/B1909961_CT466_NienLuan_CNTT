@@ -25,8 +25,8 @@
                 
                     <div class="row">
                         <div class="col-sm-6 shadow">
-                            <form action="{{URL::to('save-checkout')}}" class="pt-2" method="post">
-                                {{csrf_field()}}
+                            <form >
+                                @csrf
                             <div class="bill-to">
                                 <h4><b class="text-danger">Thông tin mua hàng</b> </h4>
                                 <div class="form-one">
@@ -34,37 +34,65 @@
                                         <div class="form-row">
                                             <label for="inputEmail4"><b>Tên khách hàng</b> </label>
                                             <input type="text" data-validation="length" data-validation-length="min3" 
-                                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="shipping_name" class=" shadow form-control" id="inputName" placeholder="Họ tên khách hàng" required>
+                                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="shipping_name" class="shipping_name shadow form-control" id="inputName" placeholder="Họ tên khách hàng" required>
                                             <label for="inputEmail4"><b>Email khách hàng</b></label>
                                             <input type="email" data-validation="length" data-validation-length="min3" 
-                                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="shipping_email" class="form-control shadow" id="inputEmail4" placeholder="examp@gmail.com" required>
+                                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="shipping_email" class="shipping_email form-control shadow" id="inputEmail4" placeholder="examp@gmail.com" required>
                                             <label for="inputEmail4"><b>Địa chỉ khách hàng</b></label>
                                             <input type="text" data-validation="length" data-validation-length="min10" 
-                                            data-validation-error-msg="Lam on dien it nhat 10 ky tu" name="shipping_address" class="form-control shadow" id="inputEmail4" placeholder="Đường 3/2, phường XK, quận NK, tp Cần Thơ">
+                                            data-validation-error-msg="Lam on dien it nhat 10 ky tu" name="shipping_address" class="shipping_address form-control shadow" id="inputEmail4" placeholder="Đường 3/2, phường XK, quận NK, tp Cần Thơ">
                                             <label for="inputEmail4"><b>Số điện thoại</b></label>
-                                            <input type="tel" name="shipping_phone" class="form-control shadow" id="inputnumber" placeholder="0978 978 789" required
+                                            <input type="tel" name="shipping_phone" class="shipping_phone form-control shadow" id="inputnumber" placeholder="0978978789" required
                                             pattern="[0-9]{3}[0-9]{3}[0-9]{4}"/>
                                             <label for="inputEmail4"><b>Ghi chú đơn hàng</b></label>
                                             <input type="text" data-validation="length" data-validation-length="min3" 
-                                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="shipping_note" class=" shadow form-control" placeholder="Ghi chú của khách hàng" required>
+                                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="shipping_note" class="shipping_note shadow form-control" placeholder="Ghi chú của khách hàng" required>
+                                            
+                                            @if(Session::get('fee'))
+                                              <input type="hidden" name="order_fee" class="order_fee" value="{{Session::get('fee')}}">
+                                            @else 
+                                              <input type="hidden" name="order_fee" class="order_fee" value="30000">
+                                            @endif
+
+                                            @if(Session::get('coupon'))
+                                              @foreach(Session::get('coupon') as $key => $cou)
+                                                <input type="hidden" name="order_coupon" class="order_coupon" value="{{$cou['coupon_code']}}">
+                                              @endforeach
+                                            @else 
+                                              <input type="hidden" name="order_coupon" class="order_coupon" value="No">
+                                            @endif
+
+                                              <div class="form-group">
+                                                <label for="exampleInputPassword1"><b>Chọn hình thức thanh toán</b></label>
+                                                  <select name="payment_select"  class="form-controll input-sm m-bot15 payment_select shadow">
+                                                    <option value="">--Chọn hình thức thanh toán--</option>
+                                                    <option value="0">Thanh Toán Khi Nhận Hàng</option>
+                                                    <option value="1">Ngân Hàng</option>   
+                                                  </select>
+                                              </div>
+                                           
+                                           <br>
                                             <?php
                                             $customer_id = Session::get('customer_id');
                                             if($customer_id != NULL)
                                             {
-                                        ?>
-                                        <input type="submit" value="Xác nhận" name="send_order" class="btn btn-danger btn-sm mt-1">
-                                        <?php
-                                            }else{
-                                        ?>
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-warning bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
-                                                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>
-                                                <div class=" text-lg font-semibold"><a class="nav-link " href="{{URL::to('/login-checkout')}}">Login</a></div>
-                                        </div>
-                                        <?php
-                                        }
-                                        ?>
+                                            ?>
+                                            <div class="delivery">
+                                              <input type="button" value="Xác nhận" name="send_order" class="btn btn-danger btn-sm mt-1 send_order">
+                                            </div>
+                                            
+                                            <?php
+                                                }else{
+                                            ?>
+                                            <div class="flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-warning bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                                                    <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>
+                                                    <div class=" text-lg font-semibold"><a class="nav-link " href="{{URL::to('/login-checkout')}}">Login</a></div>
+                                            </div>
+                                            <?php
+                                            }
+                                            ?>
                                 
                                         </div>
                                 </div>
@@ -102,8 +130,9 @@
                                         <option value="">--Chọn xã phường--</option>   
                                 </select>
                               </div>
+                            
                            <div class="delivery">
-                            <button type="button" name="fee_feeship" class="btn btn-danger btn-sm fee_feeship">Tính phí vận chuyển</button>
+                            <input type="submit" value="" name="fee_feeship" class="btn btn-sm fee_feeship">
                            </div>
                             
                             </form>
@@ -123,7 +152,7 @@
                 <div class="table-responsive">
                     <form action="{{url('update-cart')}}" method="POST">
                     @csrf
-                    {{-- {{csrf_field()}} --}}
+                    
                     <table class="table table-striped b-t b-light rounded-lg">
                         <thead >
                           <tr class="bg-warning text-white ">
@@ -167,22 +196,11 @@
               
                           @endforeach
                           <tr class="shadow">
-                            <td colspan="3"></td>
+                          <td colspan="3"></td>
                             <td colspan="2">
                               <ul>
                                 <div><b>Tổng tiền hàng: {{number_format($total,0,',','.')}}đ</b></div>
-                                <div>
-                                  <b>Thuế <span></span></b>
-                                </div>
-                                <div>
-                                  @if(Session::get('fee'))
-                                <b>Phí Vận Chuyển 
-                                  <span>{{number_format(Session::get('fee'),0,',','.')}}đ</span>
-                                  <a class="btn btn-default" href="{{url('/del-fee')}}"><b class="text-danger">X</b></a>
-                                  <?php $total_after_fee = $total + Session::get('fee'); ?>
-                                </b>
-                                @endif
-                                </div>
+                                
                                 <div>
                                   @if(Session::get('coupon'))
                                 <b>
@@ -209,6 +227,15 @@
                                         
                                       @endif
                                     @endforeach
+                                </b>
+                                @endif
+                                </div>
+                                <div>
+                                  @if(Session::get('fee'))
+                                <b>Phí Vận Chuyển 
+                                  <span>{{number_format(Session::get('fee'),0,',','.')}}đ</span>
+                                  <a class="btn btn-default" href="{{url('/del-fee')}}"><b class="text-danger">X</b></a>
+                                  <?php $total_after_fee = $total + Session::get('fee'); ?>
                                 </b>
                                 @endif
                                 </div>
@@ -269,28 +296,6 @@
                       </tr>
                       @endif
                       </table>
-                    {{-- <div class="row">
-                        <div class="col-sm-6">
-                        <div class="total_area">
-                            <ul>
-                            
-                            </ul>
-
-                            <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-danger bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
-                                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                            </svg>
-                            <div class=" text-lg font-semibold"><a class="text-danger nav-link" href="{{('/checkout')}}"><b>Checkout</b> </a></div>
-                            </div>
-                            
-                        </div>
-
-                        
-                        </div>
-                        
-                    </div> --}}
                 </div>
         </div>
     </div>

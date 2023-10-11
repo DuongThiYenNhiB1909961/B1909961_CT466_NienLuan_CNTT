@@ -47,7 +47,7 @@
                 $subtotal = $cart['product_price']*$cart['product_qty'];
                 $total += $subtotal;
               @endphp
-              <tr>
+            <tr>
               <th class="cart_name"><p>{{$cart['product_name']}}</p></th>
               <th class="cart_image">
                 <img src="{{asset('public/uploads/product/'.$cart['product_image'])}}" height="100" width="100" alt="{{$cart['product_image']}}">
@@ -71,9 +71,25 @@
                       </svg></a>
               </th>
             </tr> 
-
+            
             @endforeach
-
+            <tr>
+              <td><input type="submit" value="" name="update_qty" class="check_out btn btn-default btn-sm"></td>
+              <th colspan="6">
+                <div class="text-right"><b class="text-danger">Tổng tiền hàng: {{number_format($total,0,',','.')}}đ</b></div>
+                   
+                  <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-danger bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
+                          <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                          <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                        </svg>
+                        <div class=" text-lg font-semibold"><a class="text-danger nav-link" href="{{asset('/checkout')}}"><b>Checkout</b> </a></div>
+                  </div>
+                
+              
+              </th>
+            </tr>
             @else
             <tr>
               <th colspan="6">
@@ -91,23 +107,7 @@
         </form>
         
       </table>
-      <div class="row">
-        <div class="col-sm-6">
-        </div>
-        <div class="col-sm-6">
-          <div class="text-right"><b class="text-danger">Tổng tiền hàng:      {{number_format($total,0,',','.')}}đ</b></div>
-           
-          <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-danger bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
-                  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                </svg>
-                <div class=" text-lg font-semibold"><a class="text-danger nav-link" href="{{asset('/checkout')}}"><b>Checkout</b> </a></div>
-          </div>
-        </div>
       
-      </div>
       </div>
     </div>
 </div>

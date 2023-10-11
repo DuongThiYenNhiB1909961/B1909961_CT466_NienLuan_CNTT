@@ -85,7 +85,7 @@ Route::get('/show-cart', [CartController::class, 'show_cart']);
 Route::get('/show-cart-ajax', [CartController::class, 'show_cart_ajax']);
 Route::get('/delete-cart/{rowId}', [CartController::class, 'delete_cart']);
 Route::get('/del-product/{session_id}',[CartController::class, 'delete_product']);
-Route::get('/del-all-product',[CartController::class, 'delete_all_product']);
+Route::get('/del-all-product',[CartController::class, 'delete_all_product']); 
 
 // CHeckout
 Route::get('/login-checkout', [CheckOutController::class, 'login_checkout']);
@@ -101,6 +101,7 @@ Route::post('/checkout-by', [CheckOutController::class, 'checkout_by']);
 Route::post('/select-delivery-checkout',[CheckOutController::class, 'select_delivery_checkout']);
 Route::post('/fee-feeship', [CheckOutController::class, 'fee_feeship']);
 Route::get('/del-fee', [CheckOutController::class, 'del_fee']);
+Route::post('/confirm-order', [CheckOutController::class, 'confirm_order']);
 
 //Order
 Route::get('/manage-order',[CheckOutController::class, 'manage_order']);

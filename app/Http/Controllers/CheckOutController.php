@@ -12,6 +12,9 @@ use App\Models\City;
 use App\Models\District;
 use App\Models\Wards;
 use App\Models\Feeship;
+use App\Models\Order;
+use App\Models\Shipping;
+use App\Models\OrderDetails;
 use Socialite;
 use Cart;
 use Session;
@@ -204,51 +207,6 @@ class CheckOutController extends Controller
         Session::put('shipping_id',$shipping_id);
         return Redirect::to('/pill');
     }
-    public function pill(){
-        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
-        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
-        return view('pages.Checkout.pill')->with('category',$cate_product)->with('brand',$brand_product);
-    }
-    public function checkout_by(Request $request){
-        // Thêm vào pill
-        $data = array();
-        $data['pill_method'] = $request->payment_option;
-        $data['pill_status'] = "Chờ xử lý";
-        $pill_id = DB::table('tb_pill')->insertGetId($data);
-        
-        // thêm vào order
-        $order_data = array();
-        $order_data['customer_id'] = Session::get('customer_id');
-        $order_data['shipping_id'] = Session::get('shipping_id');
-        $order_data['pill_id'] = $pill_id;
-        $order_data['order_total'] = Cart::total();
-        $order_data['order_status'] = "Chờ xử lý";
-        $order_id = DB::table('tb_order')->insertGetId($order_data);
-
-        // thêm vào order_details
-        $content = Cart::content();
-        foreach($content as $v_content){
-            $order_details_data['order_id'] = $order_id;
-            $order_details_data['product_id'] = $v_content->id;
-            $order_details_data['product_name'] = $v_content->name;
-            $order_details_data['product_price'] = $v_content->price;
-            $order_details_data['product_sales_quantity'] = $v_content->qty;
-            $order_details_id = DB::table('tb_order_details')->insert($order_details_data);
-
-        }
-        if($data['pill_method']!=NULL){
-            Cart::destroy();
-            $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
-            $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
-            return view('pages.Checkout.cash')->with('category',$cate_product)->with('brand',$brand_product);
-        }else{
-            $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
-            $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
-            return view('pages.Checkout')->with('category',$cate_product)->with('brand',$brand_product);
-        }
-        // Session::put('shipping_id',$shipping_id);
-        // return Redirect('/pill');
-    }
 
     public function logout(Request $request){
         // $this->AuthLogin();
@@ -329,6 +287,47 @@ class CheckOutController extends Controller
 
         $manager_order = view('admin.manage_order')->with('all_order',$all_order);
         return view('admin_layout')->with('admin.manage_order',$manager_order);
+    }
+    public function confirm_order(Request $request){
+        $data = $request->all();
+        $shipping = new Shipping();
+        $shipping->shipping_name = $data['shipping_name'];
+        $shipping->shipping_email = $data['shipping_email'];
+        $shipping->shipping_address = $data['shipping_address'];
+        $shipping->shipping_phone = $data['shipping_phone'];
+        $shipping->shipping_note = $data['shipping_note'];
+        $shipping->shipping_method = $data['shipping_method'];
+        $shipping->save();
+        $shipping_id = $shipping->shipping_id;
+
+        $order_code = substr(md5(microtime()),rand(0,26),5);
+
+        $order = new Order();
+        $order->customer_id = Session::get('customer_id');
+        $order->shipping_id = $shipping_id;
+        $order->order_status = 1;
+        $order->order_code = $order_code;
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $order->created_at = now();
+        $order->save();
+
+        
+        if(Session::get('cart')==true){
+            foreach(Session::get('cart') as $key => $cart){
+                $order_details = new OrderDetails;
+                $order_details->order_code = $order_code;
+                $order_details->product_id = $cart['product_id'];
+                $order_details->product_name = $cart['product_name'];
+                $order_details->product_price = $cart['product_price'];
+                $order_details->product_sales_quantity = $cart['product_qty'];
+                $order_details->coupon =  $data['order_coupon'];
+                $order_details->feeship = $data['order_fee'];
+                $order_details->save();
+            }
+         }
+        Session::forget('coupon');
+        Session::forget('fee');
+        Session::forget('cart');
     }
 }
 
