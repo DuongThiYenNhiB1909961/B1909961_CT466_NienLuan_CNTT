@@ -100,8 +100,8 @@
                         <span>Danh mục mỹ phẩm</span>
                     </a>
                     <ul class="sub">
-						<li><a href="add-category-product">Thêm danh mục mỹ phẩm</a></li>
-						<li><a href="all-category-product">Liệt kê danh mục mỹ phẩm</a></li>
+						<li><a href="{{asset('add-category-product')}}">Thêm danh mục mỹ phẩm</a></li>
+						<li><a href="{{asset('all-category-product')}}">Liệt kê danh mục mỹ phẩm</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -110,8 +110,8 @@
                         <span>Xuất xứ mỹ phẩm</span>
                     </a>
                     <ul class="sub">
-						<li><a href="add-brand-product">Thêm nơi sản xuất mỹ phẩm</a></li>
-						<li><a href="all-brand-product">Liệt kê nơi sản xuất mỹ phẩm</a></li>
+						<li><a href="{{asset('add-brand-product')}}">Thêm nơi sản xuất mỹ phẩm</a></li>
+						<li><a href="{{asset('all-brand-product')}}">Liệt kê nơi sản xuất mỹ phẩm</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -120,8 +120,8 @@
                         <span>Danh sách mỹ phẩm</span>
                     </a>
                     <ul class="sub">
-						<li><a href="add-product">Thêm mỹ phẩm</a></li>
-						<li><a href="all-product">Liệt kê mỹ phẩm</a></li>
+						<li><a href="{{asset('add-product')}}">Thêm mỹ phẩm</a></li>
+						<li><a href="{{asset('all-product')}}">Liệt kê mỹ phẩm</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -130,7 +130,7 @@
                         <span>Đơn Hàng</span>
                     </a>
                     <ul class="sub">
-						<li><a href="manage-order">Quản Lý Đơn Hàng</a></li>
+						<li><a href="{{asset('manage-order')}}">Quản Lý Đơn Hàng</a></li>
 						
                     </ul>
                 </li>
@@ -140,8 +140,8 @@
                         <span>Mã giảm giá</span>
                     </a>
                     <ul class="sub">
-						<li><a href="add-coupon">Thêm mã giảm giá</a></li>
-						<li><a href="all-coupon">Liệt kê mã giảm giá</a></li>
+						<li><a href="{{asset('add-coupon')}}">Thêm mã giảm giá</a></li>
+						<li><a href="{{asset('all-coupon')}}">Liệt kê mã giảm giá</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -150,12 +150,12 @@
                         <span>Vận chuyển</span>
                     </a>
                     <ul class="sub">
-						<li><a href="delivery">Quản lý vận chuyển</a></li>
+						<li><a href="{{asset('delivery')}}">Quản lý vận chuyển</a></li>
 						
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="logoutad">
+                    <a href="{{asset('logoutad')}}">
                         <i class="fa fa-key"></i>
                          Log Out
                     </a>

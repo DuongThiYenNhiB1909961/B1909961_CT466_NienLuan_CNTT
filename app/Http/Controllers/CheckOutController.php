@@ -138,18 +138,18 @@ class CheckOutController extends Controller
                 return Redirect::to('admin')->send();
             }
     }
-    public function view_order($order_id){
-        $this->AuthLogin();
+    // public function view_order($order_code){
+    //     $this->AuthLogin();
 
-        $order_by_id = DB::table('tb_order')
-        ->join('tb_customer','tb_order.customer_id','=','tb_customer.customer_id')
-        ->join('tb_shipping','tb_order.shipping_id','=','tb_shipping.shipping_id')
-        ->join('tb_order_details','tb_order.order_id','=','tb_order_details.order_id')
-        ->select('tb_order.*','tb_customer.*','tb_shipping.*','tb_order_details.*')->first();
+    //     $order_by_id = DB::table('tb_order')
+    //     ->join('tb_customer','tb_order.customer_id','=','tb_customer.customer_id')
+    //     ->join('tb_shipping','tb_order.shipping_id','=','tb_shipping.shipping_id')
+    //     ->join('tb_order_details','tb_order.order_code','=','tb_order_details.order_code')
+    //     ->select('tb_order.*','tb_customer.*','tb_shipping.*','tb_order_details.*')->first();
 
-        $manager_order_by_id = view('admin.view_order')->with('order_by_id',$order_by_id);
-        return view('admin_layout')->with('admin.view_order',$manager_order_by_id);
-    }
+    //     $manager_order_by_id = view('admin.view_order')->with('order_by_id',$order_by_id);
+    //     return view('admin_layout')->with('admin.view_order',$manager_order_by_id);
+    // }
     public function login_checkout(Request $request){
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
         $meta_keywords = "shop my pham, shop mỹ phẩm, của hàng mỹ phẩm chính hãng";
@@ -278,16 +278,16 @@ class CheckOutController extends Controller
     //     return redirect('/dang-nhap')->with('message', 'Đăng ký tài khoản thành
     //     công,làm ơn đăng nhập');
     //     }
-    public function manage_order(){
-        $this->AuthLogin();
-        $all_order = DB::table('tb_order')
-        ->join('tb_customer','tb_order.customer_id','=','tb_customer.customer_id')
-        ->select('tb_order.*','tb_customer.customer_name')
-        ->orderby('tb_order.order_id','desc')->get();
+    // public function manage_order(){
+    //     $this->AuthLogin();
+    //     $all_order = DB::table('tb_order')
+    //     ->join('tb_customer','tb_order.customer_id','=','tb_customer.customer_id')
+    //     ->select('tb_order.*','tb_customer.customer_name')
+    //     ->orderby('tb_order.order_id','desc')->get();
 
-        $manager_order = view('admin.manage_order')->with('all_order',$all_order);
-        return view('admin_layout')->with('admin.manage_order',$manager_order);
-    }
+    //     $manager_order = view('admin.manage_order')->with('all_order',$all_order);
+    //     return view('admin_layout')->with('admin.manage_order',$manager_order);
+    // }
     public function confirm_order(Request $request){
         $data = $request->all();
         $shipping = new Shipping();

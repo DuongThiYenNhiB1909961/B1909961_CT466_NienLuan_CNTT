@@ -17,36 +17,45 @@
         <table class="table table-striped b-t b-light">
           <thead>
             <tr>
-              <th style="width:20px;">
-                <label class="i-checks m-b-none">
-                  <input type="checkbox"><i></i>
-                </label>
-              </th>
-              <th>Tên người đặt</th>
-              <th>Tổng giá tiền</th>
-              <th>Tình trạng</th>
-              <th>Hiển thị</th>
-              <th>Xác nhận</th>
+              
+              <th>Đơn hàng</th>
+              <th>Mã đơn</th>
+              <th>Tình trạng đơn</th>
+              <th>Thời gian đặt hàng</th>
+
               <th style="width:30px;"></th>
             </tr>
           </thead>
           <tbody>
+            @php
+              $i = 1;  
+            @endphp
             @foreach ($all_order as $key => $order)
+            
                <tr>
-              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-              <td>{{$order->customer_name}}</td>
-              <td>{{$order->order_total}}</td>
-              <td>{{$order->order_status}}</td>
+              <td>{{$i}}</td>
+              <td>{{$order->order_code}}</td>
+             
+              <td>@if($order->order_status == 1)
+                      Đơn hàng new
+                  @else
+                      Đã xử lý
+                  @endif
+              </td>
+              <td>{{$order->created_at}}</td>
               <td>
-                <a href="{{URL::to('/view-order/'.$order->order_id)}}" class="active" >
+                <a href="{{asset('/view-order/'.$order->order_code)}}" class="active" >
                     <i class="fa fa-pencil-square text-success text-active"></i></a>
-                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{URL::to('/delete-order/'.$order->order_id)}}" class="active" ui-toggle-class="">
+                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{asset('/delete-order/'.$order->order_code)}}" class="active" ui-toggle-class="">
                     <i class="fa fa-times text-danger text"></i></a>
               </td>
               <td>
                 <a href=""><i class="fa fa-check-circle text-success" aria-hidden="true"></i></a>
               </td>
             </tr> 
+            @php
+              $i++;  
+            @endphp
             @endforeach
             
           </tbody>

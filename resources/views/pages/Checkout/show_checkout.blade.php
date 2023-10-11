@@ -59,7 +59,7 @@
                                                 <input type="hidden" name="order_coupon" class="order_coupon" value="{{$cou['coupon_code']}}">
                                               @endforeach
                                             @else 
-                                              <input type="hidden" name="order_coupon" class="order_coupon" value="No">
+                                              <input type="hidden" name="order_coupon" class="order_coupon" value="no">
                                             @endif
 
                                               <div class="form-group">

@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -104,8 +105,10 @@ Route::get('/del-fee', [CheckOutController::class, 'del_fee']);
 Route::post('/confirm-order', [CheckOutController::class, 'confirm_order']);
 
 //Order
-Route::get('/manage-order',[CheckOutController::class, 'manage_order']);
-Route::get('/view-order/{order_id}',[CheckOutController::class, 'view_order']);
+Route::get('/manage-order',[OrderController::class, 'manage_order']);
+Route::get('/view-order/{order_code}',[OrderController::class, 'view_order']);
+// Route::get('/manage-order',[CheckOutController::class, 'manage_order']);
+// Route::get('/view-order/{order_code}',[CheckOutController::class, 'view_order']);
 
 //login facebook
 Route::get('/login-facebook',[AdminController::class, 'login_facebook']);

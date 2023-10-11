@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderDetails extends Model
@@ -13,4 +13,8 @@ class OrderDetails extends Model
     ];
     protected $primaryKey = 'order_details_id';
     protected $table = 'tb_order_details';
+
+    public function product(){
+        return $this->belongsTo('App\Models\Product','product_id');
+    }
 }
