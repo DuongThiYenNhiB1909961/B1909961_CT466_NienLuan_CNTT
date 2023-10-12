@@ -46,6 +46,7 @@ class ProductController extends Controller
         $data['meta_keywords'] = $request->meta_keywords;
         $data['product_price'] = $request->product_price;
         $data['product_price_buy'] = $request->product_price_buy;
+        $data['product_qty'] = $request->product_qty;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
@@ -98,6 +99,7 @@ class ProductController extends Controller
         $data['meta_keywords'] = $request->meta_keywords;
         $data['product_price'] = $request->product_price;
         $data['product_price_buy'] = $request->product_price_buy;
+        $data['product_qty'] = $request->product_qty;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;

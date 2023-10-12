@@ -20,21 +20,26 @@
                             {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên mỹ phẩm</label>
-                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên Mỹ Phẩm">
+                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Vui lòng dien it nhat 3 ky tu" name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên Mỹ Phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Từ khóa mỹ phẩm</label>
-                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="meta_keywords" class="form-control" id="exampleInputEmail1" placeholder="Tên Mỹ Phẩm">
+                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Vui lòng dien it nhat 3 ky tu" name="meta_keywords" class="form-control" id="exampleInputEmail1" placeholder="Tên Mỹ Phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá mua mỹ phẩm</label>
                             <input type="text" data-validation="number"
-                            data-validation-error-msg="Lam on dien so tien" name="product_price_buy" class="form-control" id="exampleInputEmail1" placeholder="Giá Mỹ Phẩm">
+                            data-validation-error-msg="Vui lòng dien so tien" name="product_price_buy" class="form-control" id="exampleInputEmail1" placeholder="Giá Mỹ Phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá bán mỹ phẩm</label>
                             <input type="text" data-validation="number"
-                            data-validation-error-msg="Lam on dien so tien" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá Mỹ Phẩm">
+                            data-validation-error-msg="Vui lòng dien so tien" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá Mỹ Phẩm">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Số lượng nhập</label>
+                            <input type="number" data-validation="number"
+                            data-validation-error-msg="Vui lòng dien so lượng" min="1" name="product_qty" class="form-control" id="exampleInputEmail1" placeholder="số lượng nhập">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh mỹ phẩm</label>
@@ -43,12 +48,12 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả mỹ phẩm</label>
                             <textarea style="resize: none" rows="7" class="form-control" data-validation="length" data-validation-length="min10" 
-                            data-validation-error-msg="Lam on dien it nhat 10 ky tu" name="product_desc" id="ckeditor1" placeholder="Mô tả danh mục"></textarea>
+                            data-validation-error-msg="Vui lòng dien it nhat 10 ky tu" name="product_desc" id="ckeditor1" placeholder="Mô tả danh mục"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nội dung mỹ phẩm</label>
                             <textarea style="resize: none" rows="7" class="form-control" data-validation="length" data-validation-length="min10" 
-                            data-validation-error-msg="Lam on dien it nhat 10 ky tu" name="product_content" id="ckeditor2" placeholder="Nội dung danh mục"></textarea>
+                            data-validation-error-msg="Vui lòng dien it nhat 10 ky tu" name="product_content" id="ckeditor2" placeholder="Nội dung danh mục"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Danh mục mỹ phẩm</label>
