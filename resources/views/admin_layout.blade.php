@@ -155,6 +155,16 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Slider</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{asset('add-slider')}}">Thêm slider</a></li>
+						<li><a href="{{asset('list-slider')}}">Liệt kê slider</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
                     <a href="{{asset('logoutad')}}">
                         <i class="fa fa-key"></i>
                          Log Out

@@ -14,27 +14,23 @@
               <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img style="height: 12cm" src="https://bizweb.dktcdn.net/100/376/405/articles/nhuong-quyen-gia-cong-my-pham-blog-coanmy-5.jpg?v=1596804339223" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5 class="text-white">Makeup</h5>
-                        <p class="text-white" >Trang điểm sẽ làm cho bản thân xinh đẹp, tự tin và yêu kiều hơn.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img style="height: 12cm"  src="https://images.summitmedia-digital.com/preview/images/2019/10/22/serums-for-overnight-repair-nm.jpg" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block text-black">
-                        <h5 class="text-white">Tinh dầu</h5>
-                        <p class="text-white">Tinh dầu giúp cải thiện tình trạng da kém, làm căn bóng và mịn màn hơn.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img style="height: 12cm" src="https://ann.com.vn/wp-content/uploads/17027-286547389-1485387881893221-14277493048240233-n.jpg" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5 class="text-dark">Mask</h5>
-                        <p class="text-dark">Mặt nạ giúp da được cấp ẩm làm da luôn tươi tắn, căng nước.</p>
-                    </div>
-                </div>
+                
+                    @php 
+                                $i = 0;
+                            @endphp
+                            @foreach($slider as $key => $slide)
+                            
+                                @php 
+                                    $i++;
+                                @endphp
+                                <div class="carousel-item {{$i==1 ? 'active' : '' }}">
+                                    <img style="height: 12cm" src="{{asset('public/uploads/slider/'.$slide->slider_image)}}" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class="text-white">{{$slide->slider_name}}</h5>
+                                        <p class="text-white" >{{$slide->slider_desc}}</p>
+                                    </div>
+                                </div>
+                    @endforeach 
             </div>
             <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

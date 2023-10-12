@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use App\Http\Requests;
+use App\Models\Slider;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 class IndexController extends Controller
 {
     public function index(Request $request){
+        $slider = Slider::orderby('slider_id','DESC')->get();
+
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
         $meta_keywords = "shop my pham, shop mỹ phẩm, của hàng mỹ phẩm chính hãng";
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
-        return view('pages.home')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.home')->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function introduce(Request $request){
         $meta_desc = "Mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
