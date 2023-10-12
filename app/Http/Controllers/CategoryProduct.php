@@ -34,13 +34,13 @@ class CategoryProduct extends Controller
     }
     public function save_category_product(Request $request){
         $this->AuthLogin();
-        $date = array();
-        $date['category_name'] = $request->category_product_name;
-        $date['meta_keywords'] = $request->category_product_keywords;
-        $date['category_desc'] = $request->category_product_desc;
-        $date['category_status'] = $request->category_product_status;
+        $data = array();
+        $data['category_name'] = $request->category_product_name;
+        $data['meta_keywords'] = $request->category_product_keywords;
+        $data['category_desc'] = $request->category_product_desc;
+        $data['category_status'] = $request->category_product_status;
         
-        DB::table('tb_category_product')->insert($date);
+        DB::table('tb_category_product')->insert($data);
         Session::put('message','Thêm danh mục sản phẩm thành công');
         return Redirect::to('add-category-product');
     }
@@ -64,11 +64,11 @@ class CategoryProduct extends Controller
     }
     public function update_category_product(Request $request, $id){
         $this->AuthLogin();
-        $date = array();
-        $date['category_name'] = $request->category_product_name;
-        $date['meta_keywords'] = $request->category_product_keywords;
-        $date['category_desc'] = $request->category_product_desc;
-        DB::table('tb_category_product')->where('id',$id)->update($date);
+        $data = array();
+        $data['category_name'] = $request->category_product_name;
+        $data['meta_keywords'] = $request->category_product_keywords;
+        $data['category_desc'] = $request->category_product_desc;
+        DB::table('tb_category_product')->where('id',$id)->update($data);
         Session::put('message','Cập nhật danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
     }
