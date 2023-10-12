@@ -24,6 +24,10 @@
                             <input type="text" value="{{$edit_value->brand_name}}" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Keywords xuất xứ</label>
+                            <input type="text" value="{{$edit_value->brand_keywords}}" name="brand_product_keywords" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả xuất xứ</label>
                             <textarea style="resize: none" rows="7" class="form-control" name="brand_product_desc" id="exampleInputPassword1">
                             {{$edit_value->brand_desc}}

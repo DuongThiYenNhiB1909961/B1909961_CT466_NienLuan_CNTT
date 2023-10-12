@@ -34,12 +34,13 @@ class BrandProduct extends Controller
     }
     public function save_brand_product(Request $request){
         $this->AuthLogin();
-        $date = array();
-        $date['brand_name'] = $request->brand_product_name;
-        $date['brand_desc'] = $request->brand_product_desc;
-        $date['brand_status'] = $request->brand_product_status;
+        $data = array();
+        $data['brand_name'] = $request->brand_product_name;
+        $data['brand_desc'] = $request->brand_product_desc;
+        $data['brand_keywords'] = $request->brand_product_keywords;
+        $data['brand_status'] = $request->brand_product_status;
         
-        DB::table('tb_brand')->insert($date);
+        DB::table('tb_brand')->insert($data);
         Session::put('message','Thêm thương hiệu sản phẩm thành công');
         return Redirect::to('add-brand-product');
     }
@@ -63,10 +64,11 @@ class BrandProduct extends Controller
     }
     public function update_brand_product(Request $request, $id){
         $this->AuthLogin();
-        $date = array();
-        $date['brand_name'] = $request->brand_product_name;
-        $date['brand_desc'] = $request->brand_product_desc;
-        DB::table('tb_brand')->where('id',$id)->update($date);
+        $data = array();
+        $data['brand_name'] = $request->brand_product_name;
+        $data['brand_desc'] = $request->brand_product_desc;
+        $data['brand_keywords'] = $request->brand_product_keywords;
+        DB::table('tb_brand')->where('id',$id)->update($data);
         Session::put('message','Cập nhật thương hiệu sản phẩm thành công');
         return Redirect::to('all-brand-product');
     }
