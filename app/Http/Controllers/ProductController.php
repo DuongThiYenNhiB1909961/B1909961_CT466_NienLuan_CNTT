@@ -46,7 +46,9 @@ class ProductController extends Controller
         $data['meta_keywords'] = $request->meta_keywords;
         $data['product_price'] = $request->product_price;
         $data['product_price_buy'] = $request->product_price_buy;
+        $data['product_price_real'] = $request->product_price_real;
         $data['product_qty'] = $request->product_qty;
+        $data['product_capacity'] = $request->product_capacity;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
@@ -99,7 +101,9 @@ class ProductController extends Controller
         $data['meta_keywords'] = $request->meta_keywords;
         $data['product_price'] = $request->product_price;
         $data['product_price_buy'] = $request->product_price_buy;
+        $data['product_price_real'] = $request->product_price_real;
         $data['product_qty'] = $request->product_qty;
+        $data['product_capacity'] = $request->product_capacity;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
@@ -135,12 +139,18 @@ class ProductController extends Controller
         ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
         ->where('tb_product.product_id',$product_id)->get();
         foreach($detail_product as $key => $val){
+            $category_id = $val->category_id;
+
             $meta_desc = $val->product_desc;
             $meta_keywords = $val->meta_keywords;
             $meta_title = $val->product_name;
             $url_canonical = $request->url(); 
         }
+        $relate_product = DB::table('tb_product')
+        ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
+        ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
+        ->where('tb_category_product.id',$category_id)->limit(5)->get();
 
-        return view('pages.product_detail')->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.product_detail')->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
 }

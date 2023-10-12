@@ -44,11 +44,12 @@
                     
                         <div class="mr-2 mb-2 shadow">
                                         <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
-                                            <div class="card" style="width: 15rem; height: 22rem;">
+                                            <div class="card" style="width: 15rem; height: 25rem;">
                                                 <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top shadow" alt="">
                                                 <div class="card-body">
-                                                <h6 class="card-title "><b>{{$product->product_desc}}</b></h6>
-                                                <b><p class="card-text text-danger">{{number_format($product->product_price).'đ'}}</p></b>
+                                                <h6 class="card-title " style="width:height: 5rem;"><b>{{$product->product_desc}}</b></h6>
+                                                <b><p class="card-text text-danger">{{number_format($product->product_price,0,',','.')}} đ</p></b>
+                                                <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
                                                 </div>
                                             </div>
                                         </a>

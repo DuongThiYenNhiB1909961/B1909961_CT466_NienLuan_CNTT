@@ -37,16 +37,14 @@
         <table class="table table-striped b-t b-light">
           <thead>
             <tr>
-              <th style="width:20px;">
-                <label class="i-checks m-b-none">
-                  <input type="checkbox"><i></i>
-                </label>
-              </th>
+              
               <th>Tên mỹ phẩm</th>
               <th>Từ khóa mỹ phẩm</th>
               <th>Giá mua</th>
               <th>Giá bán</th>
+              <th>Giá bán thực tế</th>
               <th>Số lượng</th>
+              <th>Dung tích</th>
               <th>Hình ảnh mỹ phẩm</th>
               <th>Mô tả mỹ phẩm</th>
               <th>Danh mục</th>
@@ -59,12 +57,14 @@
           <tbody>
             @foreach ($all_product as $key => $pro)
                <tr>
-              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+              
               <td>{{$pro->product_name}}</td>
               <td>{{$pro->meta_keywords}}</td>
               <td>{{$pro->product_price_buy}}</td>
               <td>{{$pro->product_price}}</td>
+              <td>{{$pro->product_price_real}}</td>
               <td>{{$pro->product_qty}}</td>
+              <td>{{$pro->product_capacity}}</td>
               <td><img src="public/uploads/product/{{$pro->product_image}}" height="100" width="100"></td>
               <td>{{$pro->product_desc}}</td>
               <td>{{$pro->category_name}}</td>

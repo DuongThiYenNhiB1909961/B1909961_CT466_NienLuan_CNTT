@@ -124,3 +124,14 @@ ul.sidebar-menu li a {
     border-radius: 0.25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+.product-image-wrapper{
+	border:1px solid #F7F7F5;
+	overflow: hidden;
+	margin-bottom:30px;
+}
+.single-products {
+    position: relative;
+}
+.productinfo.text-center img {
+    height: 225px;
+}

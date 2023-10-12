@@ -28,18 +28,28 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá mua mỹ phẩm</label>
-                            <input type="text" data-validation="number"
+                            <input type="text" data-validation="text"
                             data-validation-error-msg="Vui lòng dien so tien" name="product_price_buy" class="form-control" id="exampleInputEmail1" placeholder="Giá Mỹ Phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá bán mỹ phẩm</label>
-                            <input type="text" data-validation="number"
+                            <input type="text" data-validation="text"
                             data-validation-error-msg="Vui lòng dien so tien" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá Mỹ Phẩm">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Giá bán thực tế</label>
+                            <input type="text" data-validation="text"
+                            data-validation-error-msg="Vui lòng dien so tien" name="product_price_real" class="form-control" id="exampleInputEmail1" placeholder="Giá Mỹ Phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số lượng nhập</label>
                             <input type="number" data-validation="number"
-                            data-validation-error-msg="Vui lòng dien so lượng" min="1" name="product_qty" class="form-control" id="exampleInputEmail1" placeholder="số lượng nhập">
+                            data-validation-error-msg="Vui lòng dien so lượng" min="1" name="product_qty" class="form-control" id="exampleInputEmail1" placeholder="Số lượng nhập">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Dung tích</label>
+                            <input type="text" data-validation="text"
+                            data-validation-error-msg="Vui lòng dien dung tich" name="product_capacity" class="form-control" id="exampleInputEmail1" placeholder="Dung tích">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh mỹ phẩm</label>

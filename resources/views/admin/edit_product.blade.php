@@ -36,8 +36,16 @@
                             <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" value="{{$pro->product_price}}">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Giá bán thực tế</label>
+                            <input type="text" name="product_price_real" class="form-control" id="exampleInputEmail1" value="{{$pro->product_price_real}}">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Số lượng</label>
                             <input type="number" name="product_qty" min="1" class="form-control" id="exampleInputEmail1" value="{{$pro->product_qty}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Dung tích</label>
+                            <input type="text" name="product_capacity" class="form-control" id="exampleInputEmail1" value="{{$pro->product_capacity}}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh mỹ phẩm</label>
