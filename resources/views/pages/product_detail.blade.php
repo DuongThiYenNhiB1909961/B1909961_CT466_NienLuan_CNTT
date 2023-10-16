@@ -25,7 +25,7 @@
                                             </div>
                                             <div class="col-sm">
                                                 <h6 style="font-size: 15px text-alight"><b>Dung tích: </b>{{$product->product_capacity}}</h6>
-                                                <h6 style="font-size: 15px text-alight"><b>Công dụng: </b>{{$product->product_name}}</h6>
+                                                <h6 style="font-size: 15px text-alight"><b>Tình trạng: </b></h6>
                                             </div>
                                         </div>
                                         
@@ -35,21 +35,27 @@
                                             <input type="hidden" class="cart_product_name_{{$product->product_id}}" value="{{$product->product_name}}">
                                             <input type="hidden" class="cart_product_image_{{$product->product_id}}" value="{{$product->product_image}}">
                                             <input type="hidden" class="cart_product_price_{{$product->product_id}}" value="{{$product->product_price}}">
-                                            <input type="hidden" value="1" class="cart_product_pty_{{$product->product_id}}">
+                                            <input type="hidden" class="cart_product_quantity_{{$product->product_id}}" value="{{$product->product_qty}}">
                                             
                                             <div><h5 class="text-danger mt-2" style="font-size: 30px"><b>{{number_format($product->product_price,0,',','.')}} đ</h5></b>
                                                 <p class="mt-2" style="font-size: 20px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
                                             </div>
-                                            <div class="mt-3">
-                                                <h6 style="font-size: 15px text-alight"><b>Thời gian giao hàng: </b>Giao hàng trong vòng 7 ngày</h6>
-                                                <h6 style="font-size: 15px text-alight"><b>Chính sách đổi trả: </b>Đổi trả sản phẩm trong 30 ngày</h6>
+                                            <div class="mt-2">
+                                                <label><b>Số lượng: </b></label>
+                                                <input type="number" min="1" value="1" class="cart_product_pty_{{$product->product_id}}">
+
                                             </div>
-                                            <div class="delivery">
+                                            
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="text-success" viewBox="0 0 16 16">
                                                     <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
                                                 </svg>                
                                                 <input type="button" value="Thêm vào giỏ hàng" class="btn btn-default add-to-cart rounded-lg border border-danger" data-id="{{$product->product_id}}" name="add-to-cart">
+                                       
+                                            <div class="mt-3">
+                                                <h6 style="font-size: 15px text-alight"><b>Thời gian giao hàng: </b>Giao hàng trong vòng 7 ngày</h6>
+                                                <h6 style="font-size: 15px text-alight"><b>Chính sách đổi trả: </b>Đổi trả sản phẩm trong 30 ngày</h6>
                                             </div>
+                                            
                                     </div>       
                                 
                                     

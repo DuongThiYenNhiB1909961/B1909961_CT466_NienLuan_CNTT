@@ -41,6 +41,7 @@ class CartController extends Controller
                 'product_name' => $data['cart_product_name'],                
                 'product_image' => $data['cart_product_image'],
                 'product_price' => $data['cart_product_price'],
+                'product_quantity' => $data['cart_product_quantity'],
                 'product_qty' => $data['cart_product_qty'],                
                 );
                 Session::put('cart',$cart);
@@ -52,6 +53,7 @@ class CartController extends Controller
                 'product_name' => $data['cart_product_name'],                
                 'product_image' => $data['cart_product_image'],
                 'product_price' => $data['cart_product_price'],
+                'product_quantity' => $data['cart_product_quantity'],
                 'product_qty' => $data['cart_product_qty'],                
                 );
                 Session::put('cart',$cart);
@@ -81,15 +83,21 @@ class CartController extends Controller
         $data = $request->all();
         $cart = Session::get('cart');
         if($cart==true){
+            $message = '';
             foreach($data['cart_qty'] as $key => $qty){
+                $i=0;
                 foreach($cart as $session => $val){
-                    if($val['session_id']==$key){
+                    $i++;
+                    if($val['session_id']==$key && $qty < $cart[$session]['product_quantity']){
                         $cart[$session]['product_qty'] = $qty;
+                        $message .= $i.'. Cập nhật số lượng: '.$cart[$session]['product_name'].' thành công <br>';
+                    }elseif($val['session_id']==$key && $qty > $cart[$session]['product_quantity']){
+                        $message .= $i.'. Cập nhật số lượng: '.$cart[$session]['product_name'].' thất bại. Vui lòng chọn số lượng nhỏ hơn <br>';
                     }
                 }
             }
             Session::put('cart',$cart);
-            return Redirect::to('/show-cart-ajax')->with('message','Cập nhật số lượng thành công');
+            return Redirect::to('/show-cart-ajax')->with('message',$message);
         }else{
             return Redirect::to('/show-cart-ajax')->with('message','Cập nhật số lượng thất bại');
         }

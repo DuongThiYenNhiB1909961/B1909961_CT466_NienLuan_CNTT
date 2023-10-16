@@ -113,8 +113,9 @@
             <thead>
               <tr>
                 <th> STT </th>
-                <th>Mã giảm giá</th>
-                <th>Phí vận chuyển</th>
+                <th>Mã Giảm Giá</th>
+                <th>Phí Vận Chuyển</th>
+                <th>Tồn Kho</th>
                 <th>Tên Sản Phẩm</th>
                 <th>Số Lượng</th>
                 <th>Giá</th>
@@ -134,7 +135,7 @@
                 $subtotal = $OrDes->product_price * $OrDes->product_sales_quantity;
                 $total += $subtotal;
                 @endphp
-                 <tr>
+                 <tr class="color_qty_{{$OrDes->product_id}}">
                 <td>{{$i}}</td>
                 <td>
                   @if($OrDes->coupon != 'no')
@@ -144,14 +145,20 @@
                   @endif
                 </td>
                 <td>{{$OrDes->feeship}}</td>
+                <td>{{$OrDes->product->product_qty}}</td>
                 <td>{{$OrDes->product_name}}</td>
-                <td>{{$OrDes->product_sales_quantity}}</td>
+                <td>
+                  {{$OrDes->product_sales_quantity}}
+                  <input type="hidden" class="order_qty_{{$OrDes->product_id}}" value="{{$OrDes->product_sales_quantity}}" name="order_sales_quantity">
+                  <input type="hidden" name="order_qty_inventory" class="order_qty_inventory_{{$OrDes->product_id}}" value="{{$OrDes->product->product_qty}}">
+                  <input type="hidden" name="order_product_id" class="order_product_id" value="{{$OrDes->product_id}}">
+                </td>
                 <td>{{number_format($OrDes->product_price,0,',','.')}}vnđ</td>
                 <td>{{number_format($subtotal,0,',','.')}}vnđ</td>
               </tr> 
             @endforeach 
               <tr >
-                <td colspan="7" class="text-right">
+                <td colspan="8" class="text-right">
                   @php
                     $total_coupon = 0;  
                   @endphp  
@@ -170,6 +177,45 @@
                   <b class="text-danger">PHÍ SHIP: {{number_format($OrDes->feeship,0,',','.')}}vnđ</b>
                   <br>
                   <b class="text-danger">THANH TOÁN: {{number_format($total_coupon,0,',','.')}}vnđ</b>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  @foreach($order as $key => $or)
+                    @if($or->order_status==1)
+                    <form>
+                      @csrf
+                      <select class="form-control order_status">
+                        <option value="">----Chọn hình thức đơn hàng-----</option>
+                        <option id="{{$or->order_id}}" selected value="1">Chưa xử lý</option>
+                        <option id="{{$or->order_id}}" value="2">Đã xử lý - Đã giao hàng</option>
+                        <option id="{{$or->order_id}}" value="3">Hủy đơn hàng - tạm giữ</option>
+                      </select>
+                    </form>
+                    @elseif($or->order_status==2)
+                    <form>
+                      @csrf
+                      <select class="form-control order_status">
+                        <option value="">----Chọn hình thức đơn hàng-----</option>
+                        <option id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                        <option id="{{$or->order_id}}" selected value="2">Đã xử lý - Đã giao hàng</option>
+                        <option id="{{$or->order_id}}" value="3">Hủy đơn hàng - tạm giữ</option>
+                      </select>
+                    </form>
+
+                    @else
+                    <form>
+                      @csrf
+                      <select class="form-control order_status">
+                        <option value="">----Chọn hình thức đơn hàng-----</option>
+                        <option id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                        <option id="{{$or->order_id}}"  value="2">Đã xử lý - Đã giao hàng</option>
+                        <option id="{{$or->order_id}}" selected value="3">Hủy đơn hàng - tạm giữ</option>
+                      </select>
+                    </form>
+
+                    @endif
+                  @endforeach
                 </td>
               </tr>
             </tbody>
