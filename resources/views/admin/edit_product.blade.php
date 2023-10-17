@@ -44,6 +44,10 @@
                             <input type="number" name="product_qty" min="1" class="form-control" id="exampleInputEmail1" value="{{$pro->product_qty}}">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Đã bán</label>
+                            <input type="number" name="product_sold" min="0" class="form-control" id="exampleInputEmail1" value="{{$pro->product_sold}}">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Dung tích</label>
                             <input type="text" name="product_capacity" class="form-control" id="exampleInputEmail1" value="{{$pro->product_capacity}}">
                         </div>

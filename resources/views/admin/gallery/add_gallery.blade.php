@@ -5,6 +5,7 @@
             <section class="panel">
                 <header class="panel-heading">
                     Thêm thư viện ảnh
+                </header>
                     <div class="position-center">
                         <?php
                             $message = Session::get('message');
@@ -14,30 +15,28 @@
                             }
                         ?>
                     </div>
-                </header>
                 
+                <form action="{{asset('/insert-gallery/'.$pro_id)}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-3" align="right">
+
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="file" class="form-control" id="file" name="file[]" accept="image/*" multiple>
+                            <span id="error_gallery"></span>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="submit" name="upload" name="taianh" value="Tải lên" class="btn btn-success">
+                        </div>
+                    </div>
+                </form>
                 <div class="panel-body">
-                    <input type="hidden" value="{{$pro_id}}" class="pro_id">
+                    <input type="hidden" value="{{$pro_id}}" name="pro_id" class="pro_id">
                     <form>
                         @csrf
                         <div id="gallery_load">
-                            {{-- <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Tên hình ảnh</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Quản lý</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table> --}}
+                            
                         </div>
                     </form>
                     

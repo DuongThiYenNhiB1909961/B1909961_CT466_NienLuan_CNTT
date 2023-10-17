@@ -40,7 +40,6 @@
               
               <th>Tên mỹ phẩm</th>
               <th>Thư viện ảnh</th>
-              <th>Từ khóa mỹ phẩm</th>
               <th>Giá mua</th>
               <th>Giá bán</th>
               <th>Giá bán thực tế</th>
@@ -48,8 +47,6 @@
               <th>Dung tích</th>
               <th>Hình ảnh mỹ phẩm</th>
               <th>Mô tả mỹ phẩm</th>
-              <th>Danh mục</th>
-              <th>Xuất xứ</th>
               
               <th>Hiển thị</th>
               <th style="width:30px;"></th>
@@ -61,7 +58,7 @@
               
               <td>{{$pro->product_name}}</td>
               <td><a href="{{asset('/add-gallery/'.$pro->product_id)}}">THÊM</a></td>
-              <td>{{$pro->meta_keywords}}</td>
+              
               <td>{{$pro->product_price_buy}}</td>
               <td>{{$pro->product_price}}</td>
               <td>{{$pro->product_price_real}}</td>
@@ -69,9 +66,7 @@
               <td>{{$pro->product_capacity}}</td>
               <td><img src="public/uploads/product/{{$pro->product_image}}" height="100" width="100"></td>
               <td>{{$pro->product_desc}}</td>
-              <td>{{$pro->category_name}}</td>
-              <td>{{$pro->brand_name}}</td>
-
+              
               <td><span class="text-ellipsis">
               <?php
               if($pro->product_status==0){

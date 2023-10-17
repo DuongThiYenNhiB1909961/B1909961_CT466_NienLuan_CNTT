@@ -47,6 +47,11 @@
                             data-validation-error-msg="Vui lòng dien so lượng" min="1" name="product_qty" class="form-control" id="exampleInputEmail1" placeholder="Số lượng nhập">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Đã bán</label>
+                            <input type="number" data-validation="number"
+                            data-validation-error-msg="Vui lòng dien so lượng" min="0" value="0" name="product_sold" class="form-control" id="exampleInputEmail1" placeholder="Đã bán">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Dung tích</label>
                             <input type="text" data-validation="text"
                             data-validation-error-msg="Vui lòng dien dung tich" name="product_capacity" class="form-control" id="exampleInputEmail1" placeholder="Dung tích">

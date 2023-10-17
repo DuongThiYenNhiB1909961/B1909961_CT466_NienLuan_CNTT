@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use App\Http\Requests;
+use App\Models\Gallery;
+use File;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 class ProductController extends Controller
@@ -48,6 +50,7 @@ class ProductController extends Controller
         $data['product_price_buy'] = $request->product_price_buy;
         $data['product_price_real'] = $request->product_price_real;
         $data['product_qty'] = $request->product_qty;
+        $data['product_sold'] = $request->product_sold;
         $data['product_capacity'] = $request->product_capacity;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
@@ -55,21 +58,28 @@ class ProductController extends Controller
         $data['brand_id'] = $request->product_brand;
         $data['product_status'] = $request->product_status;
         $get_image = $request->file('product_image');
+
+        $path = 'public/uploads/product/';
+        $path_gallery = 'public/uploads/gallery/';
         
         if($get_image){
             $get_name_image=$get_image->getClientOriginalName();
             $name_image=current(explode('.',$get_name_image));
             $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
-            $get_image->move('public/uploads/product',$new_image);
+            $get_image->move($path,$new_image);
+            File::copy($path.$new_image,$path_gallery.$new_image);
             $data['product_image']=$new_image;
-            DB::table('tb_product')->insert($data);
-            Session::put('message','Thêm mỹ phẩm thành công');
-            return Redirect::to('add-product');
+            
         }
-        $data['product_image']= '';
-        DB::table('tb_product')->insert($data);
-        Session::put('message','Thêm mỹ phẩm không thành công');
-        return Redirect::to('all-product');
+        $pro_id = DB::table('tb_product')->insertGetId($data);
+        $gallery = new Gallery();
+        $gallery->gallery_image = $new_image;
+        $gallery->gallery_name = $name_image;
+        $gallery->product_id = $pro_id;
+        $gallery->save();
+
+        Session::put('message','Thêm mỹ phẩm thành công');
+        return Redirect::to('add-product');
     }
     public function unactive_product($product_id){
         $this->AuthLogin();
@@ -103,6 +113,7 @@ class ProductController extends Controller
         $data['product_price_buy'] = $request->product_price_buy;
         $data['product_price_real'] = $request->product_price_real;
         $data['product_qty'] = $request->product_qty;
+        $data['product_sold'] = $request->product_sold;
         $data['product_capacity'] = $request->product_capacity;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
@@ -127,11 +138,12 @@ class ProductController extends Controller
     public function delete_product($product_id){
         $this->AuthLogin();
         DB::table('tb_product')->where('product_id',$product_id)->delete();
-        Session::put('message','Xóa thương hiệu sản phẩm thành công');
+        Session::put('message','Xóa mỹ phẩm thành công');
         return Redirect::to('all-product');
     }
     // product_detail
     public function product_detail($product_id, Request $request){
+
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
         $detail_product = DB::table('tb_product')
@@ -140,17 +152,19 @@ class ProductController extends Controller
         ->where('tb_product.product_id',$product_id)->get();
         foreach($detail_product as $key => $val){
             $category_id = $val->category_id;
-
+            $product_id = $val->product_id;
             $meta_desc = $val->product_desc;
             $meta_keywords = $val->meta_keywords;
             $meta_title = $val->product_name;
             $url_canonical = $request->url(); 
         }
+        $gallery = Gallery::where('product_id',$product_id)->get();
+
         $relate_product = DB::table('tb_product')
         ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
         ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
         ->where('tb_category_product.id',$category_id)->limit(5)->get();
 
-        return view('pages.product_detail')->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.product_detail')->with('gallery',$gallery)->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
 }

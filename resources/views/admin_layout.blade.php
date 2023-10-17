@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="{{asset('resources/css/morris.css')}}" type="text/css"/>
         <!-- calendar -->
         <link rel="stylesheet" href="{{asset('resources/css/monthly.css')}}">
+        <link name="csrf-token" content="{{csrf_token()}}">
         <!-- //calendar -->
         <!-- //font-awesome icons -->
         <script src="{{asset('resources/js/jquery2.0.3.min.js')}}"></script>
@@ -117,7 +118,7 @@
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
-                        <span>Danh sách mỹ phẩm</span>
+                        <span>Mỹ Phẩm</span>
                     </a>
                     <ul class="sub">
 						<li><a href="{{asset('add-product')}}">Thêm mỹ phẩm</a></li>
@@ -281,40 +282,7 @@
 	</script>
 <!-- calendar -->
 	<script type="text/javascript" src="{{asset('resources/js/monthly.js')}}"></script>
-	<script>
-        // $(document).ready(function(){
-        //     load_gallery();
-
-        //     function load_gallery(){
-        //         var pro_id = $('.pro_id').val();
-        //         var _token = $('input[name="_token"]').val();
-        //         $.ajax({
-        //             url : '{{url('/select-gellary')}}',
-        //                         method: 'POST',
-        //                         data:{pro_id:pro_id,_token:_token},
-        //                         success:function(data){
-        //                             $('#gallery_load').html(data);
-        //                         }
-        //         })
-        //     }
-        // })
-        $(document).ready(function(){
-            load_gallery();
-    
-            function load_gallery(){
-                var pro_id = $('.pro_id').val();
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url : '{{url('/select-gellary')}}',
-                    method: 'POST',
-                    data:{pro_id:pro_id,_token:_token},
-                    success:function(data){
-                    $('#gallery_load').html(data);
-                    }
-                });
-            }
-        });
-    </script>
+	
     <script type="text/javascript">
 		$(window).load( function() {
 
@@ -397,6 +365,105 @@
             }
 
         });
+   </script>
+   <script>
+    $(document).ready(function(){
+        load_gallery();
+        
+        function load_gallery(){
+            var pro_id = $('.pro_id').val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url : '{{url('/select-gallery')}}',
+                method: 'POST',
+                data:{
+                    pro_id:pro_id,
+                    _token:_token
+                },
+                success:function(data){
+                $('#gallery_load').html(data);
+                }
+            });
+        }
+        $(document).on('blur','.edit_name_gal',function(){
+                    var gal_id = $(this).data('gal_id');
+                    var gal_text = $(this).text();
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url : '{{url('/edit-name-gal')}}',
+                        method: 'POST',
+                        data:{
+                            gal_id:gal_id,
+                            gal_text:gal_text,
+                            _token:_token
+                        },
+                        success:function(data){
+                            load_gallery();
+                        }
+                    });
+        });
+        $(document).on('change','.file_img',function(){
+                    var gal_id = $(this).data('gal_id');
+                    var image = document.getElementById('file-'+gal_id).files[0];
+                    // var _token = $('input[name="_token"]').val();
+                    var form_data = new FormData();
+
+                    form_data.append("file",document.getElementById('file-'+gal_id).files[0]);
+                    form_data.append("gal_id",gal_id);
+                    $.ajax({
+                        url : '{{url('/update-gal')}}',
+                        method: 'POST',
+                        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        data: form_data,
+                        
+                        contentType:false,
+                        cache:false,
+                        processData:false,
+                        success:function(data){
+                            load_gallery();
+                        }
+                    });
+        });
+        $(document).on('click','.delete-gallery',function(){
+                    var gal_id = $(this).data('gal_id');
+                    var _token = $('input[name="_token"]').val();
+                    if(confirm('Bạn có chắc chắn xóa ảnh này không?')){
+                        $.ajax({
+                            url : '{{url('/del-gal')}}',
+                            method: 'POST',
+                            data:{
+                                gal_id:gal_id,
+                                _token:_token
+                            },
+                            success:function(data){
+                                load_gallery();
+                                
+                            }
+                        });
+                    }
+                    
+        });
+        $('#file').change(function(){
+            var error = '';
+            var file = $('#file')[0].files;
+
+            if(file.length>5){
+                error+='<p>Bạn chọn tối đa chỉ được 5 ảnh</p>';
+            }else if(file.length==''){
+                error+='<p>Bạn không được bỏ trống ảnh</p>';
+            }else if(file.size > 2000000){
+                error+='<p>Kích thước ảnh phải nhỏ hơn 2mb</p>';
+            }
+            if(error==''){
+
+            }else{
+                $('#file').val('');
+                $('#error_gallery').html('<span class="text-danger">'+error+'</span>');
+                return false;
+            }
+        })
+        
+    });
    </script>
     <script type="text/javascript">
         $(document).ready(function(){

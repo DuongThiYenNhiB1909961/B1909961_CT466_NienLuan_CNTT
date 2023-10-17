@@ -148,4 +148,8 @@ Route::get('/active-slide/{slide_id}',[SliderController::class, 'active_slide'])
 
 // gallery
 Route::get('/add-gallery/{product_id}',[GalleryController::class, 'add_gallery']);
-Route::get('/select-gellary',[GalleryController::class, 'select_gellary']);
+Route::post('/select-gallery',[GalleryController::class, 'select_gallery']);
+Route::post('/insert-gallery/{product_id}',[GalleryController::class, 'insert_gallery']);
+Route::post('/edit-name-gal',[GalleryController::class, 'edit_name_gal']);
+Route::post('/del-gal',[GalleryController::class, 'delete_gallery']);
+Route::post('/update-gal',[GalleryController::class, 'update_gallery']);

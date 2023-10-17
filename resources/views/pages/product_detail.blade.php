@@ -23,15 +23,11 @@
                                     <div class=" col-sm-4 text-center m-1" >
                                         {{-- <img class="rounded mt-1 mt-8 shadow" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" height="85%" width="85%"> --}}
                                         <ul id="imageGallery">
-                                            <li data-thumb="{{asset('public\uploads\product\ttbcc68.jpg')}}" data-src="{{asset('public\uploads\product\ttbcc68.jpg')}}">
-                                              <img width="100%" src="{{asset('public\uploads\product\ttbcc68.jpg')}}" />
+                                            @foreach($gallery as $key => $gal)
+                                            <li data-thumb="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" data-src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}">
+                                              <img width="100%" alt="{{$gal->gallery_name}}" src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" />
                                             </li>
-                                            <li data-thumb="{{asset('public\uploads\product\ttbcc68.jpg')}}" data-src="{{asset('public\uploads\product\ttbcc68.jpg')}}">
-                                              <img width="100%" src="{{asset('public\uploads\product\ttbcc68.jpg')}}" />
-                                            </li>
-                                            <li data-thumb="{{asset('public\uploads\product\ttbcc68.jpg')}}" data-src="{{asset('public\uploads\product\ttbcc68.jpg')}}">
-                                                <img width="100%" src="{{asset('public\uploads\product\ttbcc68.jpg')}}" />
-                                              </li>
+                                            @endforeach
                                           </ul>             
                                     </div>
                                     <div class="col-sm-7">
@@ -62,7 +58,7 @@
                                             </div>
                                             <div class="mt-2">
                                                 <label><b>Số lượng: </b></label>
-                                                <input type="number" min="1" value="1" class="cart_product_pty_{{$product->product_id}}">
+                                                <input type="number" min="1" max="50" value="1" class="cart_product_pty_{{$product->product_id}}">
 
                                             </div>
                                             
