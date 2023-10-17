@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<div class="pt-1 relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+{{-- <div class="pt-1 relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"> --}}
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
@@ -96,6 +96,30 @@
                         </div>
                     </div>
         
+            </div>
         </div>
-</div>
+
+        <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+            <h5 class="ml-3"><b>Sản Phẩm Mới Nhất</b></h5>
+            <div class="row text-center ml-3">
+                @foreach($all_product as $key => $product)
+                
+                    <div class="mb-2 shadow">
+                                    <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
+                                        <div class="card" style="width: 14rem; height: 23rem;">
+                                            <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top shadow" alt="">
+                                            <div class="card-body">
+                                            <h6 class="card-title " style="width:height: 5rem;"><b>{{$product->product_desc}}</b></h6>
+                                            <b><p class="card-text text-danger">{{number_format($product->product_price,0,',','.')}} đ</p></b>
+                                            <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                    </div>
+
+                @endforeach
+            </div>
+        </div>
+    </div>
+<!--/recommended_items-->
 @endsection

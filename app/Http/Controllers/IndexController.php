@@ -18,7 +18,12 @@ class IndexController extends Controller
         $meta_keywords = "shop my pham, shop mỹ phẩm, của hàng mỹ phẩm chính hãng";
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
-        return view('pages.home')->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get(); 
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get(); 
+        
+        $all_product = DB::table('tb_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(10); 
+        return view('pages.home')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function introduce(Request $request){
         $meta_desc = "Mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
