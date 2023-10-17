@@ -12,6 +12,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\GalleryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -144,3 +145,7 @@ Route::get('/add-slider',[SliderController::class, 'add_slider']);
 Route::post('/insert-slider',[SliderController::class, 'insert_slider']);
 Route::get('/unactive-slide/{slide_id}',[SliderController::class, 'unactive_slide']);
 Route::get('/active-slide/{slide_id}',[SliderController::class, 'active_slide']);
+
+// gallery
+Route::get('/add-gallery/{product_id}',[GalleryController::class, 'add_gallery']);
+Route::get('/select-gellary',[GalleryController::class, 'select_gellary']);

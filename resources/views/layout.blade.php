@@ -21,6 +21,10 @@
         <link rel="stylesheet" href="{{asset('resources/css/style.css')}}">
         <link href="{{asset('resources/css/style-responsive.css')}}" rel="stylesheet"/>
         <link href="{{asset('resources/css/animate.css')}}" rel="stylesheet"/>
+        <link href="{{asset('resources/css/lightslider.css')}}" rel="stylesheet"/>
+        <link src="{{asset('resources/css/sweetalert.css')}}">
+        <link src="{{asset('resources/css/lightgallery.min.css')}}">
+        <link src="{{asset('resources/css/prettify.css')}}">
         <!-- Fonts -->
         <link href="{{asset('https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap')}}" rel="stylesheet">
         <!-- Styles -->
@@ -137,7 +141,7 @@
             <nav class="shadow navbar navbar-expand-lg navbar-light bg-light col-sm-8">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-warning bi bi-house-check-fill" viewBox="0 0 16 16">
                             <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
@@ -258,10 +262,33 @@
         {{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
         {{-- <script src="{{asset('resources/js/sweetalert.min.js')}}"></script> --}}
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="{{asset('resources/css/sweetalert.css')}}"></script>
+        
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
         
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <script src="{{asset('resources/js/lightslider.js')}}"></script>
+        <script src="{{asset('resources/js/lightgallery-all.min.js')}}"></script>
+        <script src="{{asset('resources/js/prettify.js')}}"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#imageGallery').lightSlider({
+                    gallery:true,
+                    item:1,
+                    loop:true,
+                    thumbItem:3,
+                    slideMargin:0,
+                    enableDrag: false,
+                    currentPagerPosition:'left',
+                    onSliderLoad: function(el) {
+                        el.lightGallery({
+                            selector: '#imageGallery .lslide'
+                        });
+                    }   
+                });  
+            });
+        </script>
         <script type="text/javascript">
         $(document).ready(function(){
             $('.add-to-cart').click(function(){

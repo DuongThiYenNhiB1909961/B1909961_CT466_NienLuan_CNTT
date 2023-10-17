@@ -39,6 +39,7 @@
             <tr>
               
               <th>Tên mỹ phẩm</th>
+              <th>Thư viện ảnh</th>
               <th>Từ khóa mỹ phẩm</th>
               <th>Giá mua</th>
               <th>Giá bán</th>
@@ -59,6 +60,7 @@
                <tr>
               
               <td>{{$pro->product_name}}</td>
+              <td><a href="{{asset('/add-gallery/'.$pro->product_id)}}">THÊM</a></td>
               <td>{{$pro->meta_keywords}}</td>
               <td>{{$pro->product_price_buy}}</td>
               <td>{{$pro->product_price}}</td>

@@ -281,7 +281,41 @@
 	</script>
 <!-- calendar -->
 	<script type="text/javascript" src="{{asset('resources/js/monthly.js')}}"></script>
-	<script type="text/javascript">
+	<script>
+        // $(document).ready(function(){
+        //     load_gallery();
+
+        //     function load_gallery(){
+        //         var pro_id = $('.pro_id').val();
+        //         var _token = $('input[name="_token"]').val();
+        //         $.ajax({
+        //             url : '{{url('/select-gellary')}}',
+        //                         method: 'POST',
+        //                         data:{pro_id:pro_id,_token:_token},
+        //                         success:function(data){
+        //                             $('#gallery_load').html(data);
+        //                         }
+        //         })
+        //     }
+        // })
+        $(document).ready(function(){
+            load_gallery();
+    
+            function load_gallery(){
+                var pro_id = $('.pro_id').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url : '{{url('/select-gellary')}}',
+                    method: 'POST',
+                    data:{pro_id:pro_id,_token:_token},
+                    success:function(data){
+                    $('#gallery_load').html(data);
+                    }
+                });
+            }
+        });
+    </script>
+    <script type="text/javascript">
 		$(window).load( function() {
 
 			$('#mycalendar').monthly({
@@ -369,16 +403,16 @@
             fetch_delivery();
     
             function fetch_delivery(){
-            var _token = $('input[name="_token"]').val();
-             $.ajax({
-                url : '{{url('/select-feeship')}}',
-                method: 'POST',
-                data:{_token:_token},
-                success:function(data){
-                   $('#load_delivery').html(data);
-                }
-            });
-        }
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url : '{{url('/select-feeship')}}',
+                    method: 'POST',
+                    data:{_token:_token},
+                    success:function(data){
+                    $('#load_delivery').html(data);
+                    }
+                });
+            }
         $(document).on('blur','.fee_feeship_edit',function(){
 
             var feeship_id = $(this).data('feeship_id');
