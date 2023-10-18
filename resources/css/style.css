@@ -26,7 +26,7 @@ header, footer{
     transition: all .3s ease;
     border: 1px solid #ca86b7;
     box-shadow: none;
-    background: rgb(233, 136, 25) url(../images/search-icon.png) no-repeat 10px 8px;
+    background: rgb(235, 230, 225) url(../images/search-icon.png) no-repeat 10px 8px;
     padding: 0 5px 0 30px;
     color: #fff;
     border-radius: 100px;

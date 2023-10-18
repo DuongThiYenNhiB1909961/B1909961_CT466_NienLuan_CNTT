@@ -30,6 +30,7 @@ Route::get('/contact', [IndexController::class, 'contact']);
 Route::post('/search', [IndexController::class, 'search']);
 Route::get('/register', [IndexController::class, 'register']);
 Route::get('/product', [IndexController::class, 'product']);
+Route::post('/auto-ajax', [IndexController::class, 'autocomplete']);
 
 // Show_cate
 Route::get('/category/{category_id}', [CategoryProduct::class, 'show_category']);

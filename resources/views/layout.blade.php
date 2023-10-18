@@ -190,15 +190,24 @@
                     @endforeach --}}
                   </ul>
                 </div>
-              </nav>
+            </nav>
                 <div class="shadow col-sm-4 bg-light">
                 <form action="{{asset('/search')}}" method="POST">
                     {{csrf_field()}}
-                        <ul class="nav pull-right top-menu mt-2">
+                        <div class="input-group">
+                            <input type="text" type="text" id="keywords" name="keywords_submit" class="form-control search" placeholder="Search">
+                            <div id="search-ajax"></div>
+                            <span class="input-group-btn">
+                            <input class="btn btn-sm btn-danger" type="submit" value="Search!">
+                            </span>
+                        </div>
+                        {{-- <ul class="nav pull-right top-menu mt-2">
                             <li>
-                                <input name="keywords_submit" type="text" class="form-control search" placeholder="Bạn tìm mỹ phẩm?">
+                                <input  placeholder="Bạn tìm mỹ phẩm?">
+                                
+
                             </li>
-                        </ul>
+                        </ul> --}}
                 </form>
                 </div>
             {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light ">
@@ -288,6 +297,32 @@
                     }   
                 });  
             });
+        </script>
+        <script>
+            $('#keywords').keyup(function(){
+                var query = $(this).val();
+                if(query != ''){
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: '{{url('/auto-ajax')}}',
+                        method: 'POST',
+                        data:{
+                            query:query,
+                            _token:_token},
+                        success:function(data){
+                            $('#search-ajax').fadeIn();
+                            $('#search-ajax').html(data);
+                        } 
+
+                    });
+                }else{
+                    $('#search-ajax').fadeOut();
+                }
+            });
+            $(document).on('click','li',function(){
+                $('#keywords').val($(this).text());
+                $('#search-ajax').fadeOut();
+            })
         </script>
         <script type="text/javascript">
         $(document).ready(function(){

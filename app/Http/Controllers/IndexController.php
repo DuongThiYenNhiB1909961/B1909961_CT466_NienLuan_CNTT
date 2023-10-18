@@ -7,10 +7,26 @@ use DB;
 use Session;
 use App\Http\Requests;
 use App\Models\Slider;
+use App\Models\Product;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 class IndexController extends Controller
 {
+    public function autocomplete(Request $request){
+        $data = $request->all();
+
+        if($data['query']){
+            $product = Product::where('product_status',0)->where('product_name','LIKE','%'.$data['query'].'%')->get();
+            $output = '<ul class="dropdown-menu" style="display:block; position: absolute; top: 34px;left: 0px; width: 50%; z-index: 600;">';
+            foreach($product as $key => $val){
+                $output .= '
+                <li class="ml-2"><a href="#">'.$val->product_name.'</a></li><hr>
+                ';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
     public function index(Request $request){
         $slider = Slider::orderby('slider_id','DESC')->get();
 
