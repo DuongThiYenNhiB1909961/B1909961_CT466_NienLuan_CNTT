@@ -14,7 +14,7 @@
                 Session::put('message',null);
             }
         ?>
-        <table class="table table-striped b-t b-light">
+        <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
               
@@ -22,7 +22,7 @@
               <th>Mã đơn</th>
               <th>Tình trạng đơn</th>
               <th>Thời gian đặt hàng</th>
-
+              <th></th>
               <th style="width:30px;"></th>
             </tr>
           </thead>

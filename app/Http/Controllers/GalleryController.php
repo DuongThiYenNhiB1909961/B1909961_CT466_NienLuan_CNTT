@@ -62,8 +62,7 @@ class GalleryController extends Controller
                         </tr>
                     </thead>
 				<tbody>
-                <form>
-                '.csrf_field().'
+                
 				';
         
         if($gallery_count>0){
@@ -96,7 +95,7 @@ class GalleryController extends Controller
                 ';
         }
         $output.='	
-                </form>	
+                
 				</tbody>
                 </table>
                 </div>

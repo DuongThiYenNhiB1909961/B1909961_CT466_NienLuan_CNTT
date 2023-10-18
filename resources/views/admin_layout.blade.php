@@ -24,6 +24,10 @@
         <link rel="stylesheet" href="{{asset('resources/css/monthly.css')}}">
         <link name="csrf-token" content="{{csrf_token()}}">
         <!-- //calendar -->
+
+        {{-- datatable css --}}
+        <link href="{{asset('resources/css/datatables.min.css')}}" rel="stylesheet">
+        
         <!-- //font-awesome icons -->
         <script src="{{asset('resources/js/jquery2.0.3.min.js')}}"></script>
         <script src="{{asset('resources/js/raphael-min.js')}}"></script>
@@ -209,6 +213,7 @@
 <script src="{{asset('resources/js/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('resources/js/jquery.nicescroll.js')}}"></script>
 <script src="{{asset('//cdn.ckeditor.com/4.22.1/standard/ckeditor.js')}}"></script>
+
 <script>
     CKEDITOR.replace('ckeditor1');
     CKEDITOR.replace('ckeditor2');
@@ -225,6 +230,12 @@
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 {{-- <script src="resources/js/jquery.scrollTo.js"></script> --}}
 <!-- morris JavaScript -->	
+
+{{-- datatable js --}}
+<script src="{{asset('resources/js/datatables.min.js')}}"></script>
+<script type="text/javascript">
+    let table = new DataTable('#myTable');
+</script>
 <script>
 	$(document).ready(function() {
 		//BOX BUTTON SHOW AND CLOSE
