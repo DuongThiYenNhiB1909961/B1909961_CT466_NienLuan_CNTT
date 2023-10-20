@@ -21,12 +21,11 @@
                             <div class="row">
                                 
                                     <div class=" col-sm-4 text-center m-1" >
-                                        {{-- <img class="rounded mt-1 mt-8 shadow" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" height="85%" width="85%"> --}}
                                         <ul id="imageGallery">
                                             @foreach($gallery as $key => $gal)
-                                            <li data-thumb="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" data-src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}">
-                                              <img width="100%" alt="{{$gal->gallery_name}}" src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" />
-                                            </li>
+                                                <li data-thumb="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" data-src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}">
+                                                <img width="100%" alt="{{$gal->gallery_name}}" src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" />
+                                                </li>
                                             @endforeach
                                           </ul>             
                                     </div>
@@ -119,6 +118,7 @@
             </div>
         </div>
     </div>
+    
         <div class="table-agile-info shadow mt-2">
             <div class="panel panel-default">
                 <div class="recommended_items mt-2  ml-2">
@@ -129,7 +129,6 @@
                           <div class="list-group" id="list-tab" role="tablist">
                             <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Mô tả sản phẩm</a>
                             <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Chi tiết sản phẩm</a>
-                            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Đánh giá</a>
                           </div>
                         </div>
                         <div class="col-8">
@@ -141,11 +140,109 @@
                                 <p><b>Dung tích: </b>{{$product->product_capacity}}</p>
                                 <p><b>Công dụng: </b>{{$product->product_name}}</p>
                             </div>
-                            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Đánh giá</div>
-                          </div>
                         </div>
-                      </div>
+                    </div>
                     @endforeach
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="table-agile-info shadow mt-2">
+            <div class="panel panel-default">
+                <div class="recommended_items mt-2  ml-2">
+                    <h4 class="title text-left text-danger"><b>Đánh giá sản phẩm</b></h4>
+                    <form>
+                        @csrf
+                        <input type="hidden" class="comment_product_id" name="comment_product_id" value="{{$product->product_id}}">
+                        <div id="load_comment"></div>  
+                    </form>
+                                
+                                            
+                                <h4 class="text-success"><b>Đánh giá từ khách hàng <p class="text-danger list-inline-item" >{{$rating}}/5 </p><p style="color: #ffcc00;" class="list-inline-item">&#9733;</p> </b></h4>
+                                
+                                @php
+                                    $j=0;
+                                @endphp
+                                @foreach($rating_id as $key => $ra)
+                                    @for($i=0; $i<$ra->rating_id; $i++)
+                                        @if((Session::get('customer_id')==$ra->customer_id) && $ra->product_id)    
+                                            @php
+                                                $j++;
+                                            @endphp
+                                        @endif
+                                    @endfor
+                                @endforeach
+                                    @if(Session::get('customer_id') && $j<1) 
+
+                                    
+                                    <b style="margin-left: 14rem">Đánh giá <p class="text-danger list-inline-item">{{$rating}}/5</p> sao</b>
+                                        <ul class="list-inline-item" title="Average Rating">
+                                            @for($count=1; $count<=5; $count++)
+                                                @php
+                                                if($count <= $rating){
+                                                    $color = 'color: #ffcc00;';
+                                                }else {
+                                                    $color = 'color: #ccc;';
+                                                }
+                                                @endphp
+                                                <li title="Đánh giá sao" 
+                                                    id="{{$product->product_id}}-{{$count}}"
+                                                    data-index="{{$count}}" 
+                                                    data-product_id="{{$product->product_id}}" 
+                                                    data-rating="{{$rating}}" 
+                                                    class="rating list-inline-item"
+                                                    style="cursor: pointer; {{$color}} font-size: 30px;" >
+                                                    &#9733;</li>
+
+                                            @endfor
+                                        </ul>
+                                        <form>
+                                            <div id="status"></div>
+                                            @csrf
+                                            
+                                            <div style="margin-left: 14rem">
+                                                <span>
+                                                @if(Session::get('customer_picture'))
+                                                    <img src="{{Session::get('customer_picture')}}" alt="{{Session::get('customer_picture')}}" width="5%">
+                                                @else
+                                                    <img src="/public/uploads/product/user1.png" alt="" width="5%">
+                                                @endif
+                                                <input type="hidden" class="comment_name" value="{{Session::get('customer_name')}}">
+                                                <b class=" text-danger">{{Session::get('customer_name')}}</b>
+                                            </span><br>
+                                                <textarea class="comment_content" name="comment_content" id="" cols="60" rows="5" style="border: 1px solid #000;" placeholder="Viết bình luận của bạn"></textarea>
+                                                
+                                                <br><input type="button" class="btn btn-danger pull-right send_cmt" value="Comment">
+                                            </div>    
+                                        </form>
+    
+                                @elseif(Session::get('customer_id') && $j>1)
+                                <div style="margin-left: 22rem">
+                                    @for($count=1; $count<=5; $count++)
+                                        @php
+                                        if($count <= $rating){
+                                            $color = 'color: #ffcc00;';
+                                        }else {
+                                            $color = 'color: #ccc;';
+                                        }
+                                        @endphp
+                                        <li title="Đánh giá sao" 
+                                            id="{{$product->product_id}}-{{$count}}"
+                                            data-index="{{$count}}" 
+                                            data-product_id="{{$product->product_id}}" 
+                                            data-rating="{{$rating}}" 
+                                            class="list-inline-item"
+                                            style="cursor: pointer; {{$color}} font-size: 30px;" >
+                                            &#9733;</li>
+
+                                    @endfor
+                                </div>
+                                    <br><b class="text-primary" style="margin-left: 22rem">Cảm ơn bạn đã đánh giá và bình luận.</b>
+                                @elseif(Session::get('customer_id')==null && $j<1)
+                                    <br><b class="text-primary">Chỉ có thành viên mới có thể đánh giá và bình luận.</b>
+                                @endif
+                                
+                    </div>
                 </div>
             </div>
         </div>

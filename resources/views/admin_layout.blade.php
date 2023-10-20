@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="{{asset('resources/css/morris.css')}}" type="text/css"/>
         <!-- calendar -->
         <link rel="stylesheet" href="{{asset('resources/css/monthly.css')}}">
+        <link href="{{asset('resources/css/sweetalert.css')}}">
         <link name="csrf-token" content="{{csrf_token()}}">
         <!-- //calendar -->
 
@@ -167,6 +168,15 @@
                     <ul class="sub">
 						<li><a href="{{asset('add-slider')}}">Thêm slider</a></li>
 						<li><a href="{{asset('list-slider')}}">Liệt kê slider</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Comment</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{asset('list-cmt')}}">Liệt kê comment</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -326,7 +336,6 @@
 	<!-- //calendar -->
     {{-- Delivery --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="{{asset('resources/css/sweetalert.css')}}"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
        
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -376,6 +385,33 @@
             }
 
         });
+   </script>
+   <script>
+    $('.reply_comment').click(function(){
+        var comment_id = $(this).data('comment_id');
+        var comment = $('.reply_content_' + comment_id).val();
+        
+        var product_id = $(this).data('product_id');
+        var _token = $('input[name="_token"]').val();
+        
+        $.ajax({
+                url : '{{url('/reply-cmt')}}',
+                method: 'POST',
+                data:{
+                    comment:comment,
+                    comment_id:comment_id,
+                    product_id:product_id,
+                    _token:_token
+                },
+                success:function(data){
+                    comment.val('');
+                    location.reload();
+                }
+            });
+    })
+    $(document).on('change','.text-ellipsis',function(){
+        location.reload();
+    })
    </script>
    <script>
     $(document).ready(function(){

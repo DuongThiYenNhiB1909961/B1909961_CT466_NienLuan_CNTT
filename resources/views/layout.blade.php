@@ -191,14 +191,14 @@
                   </ul>
                 </div>
             </nav>
-                <div class="shadow col-sm-4 bg-light">
+                <div class="shadow col-sm-4 bg-light" >
                 <form action="{{asset('/search')}}" method="POST">
                     {{csrf_field()}}
-                        <div class="input-group">
+                        <div class="input-group" style="margin-top: 10px">
                             <input type="text" type="text" id="keywords" name="keywords_submit" class="form-control search" placeholder="Search">
                             <div id="search-ajax"></div>
                             <span class="input-group-btn">
-                            <input class="btn btn-sm btn-danger" type="submit" value="Search!">
+                            <input class="btn btn-sm btn-danger" type="submit" value="Search!" style="margin-top: 4px">
                             </span>
                         </div>
                         {{-- <ul class="nav pull-right top-menu mt-2">
@@ -297,6 +297,102 @@
                     }   
                 });  
             });
+        </script>
+        <script>
+            function remove_background(product_id){
+                for(var count = 1; count <= 5; count++){
+                    $('#'+product_id+'-' +count).css('color','#ccc');
+                }
+            }
+            $(document).on('mouseenter','.rating',function(){
+                var index = $(this).data("index");
+                var product_id = $(this).data('product_id');
+                remove_background(product_id);
+                for(var count = 1; count <= index; count++){
+                    $('#'+product_id+'-' +count).css('color','#ffcc00');
+                }
+            });
+            $(document).on('mouseleave','.rating',function(){
+                var index = $(this).data("index");
+                var product_id = $(this).data('product_id');
+                var rating = $(this).data("rating");
+                remove_background(product_id);
+                for(var count = 1; count <= rating; count++){
+                    $('#'+product_id+'-' +count).css('color','#ffcc00');
+                }
+            });
+            $(document).on('click','.rating',function(){
+                var index = $(this).data("index");
+                var product_id = $(this).data('product_id');
+                var _token = $('input[name="_token"]').val();
+
+                $.ajax({
+                        url: '{{url('/add-rating')}}',
+                        method: 'POST',
+                        data:{
+                            index:index,
+                            product_id:product_id,
+                            _token:_token},
+                        success:function(data){
+                            if(data == 'done'){
+                                swal("Good job!", "Bạn đã đánh giá "+index+" trên 5 sao. Hãy viết bình luận của bạn về sản phẩm", "success");
+                                
+                            }
+                            else{
+                                alert("Lỗi đánh giá");
+                            }
+                        } 
+
+                    }); 
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                load_comment()
+                
+                function load_comment(){
+                    var product_id = $('.comment_product_id').val();
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: '{{url('/load-cmt')}}',
+                        method: 'POST',
+                        data:{
+                            product_id:product_id,
+                            _token:_token},
+                        success:function(data){
+                            
+                            $('#load_comment').html(data);
+                        } 
+
+                    }); 
+                }
+                $('.send_cmt').click(function(){
+                    
+                    var product_id = $('.comment_product_id').val();
+                    var comment_name = $('.comment_name').val();
+                    var comment_content = $('.comment_content').val();
+                    var _token = $('input[name="_token"]').val();
+                    
+                    $.ajax({
+                        url: '{{url('/send-cmt')}}',
+                        method: 'POST',
+                        data:{
+                            product_id:product_id,
+                            comment_name:comment_name,
+                            comment_content:comment_content,
+                            _token:_token},
+                        success:function(data){
+                            
+                            $('#status').html('<span class="text text-success">Chờ duyệt bình luận</span>');
+                            load_comment();
+                            $('#status').fadeOut(5000);
+                            $('.comment_content').val('');
+                            swal("Good job!", "Cảm ơn bạn đã bình luận", "success");
+                        } 
+
+                    }); 
+                })
+            })
         </script>
         <script>
             $('#keywords').keyup(function(){

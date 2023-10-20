@@ -154,3 +154,13 @@ Route::post('/insert-gallery/{product_id}',[GalleryController::class, 'insert_ga
 Route::post('/edit-name-gal',[GalleryController::class, 'edit_name_gal']);
 Route::post('/del-gal',[GalleryController::class, 'delete_gallery']);
 Route::post('/update-gal',[GalleryController::class, 'update_gallery']);
+
+// comment
+Route::post('/load-cmt',[ProductController::class, 'load_cmt']);
+Route::post('/send-cmt',[ProductController::class, 'send_cmt']);
+Route::get('/list-cmt',[ProductController::class, 'list_cmt']);
+Route::get('/unactive-comment/{comment_id}',[ProductController::class, 'unactive_comment']);
+Route::get('/active-comment/{comment_id}',[ProductController::class, 'active_comment']);
+Route::get('/delete-comment/{comment_id}',[ProductController::class, 'delete_comment']);
+Route::post('/reply-cmt',[ProductController::class, 'reply_cmt']);
+Route::post('/add-rating',[ProductController::class, 'add_rating']);

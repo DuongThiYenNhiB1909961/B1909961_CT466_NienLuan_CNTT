@@ -7,6 +7,8 @@ use DB;
 use Session;
 use App\Http\Requests;
 use App\Models\Gallery;
+use App\Models\Comment;
+use App\Models\Rating;
 use File;
 use Illuminate\Support\Facades\Redirect;
 session_start();
@@ -23,6 +25,107 @@ class ProductController extends Controller
             }else{
                 return Redirect::to('admin')->send();
             }
+    }
+    public function add_rating(Request $request){
+        $product_id = $request->product_id;
+        $index = $request->index;
+        $rating = new Rating();
+        $rating->product_id = $product_id;
+        $rating->rating = $index;
+        $rating->customer_id = Session::get('customer_id');
+        $rating->save();
+        echo 'done';
+    }
+    public function reply_cmt(Request $request){
+        $data = $request->all();
+        $comment = new Comment();
+        $comment->comment_content = $data['comment'];
+        $comment->comment_name = 'ShopThienDuongLamDep';
+        $comment->product_id = $data['product_id'];
+        $comment->comment_parent_cmt = $data['comment_id'];
+        $comment->comment_status = 0;
+        $comment->save();
+    }
+    public function list_cmt(){
+        $comment = Comment::with('product')->where('comment_parent_cmt','=','0')->orderBy('comment_status','DESC')->orderBy('comment_id','DESC')->get();
+        $comment_rep = Comment::with('product')->where('comment_parent_cmt','>','0')->orderBy('comment_id','DESC')->get();
+        return view('admin.comment.list_comment')->with('comment',$comment)->with('comment_rep',$comment_rep);
+    }
+    public function unactive_comment($comment_id){
+        $this->AuthLogin();
+        Comment::where('comment_id',$comment_id)->update(['comment_status'=>1]);
+        Session::put('message','Tắt bình luận thành công');
+        return redirect()->back();
+    }
+    public function active_comment($comment_id){
+        $this->AuthLogin();
+        Comment::where('comment_id',$comment_id)->update(['comment_status'=>0]);
+        Session::put('message','Duyệt bình luận thành công');
+        return redirect()->back();
+    }
+    public function delete_comment($comment_id){
+        $this->AuthLogin();
+        Comment::where('comment_id',$comment_id)->delete();
+        Session::put('message','Xóa bình luận thành công');
+        return Redirect()->back();
+    }
+    public function load_cmt(Request $request){
+        $product_id = $request->product_id;
+        $comment = Comment::where('product_id',$product_id)->where('comment_parent_cmt','=','0')->where('comment_status',0)->get();
+        $comment_rep = Comment::with('product')->where('comment_parent_cmt','>','0')->orderBy('comment_id','DESC')->get();
+        $output = '';
+        foreach($comment as $key => $cmt){
+            $output .= '
+                <div class="row shadow my-2" id="reviews" style="margin: 10px 10px; border: 1px solid rgb(216, 213, 213)">
+                    <div class="col-sm-2" align="center">';
+
+                    if(Session::get('customer_picture')){
+                        $output .= '<img style="margin: 15px 0;" src="'.Session::get('customer_picture').'" width="50%" class="img img-responsive img-thumbnail">';
+                    }else{
+                        $output .= '<img style="margin: 15px 0;" src="'.url('/public/uploads/product/user1.png').'" width="50%" class="img img-responsive img-thumbnail">  ';
+                    }
+                       
+                    $output .= '</div>
+            
+                    <div class="col-sm-10">
+                        <p style="color: green;">@'.$cmt->comment_name.'</p>
+                        <i style="color: #000; font-size:15px">'.$cmt->comment_date.'</i>
+                        <p>'.$cmt->comment_content.'</p>
+                    </div>
+                </div><p></p>
+            ';
+
+            foreach($comment_rep as $key => $cmt_rep){
+                if($cmt_rep->comment_parent_cmt == $cmt->comment_id){
+                    $output .= '
+                    <div class="row shadow my-2 admin" style="margin-left: 10rem; margin-right: 10px; font-size: 18px; background-color:rgb(216, 213, 213); border: 1px solid rgb(216, 213, 213)">
+                        <div class="col-sm-2" align="center">
+                        <img style="margin: 15px 0;" src="'.url('/public/uploads/product/user2.jpg').'" width="50%" class="img img-responsive img-thumbnail">     
+                        </div>
+                
+                        <div class="col-sm-10">
+                            <p style="color: green;">@ShopThienDuongLamDep</p>
+                            <i style="color: #000; font-size:15px">'.$cmt_rep->comment_date.'</i>
+                            <p>'.$cmt_rep->comment_content.'</p>
+                        </div>
+                    </div><p></p>
+                    ';
+                }
+        }
+        }
+        echo $output;
+    }
+    public function send_cmt(Request $request){
+        $product_id = $request->product_id;
+        $comment_name = $request->comment_name;
+        $comment_content = $request->comment_content;
+        $comment = new Comment();
+        $comment->comment_content = $comment_content;
+        $comment->comment_name = $comment_name;
+        $comment->product_id = $product_id;
+        $comment->comment_status = 1;
+        $comment->comment_parent_cmt = 0;
+        $comment->save();
     }
     public function add_product(){
         $this->AuthLogin();
@@ -163,8 +266,12 @@ class ProductController extends Controller
         $relate_product = DB::table('tb_product')
         ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
         ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
-        ->where('tb_category_product.id',$category_id)->limit(5)->get();
+        ->where('tb_category_product.id',$category_id)->get();
 
-        return view('pages.product_detail')->with('gallery',$gallery)->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        $customer_id = Session::get('customer_id');
+        $rating_id = Rating::where('product_id', $product_id)->get();
+        $rating = Rating::where('product_id', $product_id)->where('customer_id',$customer_id)->avg('rating');
+        $rating = round($rating);
+        return view('pages.product_detail')->with('rating_id',$rating_id)->with('rating',$rating)->with('gallery',$gallery)->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
 }

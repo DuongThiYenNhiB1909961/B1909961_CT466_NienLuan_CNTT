@@ -4,6 +4,7 @@ ul, ol {margin: 0;}
 p {margin: 0;}
 
 html, body{
+    font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
     background: #eee;
     padding: 5px 5px;
@@ -24,25 +25,25 @@ header, footer{
     -ms-transition: all .3s ease;
     -o-transition: all .3s ease;
     transition: all .3s ease;
-    border: 1px solid #ca86b7;
+    border: 1px solid #c36705;
     box-shadow: none;
-    background: rgb(235, 230, 225) url(../images/search-icon.png) no-repeat 10px 8px;
+    background: rgb(210, 199, 188) url(../images/search-icon.png) no-repeat 10px 8px;
     padding: 0 5px 0 30px;
-    color: #fff;
+    color: #000;
     border-radius: 100px;
     -webkit-border-radius: 100px;
 	cursor:pointer;
 }
 .search:focus {
     width:180px;
-    border:1px solid #8b5c7e;
+    border:1px solid #462e3f;
     box-shadow:none;
     -webkit-transition:all .3s ease;
     -moz-transition:all .3s ease;
     -ms-transition:all .3s ease;
     -o-transition:all .3s ease;
     transition:all .3s ease;
-    color:#3e8b77;
+    color:#000;
     font-weight: 300;
 }
 body a:hover{
