@@ -17,14 +17,16 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
         <title>{{$meta_title}}</title>
         <link rel="icon" href="https://cdn01.beelancer.vn/blog/wp-content/uploads/2021/07/Maquillaje-Nina-Maquillaje-Nina-Nina-Pintada-A-Mano-Ojos-De-Nina-PNG-y-PSD-para-Descargar-Gratis-_-Pngtree.jpg" type="image/x-icon">
-        <link href="" rel='stylesheet' type='text/css' />
+        
         <link rel="stylesheet" href="{{asset('resources/css/style.css')}}">
         <link href="{{asset('resources/css/style-responsive.css')}}" rel="stylesheet"/>
+        <link href="{{asset('resources/css/font-awesome.css')}}" rel="stylesheet"/>
+        <link href="{{asset('resources/css/font-awesome.min.css')}}" rel="stylesheet"/>
         <link href="{{asset('resources/css/animate.css')}}" rel="stylesheet"/>
-        <link href="{{asset('resources/css/lightslider.css')}}" rel="stylesheet"/>
-        <link src="{{asset('resources/css/sweetalert.css')}}">
-        <link src="{{asset('resources/css/lightgallery.min.css')}}">
-        <link src="{{asset('resources/css/prettify.css')}}">
+        <link href="{{asset('resources/css/lightslider.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('resources/css/sweetalert.css')}}"> 
+        <link type="text/css" rel="stylesheet" href="{{asset('resources/css/lightgallery.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('resources/css/prettify.css')}}">
         <!-- Fonts -->
         <link href="{{asset('https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap')}}" rel="stylesheet">
         <!-- Styles -->
@@ -184,7 +186,7 @@
                                 <h6 class="panel-title color-text mr-2 " ><a class="text-decoration-none"><b></b></a></h6>
                             </div>
                             
-                              <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{URL::to('category/'.$cate->id)}}"><b>{{$cate->category_name}}</b></a></div>
+                              <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{URL::to('category/'.$cate->category_id)}}"><b>{{$cate->category_name}}</b></a></div>
                             </div>
                     </li>
                     @endforeach --}}
@@ -201,31 +203,29 @@
                             <input class="btn btn-sm btn-danger" type="submit" value="Search!" style="margin-top: 4px">
                             </span>
                         </div>
-                        {{-- <ul class="nav pull-right top-menu mt-2">
-                            <li>
-                                <input  placeholder="Bạn tìm mỹ phẩm?">
-                                
-
-                            </li>
-                        </ul> --}}
+                        
                 </form>
                 </div>
-            {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        @foreach($category as $key => $cate)
-                        <li class="nav-item">
-                            <div class="flex items-center">
-                                <div class=" text-lg font-semibold"><a href="{{URL::to('category/'.$cate->id)}}" class="nav-link text-danger"><b>{{$cate->category_name}}</b></a></div>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-            </div>
-            </nav> --}} 
+                
             
         </header>
-        
+                {{-- <div class="row" >
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        {{-- <label for="amount"><b>Sắp Xếp Theo</b></label> --}}
+                        {{-- <form action="">
+                            @csrf
+                            <select name="sort" id="sort" class="form-control" style="border: 2px soild #000">
+                                <option value="{{Request::url()}}?sort_by=none"><i class="fa fa-filter" aria-hidden="true">--Lọc theo--</i></option>
+                                <option value="{{Request::url()}}?sort_by=tang_dan">--Giá tăng dần--</option>
+                                <option value="{{Request::url()}}?sort_by=giam_dan">--Giá giảm dần--</option>
+                                <option value="{{Request::url()}}?sort_by=az">--Lọc theo tên A đến Z--</option>
+                                <option value="{{Request::url()}}?sort_by=za">--Lọc theo tên Z đến A--</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>  --}}
         @yield('content')
         
         @yield('introduce')
@@ -289,13 +289,27 @@
                     thumbItem:3,
                     slideMargin:0,
                     enableDrag: false,
-                    currentPagerPosition:'left',
+                    currentPagerPosition:'center',
                     onSliderLoad: function(el) {
                         el.lightGallery({
                             selector: '#imageGallery .lslide'
                         });
                     }   
                 });  
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                $('#sort').on('change',function(){
+                    var url = $(this).val();
+                    // alert (url);
+                    if(url){
+                        window.location = url;
+                    }else{
+                        return false;
+                    }
+                    
+                });
             });
         </script>
         <script>

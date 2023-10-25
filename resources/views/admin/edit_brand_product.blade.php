@@ -24,6 +24,10 @@
                             <input type="text" value="{{$edit_value->brand_name}}" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Slug</label>
+                            <input type="text" name="slug_brand_product" class="form-control" id="exampleInputEmail1" placeholder="Tên xuất xứ">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Keywords xuất xứ</label>
                             <input type="text" value="{{$edit_value->brand_keywords}}" name="brand_product_keywords" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>

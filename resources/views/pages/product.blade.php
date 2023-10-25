@@ -1,5 +1,22 @@
 @extends('layout')
 @section('product')
+<div class="row" >
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <label for="amount"><b>Sắp Xếp Theo</b></label>
+        <form>
+            @csrf
+            <select name="sort" id="sort" class="form-control">
+                <option value="{{Request::url()}}?sort_by=none">---Lọc theo-</option>
+                <option value="{{Request::url()}}?sort_by=tang_dan">--Giá tăng dần--</option>
+                <option value="{{Request::url()}}?sort_by=giam_dan">--Giá giảm dần--</option>
+                <option value="{{Request::url()}}?sort_by=az">--Lọc theo tên A đến Z--</option>
+                <option value="{{Request::url()}}?sort_by=za">--Lọc theo tên Z đến A--</option>
+            </select>
+        </form>
+    </div>
+</div>
 <hr>
 <h4 class="rounded-lg" >
     <b class="mr-2 text-center"> 
@@ -13,7 +30,7 @@
                         @foreach($category as $key => $cate)
                         <li class="nav-item">
                             <div class="flex items-center">
-                                <div class=" text-lg font-semibold"><a href="{{URL::to('category/'.$cate->id)}}" class="nav-link"><b>{{$cate->category_name}}</b></a></div>
+                                <div class=" text-lg font-semibold"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="nav-link"><b>{{$cate->category_name}}</b></a></div>
                             </div>
                         </li>
                         @endforeach
@@ -30,7 +47,7 @@
                     <div class="panel panel-default mt-3">
                         @foreach($brand as $key => $brand)
                         <div class="panel-heading">
-                            <h6 class="panel-title color-text mr-2"><a href="{{URL::to('brand/'.$brand->id)}}" class="text-decoration-none"><b>{{$brand->brand_name}}</b></a></h6>
+                            <h6 class="panel-title color-text mr-2"><a href="{{URL::to('brand/'.$brand->slug_brand_product)}}" class="text-decoration-none"><b>{{$brand->brand_name}}</b></a></h6>
                         </div>
                         <hr>
                         @endforeach

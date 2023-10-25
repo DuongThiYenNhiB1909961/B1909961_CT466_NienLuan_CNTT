@@ -12,7 +12,7 @@
             <div class="panel panel-default mt-3">
                 @foreach($category as $key => $cate)
                 <div class="panel-heading">
-                    <h6 class="panel-title color-text mr-2"><a href="{{URL::to('category/'.$cate->id)}}" class="text-decoration-none"><b>{{$cate->category_name}}</b></a></h6>
+                    <h6 class="panel-title color-text mr-2"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="text-decoration-none"><b>{{$cate->category_name}}</b></a></h6>
                 </div>
                 <hr>
                  @endforeach
@@ -24,7 +24,7 @@
             <div class="panel panel-default mt-3">
                 @foreach($brand as $key => $brand)
                 <div class="panel-heading">
-                    <h6 class="panel-title color-text mr-2"><a href="{{URL::to('brand/'.$brand->id)}}" class="text-decoration-none"><b>{{$brand->brand_name}}</b></a></h6>
+                    <h6 class="panel-title color-text mr-2"><a href="{{URL::to('brand/'.$brand->slug_brand_product)}}" class="text-decoration-none"><b>{{$brand->brand_name}}</b></a></h6>
                 </div>
                 <hr>
                 @endforeach

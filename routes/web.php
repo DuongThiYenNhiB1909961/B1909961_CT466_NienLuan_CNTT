@@ -31,10 +31,8 @@ Route::post('/search', [IndexController::class, 'search']);
 Route::get('/register', [IndexController::class, 'register']);
 Route::get('/product', [IndexController::class, 'product']);
 Route::post('/auto-ajax', [IndexController::class, 'autocomplete']);
+// Route::get('/filter', [IndexController::class, 'filter']);
 
-// Show_cate
-Route::get('/category/{category_id}', [CategoryProduct::class, 'show_category']);
-Route::get('/brand/{brand_id}', [BrandProduct::class, 'show_brand']);
 
 // admin
 Route::get('/admin',[AdminController::class, 'index']);
@@ -43,6 +41,8 @@ Route::post('/dashboard',[AdminController::class, 'dashboard']);
 Route::get('/logoutad',[AdminController::class, 'logoutad']);
 
 //CategoryProduct
+Route::get('/category/{slug_category_product}', [CategoryProduct::class, 'show_category']);
+
 Route::get('/add-category-product',[CategoryProduct::class, 'add_category_product']);
 Route::get('/edit-category-product/{id}',[CategoryProduct::class, 'edit_category_product']);
 Route::get('/delete-category-product/{id}',[CategoryProduct::class, 'delete_category_product']);
@@ -55,6 +55,7 @@ Route::post('/save-category-product',[CategoryProduct::class, 'save_category_pro
 Route::post('/update-category-product/{id}',[CategoryProduct::class, 'update_category_product']);
 
 //BrandProduct
+Route::get('/brand/{slug_brand_product}', [BrandProduct::class, 'show_brand']);
 Route::get('/add-brand-product',[BrandProduct::class, 'add_brand_product']);
 Route::get('/edit-brand-product/{id}',[BrandProduct::class, 'edit_brand_product']);
 Route::get('/delete-brand-product/{id}',[BrandProduct::class, 'delete_brand_product']);
@@ -164,3 +165,5 @@ Route::get('/active-comment/{comment_id}',[ProductController::class, 'active_com
 Route::get('/delete-comment/{comment_id}',[ProductController::class, 'delete_comment']);
 Route::post('/reply-cmt',[ProductController::class, 'reply_cmt']);
 Route::post('/add-rating',[ProductController::class, 'add_rating']);
+
+// 

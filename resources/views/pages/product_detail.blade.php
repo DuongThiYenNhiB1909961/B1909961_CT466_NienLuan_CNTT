@@ -4,31 +4,26 @@
 <div class="table-agile-info shadow">
     <div class="panel panel-default">
                 <hr>   
-                            <style>
-                                .lSSlideOuter .lSPager.lSGallery img {
-                                    display: block;
-                                    height: 120px;
-                                    max-width: 100%;
-                                }
-                                li.active {
-                                    border: 1px solid #dc3545;
-                                }
-                            </style>                 
-                            @foreach($detail_product as $key => $product)
-                            <form >
-                                @csrf
-                            {{-- {{csrf_field()}} --}}
+                <style>
+                    li.active {
+                        border: 1px solid #dc3545;
+                    }
+                </style>                 
+                @foreach($detail_product as $key => $product)
+                <form >
+                    @csrf
+                {{-- {{csrf_field()}} --}}
                             <div class="row">
-                                
-                                    <div class=" col-sm-4 text-center m-1" >
-                                        <ul id="imageGallery">
-                                            @foreach($gallery as $key => $gal)
-                                                <li data-thumb="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" data-src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}">
-                                                <img width="100%" alt="{{$gal->gallery_name}}" src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" />
-                                                </li>
-                                            @endforeach
-                                          </ul>             
-                                    </div>
+                    
+                                <div class=" col-sm-4 text-center m-1" >
+                                    <ul id="imageGallery">
+                                        @foreach($gallery as $key => $gal)
+                                            <li data-thumb="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" data-src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}">
+                                            <img width="100%" alt="{{$gal->gallery_name}}" src="{{asset('public/uploads/gallery/'.$gal->gallery_image)}}" />
+                                            </li>
+                                        @endforeach
+                                      </ul>             
+                                </div>
                                     <div class="col-sm-7">
                                         <div class="text-danger">
                                             <h5><b style="font-size: 30px text-alight">{{$product->product_desc}}</b></h5>

@@ -18,8 +18,8 @@ class CartController extends Controller
         $meta_title = "Giỏ hàng ajax";
         $url_canonical = $request->url(); 
 
-        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
-        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         return view('pages.Cart.cart_ajax')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function add_cart_ajax(Request $request){
@@ -119,8 +119,8 @@ class CartController extends Controller
         $quantity = $request->qty;
         $product_info = DB::table('tb_product')->where('product_id', $productId)->first();
 
-        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
-        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         
         $data['id'] = $product_info->product_id;
         $data['qty'] = $quantity;
@@ -138,8 +138,8 @@ class CartController extends Controller
         $meta_title = "Giỏ hàng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
-        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         return view('pages.cart.show_cart')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function delete_cart($rowId){

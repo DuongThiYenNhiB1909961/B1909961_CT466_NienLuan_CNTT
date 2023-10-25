@@ -35,8 +35,8 @@ class IndexController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get(); 
-        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get(); 
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get(); 
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get(); 
         
         $all_product = DB::table('tb_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(10); 
         return view('pages.home')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
@@ -69,9 +69,27 @@ class IndexController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
-        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
-        $all_product = DB::table('tb_product')->where('product_status','0')->orderby('product_id','desc')->get();
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+
+        if(isset($_GET['sort_by'])){
+            $sort_by = $_GET['sort_by'];
+            if($sort_by == 'giam_dan'){
+                $all_product = Product::where('product_status','0')->orderby('product_price','desc')->get();
+            }
+            elseif($sort_by == 'tang_dan'){
+                $all_product = Product::where('product_status','0')->orderby('product_price','asc')->get();
+            }
+            elseif($sort_by == 'az'){
+                $all_product = Product::where('product_status','0')->orderby('product_name','asc')->get();
+            }
+            elseif($sort_by == 'za'){
+                $all_product = Product::where('product_status','0')->orderby('product_name','desc')->get();
+            }
+        }else{
+            $all_product = Product::where('product_status','0')->orderby('product_id','desc')->get();
+        }
+
         return view('pages.product')->with('category',$cate_product)->with('brand',$brand_product)->with('all_product',$all_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function search(Request $request){
@@ -81,8 +99,8 @@ class IndexController extends Controller
         $url_canonical = $request->url(); 
 
         $keywords = $request->keywords_submit;
-        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
-        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $search_product = DB::table('tb_product')->where('product_name','like','%'.$keywords.'%')->get();
         return view('pages.search')->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }

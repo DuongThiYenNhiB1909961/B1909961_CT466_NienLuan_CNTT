@@ -129,16 +129,16 @@ class ProductController extends Controller
     }
     public function add_product(){
         $this->AuthLogin();
-        $cate_product = DB::table('tb_category_product')->orderby('id','desc')->get();
-        $brand_product = DB::table('tb_brand')->orderby('id','desc')->get();
+        $cate_product = DB::table('tb_category_product')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tb_brand')->orderby('brand_id','desc')->get();
         return view('admin.add_product')->with('cate_product',$cate_product)->with('brand_product',$brand_product);
     }
     public function all_product(){
         $this->AuthLogin();
         $all_product = DB::table('tb_product')
         // ->orderby('product_id','desc')->get();
-        ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
-        ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
+        ->join('tb_category_product','tb_category_product.category_id','=','tb_product.category_id')
+        ->join('tb_brand','tb_brand.brand_id','=','tb_product.brand_id')
         ->orderby('product_id','desc')->get();
 
         $manager_product = view('admin.all_product')->with('all_product',$all_product);
@@ -198,8 +198,8 @@ class ProductController extends Controller
     }
     public function edit_product($product_id){
         $this->AuthLogin();
-        $cate_product = DB::table('tb_category_product')->orderby('id','desc')->get();
-        $brand_product = DB::table('tb_brand')->orderby('id','desc')->get();
+        $cate_product = DB::table('tb_category_product')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tb_brand')->orderby('brand_id','desc')->get();
 
         $edit_product = DB::table('tb_product')->where('product_id',$product_id)->get();
         $manager_product = view('admin.edit_product')->with('edit_product',$edit_product)->with('cate_product',$cate_product)
@@ -247,11 +247,11 @@ class ProductController extends Controller
     // product_detail
     public function product_detail($product_id, Request $request){
 
-        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('id','desc')->get();
-        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('id','desc')->get();
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $detail_product = DB::table('tb_product')
-        ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
-        ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
+        ->join('tb_category_product','tb_category_product.category_id','=','tb_product.category_id')
+        ->join('tb_brand','tb_brand.brand_id','=','tb_product.brand_id')
         ->where('tb_product.product_id',$product_id)->get();
         foreach($detail_product as $key => $val){
             $category_id = $val->category_id;
@@ -264,9 +264,9 @@ class ProductController extends Controller
         $gallery = Gallery::where('product_id',$product_id)->get();
 
         $relate_product = DB::table('tb_product')
-        ->join('tb_category_product','tb_category_product.id','=','tb_product.category_id')
-        ->join('tb_brand','tb_brand.id','=','tb_product.brand_id')
-        ->where('tb_category_product.id',$category_id)->get();
+        ->join('tb_category_product','tb_category_product.category_id','=','tb_product.category_id')
+        ->join('tb_brand','tb_brand.brand_id','=','tb_product.brand_id')
+        ->where('tb_category_product.category_id',$category_id)->get();
 
         $customer_id = Session::get('customer_id');
         $rating_id = Rating::where('product_id', $product_id)->get();

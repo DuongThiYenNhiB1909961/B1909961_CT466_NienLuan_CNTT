@@ -24,6 +24,10 @@
                             data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="category_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Slug</label>
+                            <input type="text" name="slug_category_product" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả danh mục</label>
                             <textarea style="resize: none" rows="7" data-validation="length" data-validation-length="min10" 
                             data-validation-error-msg="Lam on dien it nhat 10 ky tu" class="form-control" name="category_product_desc" id="ckeditor3" placeholder="Mô tả danh mục"></textarea>
