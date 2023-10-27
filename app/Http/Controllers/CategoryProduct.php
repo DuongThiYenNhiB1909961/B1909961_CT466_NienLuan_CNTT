@@ -88,6 +88,9 @@ class CategoryProduct extends Controller
         $cate_product = Category::where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $category_by_slug = Category::where('slug_category_product',$slug_category_product)->get();
+        $min_price = Product::min('product_price');
+        $max_price = Product::max('product_price');
+
         foreach($category_by_slug as $key => $cate){
             $category_id = $cate->category_id;
         }
@@ -96,23 +99,29 @@ class CategoryProduct extends Controller
             $sort_by = $_GET['sort_by'];
             if($sort_by == 'giam_dan'){
                 $category_by_id = DB::table('tb_product')->join('tb_category_product','tb_product.category_id','=','tb_category_product.category_id')
-        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_price','DESC')->get();
+        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_price','DESC')->paginate(6)->appends(request()->query());
             }
             elseif($sort_by == 'tang_dan'){
                 $category_by_id = DB::table('tb_product')->join('tb_category_product','tb_product.category_id','=','tb_category_product.category_id')
-        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_price','ASC')->get();
+        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_price','ASC')->paginate(6)->appends(request()->query());
             }
             elseif($sort_by == 'az'){
                 $category_by_id = DB::table('tb_product')->join('tb_category_product','tb_product.category_id','=','tb_category_product.category_id')
-        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_name','ASC')->get();
+        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_name','ASC')->paginate(6)->appends(request()->query());
             }
             elseif($sort_by == 'za'){
                 $category_by_id = DB::table('tb_product')->join('tb_category_product','tb_product.category_id','=','tb_category_product.category_id')
-        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_name','DESC')->get();
+        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_name','DESC')->paginate(6)->appends(request()->query());
             }
+        }elseif(isset($_GET['start_price']) && $_GET['end_price']){
+            $min = $_GET['start_price'];
+            $max = $_GET['end_price'];
+
+            $category_by_id = DB::table('tb_product')->join('tb_category_product','tb_product.category_id','=','tb_category_product.category_id')
+        ->where('tb_product.category_id',$category_id)->whereBetween('tb_product.product_price',[$min, $max])->orderBy('tb_product.product_price','ASC')->paginate(6)->appends(request()->query());            
         }else{
             $category_by_id = DB::table('tb_product')->join('tb_category_product','tb_product.category_id','=','tb_category_product.category_id')
-        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_id','DESC')->get();
+        ->where('tb_product.category_id',$category_id)->where('tb_category_product.slug_category_product',$slug_category_product)->orderBy('tb_product.product_id','DESC')->paginate(6);
         }
 
         
@@ -126,7 +135,7 @@ class CategoryProduct extends Controller
             $url_canonical = $request->url(); 
         }
 
-        return view('pages.show_cate')->with('category_by_id',$category_by_id)->with('category',$cate_product)->with('brand',$brand_product)->with('category_pro',$category_pro)
+        return view('pages.show_cate')->with('min_price',$min_price)->with('max_price',$max_price)->with('category_by_id',$category_by_id)->with('category',$cate_product)->with('brand',$brand_product)->with('category_pro',$category_pro)
         ->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     

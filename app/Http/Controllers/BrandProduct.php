@@ -8,6 +8,7 @@ use Session;
 use Auth;
 use App\Http\Requests;
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Support\Facades\Redirect;
 class BrandProduct extends Controller
 {
@@ -85,7 +86,8 @@ class BrandProduct extends Controller
     public function show_brand($slug_brand_product, Request $request){
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-
+        $min_price = Product::min('product_price');
+        $max_price = Product::max('product_price');
         $brand_by_slug = Brand::where('slug_brand_product',$slug_brand_product)->get();
         foreach($brand_by_slug as $key => $brand){
             $brand_id = $brand->brand_id;
@@ -108,6 +110,13 @@ class BrandProduct extends Controller
                 $brand_by_id = DB::table('tb_product')->join('tb_brand','tb_product.brand_id','=','tb_brand.brand_id')
         ->where('tb_product.brand_id',$brand_id)->orderBy('tb_product.product_name','DESC')->get();
             }
+        }elseif(isset($_GET['start_price']) && $_GET['end_price']){
+            $min = $_GET['start_price'];
+            $max = $_GET['end_price'];
+
+            $brand_by_id = DB::table('tb_product')->join('tb_brand','tb_product.brand_id','=','tb_brand.brand_id')
+        ->where('tb_product.brand_id',$brand_id)->whereBetween('tb_product.product_price',[$min, $max])->orderBy('tb_product.product_price','ASC')->paginate(6)->appends(request()->query());            
+
         }else{
             $brand_by_id = DB::table('tb_product')->join('tb_brand','tb_product.brand_id','=','tb_brand.brand_id')
         ->where('tb_product.brand_id',$brand_id)->orderBy('tb_product.product_id','DESC')->get();
@@ -120,6 +129,6 @@ class BrandProduct extends Controller
             $meta_title = $val->brand_name;
             $url_canonical = $request->url(); 
         }
-        return view('pages.show_brand')->with('category',$cate_product)->with('brand',$brand_product)->with('brand_pro',$brand_pro)->with('brand_by_id',$brand_by_id)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
+        return view('pages.show_brand')->with('min_price',$min_price)->with('max_price',$max_price)->with('category',$cate_product)->with('brand',$brand_product)->with('brand_pro',$brand_pro)->with('brand_by_id',$brand_by_id)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
     }
 }

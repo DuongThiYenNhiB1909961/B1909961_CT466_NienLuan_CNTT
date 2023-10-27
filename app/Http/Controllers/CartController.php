@@ -7,6 +7,7 @@ use DB;
 use Cart;
 use Session;
 use App\Http\Requests;
+use App\Models\Product;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 class CartController extends Controller
@@ -18,9 +19,12 @@ class CartController extends Controller
         $meta_title = "Giỏ hàng ajax";
         $url_canonical = $request->url(); 
 
+        $min_price = Product::min('product_price');
+        $max_price = Product::max('product_price');
+
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        return view('pages.Cart.cart_ajax')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.Cart.cart_ajax')->with('min_price',$min_price)->with('max_price',$max_price)->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function add_cart_ajax(Request $request){
         $data = $request->all();
@@ -137,10 +141,12 @@ class CartController extends Controller
         $meta_keywords = "shop my pham, shop mỹ phẩm, của hàng mỹ phẩm chính hãng";
         $meta_title = "Giỏ hàng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
+        $min_price = Product::min('product_price');
+        $max_price = Product::max('product_price');
 
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        return view('pages.cart.show_cart')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.cart.show_cart')->with('min_price',$min_price)->with('max_price',$max_price)->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function delete_cart($rowId){
         Cart::update($rowId,0);

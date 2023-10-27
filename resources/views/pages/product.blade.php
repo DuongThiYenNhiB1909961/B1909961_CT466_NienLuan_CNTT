@@ -2,7 +2,6 @@
 @section('product')
 <div class="row" >
     <div class="col-sm-4"></div>
-    <div class="col-sm-4"></div>
     <div class="col-sm-4">
         <label for="amount"><b>Sắp Xếp Theo</b></label>
         <form>
@@ -14,6 +13,16 @@
                 <option value="{{Request::url()}}?sort_by=az">--Lọc theo tên A đến Z--</option>
                 <option value="{{Request::url()}}?sort_by=za">--Lọc theo tên Z đến A--</option>
             </select>
+        </form>
+    </div>
+    <div class="col-sm-4">
+        <label for="amount"><b>Lọc Giá</b></label>
+        <form>
+            <div id="slider-range"></div>
+            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            <input type="hidden" name="start_price" id="start_price">
+            <input type="hidden" name="end_price" id="end_price">
+            <input type="submit" name="filter_price" value="Lọc giá" class="btn btn-danger btn-sm">
         </form>
     </div>
 </div>

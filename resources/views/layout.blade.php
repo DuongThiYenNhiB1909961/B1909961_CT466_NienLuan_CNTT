@@ -27,6 +27,7 @@
         <link href="{{asset('resources/css/sweetalert.css')}}"> 
         <link type="text/css" rel="stylesheet" href="{{asset('resources/css/lightgallery.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('resources/css/prettify.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
         <!-- Fonts -->
         <link href="{{asset('https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap')}}" rel="stylesheet">
         <!-- Styles -->
@@ -279,7 +280,27 @@
         <script src="{{asset('resources/js/lightslider.js')}}"></script>
         <script src="{{asset('resources/js/lightgallery-all.min.js')}}"></script>
         <script src="{{asset('resources/js/prettify.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $( "#slider-range" ).slider({
+                    orientation: "horizontal",
+                    range: true,
 
+                    min: {{$min_price}},
+                    max: {{$max_price}}+100000,
+                    values: [ {{$min_price}}, {{$max_price}} ],
+                    step: 10000,
+                    slide: function( event, ui ){
+                        $( "#amount" ).val( "vnđ " + ui.values[ 0 ] + " - vnđ " + ui.values[ 1 ] );
+                        $( "#start_price" ).val(ui.values[ 0 ]);
+                        $( "#end_price" ).val(ui.values[ 1 ] );
+                    }
+                });
+                $( "#amount" ).val( "vnđ " + $( "#slider-range" ).slider( "values", 0 ) +
+                    " - vnđ " + $( "#slider-range" ).slider( "values", 1 ) );
+            });
+        </script>
         <script>
             $(document).ready(function() {
                 $('#imageGallery').lightSlider({

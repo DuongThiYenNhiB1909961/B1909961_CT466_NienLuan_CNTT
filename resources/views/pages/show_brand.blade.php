@@ -2,7 +2,7 @@
 @section('content')
 <div class="row" >
     <div class="col-sm-4"></div>
-    <div class="col-sm-4"></div>
+    
     <div class="col-sm-4">
         <label for="amount"><b>Sắp Xếp Theo</b></label>
         <form>
@@ -16,6 +16,16 @@
             </select>
         </form>
     </div>
+    <div class="col-sm-4">
+        <label for="amount"><b>Lọc Giá</b></label>
+        <form>
+            <div id="slider-range"></div>
+            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            <input type="hidden" name="start_price" id="start_price">
+            <input type="hidden" name="end_price" id="end_price">
+            <input type="submit" name="filter_price" value="Lọc giá" class="btn btn-danger btn-sm">
+        </form>
+    </div>
 </div>
         <h2 class="text-center text-warning"><b>XUẤT XỨ MỸ PHẨM</b></h2>
         <hr>
@@ -26,11 +36,12 @@
             
                 <div class="ml-3 mb-3 shadow" >
                                 <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
-                                    <div class="card" style="width: 15rem; height: 22rem;">
+                                    <div class="card" style="width: 15rem; height: 25rem;">
                                         <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top" alt="">
                                         <div class="card-body">
                                             <h6 class="card-title"><b>{{$product->product_desc}}</b></h6>
                                             <b><p class="card-text text-danger">{{number_format($product->product_price).'đ'}}</p></b>
+                                            <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
                                         </div>
                                       </div>
                                 </a>
