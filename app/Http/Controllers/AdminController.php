@@ -7,13 +7,90 @@ use DB;
 use Session;
 use App\Models\Social;
 use App\Models\Login;
+use App\Models\Statistical;
 use Socialite;
 use Auth;
+use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 class AdminController extends Controller
 {
+    public function dashboard_filter_option(Request $request){
+        $data = $request->all();
+        // echo $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-y H:i:s');
+
+        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonthsNoOverflow()->toDateString();
+        $lastDayofPreviousMonth = Carbon::now()->subMonthsNoOverflow()->endOfMonth()->toDateString();
+        
+        $sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        if($data['dashboard_val'] == '7ngay'){
+            $statis = Statistical::whereBetween('order_date',[$sub7days,$now])->orderBy('order_date','ASC')->get();
+
+        }elseif($data['dashboard_val'] == 'thangtruoc'){
+            $statis = Statistical::whereBetween('order_date',[$firstDayofPreviousMonth,$lastDayofPreviousMonth])->orderBy('order_date','ASC')->get();
+        }elseif($data['dashboard_val'] == 'thangnay'){
+            $statis = Statistical::whereBetween('order_date',[$dauthangnay,$now])->orderBy('order_date','ASC')->get();
+        }else{
+            $statis = Statistical::whereBetween('order_date',[$sub365days,$now])->orderBy('order_date','ASC')->get();
+        }
+
+        foreach($statis as $key => $st){
+            $chart_data[] = array(
+                'period'=>$st->order_date,
+                'order'=>$st->total_order,
+                'sales'=>$st->sales,
+                'profit'=>$st->profit,
+                'quantity'=>$st->quantity
+            );
+        }
+        $data = json_encode($chart_data);
+        echo $data;
+    }
+    public function days30Order(Request $request){
+        $data = $request->all();
+        // echo $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-y H:i:s');
+
+        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(30)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $statis = Statistical::whereBetween('order_date',[$sub30days,$now])->orderBy('order_date','ASC')->get();
+
+        foreach($statis as $key => $st){
+            $chart_data[] = array(
+                'period'=>$st->order_date,
+                'order'=>$st->total_order,
+                'sales'=>$st->sales,
+                'profit'=>$st->profit,
+                'quantity'=>$st->quantity
+            );
+        }
+        $data = json_encode($chart_data);
+        echo $data;
+    }
+    public function filterbydate(Request $request){
+        $data = $request->all();
+        $from_date = $data['from_date'];
+        $to_date = $data['to_date'];
+
+        $statis = Statistical::whereBetween('order_date',[$from_date,$to_date])->orderBy('order_date','ASC')->get();
+
+        foreach($statis as $key => $st){
+            $chart_data[] = array(
+                'period'=>$st->order_date,
+                'order'=>$st->total_order,
+                'sales'=>$st->sales,
+                'profit'=>$st->profit,
+                'quantity'=>$st->quantity
+            );
+        }
+        $data = json_encode($chart_data);
+        echo $data;
+    }
     public function login_google(){
         return Socialite::driver('google')->redirect();
     }

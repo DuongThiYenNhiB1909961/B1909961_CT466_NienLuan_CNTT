@@ -1,6 +1,7 @@
 @extends('layout')
 @section('product')
-<div class="row" >
+    <div class="row" >
+    
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
         <label for="amount"><b>Sắp Xếp Theo</b></label>
@@ -26,12 +27,13 @@
         </form>
     </div>
 </div>
+
 <hr>
 <h4 class="rounded-lg" >
     <b class="mr-2 text-center"> 
         Danh Mục Nổi Bậc
-    </b
-></h4>
+    </b>
+</h4>
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
     
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">

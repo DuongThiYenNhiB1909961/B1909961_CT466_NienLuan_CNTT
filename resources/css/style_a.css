@@ -2031,7 +2031,7 @@ ul.labels-info li a i {
     padding:0 10px;
     float:left;
     border-radius:4px 0 0 4px;
-    color:#8a8a8a;
+    color:#000;
 }
 .inbox-head .sr-btn {
     height:40px;
@@ -2470,16 +2470,16 @@ h4 input[type="checkbox"] {
 }
  /*--placeholder-color--*/
 ::-webkit-input-placeholder {
-	color:#fff !important;
+	color:#6a6868 !important;
 }
 :-moz-placeholder { /* Firefox 18- */
-	color:#fff !important; 
+	color:#000 !important; 
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-	color:#fff !important;
+	color:#000 !important;
 }
 :-ms-input-placeholder {  
-	color:#fff !important;
+	color:#000 !important;
 }
 /*--//placeholder-color--*/
 .alert {

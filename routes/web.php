@@ -40,6 +40,11 @@ Route::get('/manage',[AdminController::class, 'manage']);
 Route::post('/dashboard',[AdminController::class, 'dashboard']);
 Route::get('/logoutad',[AdminController::class, 'logoutad']);
 
+// filter
+Route::post('/filterbydate',[AdminController::class, 'filterbydate']);
+Route::post('/days30Order',[AdminController::class, 'days30Order']);
+Route::post('/dashboard-option',[AdminController::class, 'dashboard_filter_option']);
+
 //CategoryProduct
 Route::get('/category/{slug_category_product}', [CategoryProduct::class, 'show_category']);
 

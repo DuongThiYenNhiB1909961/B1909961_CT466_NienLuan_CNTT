@@ -63,18 +63,18 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả mỹ phẩm</label>
                             <textarea style="resize: none" rows="7" class="form-control" data-validation="length" data-validation-length="min10" 
-                            data-validation-error-msg="Vui lòng dien it nhat 10 ky tu" name="product_desc" id="ckeditor1" placeholder="Mô tả danh mục"></textarea>
+                            data-validation-error-msg="Vui lòng dien it nhat 10 ky tu" name="product_desc" placeholder="Mô tả danh mục"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nội dung mỹ phẩm</label>
                             <textarea style="resize: none" rows="7" class="form-control" data-validation="length" data-validation-length="min10" 
-                            data-validation-error-msg="Vui lòng dien it nhat 10 ky tu" name="product_content" id="ckeditor2" placeholder="Nội dung danh mục"></textarea>
+                            data-validation-error-msg="Vui lòng dien it nhat 10 ky tu" name="product_content" placeholder="Nội dung danh mục"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Danh mục mỹ phẩm</label>
                             <select name="product_cate" class="form-control input-sm m-bot15">
                                 @foreach ($cate_product as $key => $cate)
-                                    <option value="{{$cate->id}}">{{$cate->category_name}}</option>
+                                    <option value="{{$cate->category_id}}">{{$cate->category_name}}</option>
                                 @endforeach
                                 
                             </select>
@@ -83,7 +83,7 @@
                             <label for="exampleInputPassword1">Xuất Xứ</label>
                             <select name="product_brand" class="form-control input-sm m-bot15">
                                 @foreach ($brand_product as $key => $brand)
-                                <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
+                                <option value="{{$brand->brand_id}}">{{$brand->brand_name}}</option>
                                 @endforeach
                             </select>
                         </div>
