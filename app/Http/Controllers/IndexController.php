@@ -35,13 +35,11 @@ class IndexController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get(); 
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get(); 
         
         $all_product = DB::table('tb_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(12); 
-        return view('pages.home')->with('min_price',$min_price)->with('max_price',$max_price)->with('min_price',$min_price)->with('max_price',$max_price)->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.home')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function introduce(Request $request){
         $meta_desc = "Mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
@@ -49,9 +47,7 @@ class IndexController extends Controller
         $meta_title = "Giới thiệu các loại mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
-        return view('pages.introduce')->with('min_price',$min_price)->with('max_price',$max_price)->with('min_price',$min_price)->with('max_price',$max_price)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.introduce')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function contact(Request $request){
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
@@ -59,9 +55,7 @@ class IndexController extends Controller
         $meta_title = "Liên hệ mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
-        return view('pages.contact')->with('min_price',$min_price)->with('max_price',$max_price)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.contact')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function login(Request $request){
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
@@ -69,9 +63,7 @@ class IndexController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
-        return view('pages.login')->with('min_price',$min_price)->with('max_price',$max_price)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.login')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     
     public function product(Request $request){
@@ -82,6 +74,8 @@ class IndexController extends Controller
 
         $min_price = Product::min('product_price');
         $max_price = Product::max('product_price');
+        $max_add = $max_price + 500000;
+
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
 
@@ -110,7 +104,8 @@ class IndexController extends Controller
             $all_product = Product::where('product_status','0')->orderby('product_id','desc')->get();
         }
 
-        return view('pages.product')->with('min_price',$min_price)->with('max_price',$max_price)->with('category',$cate_product)->with('brand',$brand_product)->with('all_product',$all_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.product')->with('min_price',$min_price)->with('max_price',$max_price)->with('max_add',$max_add)
+        ->with('category',$cate_product)->with('brand',$brand_product)->with('all_product',$all_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function search(Request $request){
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
@@ -119,12 +114,9 @@ class IndexController extends Controller
         $url_canonical = $request->url(); 
         $keywords = $request->keywords_submit;
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
-        
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $search_product = DB::table('tb_product')->where('product_name','like','%'.$keywords.'%')->get();
-        return view('pages.search')->with('min_price',$min_price)->with('max_price',$max_price)->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.search')->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
 }

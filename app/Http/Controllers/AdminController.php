@@ -8,6 +8,10 @@ use Session;
 use App\Models\Social;
 use App\Models\Login;
 use App\Models\Statistical;
+use App\Models\Visitors;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\Customer;
 use Socialite;
 use Auth;
 use Carbon\Carbon;
@@ -195,9 +199,52 @@ class AdminController extends Controller
     public function index(){
         return view('admin_login');
     }
-    public function manage(){
-        $this->AuthLogin();
-        return view('admin.dashboard');
+    public function manage(Request $request){
+        // $this->AuthLogin();
+
+        // get ip address
+        $user_ip_address = $request->ip();
+
+        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonthsNoOverflow()->toDateString();
+        $lastDayofPreviousMonth = Carbon::now()->subMonthsNoOverflow()->endOfMonth()->toDateString();
+        
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+
+        $visitor_of_lastmonth = Visitors::whereBetween('date_visitor',[$firstDayofPreviousMonth,$lastDayofPreviousMonth])->get();
+        $visitor_last_month_count = $visitor_of_lastmonth->count();
+
+        $visitor_of_thismonth = Visitors::whereBetween('date_visitor',[$dauthangnay,$now])->get();
+        $visitor_this_month_count = $visitor_of_thismonth->count();
+
+        $visitor_of_year = Visitors::whereBetween('date_visitor',[$sub365days,$now])->get();
+        $visitor_year_count = $visitor_of_year->count();
+
+        // them ip
+        $visitors_current = Visitors::where('address_ip', $user_ip_address)->get();
+        $visitor_count = $visitors_current->count();
+        if($visitor_count < 1){
+            $visitor = new Visitors();
+            $visitor->address_ip = $user_ip_address;
+            $visitor->date_visitor = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+        $visitors = Visitors::all();
+        $visitors_total = $visitors->count();
+
+        $product = Product::all()->count();
+        // $product_views = Product::orderBy('product_views','DESC')->take(20)->get();
+        // $post = Post::all()->count();
+        // $post_views = Post::orderBy('post_views','DESC')->take(20)->get();
+        $order = Order::all()->count();
+        $admin = Login::all()->count();
+        $customer = Customer::all()->count();
+     
+        return view('admin.dashboard')->with('visitors_total', $visitors_total)->with('visitor_count',$visitor_count)->with('product',$product)
+        ->with('order',$order)->with('customer',$customer)->with('admin',$admin)
+        ->with('visitor_last_month_count',$visitor_last_month_count)->with('visitor_this_month_count',$visitor_this_month_count)->with('visitor_year_count',$visitor_year_count);
     }
     public function dashboard(Request $request){
         $data = $request->all();
@@ -217,7 +264,8 @@ class AdminController extends Controller
                 return Redirect::to('/admin');
         }
         // $admin_email = $request->admin_email;
-        // $admin_password = md5($request->admin_password);
+        // // $admin_password = md5($request->admin_password);
+        // $admin_password = $request->admin_password;
 
         // $result = DB::table('tb_admin')->where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
         // if($result){

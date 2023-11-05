@@ -326,6 +326,30 @@
         });
     </script>
     <script>
+        $(document).ready(function(){
+            var colorDanger = "#FF1744";
+            Morris.Donut({
+            element: 'donut',
+            resize: true,
+            colors: [
+                '#FFCC99',
+                '#66FF00',
+                '#00FFFF',
+                '#FF6666',
+                '#FF00FF'
+            ],
+            
+            data: [
+                {label:"Sản Phẩm", value:<?php echo $product ?>},
+                {label:"Đơn Hàng", value:<?php echo $order ?>},
+                {label:"Khách Hàng", value:<?php echo $customer ?>},
+                {label:"Bài Viết", value:4},
+                {label:"Admin", value:<?php echo $admin ?>}
+            ]
+            });
+        });
+    </script>
+    <script>
 
         $( function() {
             $( "#datepicker" ).datepicker({

@@ -53,6 +53,7 @@
         <!-- Example single danger button -->
         <div class="col-sm-10">
             <ul class="nav justify-content-end">
+                
                 <?php
                     $customer_id = Session::get('customer_id');
                     $shipping_id = Session::get('shipping_id');
@@ -289,7 +290,7 @@
                     range: true,
 
                     min: {{$min_price}},
-                    max: {{$max_price}}+100000,
+                    max: {{$max_add}},
                     values: [ {{$min_price}}, {{$max_price}} ],
                     step: 10000,
                     slide: function( event, ui ){

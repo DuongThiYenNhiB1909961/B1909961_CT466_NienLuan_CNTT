@@ -56,19 +56,19 @@
               <?php
               if($cate_pro->brand_status==0){
                 ?>
-                <a href="{{URL::to('/unactive-brand-product/'.$cate_pro->id)}}"><span class="fa-thumb-styling fa fa-toggle-on"></span></a>
+                <a href="{{URL::to('/unactive-brand-product/'.$cate_pro->brand_id)}}"><span class="fa-thumb-styling fa fa-toggle-on"></span></a>
                 <?php
                 }else{
                 ?>
-                    <a href="{{URL::to('/active-brand-product/'.$cate_pro->id)}}"><span class="fa-thumb-styling fa fa-toggle-off"></span></a>
+                    <a href="{{URL::to('/active-brand-product/'.$cate_pro->brand_id)}}"><span class="fa-thumb-styling fa fa-toggle-off"></span></a>
                 <?php
                 }
               ?>  
               </span></td>
               <td>
-                <a href="{{URL::to('/edit-brand-product/'.$cate_pro->id)}}" class="active" ui-toggle-class="">
+                <a href="{{URL::to('/edit-brand-product/'.$cate_pro->brand_id)}}" class="active" ui-toggle-class="">
                     <i class="fa fa-pencil-square text-success text-active"></i></a>
-                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{URL::to('/delete-brand-product/'.$cate_pro->id)}}" class="active" ui-toggle-class="">
+                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{URL::to('/delete-brand-product/'.$cate_pro->brand_id)}}" class="active" ui-toggle-class="">
                     <i class="fa fa-times text-danger text"></i></a>
               </td>
             </tr> 

@@ -17,7 +17,7 @@
                         Session::put('message',null);
                     }
                 ?>
-                        <form role="form" action="{{URL::to('/update-category-product/'.$edit_value->id)}}" method="post">
+                        <form role="form" action="{{URL::to('/update-category-product/'.$edit_value->category_id)}}" method="post">
                             {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục</label>

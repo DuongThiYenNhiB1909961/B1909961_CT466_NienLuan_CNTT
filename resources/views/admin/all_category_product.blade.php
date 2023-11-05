@@ -57,20 +57,20 @@
                   <?php
                   if($cate_pro->category_status==0){
                     ?>
-                    <a href="{{URL::to('/unactive-category-product/'.$cate_pro->id)}}"><span class="fa-thumb-styling fa fa-toggle-on"></span></a>
+                    <a href="{{URL::to('/unactive-category-product/'.$cate_pro->category_id)}}"><span class="fa-thumb-styling fa fa-toggle-on"></span></a>
                     <?php
                     }else{
                     ?>
-                        <a href="{{URL::to('/active-category-product/'.$cate_pro->id)}}"><span class="fa-thumb-styling fa fa-toggle-off"></span></a>
+                        <a href="{{URL::to('/active-category-product/'.$cate_pro->category_id)}}"><span class="fa-thumb-styling fa fa-toggle-off"></span></a>
                     <?php
                     }
                   ?>  
                 </span>
               </td>
               <td>
-                <a href="{{URL::to('/edit-category-product/'.$cate_pro->id)}}" class="active" ui-toggle-class="">
+                <a href="{{URL::to('/edit-category-product/'.$cate_pro->category_id)}}" class="active" ui-toggle-class="">
                     <i class="fa fa-pencil-square text-success text-active"></i></a>
-                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{URL::to('/delete-category-product/'.$cate_pro->id)}}" class="active" ui-toggle-class="">
+                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{URL::to('/delete-category-product/'.$cate_pro->category_id)}}" class="active" ui-toggle-class="">
                     <i class="fa fa-times text-danger text"></i></a>
               </td>
             </tr> 

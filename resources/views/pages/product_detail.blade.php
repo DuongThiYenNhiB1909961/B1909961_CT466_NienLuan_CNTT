@@ -88,7 +88,7 @@
                                             <div class="product-image-wrapper">
                                                 <div class="productinfo text-center">
                                                     <a href="{{URL::to('product-detail/'.$lienquan->product_id)}}" class="text-decoration-none">
-                                                        <div class="card" style="width: 12rem; height: 22rem;">
+                                                        <div class="card" style="width: 12rem; height: 24rem;">
                                                             <img src="{{URL::to('public/uploads/product/'.$lienquan->product_image)}}" class="card-img-top" alt="">
                                                             <div class="card-body">
                                                             <h6 class="card-title "><b>{{$lienquan->product_desc}}</b></h6>

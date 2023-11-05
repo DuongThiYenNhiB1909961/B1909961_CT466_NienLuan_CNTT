@@ -155,24 +155,19 @@ class CheckOutController extends Controller
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
         $meta_keywords = "shop my pham, shop mỹ phẩm, của hàng mỹ phẩm chính hãng";
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
-        $url_canonical = $request->url(); 
-
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
+        $url_canonical = $request->url();
 
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        return view('pages.Checkout.login_checkout')->with('min_price',$min_price)->with('max_price',$max_price)->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.Checkout.login_checkout')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function register(Request $request){
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
         $meta_keywords = "shop my pham, shop mỹ phẩm, của hàng mỹ phẩm chính hãng";
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
-        $url_canonical = $request->url(); 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
+        $url_canonical = $request->url();
 
-        return view('pages.Checkout.register')->with('min_price',$min_price)->with('max_price',$max_price)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.Checkout.register')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function add_customer(Request $request){
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
@@ -180,8 +175,6 @@ class CheckOutController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
         $data = array();
         $data['customer_name'] = $request->customer_name;
         $data['customer_email'] = $request->customer_email;
@@ -191,7 +184,7 @@ class CheckOutController extends Controller
         $customer_id = DB::table('tb_customer')->insertGetId($data);
         Session::put('customer_id',$request->customer_id);
         Session::put('customer_name',$request->customer_name);
-        return view('pages.Checkout.login_checkout')->with('min_price',$min_price)->with('max_price',$max_price)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.Checkout.login_checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function checkout(Request $request){
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
@@ -199,12 +192,10 @@ class CheckOutController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
-        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+       $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $city = City::orderby('matp','ASC')->get();
-        return view('pages.Checkout.show_checkout')->with('min_price',$min_price)->with('max_price',$max_price)->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('city',$city);
+        return view('pages.Checkout.show_checkout')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('city',$city);
     }
     public function save_checkout(Request $request){
         $data = array();
@@ -224,12 +215,10 @@ class CheckOutController extends Controller
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
         $meta_keywords = "shop my pham, shop mỹ phẩm, của hàng mỹ phẩm chính hãng";
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
-        $url_canonical = $request->url(); 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
+        $url_canonical = $request->url();
 
         Session::flush();
-        return view('pages.Checkout.login_checkout')->with('min_price',$min_price)->with('max_price',$max_price)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
+        return view('pages.Checkout.login_checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
     }
     public function login(Request $request){
         $meta_desc = "Đăng nhập";
@@ -237,8 +226,6 @@ class CheckOutController extends Controller
         $meta_title = "Đăng nhập, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
         $data = $request->all();
         //$data = $request->validate([
           //  'customer_email' => 'required',
@@ -259,7 +246,7 @@ class CheckOutController extends Controller
             }
         }else{
             Session::put('message','Mat khau hoac email sai. Vui long nhap lai');
-            return Redirect::to('/login-checkout')->with('min_price',$min_price)->with('max_price',$max_price)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);; 
+            return Redirect::to('/login-checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);; 
         }
         
 

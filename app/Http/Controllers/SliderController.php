@@ -29,14 +29,14 @@ class SliderController extends Controller
         $this->AuthLogin();
         DB::table('tb_slider')->where('slider_id',$slide_id)->update(['slider_status'=>0]);
         Session::put('message','Không kích hoạt slider thành công');
-        return Redirect::to('manage-slider');
+        return Redirect()->Back();
 
     }
     public function active_slide($slide_id){
         $this->AuthLogin();
         DB::table('tb_slider')->where('slider_id',$slide_id)->update(['slider_status'=>1]);
         Session::put('message','Kích hoạt slider thành công');
-        return Redirect::to('manage-slider');
+        return Redirect()->Back();
 
     }
 

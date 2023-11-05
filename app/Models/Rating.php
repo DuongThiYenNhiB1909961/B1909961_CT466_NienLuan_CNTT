@@ -9,7 +9,7 @@ class Rating extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'rating', 'product_id'
+        'rating', 'product_id', 'customer_id'
     ];
     protected $primaryKey = 'rating_id';
     protected $table = 'tb_rating';

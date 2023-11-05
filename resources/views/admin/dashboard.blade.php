@@ -44,10 +44,50 @@
         </form>
     </div>
     <div class="row">
-
+        <style>
+            table.table.table-bordered.table-dark{
+                background: #32383e;
+            }
+            table.table.table-bordered.table-dark tr th{
+                color: #ffffff;
+            }
+        </style>
+        <p class="title_statistic">Thống Kê Lượt Truy Cập</p>
+        <table class="table table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Đang online</th>
+                    <th scope="col">Tổng tháng trước</th>
+                    <th scope="col">Tổng tháng này</th>
+                    <th scope="col">Tổng một năm</th>
+                    <th scope="col">Tổng truy cập</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{$visitor_count}}</td>
+                    <td>{{$visitor_last_month_count}}</td>
+                    <td>{{$visitor_this_month_count}}</td>
+                    <td>{{$visitor_year_count}}</td>
+                    <td>{{$visitors_total}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="row">
+        <div class="col-md-4 col-xs-12">
+            <p class="title_statistic">Thống Kê Tổng sản phẩm đơn hàng</p>
+            <div id="donut"></div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <h3>sản phẩm</h3>
+            <ol class="list-views">
 
+            </ol>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            
+        </div>
     </div>
 </div>
 @endsection

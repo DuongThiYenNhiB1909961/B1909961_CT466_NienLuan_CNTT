@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use Auth;
 use App\Http\Requests;
 use App\Models\Gallery;
 use App\Models\Comment;
@@ -251,8 +252,6 @@ class ProductController extends Controller
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
         $detail_product = DB::table('tb_product')
         ->join('tb_category_product','tb_category_product.category_id','=','tb_product.category_id')
         ->join('tb_brand','tb_brand.brand_id','=','tb_product.brand_id')
@@ -272,10 +271,10 @@ class ProductController extends Controller
         ->join('tb_brand','tb_brand.brand_id','=','tb_product.brand_id')
         ->where('tb_category_product.category_id',$category_id)->get();
 
-        $customer_id = Session::get('customer_id');
+        // $customer_id = Session::get('customer_id');
         $rating_id = Rating::where('product_id', $product_id)->get();
-        $rating = Rating::where('product_id', $product_id)->where('customer_id',$customer_id)->avg('rating');
+        $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
         $rating = round($rating);
-        return view('pages.product_detail')->with('min_price',$min_price)->with('max_price',$max_price)->with('rating_id',$rating_id)->with('rating',$rating)->with('gallery',$gallery)->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.product_detail')->with('rating_id',$rating_id)->with('rating',$rating)->with('gallery',$gallery)->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
 }

@@ -17,7 +17,7 @@
                         Session::put('message',null);
                     }
                 ?>
-                        <form role="form" action="{{URL::to('/update-brand-product/'.$edit_value->id)}}" method="post">
+                        <form role="form" action="{{URL::to('/update-brand-product/'.$edit_value->brand_id)}}" method="post">
                             {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên xuất xứ</label>
