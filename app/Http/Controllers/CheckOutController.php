@@ -96,7 +96,7 @@ class CheckOutController extends Controller
             Session::put('customer_name',$account_name->customer_name);
         }
 
-        return redirect('/checkout')->with('message', 'Đăng nhập Admin thành công');
+        return redirect('/checkout')->with('message', 'Đăng nhập thành viên thành công');
 
     }
     public function findOrCreateCustomer($users,$provider){
