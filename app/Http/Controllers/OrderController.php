@@ -10,7 +10,9 @@ use App\Models\OrderDetails;
 use App\Models\Customer;
 use App\Models\Coupon;
 use App\Models\Product;
-
+use App\Models\Statistical;
+use Carbon\Carbon;
+use Session;
 class OrderController extends Controller
 {
 	public function update_inventory_qty(Request $request){
@@ -19,35 +21,60 @@ class OrderController extends Controller
 		$order->order_status = $data['order_status'];
 		$order->save();
 
+		$order_date = $order->order_date;
+		$statistical = Statistical::where('order_date', $order_date)->get();
+		if($statistical){
+			$statistical_count = $statistical->count();
+		}else{
+			$statistical_count = 0;
+		}
+
+
 		if($order->order_status==2){
+			$total_order = 0;
+			$sales = 0;
+			$profit = 0;
+			$quantity = 0;
+
 			foreach($data['order_product_id'] as $key1 => $product_id){
 				
 				$product = Product::find($product_id);
 				$product_quantity = $product->product_qty;
 				$product_sold = $product->product_sold;
+
+				$product_price = $product->product_price;
+				$product_price_buy = $product->product_price_buy;
+				$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
 				foreach($data['quantity'] as $key2 => $qty){
 						if($key1 == $key2){
 								$pro_remain = $product_quantity - $qty;
 								$product->product_qty = $pro_remain;
 								$product->product_sold = $product_sold + $qty;
 								$product->save();
+
+								$quantity += $qty;
+								$total_order += 1;
+								$sales += $product_price*$qty;
+								$profit += ($product_price*$qty) - ($product_price_buy*$qty);
 						}
 				}
 			}
-		}elseif($order->order_status!=2 && $order->order_status!=3){
-			foreach($data['order_product_id'] as $key => $product_id){
-				
-				$product = Product::find($product_id);
-				$product_quantity = $product->product_qty;
-				$product_sold = $product->product_sold;
-				foreach($data['quantity'] as $key2 => $qty){
-						if($key==$key2){
-								$pro_remain = $product_quantity + $qty;
-								$product->product_qty = $pro_remain;
-								$product->product_sold = $product_sold - $qty;
-								$product->save();
-						}
-				}
+			if($statistical_count>0){
+				$statistical_update = Statistical::where('order_date',$order_date)->first();
+				$statistical_update->sales = $statistical_update->sales + $sales;
+				$statistical_update->profit = $statistical_update->profit + $profit;
+				$statistical_update->quantity = $statistical_update->quantity + $quantity;
+				$statistical_update->total_order = $statistical_update->total_order + 1;
+				$statistical_update->save();
+			}else{
+				$statistical_new = new Statistical();
+				$statistical_new->order_date = $order_date;
+				$statistical_new->sales = $sales;
+				$statistical_new->profit = $profit;
+				$statistical_new->quantity = $quantity;
+				$statistical_new->total_order = $total_order;
+				$statistical_new->save();
 			}
 		}
 	}
@@ -63,7 +90,8 @@ class OrderController extends Controller
 			$shipping_id = $ord->shipping_id;
 			$order_status = $ord->order_status;
 		}
-		$customer = Customer::where('customer_id',$customer_id)->first();
+		$cus = Customer::where('customer_id', $customer_id)->first();
+		// $customer = Customer::where('customer_id',$customer_id)->first();
 		$shipping = Shipping::where('shipping_id',$shipping_id)->first();
 
 		foreach($order_details as $key => $details){
@@ -79,7 +107,13 @@ class OrderController extends Controller
 			$coupon_number = 0;
 		}
 		
-		return view('admin.view_order')->with(compact('order_details','customer','shipping','order_details','coupon_condition','coupon_number','order','order_status'));
+		return view('admin.view_order')->with(compact('order_details','cus','shipping','order_details',
+		'coupon_condition','coupon_number','order','order_status'));
 
         }
+		public function delete_order($order_id){
+			$order = Order::find($order_id)->delete();
+			Session::put('message','Xóa đơn hàng thành công');
+			return Redirect()->Back();
+		}
 }

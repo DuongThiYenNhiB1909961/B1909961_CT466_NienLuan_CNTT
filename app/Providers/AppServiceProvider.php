@@ -34,12 +34,14 @@ class AppServiceProvider extends ServiceProvider
             $max_add = $max_price + 500000;
 
             $product = Product::all()->count();
-            $order = Order::all()->count();
+            $order_count = Order::all()->count();
             $admin = Login::all()->count();
             $customer = Customer::all()->count();
+            $product_views = Product::orderBy('product_views','DESC')->take(20)->get();
+    
 
-            $view->with('min_price',$min_price)->with('max_price',$max_price)->with('max_add',$max_add)->with('product',$product)
-            ->with('order',$order)->with('customer',$customer)->with('admin',$admin);
+            $view->with('min_price',$min_price)->with('product_views',$product_views)->with('max_price',$max_price)->with('max_add',$max_add)->with('product',$product)
+            ->with('order_count',$order_count)->with('customer',$customer)->with('admin',$admin);
         });
     }
 }

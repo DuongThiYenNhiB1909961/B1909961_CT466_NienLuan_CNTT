@@ -16,6 +16,7 @@ use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use Carbon\Carbon;
 use Socialite;
 use Cart;
 use Session;
@@ -242,7 +243,7 @@ class CheckOutController extends Controller
             if($login_count>0){
                 Session::put('customer_name',$login->customer_name);
                 Session::put('customer_id', $login->customer_id);
-                return Redirect::to('/checkout')->with('min_price',$min_price)->with('max_price',$max_price)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
+                return Redirect::to('/checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
             }
         }else{
             Session::put('message','Mat khau hoac email sai. Vui long nhap lai');
@@ -310,8 +311,13 @@ class CheckOutController extends Controller
         $order->shipping_id = $shipping_id;
         $order->order_status = 1;
         $order->order_code = $order_code;
+        
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $order->created_at = now();
+        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+                
+        $order->order_date = $order_date;
+        $order->created_at = $created_at;
         $order->save();
 
         

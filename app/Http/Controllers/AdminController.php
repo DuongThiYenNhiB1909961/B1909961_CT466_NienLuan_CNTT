@@ -235,15 +235,15 @@ class AdminController extends Controller
         $visitors_total = $visitors->count();
 
         $product = Product::all()->count();
-        // $product_views = Product::orderBy('product_views','DESC')->take(20)->get();
+        $product_views = Product::orderBy('product_views','ASC')->take(20)->get();
         // $post = Post::all()->count();
         // $post_views = Post::orderBy('post_views','DESC')->take(20)->get();
-        $order = Order::all()->count();
+        $order_count = Order::all()->count();
         $admin = Login::all()->count();
         $customer = Customer::all()->count();
      
         return view('admin.dashboard')->with('visitors_total', $visitors_total)->with('visitor_count',$visitor_count)->with('product',$product)
-        ->with('order',$order)->with('customer',$customer)->with('admin',$admin)
+        ->with('order_count',$order_count)->with('customer',$customer)->with('admin',$admin)->with('product_views',$product_views)
         ->with('visitor_last_month_count',$visitor_last_month_count)->with('visitor_this_month_count',$visitor_this_month_count)->with('visitor_year_count',$visitor_year_count);
     }
     public function dashboard(Request $request){

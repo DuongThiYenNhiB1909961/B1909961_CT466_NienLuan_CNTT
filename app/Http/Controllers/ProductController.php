@@ -155,12 +155,13 @@ class ProductController extends Controller
         $data['product_price_buy'] = $request->product_price_buy;
         $data['product_price_real'] = $request->product_price_real;
         $data['product_qty'] = $request->product_qty;
-        $data['product_sold'] = $request->product_sold;
+        $data['product_sold'] = 0;
         $data['product_capacity'] = $request->product_capacity;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
         $data['category_id'] = $request->product_cate;
         $data['brand_id'] = $request->product_brand;
+        $data['product_views'] = 0;
         $data['product_status'] = $request->product_status;
         $get_image = $request->file('product_image');
 
@@ -218,7 +219,6 @@ class ProductController extends Controller
         $data['product_price_buy'] = $request->product_price_buy;
         $data['product_price_real'] = $request->product_price_real;
         $data['product_qty'] = $request->product_qty;
-        $data['product_sold'] = $request->product_sold;
         $data['product_capacity'] = $request->product_capacity;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
@@ -265,6 +265,11 @@ class ProductController extends Controller
             $url_canonical = $request->url(); 
         }
         $gallery = Gallery::where('product_id',$product_id)->get();
+
+        // product_views
+        $product = Product::where('product_id',$product_id)->first();
+        $product->product_views = $product->product_views + 1;
+        $product->save();
 
         $relate_product = DB::table('tb_product')
         ->join('tb_category_product','tb_category_product.category_id','=','tb_product.category_id')

@@ -84,14 +84,14 @@
                         <div class="carousel-inner"><div class="">
                             <div class="row text-center ml-3 item active">
                                 @foreach($relate as $key => $lienquan)
-                                        <div class="mr-1 mb-2">
+                                        <div class="mr-1 mb-1">
                                             <div class="product-image-wrapper">
                                                 <div class="productinfo text-center">
                                                     <a href="{{URL::to('product-detail/'.$lienquan->product_id)}}" class="text-decoration-none">
                                                         <div class="card" style="width: 12rem; height: 24rem;">
                                                             <img src="{{URL::to('public/uploads/product/'.$lienquan->product_image)}}" class="card-img-top" alt="">
                                                             <div class="card-body">
-                                                            <h6 class="card-title "><b>{{$lienquan->product_desc}}</b></h6>
+                                                            <h6 class="card-title "><b>{{$lienquan->product_name}}</b></h6>
                                                             <b><p class="card-text text-danger">{{number_format($lienquan->product_price).'đ'}}</p></b>
                                                             <p class="mt-2" style="font-size: 15px; text-decoration-line: line-through">{{number_format($lienquan->product_price_real,0,',','.')}} đ</p>
                                                             </div>

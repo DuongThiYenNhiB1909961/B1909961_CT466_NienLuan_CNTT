@@ -46,11 +46,11 @@
               <td>
                 <a href="{{asset('/view-order/'.$order->order_code)}}" class="active" >
                     <i class="fa fa-pencil-square text-success text-active"></i></a>
-                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{asset('/delete-order/'.$order->order_code)}}" class="active" ui-toggle-class="">
-                    <i class="fa fa-times text-danger text"></i></a>
+                
               </td>
               <td>
-                <a href=""><i class="fa fa-check-circle text-success" aria-hidden="true"></i></a>
+                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{asset('/delete-order/'.$order->order_id)}}" class="active" ui-toggle-class="">
+                    <i class="fa fa-times text-danger text"></i></a>
               </td>
             </tr> 
             @php
