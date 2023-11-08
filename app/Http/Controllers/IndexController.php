@@ -8,10 +8,29 @@ use Session;
 use App\Http\Requests;
 use App\Models\Slider;
 use App\Models\Product;
+use App\Models\Coupon;
+use Carbon\Carbon;
+use Mail;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 class IndexController extends Controller
 {
+    public function send_mail(){
+        //send mail
+               $to_name = "Nhi admin";
+               $to_email = "nhib1909961@student.ctu.edu.vn";//send to this email
+              
+            
+               $data = array("name"=>"Mail từ tài khoản Khách hàng","body"=>'Mail gửi về vấn về hàng hóa'); //body of mail.blade.php
+               
+               Mail::send('pages.send_mail',$data,function($message) use ($to_name,$to_email){
+
+                   $message->to($to_email)->subject('Test thử gửi mail google');//send this mail with subject
+                   $message->from($to_email,$to_name);//send from this mail
+               });
+               return view('pages.send_mail')->with('message','');
+               //--send mail
+   }
     public function autocomplete(Request $request){
         $data = $request->all();
 
@@ -38,8 +57,11 @@ class IndexController extends Controller
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get(); 
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get(); 
         
+        $coupon = Coupon::orderby('coupon_id','DESC')->get();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d/m/Y');
+
         $all_product = DB::table('tb_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(12); 
-        return view('pages.home')->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.home')->with('now',$now)->with('coupon',$coupon)->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function introduce(Request $request){
         $meta_desc = "Mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";

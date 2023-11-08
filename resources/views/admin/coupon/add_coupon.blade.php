@@ -20,19 +20,19 @@
                                     @csrf
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên mã giảm giá</label>
-                                    <input type="text" name="coupon_name" class="form-control" id="exampleInputEmail1" >
+                                    <input type="text" name="coupon_name" class="form-control" id="exampleInputEmail1" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Mã giảm giá</label>
-                                    <input type="text" name="coupon_code" class="form-control" id="exampleInputEmail1" >
+                                    <input type="text" name="coupon_code" class="form-control" id="exampleInputEmail1" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Số lượng mã</label>
-                                      <input type="text" name="coupon_time" class="form-control" id="exampleInputEmail1" >
+                                      <input type="text" name="coupon_time" class="form-control" id="exampleInputEmail1" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Tính năng mã</label>
-                                     <select name="coupon_condition" class="form-control input-sm m-bot15">
+                                     <select name="coupon_condition" class="form-control input-sm m-bot15" required>
                                              <option value="0">----Chọn-----</option>
                                             <option value="1">Giảm theo phần trăm</option>
                                             <option value="2">Giảm theo tiền</option>
@@ -41,9 +41,16 @@
                                 </div>
                                  <div class="form-group">
                                     <label for="exampleInputPassword1">Nhập số % hoặc tiền giảm</label>
-                                     <input type="text" name="coupon_number" class="form-control" id="exampleInputEmail1" >
+                                     <input type="text" name="coupon_number" class="form-control" id="exampleInputEmail1" required>
                                 </div>
-                               
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Ngày bắt đầu</label>
+                                    <input type="text" name="coupon_date_start" id="datepicker2" placeholder="20/10/2023" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Ngày kết thúc</label>
+                                    <input type="text" name="coupon_date_end" id="datepicker3" placeholder="21/10/2023" class="form-control" required>
+                                </div>
                                
                                 <button type="submit" name="add_coupon" class="btn btn-info">Thêm mã</button>
                                 </form>

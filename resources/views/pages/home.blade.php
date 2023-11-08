@@ -1,13 +1,17 @@
 @extends('layout')
 @section('content')
 {{-- <div class="pt-1 relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"> --}}
-
+<style>
+    .bg{
+        background-color: #fdaaba;
+    }
+</style>
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
             <img src="resources/images/logo.jpg" class="h-30 w-auto text-gray-700 sm:h-20">
             <i class="justify-center pt-4 font-semibold text-danger" ><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></i>
         </div>
-        <div id="carouselExampleCaptions" class="carousel slide pt-2" data-ride="carousel">
+        <div id="carouselExampleCaptions" class="carousel slide mt-2 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
               <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -26,8 +30,8 @@
                                 <div class="carousel-item {{$i==1 ? 'active' : '' }}">
                                     <img style="height: 12cm" src="{{asset('public/uploads/slider/'.$slide->slider_image)}}" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h5 class="text-white">{{$slide->slider_name}}</h5>
-                                        <p class="text-white" >{{$slide->slider_desc}}</p>
+                                        <h5 class="text-light bg dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">{{$slide->slider_name}}</h5>
+                                        <p class="text-light bg dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" >{{$slide->slider_desc}}</p>
                                     </div>
                                 </div>
                     @endforeach 
@@ -41,7 +45,63 @@
                 <span class="sr-only">Next</span>
             </button>
         </div>
-          
+        <div  class="text-danger">
+           <center><b>MÃ GIẢ GIÁ</b></center> 
+       </div>
+        <style>
+            .coupon{
+              border: 2px solid #35dccb;
+              margin: 2px 0 2px;
+              border-top-right-radius: 25%;
+              border-bottom-left-radius: 25%;
+            }
+            .date{
+              border: 2px solid #dc3554;
+              border-top-right-radius: 25%;
+              border-bottom-left-radius: 25%;
+            }
+          </style>
+            <div class="table-agile-info">
+                <div class="row panel panel-default">
+                @foreach ($coupon as $key => $cou)
+                    <div class="col-sm-6 coupon mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" >
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">{{$cou->coupon_name}}</th>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <th scope="col">{{$cou->coupon_date_start}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td scope="row">
+                                Còn lại: {{$cou->coupon_time}}
+                                <br>
+                                <b class="text-danger">Nhập Mã Ngay</b>
+                            </td>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <td>
+                            <b class="text-danger">Code: {{$cou->coupon_code}}</b><br>
+                            @if($cou->coupon_date_end >= $now)
+                            <input type="button" class="text-success date" value="Còn hạn">
+                            @else
+                            <input type="button" class="text-danger date" value="Hết hạn">
+                            @endif
+            
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div> 
+                @endforeach
+                
+                </div>
+            </div> 
         <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
             <div class="grid grid-cols-1 md:grid-cols-2">
                     <div class="p-6">

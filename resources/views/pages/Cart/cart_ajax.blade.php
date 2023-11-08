@@ -2,7 +2,7 @@
 @section('content')
 <div class="table-agile-info">
     <div class="panel panel-default">
-      <div class="panel-heading">
+      <div class="panel-heading ">
         <h5 class="text-danger text-center"><b>GIỎ HÀNG</b></h5> 
       </div>
       <?php
@@ -111,4 +111,5 @@
       </div>
     </div>
 </div>
+    
 @endsection

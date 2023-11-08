@@ -141,8 +141,8 @@
               </ul>
         </div>
     </div>
-        <header class=" row">
-            <nav class="shadow navbar navbar-expand-lg navbar-light bg-light col-sm-8">
+        <header class="">
+            <nav class="shadow navbar navbar-expand-lg navbar-light bg-light bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -194,11 +194,10 @@
                     @endforeach --}}
                   </ul>
                 </div>
-            </nav>
-                <div class="shadow col-sm-4 bg-light" >
+                <div class="shadow bg-light" >
                 <form action="{{asset('/search')}}" method="POST">
                     {{csrf_field()}}
-                        <div class="input-group" style="margin-top: 10px">
+                        <div class="input-group">
                             <input type="text" type="text" id="keywords" name="keywords_submit" class="form-control search" placeholder="Search">
                             <div id="search-ajax"></div>
                             <span class="input-group-btn">
@@ -208,6 +207,8 @@
                         
                 </form>
                 </div>
+            </nav>
+                
                 
             
         </header>
@@ -234,10 +235,8 @@
         @yield('login')
         @yield('register')
         @yield('product')
-        <footer class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="mt-8 dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-
-                <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 ">
+        <footer class=" mt-2 dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 ">
                     <div class="rounded">
                         <div class="row">
                             <div class="col text-center m-2">
@@ -265,7 +264,6 @@
                             <i><b>Mọi ý kiến góp ý xin gửi về theo địa chỉ email thienduonglamdep2023@gmail.com</b></i>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>  
             

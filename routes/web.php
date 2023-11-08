@@ -33,6 +33,8 @@ Route::get('/product', [IndexController::class, 'product']);
 Route::post('/auto-ajax', [IndexController::class, 'autocomplete']);
 // Route::get('/filter', [IndexController::class, 'filter']);
 
+// Send mail
+Route::get('/send-email', [IndexController::class, 'send_mail']);
 
 // admin
 Route::get('/admin',[AdminController::class, 'index']);

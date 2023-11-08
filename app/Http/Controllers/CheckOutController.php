@@ -16,6 +16,7 @@ use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use App\Models\Coupon;
 use Carbon\Carbon;
 use Socialite;
 use Cart;
@@ -219,6 +220,7 @@ class CheckOutController extends Controller
         $url_canonical = $request->url();
 
         Session::flush();
+        Session::forget('coupon');
         return view('pages.Checkout.login_checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
     }
     public function login(Request $request){
@@ -294,6 +296,12 @@ class CheckOutController extends Controller
     // }
     public function confirm_order(Request $request){
         $data = $request->all();
+
+        $coupon = Coupon::where('coupon_code', $data['order_coupon'])->first();
+        $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+        $coupon->coupon_time = $coupon->coupon_time - 1;
+        $coupon->save();
+
         $shipping = new Shipping();
         $shipping->shipping_name = $data['shipping_name'];
         $shipping->shipping_email = $data['shipping_email'];

@@ -144,10 +144,14 @@
                 <h4 class="text-danger text-center"><b>XEM LẠI GIỎ HÀNG</b></h4> 			
                 <?php
                     $message = Session::get('message');
+                    $error = Session::get('error');
                     if($message){
-                    echo '<b class="text-danger">'.$message.'</b>';
-                    Session::put('message',null);
-                }
+                      echo '<b class="text-success">'.$message.'</b>';
+                      Session::put('message',null);
+                    }else{
+                      echo '<b class="text-danger">'.$error.'</b>';
+                      Session::put('error',null);
+                    }
                 ?>
                 <div class="table-responsive">
                     <form action="{{url('update-cart')}}" method="POST">
@@ -283,14 +287,14 @@
                       </form>
                       @if(Session::get('cart'))
                       <tr>
-                        <td colspan="6">
+                        <td colspan="2">
                           <form method="POST" action="{{url('/check-coupon')}}">
                             @csrf
                               <input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
                               <input type="submit" class="btn btn-default check_coupon text-danger" name="check_coupon" value="Duyệt mã">
                               @if(Session::get('coupon'))
                                 <a class="btn btn-default check_out text-danger" href="{{url('/del-coupon')}}"><b>Xóa mã khuyến mãi</b></a>
-                                              @endif         
+                              @endif         
                           </form>
                         </td>
                       </tr>
