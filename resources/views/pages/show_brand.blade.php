@@ -27,6 +27,13 @@
         </form>
     </div>
 </div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb text-danger">
+      <li class="breadcrumb-item"><a href="{{asset('index')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Brand</a></li>
+      <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page">{{$meta_title}}</li>
+    </ol>
+</nav>
         <h2 class="text-center text-warning"><b>XUẤT XỨ MỸ PHẨM</b></h2>
         <hr>
 <div class="row">

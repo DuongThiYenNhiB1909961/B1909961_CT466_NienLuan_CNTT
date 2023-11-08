@@ -1,6 +1,12 @@
 @extends('layout')
 @section('content')
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb text-danger">
+      <li class="breadcrumb-item"><a href="{{asset('index')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{asset('/category/'.$cate_slug)}}">{{$product_cate}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{$meta_desc}}</li>
+    </ol>
+</nav>
 <div class="table-agile-info shadow">
     <div class="panel panel-default">
                 <hr>   
@@ -12,7 +18,6 @@
                 @foreach($detail_product as $key => $product)
                 <form >
                     @csrf
-                {{-- {{csrf_field()}} --}}
                             <div class="row">
                     
                                 <div class=" col-sm-4 text-center m-1" >

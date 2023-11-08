@@ -48,6 +48,12 @@
             </ul>
         </div>
     </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb text-danger">
+          <li class="breadcrumb-item"><a href="{{asset('index')}}">Home</a></li>
+          <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page" >Mỹ phẩm</li>
+        </ol>
+    </nav>
     <h2 class="text-center text-warning"><b>Mỹ Phẩm</b></h2>
     <div class="row mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
         <div class="col-sm-2">

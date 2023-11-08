@@ -1,5 +1,11 @@
 @extends('layout')
 @section('content')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb text-danger">
+    <li class="breadcrumb-item"><a href="{{asset('index')}}">Home</a></li>
+    <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page">Thanh toán</li>
+  </ol>
+</nav>
 <section id="cart_items">
     <div class="container">
         <?php

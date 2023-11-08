@@ -1,5 +1,11 @@
 @extends('layout')
 @section('content')
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb text-danger">
+      <li class="breadcrumb-item"><a href="{{asset('index')}}">Home</a></li>
+      <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page">Đăng nhập</li>
+    </ol>
+  </nav>
 <div class=" shadow relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">

@@ -259,6 +259,9 @@ class ProductController extends Controller
         foreach($detail_product as $key => $val){
             $category_id = $val->category_id;
             $product_id = $val->product_id;
+            $product_cate = $val->category_name;
+            $cate_slug = $val->slug_category_product;
+
             $meta_desc = $val->product_desc;
             $meta_keywords = $val->meta_keywords;
             $meta_title = $val->product_name;
@@ -280,6 +283,6 @@ class ProductController extends Controller
         $rating_id = Rating::where('product_id', $product_id)->get();
         $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
         $rating = round($rating);
-        return view('pages.product_detail')->with('rating_id',$rating_id)->with('rating',$rating)->with('gallery',$gallery)->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.product_detail')->with('cate_slug',$cate_slug)->with('product_cate',$product_cate)->with('rating_id',$rating_id)->with('rating',$rating)->with('gallery',$gallery)->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
 }

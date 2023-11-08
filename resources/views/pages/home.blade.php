@@ -1,6 +1,10 @@
 @extends('layout')
 @section('content')
-{{-- <div class="pt-1 relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"> --}}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page">Home / </li>
+    </ol>
+</nav>
 <style>
     .bg{
         background-color: #fdaaba;

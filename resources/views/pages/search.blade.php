@@ -1,6 +1,11 @@
 @extends('layout')
 @section('content')
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb text-danger">
+      <li class="breadcrumb-item "><a href="{{asset('index')}}">Home</a></li>
+      <li class="breadcrumb-item active" style="border: 1px solid #dc3545;">Search</li>
+    </ol>
+</nav>
         <h2 class="text-center text-warning"><b>Mỹ Phẩm</b></h2>
         <hr>
 <div class="row">

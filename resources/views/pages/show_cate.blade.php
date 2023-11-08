@@ -27,8 +27,14 @@
         </form>
     </div>
 </div>
-        <h2 class="text-center text-warning"><b>DANH MỤC MỸ PHẨM</b></h2>
-        <hr>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb text-danger">
+      <li class="breadcrumb-item"><a href="{{asset('index')}}">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Category</a></li>
+      <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page">{{$meta_title}}</li>
+    </ol>
+  </nav>
+<h2 class="text-center text-warning"><b>DANH MỤC MỸ PHẨM</b></h2><hr>
 
 <div class="row mt-2">
     <div class="col-sm-10">
@@ -36,11 +42,11 @@
             @foreach($category_by_id as $key => $product)
             
                 <div class="ml-3 mb-3 shadow" >
-                                <a href="{{URL::to('product-detail/'.$product->slug_category_product)}}" class="text-decoration-none">
+                                <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
                                     <div class="card" style="width: 15rem; height: 25rem;">
                                         <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top" alt="">
                                         <div class="card-body">
-                                            <h6 class="card-title "><b>{{$product->product_desc}}</b></h6>
+                                            <h6 class="card-title"><b>{{$product->product_desc}}</b></h6>
                                             <b><p class="card-text text-danger">{{number_format($product->product_price).'đ'}}</p></b>
                                             <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
                                         </div>

@@ -141,8 +141,8 @@
               </ul>
         </div>
     </div>
-        <header class="">
-            <nav class="shadow navbar navbar-expand-lg navbar-light bg-light bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+        <header class="row">
+            <nav class="shadow navbar navbar-expand-lg navbar-light bg-light col-sm-8">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -194,21 +194,21 @@
                     @endforeach --}}
                   </ul>
                 </div>
-                <div class="shadow bg-light" >
-                <form action="{{asset('/search')}}" method="POST">
-                    {{csrf_field()}}
-                        <div class="input-group">
-                            <input type="text" type="text" id="keywords" name="keywords_submit" class="form-control search" placeholder="Search">
-                            <div id="search-ajax"></div>
-                            <span class="input-group-btn">
-                            <input class="btn btn-sm btn-danger" type="submit" value="Search!" style="margin-top: 4px">
-                            </span>
-                        </div>
-                        
-                </form>
-                </div>
-            </nav>
                 
+            </nav>
+            <div class="shadow bg-light col-sm-4" >
+                    <form action="{{asset('/search')}}" method="POST">
+                        {{csrf_field()}}
+                            <div class="input-group" style="margin-top: 13px">
+                                <input type="text" type="text" id="keywords" name="keywords_submit" class="form-control search" placeholder="Search">
+                                <div id="search-ajax"></div>
+                                <span class="input-group-btn">
+                                <input class="btn btn-sm btn-danger" type="submit" value="Search!" style="margin-top: 4px">
+                                </span>
+                            </div>
+                            
+                    </form>
+            </div>    
                 
             
         </header>
