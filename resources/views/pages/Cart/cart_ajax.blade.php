@@ -1,13 +1,19 @@
 @extends('layout')
 @section('content')
+<style>
+  .bg{
+    background-color: #C92127;
+    padding-left: 25%;
+  }
+</style>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb text-danger">
     <li class="breadcrumb-item"><a href="{{asset('index')}}">Home</a></li>
     <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page">Giỏ hàng</li>
   </ol>
 </nav>
-<div class="table-agile-info">
-    <div class="panel panel-default">
+<div class="row table-agile-info">
+    <div class="col-sm-9 panel panel-default">
       <div class="panel-heading ">
         <h5 class="text-danger text-center"><b>GIỎ HÀNG</b></h5> 
       </div>
@@ -29,7 +35,7 @@
         <table class="table table-striped b-t b-light rounded-lg">
           <thead >
             <tr class="bg-warning text-white ">
-              <th>Tên mỹ phẩm</th>
+              <th>Tên</th>
               <th>Hình ảnh</th>
               <th>Giá</th>
               <th>Số lượng</th>
@@ -82,17 +88,7 @@
             <tr>
               <td><input type="submit" value="" name="update_qty" class="check_out btn btn-default btn-sm"></td>
               <th colspan="6">
-                <div class="text-right"><b class="text-danger">Tổng tiền hàng: {{number_format($total,0,',','.')}}đ</b></div>
-                   
-                  <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-danger bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
-                          <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                          <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                        </svg>
-                        <div class=" text-lg font-semibold"><a class="text-danger nav-link" href="{{asset('/checkout')}}"><b>Checkout</b> </a></div>
-                  </div>
-                
+                <div class="text-right"><b class="text-danger">Tổng tiền hàng: {{number_format($total,0,',','.')}}đ</b></div>          
               
               </th>
             </tr>
@@ -116,6 +112,83 @@
       
       </div>
     </div>
+    <div class="col-sm-3">
+      <div  class="text-danger">
+        <center><b>MÃ GIẢ GIÁ</b></center> 
+      </div>
+      <style>
+         .coupon{
+           border: 2px solid #35dccb;
+           margin: 2px 0 2px;
+           border-top-right-radius: 25%;
+           border-bottom-left-radius: 25%;
+         }
+         .date{
+           border: 2px solid #dc3554;
+           border-top-right-radius: 25%;
+           border-bottom-left-radius: 25%;
+         }
+         .font{
+          font-size: 15px;
+         }
+       </style>
+         <div class="table-agile-info font">
+             <div class="panel panel-default">
+             @foreach ($coupon as $key => $cou)
+                 <div class="coupon mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" >
+                 <table class="table table-sm">
+                     <thead>
+                     <tr>
+                         <th scope="col">{{$cou->coupon_name}}</th>
+                         <div></div>
+                         <div></div>
+                         <div></div>
+                         <th scope="col">{{$cou->coupon_date_start}}</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr>
+                         <td scope="row">
+                             Còn lại: {{$cou->coupon_time}}
+                             <br>
+                             <b class="text-danger">Nhập Mã Ngay</b>
+                         </td>
+                         <div></div>
+                         <div></div>
+                         <div></div>
+                         <td>
+                         <b class="text-danger">Code: {{$cou->coupon_code}}</b><br>
+                         @if($cou->coupon_date_end >= $now)
+                         <input type="button" class="text-success date" value="Còn hạn">
+                         @else
+                         <input type="button" class="text-danger date" value="Hết hạn">
+                         @endif
+         
+                         </td>
+                     </tr>
+                     </tbody>
+                 </table>
+                 </div> 
+             @endforeach
+             
+             </div>
+         </div> 
+         <center>
+            {{-- <button class=""> --}}
+              <div class="flex items-center bg rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-white bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z"/>
+                  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                </svg>
+                <div class=" text-lg font-semibold"><a class="text-danger nav-link" href="{{asset('/checkout')}}"><b class="text-white">Checkout</b> </a></div>
+              
+              </div>
+            {{-- </button> --}}
+         </center>
+    
+  </div>
+  
 </div>
     
 @endsection

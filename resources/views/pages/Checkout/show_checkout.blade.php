@@ -166,12 +166,7 @@
                     <table class="table table-striped b-t b-light rounded-lg">
                         <thead >
                           <tr class="bg-warning text-white ">
-                            <th>Tên mỹ phẩm</th>
-                            <th>Hình ảnh</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-                            
+                            <th colspan="5">Xem lại giỏ hàng</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -186,10 +181,11 @@
                               $total += $subtotal;
                             @endphp
                             <tr>
-                            <th class="cart_name"><p>{{$cart['product_name']}}</p></th>
+                            
                             <th class="cart_image">
                               <img src="{{asset('public/uploads/product/'.$cart['product_image'])}}" height="100" width="100" alt="{{$cart['product_image']}}">
                             </th>
+                            <th class="cart_name">{{$cart['product_name']}}</th>
                             <th class="cart_price">
                               <p>{{number_format($cart['product_price'],0,',','.')}}đ</p>
                             </th>
@@ -197,7 +193,7 @@
                               <p class="text-center">{{$cart['product_qty']}}</p>
                             </th>
                             <th class="cart_total">
-                              <p>
+                              <p class="text-danger">
                                 {{number_format($subtotal,0,',','.')}}đ
                               </p>
                             </th>
@@ -291,21 +287,32 @@
                           @endif
                         </tbody>
                       </form>
-                      @if(Session::get('cart'))
-                      <tr>
-                        <td colspan="2">
-                          <form method="POST" action="{{url('/check-coupon')}}">
-                            @csrf
-                              <input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
-                              <input type="submit" class="btn btn-default check_coupon text-danger" name="check_coupon" value="Duyệt mã">
-                              @if(Session::get('coupon'))
-                                <a class="btn btn-default check_out text-danger" href="{{url('/del-coupon')}}"><b>Xóa mã khuyến mãi</b></a>
-                              @endif         
-                          </form>
-                        </td>
-                      </tr>
-                      @endif
+                      
                       </table>
+                      <b>MÃ KHUYẾN MÃI/MÃ QUÀ TẶNG</b>
+                      <div style="background-color: rgb(241, 216, 216); padding: 10px; width: 70%;" class="rounded">
+                        @if(Session::get('cart'))
+                        
+                          <td colspan="2">
+                            <form method="POST" action="{{url('/check-coupon')}}">
+                              @csrf
+                              <div class="input-group" style="margin-top: 13px">
+                                <p class="mt-1">Mã KM/Quà tặng </p>
+                                <input type="text" id="keywords" name="coupon" class="form-control rounded" placeholder="Mã KM">
+                                <span class="input-group-btn">
+                                  <input class="btn btn-sm btn-info check_coupon text-white" type="submit" value="Áp dụng" style="margin-top: 4px">
+                                </span>
+                                  @if(Session::get('coupon'))
+                                    <a class="btn btn-default check_out text-danger" href="{{url('/del-coupon')}}"><b>Xóa mã khuyến mãi</b></a>
+                                  @endif  
+                                <br>
+                                
+                              </div>
+                              <i style="font-size: 15px; padding: 25%" class="text-danger">*Chỉ áp dụng được 1 mã khuyến mãi</i>
+                            </form>
+                          </td>
+                        @endif
+                      </div>
                 </div>
         </div>
     </div>

@@ -200,7 +200,7 @@
                     <form action="{{asset('/search')}}" method="POST">
                         {{csrf_field()}}
                             <div class="input-group" style="margin-top: 13px">
-                                <input type="text" type="text" id="keywords" name="keywords_submit" class="form-control search" placeholder="Search">
+                                <input type="text" id="keywords" name="keywords_submit" class="form-control search" placeholder="Search">
                                 <div id="search-ajax"></div>
                                 <span class="input-group-btn">
                                 <input class="btn btn-sm btn-danger" type="submit" value="Search!" style="margin-top: 4px">

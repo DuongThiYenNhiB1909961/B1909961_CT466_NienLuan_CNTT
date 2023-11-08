@@ -194,10 +194,12 @@ class CheckOutController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-       $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $product = Product::orderby('product_id','desc');
+
+        $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $city = City::orderby('matp','ASC')->get();
-        return view('pages.Checkout.show_checkout')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('city',$city);
+        return view('pages.Checkout.show_checkout')->with('product',$product)->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('city',$city);
     }
     public function save_checkout(Request $request){
         $data = array();

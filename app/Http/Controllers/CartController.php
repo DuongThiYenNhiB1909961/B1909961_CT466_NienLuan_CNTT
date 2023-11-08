@@ -8,6 +8,8 @@ use Cart;
 use Session;
 use App\Http\Requests;
 use App\Models\Product;
+use App\Models\Coupon;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 class CartController extends Controller
@@ -19,9 +21,12 @@ class CartController extends Controller
         $meta_title = "Giỏ hàng ajax";
         $url_canonical = $request->url(); 
 
+        $coupon = Coupon::orderby('coupon_id','DESC')->get();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d/m/Y');
+
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        return view('pages.Cart.cart_ajax')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.Cart.cart_ajax')->with('now',$now)->with('coupon',$coupon)->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function add_cart_ajax(Request $request){
         $data = $request->all();
