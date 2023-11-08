@@ -116,4 +116,45 @@ class OrderController extends Controller
 			Session::put('message','Xóa đơn hàng thành công');
 			return Redirect()->Back();
 		}
+		public function history(Request $request){
+			
+			if(!Session::get('customer_id')){
+				return redirect('login-checkout')->with('error','Vui lòng đăng nhập để xem lịch sử đơn hàng');
+			}else{
+				$meta_desc = "Lịch sử đơn hàng";
+				$meta_keywords = "Lịch sử đơn hàng";
+				$meta_title = "Lịch sử đơn hàng";
+				$url_canonical = $request->url(); 
+
+				$getorder = Order::where('customer_id',Session::get('customer_id'))->orderby('order_date','DESC')->get();
+				return view('pages.Cart.history')->with(compact('getorder','meta_desc', 'meta_keywords','meta_title','url_canonical'));
+
+			}
+		}
+		public function history_view_order(Request $request, $order_code){
+			$meta_desc = "Lịch sử đơn hàng";
+			$meta_keywords = "Lịch sử đơn hàng";
+			$meta_title = "Lịch sử đơn hàng";
+			$url_canonical = $request->url(); 
+
+			$order_details = OrderDetails::with('product')->where('order_code',$order_code)->get();
+			$order = Order::where('order_code',$order_code)->get();
+			foreach($order as $key => $ord){
+				$customer_id = $ord->customer_id;
+				$shipping_id = $ord->shipping_id;
+				$order_status = $ord->order_status;
+			}
+			$cus = Customer::where('customer_id', $customer_id)->first();
+			// $customer = Customer::where('customer_id',$customer_id)->first();
+			$shipping = Shipping::where('shipping_id',$shipping_id)->first();
+	
+			foreach($order_details as $key => $details){
+	
+				$coupon_code = $details->coupon;
+			}
+			return view('pages.Cart.history_details')->with(compact('order_details','cus','shipping','order_details',
+			'order','order_status','meta_desc', 'meta_keywords','meta_title','url_canonical'));
+
+		}
+		
 }

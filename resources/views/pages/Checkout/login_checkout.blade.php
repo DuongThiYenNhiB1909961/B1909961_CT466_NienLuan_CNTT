@@ -15,9 +15,13 @@
         </div>
         <?php
                     $message = Session::get('message');
+                    $error = Session::get('error');
                     if($message){
                         echo '<b class="text-danger">'.$message.'</b>';
                         Session::put('message',null);
+                    }else{
+                        echo '<b class="text-danger">'.$error.'</b>';
+                        Session::put('error',null);
                     }
                 ?>
         <form action="{{URL::to('login')}}" method="get" class="pt-2">

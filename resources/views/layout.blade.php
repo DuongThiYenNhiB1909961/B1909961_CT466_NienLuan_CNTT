@@ -108,7 +108,20 @@
                     <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/show-cart-ajax')}}"><b>Cart</b></a></div>
                 </div>
             </li>
-            
+            <?php
+            $customer_id = Session::get('customer_id');
+            if($customer_id != NULL)
+            {
+            ?>
+            <li class="nav-item">
+                <div class="flex items-center">
+                    <i class="fa fa-history text-warning" aria-hidden="true"></i>
+                    <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/history')}}"><b>History</b></a></div>
+                </div>
+            </li>
+            <?php
+                }
+            ?>
                 <?php
                     $customer_id = Session::get('customer_id');
                     if($customer_id != NULL)
