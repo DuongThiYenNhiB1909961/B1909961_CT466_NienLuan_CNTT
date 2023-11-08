@@ -158,10 +158,10 @@
                          <div></div>
                          <td>
                          <b class="text-danger">Code: {{$cou->coupon_code}}</b><br>
-                         @if($cou->coupon_date_end >= $now)
+                         @if(($cou->coupon_date_end >= $now) && ($cou->coupon_time >0))
                          <input type="button" class="text-success date" value="Còn hạn">
                          @else
-                         <input type="button" class="text-danger date" value="Hết hạn">
+                         <input type="button" class="text-danger date" value="Đã hết">
                          @endif
          
                          </td>
