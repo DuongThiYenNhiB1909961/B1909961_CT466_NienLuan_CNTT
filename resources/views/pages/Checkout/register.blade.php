@@ -25,8 +25,12 @@
                     <input type="email" name="customer_email" class="form-control" id="inputEmail4" placeholder="examp@gmail.com" required>
                 </div>
                 <div class="form-group col-md-6">
+                    <label for="inputEmail4">Địa chỉ khách hàng</label>
+                    <input type="text" name="customer_address" class="form-control" id="inputName" placeholder="Họ tên khách hàng" required>
+                </div>
+                <div class="form-group col-md-6">
                     <label for="inputPassword4">Password</label>
-                    <input type="password" name="customer_password" class="form-control" id="inputPassword4" required>
+                    <input type="password" name="customer_password" class="form-control" id="inputPassword4" placeholder="********" required>
                 </div>
                 <div class="form-group col-md-6">
                         <label for="inputnumber">Telephone</label>

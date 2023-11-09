@@ -281,6 +281,7 @@
             </div>  
             
         </footer>
+        
         {{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
         {{-- <script src="{{asset('resources/js/sweetalert.min.js')}}"></script> --}}
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -293,36 +294,6 @@
         <script src="{{asset('resources/js/lightgallery-all.min.js')}}"></script>
         <script src="{{asset('resources/js/prettify.js')}}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-        <!-- Messenger Plugin chat Code -->
-        <div id="fb-root"></div>
-
-        <!-- Your Plugin chat code -->
-        <div id="fb-customer-chat" class="fb-customerchat">
-        </div>
-
-        <script>
-        var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "116662988206640");
-        chatbox.setAttribute("attribution", "biz_inbox");
-        </script>
-
-        <!-- Your SDK code -->
-        <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-            xfbml            : true,
-            version          : 'v18.0'
-            });
-        };
-
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-        </script>
         <script>
             $(document).ready(function(){
                 $( "#slider-range" ).slider({
@@ -581,6 +552,7 @@
                 }); 
             });
         </script>
+        
         <script type="text/javascript">
             $(document).ready(function(){
                 $('.send_order').click(function(){
@@ -594,8 +566,8 @@
                     var order_fee = $('.order_fee').val();
                     var order_coupon = $('.order_coupon').val();
                     var _token = $('input[name="_token"]').val();
-                    if(shipping_name == '' || shipping_email == '' || shipping_address == '' || shipping_phone == '' || shipping_note == ''
-                    || shipping_method == ''){
+                    // alert(shipping_address);
+                    if(shipping_name == '' || shipping_email == '' || shipping_address == '' || shipping_phone == ''|| shipping_method == ''){
                         alert('Vui lòng điền đầy đủ thông tin nhận hàng');
                     }else{
                         $.ajax({
@@ -615,9 +587,9 @@
                                     swal("Good job!", "Đặt hàng thành công", "success");
                                 }
                         });
-                        window.setTimeout(function(){ 
-                            location.reload();
-                        } ,3000);
+                        // window.setTimeout(function(){ 
+                        //     location.reload();
+                        // } ,3000);
                     }
                     
                 });

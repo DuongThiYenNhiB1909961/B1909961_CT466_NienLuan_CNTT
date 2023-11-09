@@ -45,7 +45,7 @@ class CheckOutController extends Controller
                         Session::save();
                     }
                 }else{ 
-                    Session::put('fee',25000);
+                    Session::put('fee',35000);
                     Session::save();
                 }
             }
@@ -182,10 +182,14 @@ class CheckOutController extends Controller
         $data['customer_email'] = $request->customer_email;
         $data['customer_password'] = $request->customer_password;
         $data['customer_phone'] = $request->customer_phone;
+        $data['customer_address'] = $request->customer_address;
 
         $customer_id = DB::table('tb_customer')->insertGetId($data);
         Session::put('customer_id',$request->customer_id);
         Session::put('customer_name',$request->customer_name);
+        Session::put('customer_email',$request->customer_email);
+        Session::put('customer_address',$request->customer_address);
+        Session::put('customer_phone',$request->customer_phone);
         return view('pages.Checkout.login_checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function checkout(Request $request){
@@ -194,7 +198,9 @@ class CheckOutController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $product = Product::orderby('product_id','desc');
+        $product = Product::orderby('product_id','desc')->get();
+        // $customer = Product::where('customer_id',Session::get('customer_id'))->get();->with('customer',$customer)
+        // $customer = Customer::where('customer_id', Session::get('customer_id'))->first();
 
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
@@ -247,6 +253,9 @@ class CheckOutController extends Controller
             if($login_count>0){
                 Session::put('customer_name',$login->customer_name);
                 Session::put('customer_id', $login->customer_id);
+                Session::put('customer_email',$login->customer_email);
+                Session::put('customer_address',$login->customer_address);
+                Session::put('customer_phone',$login->customer_phone);
                 return Redirect::to('/checkout')->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
             }
         }else{
@@ -299,10 +308,13 @@ class CheckOutController extends Controller
     public function confirm_order(Request $request){
         $data = $request->all();
 
-        $coupon = Coupon::where('coupon_code', $data['order_coupon'])->first();
-        $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
-        $coupon->coupon_time = $coupon->coupon_time - 1;
-        $coupon->save();
+        if(Session::get('coupon')){
+            $coupon = Coupon::where('coupon_code', $data['order_coupon'])->first();
+            $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+            $coupon->coupon_time = $coupon->coupon_time - 1;
+            $coupon->save();
+        }
+       
 
         $shipping = new Shipping();
         $shipping->shipping_name = $data['shipping_name'];

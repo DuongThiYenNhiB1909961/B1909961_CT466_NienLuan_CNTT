@@ -136,7 +136,7 @@ Route::get('/login-customer-google',[CheckOutController::class, 'login_customer_
 Route::get('/customer/google/callback', [CheckOutController::class, 'callback_customer_google']);
 
 //coupon
-Route::post('/check-coupon',[CouponController::class, 'check_coupon']);
+Route::post('/checkCoupon',[CouponController::class, 'check_coupon']);
 
 Route::get('/add-coupon',[CouponController::class, 'add_coupon']);
 Route::post('/add-coupon-code',[CouponController::class, 'add_coupon_code']);
