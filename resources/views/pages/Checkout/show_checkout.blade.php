@@ -267,7 +267,13 @@
                                   @endphp
                                 </b>
                                 </div>
-                                
+                                <div class="col-md-12">
+                                  @php
+                                    $toUSD = $total_after/24305;
+                                  @endphp
+                                  <div id="paypal-button"></div>
+                                  <input type="hidden" id="toUSD" value="{{round($toUSD,2)}}">
+                                </div>
                               </ul>
                             </td>
                             

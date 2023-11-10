@@ -294,36 +294,81 @@
         <script src="{{asset('resources/js/lightgallery-all.min.js')}}"></script>
         <script src="{{asset('resources/js/prettify.js')}}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+        <div id="paypal-button"></div>
+        {{-- Paypal --}}
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <script>
+            var toUSD = document.getElementById("toUSD").value;
+          paypal.Button.render({
+            // Configure environment
+            env: 'sandbox',
+            client: {
+              sandbox: 'AfSelfBuM4dxzbV1JYxZFyS2CJO1BX1M3Iwl5cz6rFNq43DxYqL3zn_EPEIqNCqEJH8j7Ht1khRXUsVD',
+              production: 'demo_production_client_id'
+            },
+            // Customize button (optional)
+            locale: 'en_US',
+            style: {
+              size: 'small',
+              color: 'gold',
+              shape: 'pill',
+            },
+        
+            // Enable Pay Now checkout flow (optional)
+            commit: true,
+        
+            // Set up a payment
+            payment: function(data, actions) {
+              return actions.payment.create({
+                transactions: [{
+                  amount: {
+                    total: `${toUSD}`,
+                    currency: 'USD'
+                  }
+                }]
+              });
+            },
+            // Execute the payment
+            onAuthorize: function(data, actions) {
+              return actions.payment.execute().then(function() {
+                // Show a confirmation message to the buyer
+                window.alert('Cảm ơn bạn đã tin tưởng mua hàng của shop!');
+              });
+            }
+          }, '#paypal-button');
+        
+        </script>
+        {{-- //Paypal --}}
         <!-- Messenger Plugin chat Code -->
-    <div id="fb-root"></div>
+        <div id="fb-root"></div>
 
-    <!-- Your Plugin chat code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
+        <!-- Your Plugin chat code -->
+        <div id="fb-customer-chat" class="fb-customerchat">
+        </div>
 
-    <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "116662988206640");
-      chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
+        <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "116662988206640");
+        chatbox.setAttribute("attribution", "biz_inbox");
+        </script>
 
-    <!-- Your SDK code -->
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v18.0'
-        });
-      };
+        <!-- Your SDK code -->
+        <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            xfbml            : true,
+            version          : 'v18.0'
+            });
+        };
 
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
         <script>
             $(document).ready(function(){
                 $( "#slider-range" ).slider({
