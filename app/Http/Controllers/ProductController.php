@@ -11,6 +11,7 @@ use App\Models\Gallery;
 use App\Models\Comment;
 use App\Models\Rating;
 use App\Models\Product;
+use Carbon\Carbon;
 use File;
 use Illuminate\Support\Facades\Redirect;
 session_start();
@@ -148,6 +149,8 @@ class ProductController extends Controller
     }
     public function save_product(Request $request){
         $this->AuthLogin();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('y-m-d');
+
         $data = array();
         $data['product_name'] = $request->product_name;
         $data['meta_keywords'] = $request->meta_keywords;
@@ -163,6 +166,7 @@ class ProductController extends Controller
         $data['brand_id'] = $request->product_brand;
         $data['product_views'] = 0;
         $data['product_status'] = $request->product_status;
+        $data['date_add_product'] = $now;
         $get_image = $request->file('product_image');
 
         $path = 'public/uploads/product/';
