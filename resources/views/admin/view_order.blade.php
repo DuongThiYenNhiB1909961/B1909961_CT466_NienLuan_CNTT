@@ -183,24 +183,36 @@
               <tr>
                 <td colspan="5">
                   @foreach($order as $key => $or)
-                    @if($or->order_status==1)
-                    <form>
-                      @csrf
-                      <select class="form-control order_status">
-                        <option value="">----Chọn hình thức đơn hàng-----</option>
-                        <option id="{{$or->order_id}}" selected value="1">Chưa xử lý</option>
-                        <option id="{{$or->order_id}}" value="2">Đã xử lý - Đã giao hàng</option>
-                      </select>
-                    </form>
-                 @else
-                    <form>
-                      @csrf
-                      <select class="form-control order_status">
-                        <option value="">----Chọn hình thức đơn hàng-----</option>
-                        <option disabled id="{{$or->order_id}}" value="1">Chưa xử lý</option>
-                        <option id="{{$or->order_id}}" selected value="2">Đã xử lý - Đã giao hàng</option>
-                      </select>
-                    </form>
+                    @if($or->order_status==0)
+                      <form>
+                        @csrf
+                        <select class="form-control order_status">
+                          <option value="">----Chọn hình thức đơn hàng-----</option>
+                          <option id="{{$or->order_id}}" selected value="0">Chờ xác nhận</option>
+                          <option id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                          <option id="{{$or->order_id}}" value="2">Đã xử lý - Đã giao hàng</option>
+                        </select>
+                      </form>
+                    @elseif($or->order_status==1)
+                      <form>
+                        @csrf
+                        <select class="form-control order_status">
+                          <option value="">----Chọn hình thức đơn hàng-----</option>
+                          <option id="{{$or->order_id}}" selected value="0">Chờ xác nhận</option>
+                          <option id="{{$or->order_id}}" selected value="1">Chưa xử lý</option>
+                          <option id="{{$or->order_id}}" value="2">Đã xử lý - Đã giao hàng</option>
+                        </select>
+                      </form>
+                      @else
+                      <form>
+                        @csrf
+                        <select class="form-control order_status">
+                          <option value="">----Chọn hình thức đơn hàng-----</option>
+                          <option disabled id="{{$or->order_id}}" selected value="0">Chờ xác nhận</option>
+                          <option disabled id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                          <option id="{{$or->order_id}}" selected value="2">Đã xử lý - Đã giao hàng</option>
+                        </select>
+                      </form>
 
                     @endif
                   @endforeach

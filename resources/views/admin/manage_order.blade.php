@@ -36,8 +36,10 @@
               <td>{{$i}}</td>
               <td>{{$order->order_code}}</td>
              
-              <td>@if($order->order_status == 1)
-                      Đơn hàng new
+              <td>@if($order->order_status == 0)
+                      Chờ xác nhận
+                  @elseif($order->order_status == 1)
+                      Chờ soạn hàng
                   @else
                       Đã xử lý
                   @endif

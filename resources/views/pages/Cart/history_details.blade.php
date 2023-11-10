@@ -159,8 +159,29 @@
                 </tr> 
                 
               @endforeach 
+              <tr >
+                <td colspan="6" class="text-right" style="background-color: #cac6c6">
+                  @php
+                    $total_coupon = 0;  
+                  @endphp  
+                  @if($coupon_condition==1)
+                      @php
+                        $total_after_coupon =  ($total * $coupon_number)/100;
+                        echo 'Tổng giảm: '.number_format($total_after_coupon,0,',','.').'vnđ'.'</br>';
+                        $total_coupon = $total + $OrDes->feeship - $total_after_coupon;
+                      @endphp
+                  @else
+                      @php
+                        echo 'Tổng giảm: '.number_format($coupon_number,0,',','.').'vnđ'.'</br>';
+                        $total_coupon = $total + $OrDes->feeship - $coupon_number;
+                      @endphp
+                  @endif
+                  <p>Phí ship: {{number_format($OrDes->feeship,0,',','.')}}vnđ</p>
+                </td>
+                
+              </tr>
               <tr>
-                    <td colspan="6" class="bg-danger text-white" align="right"><b>Thanh toán: {{number_format($total,0,',','.')}}vnđ</b></td>
+                    <td colspan="6" class="bg-danger text-white" align="right"><b>Thanh toán: {{number_format($total_coupon,0,',','.')}}vnđ</b></td>
                 </tr>
               </tbody>
             </table>

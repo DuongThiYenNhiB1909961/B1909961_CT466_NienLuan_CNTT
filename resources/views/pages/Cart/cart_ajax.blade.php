@@ -102,7 +102,7 @@
                                          
                                           @endphp
                                         </p>
-                                      <div class="text-right"><b class="text-danger">Mã giảm {{$cou['coupon_number']}}%: </b>{{number_format($totalCoupon,0,',','.')}}</div>
+                                      <div class="text-right"><b class="text-danger">Mã giảm {{$cou['coupon_number']}}%: {{number_format($totalCoupon,0,',','.')}}đ</b></div>
                                         
                                       @elseif($cou['coupon_condition']==2)
                                       

@@ -152,7 +152,15 @@ class OrderController extends Controller
 	
 				$coupon_code = $details->coupon;
 			}
-			return view('pages.Cart.history_details')->with(compact('order_details','cus','shipping','order_details',
+			if($coupon_code != 'no'){
+				$coupon = Coupon::where('coupon_code',$coupon_code)->first();
+				$coupon_condition = $coupon->coupon_condition;
+				$coupon_number = $coupon->coupon_number;
+			}else{
+				$coupon_condition = 2;
+				$coupon_number = 0;
+			}
+			return view('pages.Cart.history_details')->with(compact('order_details','cus','shipping','order_details', 'coupon_condition','coupon_number',
 			'order','order_status','meta_desc', 'meta_keywords','meta_title','url_canonical'));
 
 		}

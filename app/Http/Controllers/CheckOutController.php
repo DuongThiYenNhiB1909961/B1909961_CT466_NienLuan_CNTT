@@ -331,7 +331,7 @@ class CheckOutController extends Controller
         $order = new Order();
         $order->customer_id = Session::get('customer_id');
         $order->shipping_id = $shipping_id;
-        $order->order_status = 1;
+        $order->order_status = 0;
         $order->order_code = $order_code;
         
         date_default_timezone_set('Asia/Ho_Chi_Minh');

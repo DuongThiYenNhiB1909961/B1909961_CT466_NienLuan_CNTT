@@ -59,8 +59,8 @@
             <b><p>Nếu bạn chưa có tài khoản hãy</p><a class="nav-link text-danger" href="register">Register</a></b>
             
         </form>
-        {{-- <a href="{{url::to('/login-customer-google')}}"><b>Login Google</b></a>
-        <a href="{{url::to('/login-facebook-customer')}}"><b>Login Facebook</b></a> --}}
+        <a href="{{url::to('/login-customer-google')}}"><b>Login Google</b></a>
+        <a href="{{url::to('/login-facebook-customer')}}"><b>Login Facebook</b></a>
     </div>
 </div>
 {{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}

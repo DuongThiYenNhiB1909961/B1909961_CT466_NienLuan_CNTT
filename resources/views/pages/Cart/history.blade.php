@@ -42,8 +42,11 @@
               <td>{{$i}}</td>
               <td class="text-danger">{{$order->order_code}}</td>
              
-              <td class="text-danger">@if($order->order_status == 1)
-                      Đơn hàng new
+              <td class="text-danger">
+                  @if($order->order_status == 0)
+                      Chờ xác nhận
+                  @elseif($order->order_status == 1)
+                      Người bán đang soạn hàng
                   @else
                       Đã xử lý - chờ giao hàng
                   @endif
