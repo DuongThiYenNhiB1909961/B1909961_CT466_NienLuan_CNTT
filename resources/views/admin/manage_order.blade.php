@@ -22,7 +22,7 @@
               <th>Mã đơn</th>
               <th>Tình trạng đơn</th>
               <th>Thời gian đặt hàng</th>
-              <th></th>
+              <th>Lý do hủy</th>
               <th style="width:30px;"></th>
             </tr>
           </thead>
@@ -37,21 +37,25 @@
               <td>{{$order->order_code}}</td>
              
               <td>@if($order->order_status == 0)
-                      Chờ xác nhận
+                      <span class="btn btn-warning">Chờ xác nhận</span>
                   @elseif($order->order_status == 1)
-                      Chờ soạn hàng
+                      <span class="btn btn-info">Chờ soạn hàng</span>
+                  @elseif($order->order_status == 2)
+                      <span class="btn btn-success">Đã xử lý</span>
                   @else
-                      Đã xử lý
+                      <span class="btn btn-danger">Đã hủy đơn</span>
                   @endif
               </td>
               <td>{{$order->created_at}}</td>
               <td>
-                <a href="{{asset('/view-order/'.$order->order_code)}}" class="active" >
-                    <i class="fa fa-pencil-square text-success text-active"></i></a>
-                
+                @if($order->order_status == 3)
+                  <p class="text-danger">{{$order->order_destroy}}</p>
+                @endif
               </td>
               <td>
-                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{asset('/delete-order/'.$order->order_id)}}" class="active" ui-toggle-class="">
+                <a href="{{asset('/view-order/'.$order->order_code)}}" class="active" >
+                    <i class="fa fa-pencil-square text-success text-active"></i></a>
+                <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{asset('/delete-order/'.$order->order_code)}}" class="active" ui-toggle-class="">
                     <i class="fa fa-times text-danger text"></i></a>
               </td>
             </tr> 

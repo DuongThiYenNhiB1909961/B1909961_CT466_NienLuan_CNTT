@@ -294,6 +294,11 @@
         <script src="{{asset('resources/js/lightgallery-all.min.js')}}"></script>
         <script src="{{asset('resources/js/prettify.js')}}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+        <script src="{{asset('resources/js/datatables.min.js')}}"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+        <script type="text/javascript">
+            let table = new DataTable('#myTable');
+        </script>
         <div id="paypal-button"></div>
         {{-- Paypal --}}
         <script src="https://www.paypalobjects.com/api/checkout.js"></script>
@@ -388,6 +393,28 @@
                 $( "#amount" ).val( "vnđ " + $( "#slider-range" ).slider( "values", 0 ) +
                     " - vnđ " + $( "#slider-range" ).slider( "values", 1 ) );
             });
+        </script>
+        <script>
+            function Huydon(id){
+                var order_code = id;
+                var lydo = $('.lydo').val();
+                var _token = $('input[name="_token"]').val();
+                // alert(order_code);
+                $.ajax({
+                    url: '{{url('/huydon')}}',
+                        method: 'POST',
+                        data:{
+                            order_code:order_code,
+                            lydo:lydo,
+                            _token:_token},
+                        success:function(data){
+                            swal("Đã hủy đơn hàng của bạn");
+                        }
+                }); 
+                window.setTimeout(function(){ 
+                    location.reload();   
+                } ,3000);
+            }
         </script>
         <script>
             $(document).ready(function() {
@@ -662,9 +689,9 @@
                                     swal("Good job!", "Đặt hàng thành công", "success");
                                 }
                         });
-                        // window.setTimeout(function(){ 
-                        //     location.reload();
-                        // } ,3000);
+                        window.setTimeout(function(){ 
+                            window.location.href = "{{url('/history')}}";
+                        } ,1000);
                     }
                     
                 });

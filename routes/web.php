@@ -119,9 +119,10 @@ Route::post('/confirm-order', [CheckOutController::class, 'confirm_order']);
 Route::get('/manage-order',[OrderController::class, 'manage_order']);
 Route::get('/view-order/{order_code}',[OrderController::class, 'view_order']);
 Route::post('/update-inventory-qty',[OrderController::class, 'update_inventory_qty']);
-Route::get('/delete-order/{order_id}',[OrderController::class, 'delete_order']);
+Route::get('/delete-order/{order_code}',[OrderController::class, 'delete_order']);
 Route::get('/history',[OrderController::class, 'History']);
 Route::get('/history-view-order/{order_code}',[OrderController::class, 'history_view_order']);
+Route::post('/huydon',[OrderController::class, 'huydon']);
 
 //login facebook
 Route::get('/login-facebook',[AdminController::class, 'login_facebook']);

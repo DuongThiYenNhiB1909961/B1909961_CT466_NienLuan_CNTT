@@ -15,6 +15,14 @@ use Carbon\Carbon;
 use Session;
 class OrderController extends Controller
 {
+	public function huydon(Request $request){
+		$data = $request->all();
+		$order_code = $data['order_code'];
+		$order = Order::where('order_code',$order_code)->first();
+		$order->order_destroy = $data['lydo'];
+		$order->order_status = 3;
+		$order->save();
+	}
 	public function update_inventory_qty(Request $request){
 		$data = $request->all();
 		$order = Order::find($data['order_id']);
@@ -111,8 +119,8 @@ class OrderController extends Controller
 		'coupon_condition','coupon_number','order','order_status'));
 
         }
-		public function delete_order($order_id){
-			$order = Order::find($order_id)->delete();
+		public function delete_order($order_code){
+			$order = Order::where('order_code',$order_code)->delete();
 			Session::put('message','Xóa đơn hàng thành công');
 			return Redirect()->Back();
 		}

@@ -29,6 +29,7 @@
               <th>Mã đơn</th>
               <th>Tình trạng đơn</th>
               <th>Thời gian đặt hàng</th>
+              <th>Lý do hủy đơn</th>
               <th style="width:30px;"></th>
             </tr>
           </thead>
@@ -44,23 +45,37 @@
              
               <td class="text-danger">
                   @if($order->order_status == 0)
-                      Chờ xác nhận
+                    <span class="btn btn-warning">Chờ xác nhận</span>
                   @elseif($order->order_status == 1)
-                      Người bán đang soạn hàng
+                    <span class="btn btn-info">Người bán đang soạn hàng</span>
+                  @elseif($order->order_status == 2)
+                    <span class="btn btn-success">Đã xử lý - chờ giao hàng</span>
                   @else
-                      Đã xử lý - chờ giao hàng
+                    <span class="btn btn-danger">Đã hủy đơn</span>
                   @endif
               </td>
               <td>{{$order->created_at}}</td>
+              <form>
+                  @csrf
               <td>
+                
+                @if($order->order_status != 3)
+                    <p><textarea class="lydo" id="" cols="10" rows="3" placeholder="Lý do hủy đơn hàng" required></textarea></p>
+                @endif
+              </td>
+              <td>
+                @if($order->order_status != 3)
+                <button type="button" id="{{$order->order_code}}" onclick="Huydon(this.id)" class="btn btn-danger">Hủy đơn</button>
+                @endif
                 <a href="{{asset('/history-view-order/'.$order->order_code)}}" class="active" >
                     <input type="button" class="btn btn-success" value="Chi tiết"></a>
                 
               </td>
+              </form>
             </tr> 
-            @php
-              $i++;  
-            @endphp
+              @php
+                $i++;  
+              @endphp
             @endforeach
             
           </tbody>
