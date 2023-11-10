@@ -7,19 +7,39 @@ html, body{
     font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
     background: #fff;
-    padding: 5px 5px;
 	background-size:cover;
     margin: 0;
     font-size:1.125rem;
 }
 header, footer{
-    background: #eee;
-    padding: 5px 0 10px;
+    width: 100%;
+    background: #e9e8e8;
+    padding: 0px 0 10px;
 	background-size:cover;
     margin: 0;
 }
+.yield{
+    margin: 5%;
+    margin-top: 8%;
+}
+.header{
+    Position: fixed;
+    Z-index: 1;
+    background: #fff;
+}
+.banner{
+    height: 40px;
+
+}
+.sea{
+    
+    padding-left: 40%;
+    padding-right: 40%;
+    
+}
 .search {
     width: 20px;
+    height: inherit;
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
     -ms-transition: all .3s ease;
@@ -35,7 +55,8 @@ header, footer{
 	cursor:pointer;
 }
 .search:focus {
-    width:180px;
+    width:70px;
+    height: 50%;
     border:1px solid #462e3f;
     box-shadow:none;
     -webkit-transition:all .3s ease;
@@ -135,4 +156,12 @@ ul.sidebar-menu li a {
 }
 .productinfo.text-center img {
     height: 225px;
+}
+span.badges{
+    background: red;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
 }

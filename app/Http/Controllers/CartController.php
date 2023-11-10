@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Redirect;
 session_start();
 class CartController extends Controller
 {
+    public function show_cart_number(){
+        $count = 0;
+        $count = count(Session::get('cart'));
+        $output = '';
+        
+            $output .= '<li class="nav-item">
+                <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="'.url('/show-cart-ajax').'">
+                <i class="fa fa-shopping-cart text-warning" aria-hidden="true"></i>
+                <b>Cart <span class="badges">'.$count.'</span></b></a></div></li>';
+        
+        echo $output;
+    }
     public function show_cart_ajax(Request $request){
         $cart = Session::get('cart');
         $meta_desc = "Giỏ hàng mỹ phẩm";

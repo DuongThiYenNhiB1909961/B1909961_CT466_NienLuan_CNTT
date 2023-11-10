@@ -98,6 +98,7 @@ Route::get('/show-cart-ajax', [CartController::class, 'show_cart_ajax']);
 Route::get('/delete-cart/{rowId}', [CartController::class, 'delete_cart']);
 Route::get('/del-product/{session_id}',[CartController::class, 'delete_product']);
 Route::get('/del-all-product',[CartController::class, 'delete_all_product']); 
+Route::get('/show-cart-number', [CartController::class, 'show_cart_number']);
 
 // CHeckout
 Route::get('/login-checkout', [CheckOutController::class, 'login_checkout']);
