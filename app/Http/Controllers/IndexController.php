@@ -15,6 +15,48 @@ use Illuminate\Support\Facades\Redirect;
 session_start();
 class IndexController extends Controller
 {
+    public function load_more(Request $request){
+        $data = $request->all();
+        if($data['id']>0){
+            $all_product = Product::where('product_status','0')->where('product_id','<',$data['id'])->orderby('product_id','desc')->take(6)->get();
+        }else{
+            $all_product = Product::where('product_status','0')->orderby('product_id','desc')->take(6)->get();
+        }
+        $output = '';
+        if(!$all_product -> isEmpty()){
+            foreach($all_product as $key => $product){
+                $last_id = $product->product_id;
+                $output .= '<div class="mr-4 mb-4">
+                                <a href="'.url('/product-detail/'.$product->product_id).'" class="text-decoration-none">
+                                    <div class="card" style="width: 15rem; height: 25rem;">
+                                        <img src="'.asset('public/uploads/product/'.$product->product_image).'" class="card-img-top shadow" alt="">
+                                        <div class="card-body">
+                                        <h6 class="card-title " style="width:height: 5rem;"><b>'.$product->product_desc.'</b></h6>
+                                        <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ</p></b>
+                                        <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>';
+            }
+            $output .= '<br><div id="load_more" style="text-align: center; margin: 0 auto;}" class="mb-2">
+                            <center>
+                                <button type="button" class="btn btn-warning" name="load_more_button" data-id="'.$last_id.'" id="load_more_button">
+                                    <i class="fa fa-caret-down" aria-hidden="true">Thêm</i>
+                                </button>
+                            </center>
+                            </div>';
+        }else{
+            $output .= '<br><div id="load_more" style="text-align: center; margin: 0 auto;}">
+                            <center>
+                                <button type="button" class="btn btn-warning" name="load_more_button">
+                                    <i class="fa fa-caret-down" aria-hidden="true">Loading...</i>
+                                </button>
+                            </center>
+                            </div>';
+        }
+        echo $output;
+    }
     public function send_mail(){
         //send mail
                $to_name = "Nhi admin";

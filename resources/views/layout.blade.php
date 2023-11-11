@@ -16,6 +16,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
         <title>{{$meta_title}}</title>
+        <meta name="csrf-token" content="{{csrf_token()}}">
         <link rel="icon" href="https://cdn01.beelancer.vn/blog/wp-content/uploads/2021/07/Maquillaje-Nina-Maquillaje-Nina-Nina-Pintada-A-Mano-Ojos-De-Nina-PNG-y-PSD-para-Descargar-Gratis-_-Pngtree.jpg" type="image/x-icon">
         
         <link rel="stylesheet" href="{{asset('resources/css/style.css')}}">
@@ -209,6 +210,27 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
         <script type="text/javascript">
             let table = new DataTable('#myTable');
+        </script>
+        <script>
+            load_more_product();
+            function load_more_product(id = ''){
+                $.ajax({
+                    url: '{{url('/load-more')}}',
+                    method: 'POST',
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{id:id},
+                    success:function(data){
+                        $('#load_more_button').remove();
+                        $('#all_product').append(data);
+                    } 
+                });
+            }
+            $(document).on('click','#load_more_button',function(){
+                var id = $(this).data('id');
+                load_more_product(id);
+            })
         </script>
         <div id="paypal-button"></div>
         {{-- Paypal --}}

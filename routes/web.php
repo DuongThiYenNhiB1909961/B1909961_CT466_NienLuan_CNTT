@@ -24,6 +24,7 @@ use App\Http\Controllers\GalleryController;
 |
 */
 Route::get('/', [IndexController::class, 'index']);
+Route::post('/load-more', [IndexController::class, 'load_more']);
 Route::get('/index', [IndexController::class, 'index']);
 Route::get('/introduce', [IndexController::class, 'introduce']);
 Route::get('/contact', [IndexController::class, 'contact']);
