@@ -180,4 +180,6 @@ Route::get('/delete-comment/{comment_id}',[ProductController::class, 'delete_com
 Route::post('/reply-cmt',[ProductController::class, 'reply_cmt']);
 Route::post('/add-rating',[ProductController::class, 'add_rating']);
 
-// 
+//Checkout online
+Route::post('/vnpay-checkout',[CheckoutController::class, 'vnpay_checkout']);
+Route::post('/momo-checkout',[CheckoutController::class, 'momo_checkout']);

@@ -591,6 +591,7 @@
                     var matp = $('.city').val();
                     var maqh = $('.district').val();
                     var xaid = $('.wards').val();
+                    var payment_select = $('.payment_select').val();
                     var _token = $('input[name="_token"]').val();
                     if(matp == '' || maqh == '' || xaid == ''){
                         alert('Vui lòng chọn đầy đủ địa chỉ cần vận chuyển');
@@ -598,7 +599,7 @@
                     $.ajax({
                         url : '{{url('/fee-feeship')}}',
                         method: 'POST',
-                        data:{matp:matp,maqh:maqh,xaid:xaid,_token:_token},
+                        data:{matp:matp,maqh:maqh,xaid:xaid,payment_select:payment_select,_token:_token},
                         success:function(data){
                             location.reload();      
                         }
@@ -607,7 +608,24 @@
                 }); 
             });
         </script>
-        
+        <script>
+            $(document).ready(function(){
+                $('.vnpay').click(function(){
+                    var total_vnpay = $('.total_vnpay').val();
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                            url: '{{url('/vnpay-checkout')}}',
+                            method: 'POST',
+                            data:{
+                                total_vnpay:total_vnpay,
+                                _token:_token},
+                                success:function(data){
+                                    swal("Good job!", "Đặt hàng thành công", "success");
+                                }
+                        });
+                })
+            })
+        </script>
         <script type="text/javascript">
             $(document).ready(function(){
                 $('.send_order').click(function(){

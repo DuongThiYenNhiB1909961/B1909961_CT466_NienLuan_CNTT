@@ -11,6 +11,12 @@
   .shipping.order-message{
     padding-left: 2px;
   }
+  /* .footer_checkout{
+    Position: fixed;
+    Z-index: 1;
+    background: #000;
+    padding-top: 80%;
+} */
 </style>
 <section id="cart_items">
   
@@ -39,7 +45,7 @@
             <form>
     @csrf
               <div class="bill-to">
-                  <h4><b class="text-danger">Thông tin mua hàng</b> </h4>
+                  <h5 class="mt-2"><b>Thông Tin Mua Hàng</b> </h5><hr>
                   <div class="form-group row">
                       <label for="colFormLabel" class="col-sm-4 col-form-label">Tên Người Nhận</label>
                       <div class="col-sm-5">
@@ -76,6 +82,37 @@
                       </div>
                     </div>
                     <div class="form-group row">
+                      <label for="colFormLabel" class="col-sm-4 col-form-label">Chọn Thành Phố</label>
+                      <div class="col-sm-5">
+                        <select name="city" id="city" class="shadow form-control input-sm m-bot15 choose city">
+                        
+                                <option value="">--Chọn tỉnh thành phố--</option>
+                            @foreach($city as $key => $tp)
+                                <option value="{{$tp->matp}}">{{$tp->name_city}}</option>
+                            @endforeach
+                                
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="colFormLabel" class="col-sm-4 col-form-label">Chọn Quận Huyện</label>
+                      <div class="col-sm-5">
+                        <select name="district" id="district" class="shadow form-control input-sm m-bot15 choose district">
+                                <option value="">--Chọn quận huyện--</option>
+      
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="colFormLabel" class="col-sm-4 col-form-label">Chọn Xã Phường</label>
+                      <div class="col-sm-5">
+                        <select name="wards" id="wards" class="shadow form-control input-sm m-bot15 wards">
+                              <option value="">--Chọn xã phường--</option>   
+                        </select>
+                      </div>
+                    </div>
+                    <h5 class="mt-2"><b>Phương Thức Thanh Toán</b></h5><hr>
+                    <div class="form-group row">
                       <label for="colFormLabel" class="col-sm-4 col-form-label">Chọn hình thức thanh toán</label>
                       <div class="col-sm-5">
                         <label for="exampleInputPassword1"><b></b></label>
@@ -85,9 +122,14 @@
                             <option value="1">Ngân Hàng</option>   
                           </select>
                       </div>
-                    </div>
-                    
-{{-- </form> --}}
+                    </div>        
+                    <div class="delivery">
+                      <center>
+                        <input type="submit" value="Tính Phí" name="fee_feeship" class="btn btn-danger btn-sm fee_feeship">
+                      </center>
+                      
+                    </div>                  
+
                     @if(Session::get('fee'))
                       <input type="hidden" name="order_fee" class="order_fee" value="{{Session::get('fee')}}">
                     @else 
@@ -103,47 +145,11 @@
                     @endif
               </div>   
           </div>
+</form>
           <div class="order-message shadow pl-2 pt-2 pb-2 mt-2">
-            <h4><b class="text-danger ">Địa chỉ vận chuyển</b></h4>
-              <div class="form-group row">
-                <label for="colFormLabel" class="col-sm-4 col-form-label">Chọn Thành Phố</label>
-                <div class="col-sm-5">
-                  <select name="city" id="city" class="shadow form-control input-sm m-bot15 choose city">
-                  
-                          <option value="">--Chọn tỉnh thành phố--</option>
-                      @foreach($city as $key => $tp)
-                          <option value="{{$tp->matp}}">{{$tp->name_city}}</option>
-                      @endforeach
-                          
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="colFormLabel" class="col-sm-4 col-form-label">Chọn Quận Huyện</label>
-                <div class="col-sm-5">
-                  <select name="district" id="district" class="shadow form-control input-sm m-bot15 choose district">
-                          <option value="">--Chọn quận huyện--</option>
-
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="colFormLabel" class="col-sm-4 col-form-label">Chọn Xã Phường</label>
-                <div class="col-sm-5">
-                  <select name="wards" id="wards" class="shadow form-control input-sm m-bot15 wards">
-                        <option value="">--Chọn xã phường--</option>   
-                  </select>
-                </div>
-              </div>           
-              <div class="delivery">
-                <center>
-                  <input type="submit" value="Tính Phí" name="fee_feeship" class="btn btn-danger btn-sm fee_feeship">
-                </center>
-                
-              </div>
+            
           </div>
         </div>
-                <h4 class="text-danger text-center"><b>XEM LẠI GIỎ HÀNG</b></h4> 			
                 <?php
                     $message = Session::get('message');
                     $error = Session::get('error');
@@ -158,8 +164,8 @@
                 <div class="table-responsive">
                     <table class="table table-striped b-t b-light rounded-lg">
                         <thead >
-                          <tr class="bg-warning text-white ">
-                            <th colspan="5">Xem lại giỏ hàng</th>
+                          <tr>
+                            <th colspan="5">Kiểm tra lại đơn hàng</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -274,9 +280,9 @@
                                   <div id="paypal-button"></div>
                                   <input type="hidden" id="toUSD" value="{{round($toUSD,2)}}">
                                 </div>
+                                
                               </ul>
                             </td>
-                            
                           </tr>
                           @else
                           <tr>
@@ -303,26 +309,62 @@
         if(($customer_id != NULL) && ($cart != NULL))
         {
         ?>
+        @if(Session::get('payment_select')==0)
         <div class="delivery">
           <center>
-            <input type="button" value="Xác nhận" name="send_order" class="btn btn-danger btn-sm mt-1 send_order">
+            <form >
+              @csrf
+              <input type="button" value="Thanh Toán" name="send_order" class="btn btn-danger btn-sm mt-1 send_order">
+            </form>
           </center>
           
         </div>
-        
+        @elseif(Session::get('payment_select')==1)
+          <div class="delivery">
+            <center>
+            <form action="{{url('/vnpay-checkout')}}" method="POST">
+              @csrf
+              <input type="hidden" name="total_vnpay" value="{{$total_after}}">
+              <button type="submit"  name="redirect" class="vnpay btn btn-warning text-danger ml-4" style="font-size: 15px; border-radius: 15px 15px 15px 15px; margin: 0; ">
+                <i class="fa fa-credit-card text-danger" aria-hidden="true"></i>
+                <b>   VNPay</b>
+              </button>
+            </form>
+            </center>
+            
+          </div>
+        @else
+        <div class="delivery">
+          <center>
+            <form >
+              @csrf
+              <input type="button" value="Thanh Toán" name="send_order" class="btn btn-danger btn-sm mt-1 send_order">
+            </form>
+          </center>
+          
+        </div>
+        @endif
         <?php
             }else{
         ?>
         <div class="delivery">
-          <center>
-            <p class="btn btn-danger">Vui lòng thêm SP vào giỏ hàng để đặt hàng</p>
-          </center>
-          
         </div>
         <?php
         }
         ?>  
     </div>
-  </form>
+  {{-- </form> --}}
+  {{-- @if(Session::get('cart')==true && Session::get('payment_select')==1)
+    <div class="col-md-12">
+      <form action="{{url('/vnpay-checkout')}}" method="POST">
+        @csrf
+        <input type="hidden" name="total_vnpay" value="{{$total_after}}">
+        <button type="submit"  name="redirect" class="vnpay btn btn-warning text-danger ml-4" style="font-size: 15px; border-radius: 15px 15px 15px 15px; margin: 0; ">
+          <i class="fa fa-credit-card text-danger" aria-hidden="true"></i>
+          <b>   VNPay</b>
+        </button>
+      </form>
+    </div>
+  @endif --}}
 </section>
 @endsection

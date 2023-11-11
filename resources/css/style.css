@@ -27,6 +27,12 @@ header, footer{
     Z-index: 1;
     background: #fff;
 }
+/* .footer_checkout{
+    Position: fixed;
+    Z-index: 1;
+    background: #000;
+    padding-top: 80%;
+} */
 .banner{
     height: 40px;
 
