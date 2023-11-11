@@ -37,6 +37,40 @@ header, footer{
     padding-right: 40%;
     
 }
+.nav-link {
+    display: block;
+    padding: 0.2rem 0.2rem;
+    margin: 0;
+}
+.shop-menu ul li{
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.shop-menu .hover-cart{
+    display: inline-grid;
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    background: bisque;
+    padding: 0;
+}
+li.cart-hover:hover .hover-cart{
+    display: inherit;
+}
+ul.hover-cart li{
+    padding: 10px;
+    border-bottom: 1px solid #fff;
+}
+ul.hover-cart li img{
+    display: block;
+    margin: 0 auto;
+    width: 70px;
+    height: 70px;
+}
+li.cart-hover{
+    position: relative;
+}
 .search {
     width: 20px;
     height: inherit;

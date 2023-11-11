@@ -14,16 +14,45 @@ use Illuminate\Support\Facades\Redirect;
 session_start();
 class CartController extends Controller
 {
+    public function hover_cart(){
+        // {{asset('public/uploads/product/body570.jpg')}}{{asset('/del-product/'.$cart['session_id'])}}
+        $count = 0;
+        $count = count(Session::get('cart'));
+        $output = '';
+        if($count>0){
+            
+            $output .= '<ul class="hover-cart">';
+            foreach(Session::get('cart') as $key => $value){
+                $output .= '<li><a href="">
+                                    <img src="'.asset('public/uploads/product/'.$value['product_image']).'">
+                                    <p class="text-danger" style="font-size:15px;">'.number_format($value['product_price'],0,',','.').'vnđ</p>
+                                    <p class="text-danger" style="font-size:15px;">Số lượng: '.$value['product_qty'].'</p>
+                                </a>
+                                <center>
+                                <a class="del-cart" href="'.url('/del-product/'.$value['session_id']).'">
+                                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                </a>
+                                </center>
+                            </li>';
+            }
+                $output .= '</ul>';
+        }else{
+            $output .='<ul class="hover-cart">
+                        <li?><p>Giỏ hàng rỗng</p></li>
+                        </ul>';
+        }
+        
+                  
+        echo $output;
+    }
     public function show_cart_number(){
         $count = 0;
         $count = count(Session::get('cart'));
         $output = '';
         
-            $output .= '<li class="nav-item">
-                <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="'.url('/show-cart-ajax').'">
-                <i class="fa fa-shopping-cart text-warning" aria-hidden="true"></i>
-                <b>Cart <span class="badges">'.$count.'</span></b></a></div></li>';
+            $output .= '<span class="badges">'.$count.'</span>';
         
+                  
         echo $output;
     }
     public function show_cart_ajax(Request $request){

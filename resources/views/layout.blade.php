@@ -36,6 +36,7 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            
         </style>
     </head>
     <body class="antialiased">
@@ -61,64 +62,75 @@
             </nav>
             
             <nav class="banner col-sm-6">
-                <ul class="nav justify-content-center">
-                
-                    <?php
-                        $customer_id = Session::get('customer_id');
-                        $shipping_id = Session::get('shipping_id');
-                        if($customer_id != NULL && $shipping_id == NULL)
-                        {
-                    ?>
-                    <li class="nav-item">
-                        <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Checkout</b></a></div>
-                    </li>
-                    <?php
-                        }else if($customer_id != NULL && $shipping_id != NULL){
-                    ?>
-                    <li class="nav-item">
-                        <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/pill')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Checkout</b></a></div>
-                    </li>
-                    <?php
-                        }else {
-                    ?>
-                    <li class="nav-item">
-                        <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Checkout</b></a></div>
-                    </li>
-                    <?php
-                    }
-                    ?>
+                <div class="shop-menu pull-right">
+                    <ul class="nav justify-content-center">
                     
-                <span id="show-cart"></span>
-                <?php
-                $customer_id = Session::get('customer_id');
-                if($customer_id != NULL)
-                {
-                ?>
-                <li class="nav-item">
-                    <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/history')}}"><i class="fa fa-history text-warning" aria-hidden="true"></i><b>History</b></a></div>
-                </li>
-                <?php
-                    }
-                ?>
-                    <?php
+                        <?php
+                            $customer_id = Session::get('customer_id');
+                            $shipping_id = Session::get('shipping_id');
+                            if($customer_id != NULL && $shipping_id == NULL)
+                            {
+                        ?>
+                        <li class="nav-item">
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Checkout</b></a></div>
+                        </li>
+                        <?php
+                            }else if($customer_id != NULL && $shipping_id != NULL){
+                        ?>
+                        <li class="nav-item">
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/pill')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Checkout</b></a></div>
+                        </li>
+                        <?php
+                            }else {
+                        ?>
+                        <li class="nav-item">
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Checkout</b></a></div>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                        <li class="nav-item cart-hover">
+                            <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/show-cart-ajax')}}">
+                            <i class="fa fa-shopping-cart text-warning" aria-hidden="true"></i>
+                            <b>Cart <span id="show-cart"></span>
+                                <div class="clearfix"></div>
+                                <span class="hover-giohang"></span>
+                                
+                            </b></a></div>
+                        </li>    
+                        
+
+                        <?php
                         $customer_id = Session::get('customer_id');
                         if($customer_id != NULL)
                         {
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link  text-danger" href="{{asset('/logout')}}"><i class="fa fa-sign-out text-warning" aria-hidden="true"></i><b>Logout</b></a>
-                        <img width="15%" src="{{Session::get('customer_picture')}}"><b class="text-danger">{{Session::get('customer_name')}}</b> 
-                    </li>
-                    <?php
-                        }else{
-                    ?>
-                    <li class="nav-item">
-                        <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-sign-in text-warning" aria-hidden="true"></i><b>Login</b></a></div>
-                    </li>
-                    <?php
-                    }
-                    ?>
-                  </ul>
+                        ?>
+                        <li class="nav-item">
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/history')}}"><i class="fa fa-history text-warning" aria-hidden="true"></i><b>History</b></a></div>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                        <?php
+                            $customer_id = Session::get('customer_id');
+                            if($customer_id != NULL)
+                            {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link  text-danger" href="{{asset('/logout')}}"><i class="fa fa-sign-out text-warning" aria-hidden="true"></i><b>Logout</b></a>
+                            <img width="15%" src="{{Session::get('customer_picture')}}"><b class="text-danger">{{Session::get('customer_name')}}</b> 
+                        </li>
+                        <?php
+                            }else{
+                        ?>
+                        <li class="nav-item">
+                            <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-sign-in text-warning" aria-hidden="true"></i><b>Login</b></a></div>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
             </nav><br>
             <div class="sea">
                     <form action="{{asset('/search')}}" method="POST">
@@ -472,6 +484,16 @@
         <script type="text/javascript">
         $(document).ready(function(){
             show_cart_number();
+            hover_cart();
+            function hover_cart(){
+                $.ajax({
+                    url: '{{url('/hover-cart')}}',
+                    method: 'GET',
+                    success:function(data){
+                        $('.hover-giohang').html(data);
+                    } 
+                });
+            }
             function show_cart_number(){
                 $.ajax({
                     url: '{{url('/show-cart-number')}}',
@@ -509,6 +531,7 @@
                         success:function(data){
                             swal("Good job!", "Đã thêm sản phẩm vào giỏ hàng", "success");
                             show_cart_number();
+                            hover_cart();
                         } 
                         });
                     }
