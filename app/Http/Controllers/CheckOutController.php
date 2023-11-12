@@ -111,11 +111,21 @@ class CheckOutController extends Controller
                      foreach($feeship as $key => $fee){
                         Session::put('fee',$fee->fee_feeship);
                         Session::put('payment_select',$data['payment_select']);
+                        Session::put('shipping_name',$data['shipping_name']);
+                        Session::put('shipping_email',$data['shipping_email']);
+                        Session::put('shipping_address',$data['shipping_address']);
+                        Session::put('shipping_phone',$data['shipping_phone']);
+                        Session::put('shipping_note',$data['shipping_note']);
                         Session::save();
                     }
                 }else{ 
                     Session::put('fee',35000);
                     Session::put('payment_select',$data['payment_select']);
+                    Session::put('shipping_name',$data['shipping_name']);
+                    Session::put('shipping_email',$data['shipping_email']);
+                    Session::put('shipping_address',$data['shipping_address']);
+                    Session::put('shipping_phone',$data['shipping_phone']);
+                    Session::put('shipping_note',$data['shipping_note']);
                     Session::save();
                 }
             }

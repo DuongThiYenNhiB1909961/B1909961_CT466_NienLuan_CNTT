@@ -41,15 +41,15 @@ class IndexController extends Controller
             }
             $output .= '<br><div id="load_more" style="text-align: center; margin: 0 auto;}" class="mb-2">
                             <center>
-                                <button type="button" class="btn btn-warning" name="load_more_button" data-id="'.$last_id.'" id="load_more_button">
-                                    <i class="fa fa-caret-down" aria-hidden="true">Thêm</i>
+                                <button name="load_more_button" data-id="'.$last_id.'" id="load_more_button">
+                                    <i class="fa fa-caret-down" aria-hidden="true">Load more</i>
                                 </button>
                             </center>
                             </div>';
         }else{
             $output .= '<br><div id="load_more" style="text-align: center; margin: 0 auto;}">
                             <center>
-                                <button type="button" class="btn btn-warning" name="load_more_button">
+                                <button class="" name="load_more_button">
                                     <i class="fa fa-caret-down" aria-hidden="true">Loading...</i>
                                 </button>
                             </center>

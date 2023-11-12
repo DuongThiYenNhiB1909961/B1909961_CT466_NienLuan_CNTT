@@ -592,6 +592,11 @@
                     var maqh = $('.district').val();
                     var xaid = $('.wards').val();
                     var payment_select = $('.payment_select').val();
+                    var shipping_name = $('.shipping_name').val();
+                    var shipping_email = $('.shipping_email').val();
+                    var shipping_address = $('.shipping_address').val();
+                    var shipping_phone = $('.shipping_phone').val();
+                    var shipping_note = $('.shipping_note').val();
                     var _token = $('input[name="_token"]').val();
                     if(matp == '' || maqh == '' || xaid == ''){
                         alert('Vui lòng chọn đầy đủ địa chỉ cần vận chuyển');
@@ -599,7 +604,8 @@
                     $.ajax({
                         url : '{{url('/fee-feeship')}}',
                         method: 'POST',
-                        data:{matp:matp,maqh:maqh,xaid:xaid,payment_select:payment_select,_token:_token},
+                        data:{matp:matp,maqh:maqh,xaid:xaid,payment_select:payment_select,shipping_name:shipping_name,shipping_email:shipping_email,
+                            shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_note:shipping_note,_token:_token},
                         success:function(data){
                             location.reload();      
                         }

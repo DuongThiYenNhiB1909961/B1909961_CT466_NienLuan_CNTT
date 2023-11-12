@@ -9,55 +9,54 @@
 <div class="shadow p-3">
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-        <div class="flex justify-center sm:justify-start sm:pt-0">
-            <img src="https://printgo.vn/uploads/media/772948/thiet-ke-logo-my-pham-10_1584438206.jpg" class="h-30 w-auto text-gray-700 sm:h-20">
-            <i class="justify-center pt-4 font-semibold text-danger" ><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></i>
-        </div>
+        <center><h4><b>Đăng ký tài khoản</b></h4><hr></center>
         <form action="{{URL::to('add-customer')}}" class="pt-2" method="POST">
             {{csrf_field()}}
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Tên khách hàng</label>
-                    <input type="text" name="customer_name" class="form-control" id="inputName" placeholder="Họ tên khách hàng" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" name="customer_email" class="form-control" id="inputEmail4" placeholder="examp@gmail.com" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Địa chỉ khách hàng</label>
-                    <input type="text" name="customer_address" class="form-control" id="inputName" placeholder="Họ tên khách hàng" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
-                    <input type="password" name="customer_password" class="form-control" id="inputPassword4" placeholder="********" required>
-                </div>
-                <div class="form-group col-md-6">
-                        <label for="inputnumber">Telephone</label>
-                        <input type="text" name="customer_phone" class="form-control" id="inputnumber" placeholder="0978978789" required
-                        pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
+            <div class="form-group row" style="margin-left: 186px">
+                <label for="colFormLabel" class="col-sm-3 col-form-label">Tên khách hàng</label>
+                <div class="col-sm-7">
+                  <input type="name" name="customer_name" class="customer_name shadow form-control" id="inputName" placeholder="Họ tên khách hàng" required>
                 </div>
             </div>
-                
-                <div class="form-group">
+            <div class="form-group row" style="margin-left: 186px">
+                <label for="colFormLabel" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-7">
+                  <input type="email" name="customer_email" class="customer_email shadow form-control" id="inputName" placeholder="Email đăng nhập" required>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-left: 186px">
+                <label for="colFormLabel" class="col-sm-3 col-form-label">Địa chỉ khách hàng</label>
+                <div class="col-sm-7">
+                  <input type="text" name="customer_address" class="customer_address shadow form-control" id="inputName" placeholder="Địa chỉ khách hàng" required>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-left: 186px">
+                <label for="colFormLabel" class="col-sm-3 col-form-label">Mật khẩu</label>
+                <div class="col-sm-7">
+                  <input type="password" name="customer_password" class="customer_password shadow form-control" id="inputName" placeholder="******" required>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-left: 186px">
+                <label for="colFormLabel" class="col-sm-3 col-form-label">Số điện thoại</label>
+                <div class="col-sm-7">
+                  <input type="text" name="customer_phone" class="customer_phone shadow form-control" id="inputName" placeholder="0978978789" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                </div>
+            </div>
+            <div class="form-group row" style="margin-left: 186px">
+                <label for="colFormLabel" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-7">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="gridCheck">
                         <label class="form-check-label" for="gridCheck">
                         Check me out
                         </label>
                     </div>
+                    <button type="submit" class="btn btn-danger">Register</button>
                 </div>
-                {{-- <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
-                <br/>
-                @if($errors->has('g-recaptcha-response'))
-                <span class="invalid-feedback" style='display:block'>
-                <strong>{{$errors->first('g-recaptcha-response')}}</strong>
-                </span>
-                @endif --}}
+            </div>
 
-                <button type="submit" class="btn btn-danger">Register</button>
+            
         </form>
     </div>
 </div>
-{{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
 @endsection

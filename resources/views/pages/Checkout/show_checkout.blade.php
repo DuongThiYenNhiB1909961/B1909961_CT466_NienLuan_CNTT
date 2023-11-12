@@ -46,7 +46,7 @@
     @csrf
               <div class="bill-to">
                   <h5 class="mt-2"><b>Thông Tin Mua Hàng</b> </h5><hr>
-                  <div class="form-group row">
+                    <div class="form-group row">
                       <label for="colFormLabel" class="col-sm-4 col-form-label">Tên Người Nhận</label>
                       <div class="col-sm-5">
                         <input type="text" data-validation="length" data-validation-length="min3" 
@@ -145,9 +145,33 @@
                     @endif
               </div>   
           </div>
-</form>
-          <div class="order-message shadow pl-2 pt-2 pb-2 mt-2">
+</form></div>
+        <div class="order-message shadow pl-2 pt-2 pb-2 mt-2">
+          <h6>MÃ KHUYẾN MÃI/MÃ QUÀ TẶNG</h6><hr>
+          <div style="background-color: rgb(241, 216, 216); padding: 10px; width: 70%;" class="rounded">
+            @if(Session::get('cart'))
             
+              <td colspan="2">
+                <form method="POST" action="{{url('/checkCoupon')}}">
+                  @csrf
+                  <div class="input-group" style="margin-top: 13px">
+                    <p class="mt-1">Mã KM/Quà tặng </p>
+                    <input type="text" id="keywords" name="coupon" class="form-control rounded coupon" placeholder="Mã KM">
+                    <span class="input-group-btn">
+                      <input type="submit" value="Áp dụng" name="check_coupon" class="btn btn-info btn-sm check_coupon">
+                      {{-- <input type="submit" class="btn btn-sm btn-info check_coupon text-white" name="check_coupon"  value="Áp dụng" style="margin-top: 4px"> --}}
+                    </span>
+                      @if(Session::get('coupon'))
+                        <a class="btn btn-default check_out text-danger" href="{{url('/del-coupon')}}"><b>Xóa mã khuyến mãi</b></a>
+                      @endif  
+                    <br>
+                    
+                  </div>
+                  <i style="font-size: 15px; padding: 25%" class="text-danger">*Chỉ áp dụng được 1 mã khuyến mãi</i>
+                  
+                </form>
+              </td>
+            @endif
           </div>
         </div>
                 <?php
@@ -252,33 +276,88 @@
                                 </div>
                                 <div>
                                   <b>
-                                  Thanh Toán: 
-                                  @php 
-                                    if(Session::get('fee') && !Session::get('coupon')){
-                                      $total_after = $total_after_fee;
-                                      echo number_format($total_after,0,',','.').'đ';
-                                    }elseif(!Session::get('fee') && Session::get('coupon')){
-                                      $total_after = $total_after_coupon;
-                                      $total_after = $total_after + Session::get('fee',35000);
-                                      echo number_format($total_after,0,',','.').'đ';
-                                    }elseif(Session::get('fee') && Session::get('coupon')){
-                                      $total_after = $total_after_coupon;
-                                      $total_after = $total_after + Session::get('fee');
-                                      echo number_format($total_after,0,',','.').'đ';
-                                    }elseif(!Session::get('fee') && !Session::get('coupon')){
-                                      $total_after = $total + Session::get('fee',35000);
-                                      echo number_format($total_after,0,',','.').'đ';
-                                    }
+                                    Thanh Toán: 
+                                    @php 
+                                      if(Session::get('fee') && !Session::get('coupon')){
+                                        $total_after = $total_after_fee;
+                                        echo number_format($total_after,0,',','.').'đ';
+                                      }elseif(!Session::get('fee') && Session::get('coupon')){
+                                        $total_after = $total_after_coupon;
+                                        $total_after = $total_after + Session::get('fee',35000);
+                                        echo number_format($total_after,0,',','.').'đ';
+                                      }elseif(Session::get('fee') && Session::get('coupon')){
+                                        $total_after = $total_after_coupon;
+                                        $total_after = $total_after + Session::get('fee');
+                                        echo number_format($total_after,0,',','.').'đ';
+                                      }elseif(!Session::get('fee') && !Session::get('coupon')){
+                                        $total_after = $total + Session::get('fee',35000);
+                                        echo number_format($total_after,0,',','.').'đ';
+                                      }
 
-                                  @endphp
-                                </b>
+                                    @endphp
+                                  </b>
                                 </div>
                                 <div class="col-md-12">
-                                  @php
-                                    $toUSD = $total_after/24305;
-                                  @endphp
-                                  <div id="paypal-button"></div>
-                                  <input type="hidden" id="toUSD" value="{{round($toUSD,2)}}">
+                                  <?php
+                                  $customer_id = Session::get('customer_id');
+                                  $cart = Session::get('cart');
+                                  if(($customer_id != NULL) && ($cart != NULL))
+                                  {
+                                  ?>
+                                  @if(Session::get('payment_select')==0)
+                                  <div class="delivery">
+                                    
+                                      <form >
+                                        @csrf
+                                        <input type="hidden" name="shipping_name" value="{{Session::get('shipping_name')}}">
+                                        <input type="hidden" name="shipping_email" value="{{Session::get('shipping_email')}}">
+                                        <input type="hidden" name="shipping_address" value="{{Session::get('shipping_address')}}">
+                                        <input type="hidden" name="shipping_phone" value="{{Session::get('shipping_phone')}}">
+                                        <input type="hidden" name="shipping_note" value="{{Session::get('shipping_note')}}">
+                                        <input type="hidden" name="shipping_method" value="{{Session::get('shipping_method')}}">
+                                       
+                                        <input type="hidden" name="totalafter" value="{{$total_after}}">
+                                        <input type="button" value="Thanh Toán" name="send_order" class="btn btn-danger btn-sm mt-1 send_order">
+                                      </form>
+                                   
+                                    
+                                  </div>
+                                  @elseif(Session::get('payment_select')==1)
+                                    <div class="delivery">
+                                     
+                                      <form action="{{url('/vnpay-checkout')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="shipping_name" value="{{Session::get('shipping_name')}}">
+                                        <input type="hidden" name="shipping_email" value="{{Session::get('shipping_email')}}">
+                                        <input type="hidden" name="shipping_address" value="{{Session::get('shipping_address')}}">
+                                        <input type="hidden" name="shipping_phone" value="{{Session::get('shipping_phone')}}">
+                                        <input type="hidden" name="shipping_note" value="{{Session::get('shipping_note')}}">
+                                        <input type="hidden" name="shipping_method" value="{{Session::get('shipping_method')}}">
+                                        
+                                        <input type="hidden" name="total_vnpay" value="{{$total_after}}">
+                                        <button type="submit"  name="redirect" class="vnpay btn btn-warning text-danger ml-4" style="font-size: 15px; border-radius: 15px 15px 15px 15px; margin: 0; ">
+                                          <i class="fa fa-credit-card text-danger" aria-hidden="true"></i>
+                                          <b>   VNPay</b>
+                                        </button>
+                                      </form>
+                                      @php
+                                        $toUSD = $total_after/24305;
+                                      @endphp
+                                      <div id="paypal-button"></div>
+                                      <input type="hidden" id="toUSD" value="{{round($toUSD,2)}}">
+                                      
+                                      
+                                    </div>
+                                  @endif
+                                  <?php
+                                      }else{
+                                  ?>
+                                  <div class="delivery">
+                                  </div>
+                                  <?php
+                                  }
+                                  ?>  
+                                  
                                 </div>
                                 
                               </ul>
@@ -303,55 +382,7 @@
                       
                 </div>
         </div>
-        <?php
-        $customer_id = Session::get('customer_id');
-        $cart = Session::get('cart');
-        if(($customer_id != NULL) && ($cart != NULL))
-        {
-        ?>
-        @if(Session::get('payment_select')==0)
-        <div class="delivery">
-          <center>
-            <form >
-              @csrf
-              <input type="button" value="Thanh Toán" name="send_order" class="btn btn-danger btn-sm mt-1 send_order">
-            </form>
-          </center>
-          
-        </div>
-        @elseif(Session::get('payment_select')==1)
-          <div class="delivery">
-            <center>
-            <form action="{{url('/vnpay-checkout')}}" method="POST">
-              @csrf
-              <input type="hidden" name="total_vnpay" value="{{$total_after}}">
-              <button type="submit"  name="redirect" class="vnpay btn btn-warning text-danger ml-4" style="font-size: 15px; border-radius: 15px 15px 15px 15px; margin: 0; ">
-                <i class="fa fa-credit-card text-danger" aria-hidden="true"></i>
-                <b>   VNPay</b>
-              </button>
-            </form>
-            </center>
-            
-          </div>
-        @else
-        <div class="delivery">
-          <center>
-            <form >
-              @csrf
-              <input type="button" value="Thanh Toán" name="send_order" class="btn btn-danger btn-sm mt-1 send_order">
-            </form>
-          </center>
-          
-        </div>
-        @endif
-        <?php
-            }else{
-        ?>
-        <div class="delivery">
-        </div>
-        <?php
-        }
-        ?>  
+        
     </div>
   {{-- </form> --}}
   {{-- @if(Session::get('cart')==true && Session::get('payment_select')==1)

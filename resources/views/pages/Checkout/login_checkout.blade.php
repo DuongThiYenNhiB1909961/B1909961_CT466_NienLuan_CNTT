@@ -9,10 +9,6 @@
 <div class=" shadow relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-        <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-            <img src="https://printgo.vn/uploads/media/772948/thiet-ke-logo-my-pham-10_1584438206.jpg" class="h-30 w-auto text-gray-700 sm:h-20">
-            <i class="justify-center pt-4 font-semibold text-danger" ><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></i>
-        </div>
         <?php
                     $message = Session::get('message');
                     $error = Session::get('error');
@@ -25,25 +21,32 @@
                     }
                 ?>
         <form action="{{URL::to('login')}}" method="get" class="pt-2">
-            <h3>Đăng nhập tài khoản</h3>
+            <center><h4><b>Đăng nhập tài khoản</b></h4><hr></center>
             {{csrf_field()}}
             @foreach($errors->all() as $val)
             {{$val}}
             @endforeach
-            <div class="form-group">
-                <label for="inputEmail4">Email</label>
-                <input name="customer_email" type="email" class="form-control" id="inputEmail4" required>
+            <div class="form-group row" style="margin-left: 186px">
+                <label for="colFormLabel" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-5">
+                  <input type="email" name="customer_email" class="customer_email shadow form-control" id="inputName" placeholder="Email đăng nhập" required>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="inputPassword4">Password</label>
-                <input name="customer_password" type="password" class="form-control" id="inputPassword4" required>
+            <div class="form-group row" style="margin-left: 186px">
+                <label for="colFormLabel" class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-5">
+                  <input type="password" name="customer_password" class="customer_password shadow form-control" id="inputName" placeholder="*******" required>
+                </div>
             </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                    Check me out
-                    </label>
+            <div class="form-group row" style="margin-left: 186px">
+                <label for="colFormLabel" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                        Check me out
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -54,13 +57,14 @@
                 <strong>{{$errors->first('g-recaptcha-response')}}</strong>
                 </span>
                 @endif --}}
-
+        <div style="margin-left: 39%">
             <button type="submit" class="btn btn-danger">Login</button>
             <b><p>Nếu bạn chưa có tài khoản hãy</p><a class="nav-link text-danger" href="register">Register</a></b>
             
-        </form>
-        <a href="{{url::to('/login-customer-google')}}"><b>Login Google</b></a>
-        <a href="{{url::to('/login-facebook-customer')}}"><b>Login Facebook</b></a>
+            </form>
+            <a href="{{url::to('/login-customer-google')}}"><b>Login Google</b></a>
+            <a href="{{url::to('/login-facebook-customer')}}"><b>Login Facebook</b></a>
+        </div>
     </div>
 </div>
 {{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
