@@ -60,7 +60,14 @@
               <td>
                 
                 @if($order->order_status != 3)
-                    <p><textarea class="lydo" id="" cols="10" rows="3" placeholder="Lý do hủy đơn hàng" required></textarea></p>
+                    {{-- <p><textarea class="" id="" cols="10" rows="3" placeholder="Lý do hủy đơn hàng" required></textarea></p> --}}
+                    <select name="lydo"  class="lydo form-controll input-sm m-bot15 payment_select shadow">
+                      <option value="">--Lý do hủy--</option>
+                      <option value="0">Thay đổi số lượng </option>
+                      <option value="1">Thay đổi mã giảm</option>   
+                      <option value="2">Thay đổi size</option>  
+                      <option value="3">Thêm sản phẩm</option>    
+                    </select>
                 @endif
               </td>
               <td>

@@ -332,7 +332,7 @@
                 var order_code = id;
                 var lydo = $('.lydo').val();
                 var _token = $('input[name="_token"]').val();
-                // alert(order_code);
+                // alert(lydo);
                 $.ajax({
                     url: '{{url('/huydon')}}',
                         method: 'POST',

@@ -49,7 +49,15 @@
               <td>{{$order->created_at}}</td>
               <td>
                 @if($order->order_status == 3)
-                  <p class="text-danger">{{$order->order_destroy}}</p>
+                  @if($order->order_destroy==0)
+                    <p class="text-danger">Thay đổi số lượng</p>
+                  @elseif($order->order_destroy==1)
+                    <p class="text-danger">Thay đổi mã giảm</p>
+                  @elseif($order->order_destroy==2)
+                    <p class="text-danger">Thay đổi size</p>
+                  @elseif($order->order_destroy==3)
+                    <p class="text-danger">Thêm sản phẩm</p>
+                  @endif
                 @endif
               </td>
               <td>
