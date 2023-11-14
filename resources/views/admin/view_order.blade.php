@@ -81,8 +81,10 @@
               <td>
                 @if($shipping->shipping_method == 0)
                   Thanh toán khi nhận
-                @else
-                  Ngân hàng
+                @elseif($shipping->shipping_method == 1)
+                  Thanh toán qua VNPay
+                @elseif($shipping->shipping_method == 2)
+                  Thanh toán qua PayPal
                 @endif
               </td>
             </tr> 

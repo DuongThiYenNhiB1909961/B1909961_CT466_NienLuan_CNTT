@@ -237,7 +237,9 @@
         <script src="https://www.paypalobjects.com/api/checkout.js"></script>
         <script>
             var toUSD = document.getElementById("toUSD").value;
-          paypal.Button.render({
+            var order_coupon = document.getElementById("order_coupon").value;
+            var order_fee = document.getElementById("order_fee").value;
+            paypal.Button.render({
             // Configure environment
             env: 'sandbox',
             client: {
@@ -266,15 +268,22 @@
                 }]
               });
             },
+            
             // Execute the payment
             onAuthorize: function(data, actions) {
               return actions.payment.execute().then(function() {
+                
                 // Show a confirmation message to the buyer
-                window.alert('Cảm ơn bạn đã tin tưởng mua hàng của shop!');
+                // window.alert('Cảm ơn bạn đã tin tưởng mua hàng của shop!');
+                window.location.replace('http://nhiduongcosmetic.com/My_Project_NL/history?thanhtoan=paypal');
               });
-            }
+            },
+            // onCancle:function(data){
+            //     window.location.replace('http://nhiduongcosmetic.com/My_Project_NL/history');
+            // }
+          
           }, '#paypal-button');
-        
+          
         </script>
         {{-- //Paypal --}}
         <!-- Messenger Plugin chat Code -->
@@ -332,8 +341,10 @@
                 var order_code = id;
                 var lydo = $('.lydo').val();
                 var _token = $('input[name="_token"]').val();
-                // alert(lydo);
-                $.ajax({
+                if(lydo==''){
+                    alert('Vui lòng chọn vào lý do hủy đơn');
+                }else{
+                    $.ajax({
                     url: '{{url('/huydon')}}',
                         method: 'POST',
                         data:{
@@ -347,6 +358,7 @@
                 window.setTimeout(function(){ 
                     location.reload();   
                 } ,3000);
+                } 
             }
         </script>
         <script>
@@ -618,17 +630,24 @@
             $(document).ready(function(){
                 $('.vnpay').click(function(){
                     var total_vnpay = $('.total_vnpay').val();
+                    var order_coupon = $('.order_coupon').val();
+                    var order_fee = $('.order_fee').val();
                     var _token = $('input[name="_token"]').val();
                     $.ajax({
                             url: '{{url('/vnpay-checkout')}}',
                             method: 'POST',
                             data:{
                                 total_vnpay:total_vnpay,
+                                order_coupon:order_coupon,
+                                order_fee:order_fee,
                                 _token:_token},
                                 success:function(data){
                                     swal("Good job!", "Đặt hàng thành công", "success");
                                 }
                         });
+                        window.setTimeout(function(){ 
+                            window.location.href = "{{url('/history')}}";
+                        } ,1000);
                 })
             })
         </script>

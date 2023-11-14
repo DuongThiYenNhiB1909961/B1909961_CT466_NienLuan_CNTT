@@ -70,7 +70,7 @@
                     <div class="form-group row">
                       <label for="colFormLabel" class="col-sm-4 col-form-label">Số Điện Thoại</label>
                       <div class="col-sm-5">
-                        <input type="tel" name="shipping_phone" class="shipping_phone form-control shadow" id="inputnumber" value="0{{Session::get('customer_phone')}}" required
+                        <input type="tel" name="shipping_phone" class="shipping_phone form-control shadow" id="inputnumber" value="{{Session::get('customer_phone')}}" required
                         pattern="[0-9]{3}[0-9]{3}[0-9]{4}"/>
                       </div>
                     </div>
@@ -119,7 +119,8 @@
                           <select name="payment_select"  class="form-controll input-sm m-bot15 payment_select shadow">
                             <option value="">--Chọn hình thức thanh toán--</option>
                             <option selected value="0">Thanh Toán Khi Nhận Hàng</option>
-                            <option value="1">Ngân Hàng</option>   
+                            <option value="1">Thanh Toán Qua VNPay</option>   
+                            <option value="2">Thanh Toán Qua PayPal</option>   
                           </select>
                       </div>
                     </div>        
@@ -297,6 +298,7 @@
                                     @endphp
                                   </b>
                                 </div>
+                                <input type="text" name="" id="" value="{{Session::get('payment_select')}}">
                                 <div class="col-md-12">
                                   <?php
                                   $customer_id = Session::get('customer_id');
@@ -309,12 +311,19 @@
                                     
                                       <form >
                                         @csrf
-                                        <input type="hidden" name="shipping_name" value="{{Session::get('shipping_name')}}">
-                                        <input type="hidden" name="shipping_email" value="{{Session::get('shipping_email')}}">
-                                        <input type="hidden" name="shipping_address" value="{{Session::get('shipping_address')}}">
-                                        <input type="hidden" name="shipping_phone" value="{{Session::get('shipping_phone')}}">
-                                        <input type="hidden" name="shipping_note" value="{{Session::get('shipping_note')}}">
-                                        <input type="hidden" name="shipping_method" value="{{Session::get('shipping_method')}}">
+                                        @if(Session::get('fee'))
+                                          <input type="hidden" name="order_fee" class="order_fee" value="{{Session::get('fee')}}">
+                                        @else 
+                                          <input type="hidden" name="order_fee" class="order_fee" value="35000">
+                                        @endif
+                    
+                                        @if(Session::get('coupon'))
+                                          @foreach(Session::get('coupon') as $key => $cou)
+                                            <input type="hidden" name="order_coupon" class="order_coupon" value="{{$cou['coupon_code']}}">
+                                          @endforeach
+                                        @else 
+                                          <input type="hidden" name="order_coupon" class="order_coupon" value="no">
+                                        @endif
                                        
                                         <input type="hidden" name="totalafter" value="{{$total_after}}">
                                         <input type="button" value="Thanh Toán" name="send_order" class="btn btn-danger btn-sm mt-1 send_order">
@@ -327,26 +336,28 @@
                                      
                                       <form action="{{url('/vnpay-checkout')}}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="shipping_name" value="{{Session::get('shipping_name')}}">
-                                        <input type="hidden" name="shipping_email" value="{{Session::get('shipping_email')}}">
-                                        <input type="hidden" name="shipping_address" value="{{Session::get('shipping_address')}}">
-                                        <input type="hidden" name="shipping_phone" value="{{Session::get('shipping_phone')}}">
-                                        <input type="hidden" name="shipping_note" value="{{Session::get('shipping_note')}}">
-                                        <input type="hidden" name="shipping_method" value="{{Session::get('shipping_method')}}">
                                         
                                         <input type="hidden" name="total_vnpay" value="{{$total_after}}">
                                         <button type="submit"  name="redirect" class="vnpay btn btn-warning text-danger ml-4" style="font-size: 15px; border-radius: 15px 15px 15px 15px; margin: 0; ">
                                           <i class="fa fa-credit-card text-danger" aria-hidden="true"></i>
                                           <b>   VNPay</b>
                                         </button>
+                                      </form>                                      
+                                    </div>
+
+                                    @elseif(Session::get('payment_select')==2)
+                                    <div class="delivery">
+                                      
+                                        <form>
+                                        @csrf
+                                          
+                                          @php
+                                            $toUSD = $total_after/24305;
+                                          @endphp
+
+                                          <div id="paypal-button"></div>
+                                          <input type="hidden" id="toUSD" value="{{round($toUSD,2)}}">
                                       </form>
-                                      @php
-                                        $toUSD = $total_after/24305;
-                                      @endphp
-                                      <div id="paypal-button"></div>
-                                      <input type="hidden" id="toUSD" value="{{round($toUSD,2)}}">
-                                      
-                                      
                                     </div>
                                   @endif
                                   <?php
