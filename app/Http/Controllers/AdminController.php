@@ -49,7 +49,8 @@ class AdminController extends Controller
                 'order'=>$st->total_order,
                 'sales'=>$st->sales,
                 'profit'=>$st->profit,
-                'quantity'=>$st->quantity
+                'spend'=>$st->spend,
+                'quantity'=>$st->quantity_order
             );
         }
         $data = json_encode($chart_data);
@@ -70,7 +71,8 @@ class AdminController extends Controller
                 'order'=>$st->total_order,
                 'sales'=>$st->sales,
                 'profit'=>$st->profit,
-                'quantity'=>$st->quantity
+                'spend'=>$st->spend,
+                'quantity'=>$st->quantity_order
             );
         }
         $data = json_encode($chart_data);
@@ -89,7 +91,8 @@ class AdminController extends Controller
                 'order'=>$st->total_order,
                 'sales'=>$st->sales,
                 'profit'=>$st->profit,
-                'quantity'=>$st->quantity
+                'spend'=>$st->spend,
+                'quantity'=>$st->quantity_order
             );
         }
         $data = json_encode($chart_data);
@@ -241,8 +244,14 @@ class AdminController extends Controller
         $order_count = Order::all()->count();
         $admin = Login::all()->count();
         $customer = Customer::all()->count();
+
+        // Thong ke SP
+        $all_product = DB::table('tb_product')
+        ->join('tb_category_product','tb_category_product.category_id','=','tb_product.category_id')
+        ->join('tb_brand','tb_brand.brand_id','=','tb_product.brand_id')
+        ->orderby('product_id','desc')->get();
      
-        return view('admin.dashboard')->with('visitors_total', $visitors_total)->with('visitor_count',$visitor_count)->with('product',$product)
+        return view('admin.dashboard')->with('all_product', $all_product)->with('visitors_total', $visitors_total)->with('visitor_count',$visitor_count)->with('product',$product)
         ->with('order_count',$order_count)->with('customer',$customer)->with('admin',$admin)->with('product_views',$product_views)
         ->with('visitor_last_month_count',$visitor_last_month_count)->with('visitor_this_month_count',$visitor_this_month_count)->with('visitor_year_count',$visitor_year_count);
     }

@@ -73,7 +73,7 @@ class OrderController extends Controller
 				$statistical_update = Statistical::where('order_date',$order_date)->first();
 				$statistical_update->sales = $statistical_update->sales + $sales;
 				$statistical_update->profit = $statistical_update->profit + $profit;
-				$statistical_update->quantity = $statistical_update->quantity + $quantity;
+				$statistical_update->quantity_order = $statistical_update->quantity + $quantity;
 				$statistical_update->total_order = $statistical_update->total_order + 1;
 				$statistical_update->save();
 			}else{
@@ -81,7 +81,7 @@ class OrderController extends Controller
 				$statistical_new->order_date = $order_date;
 				$statistical_new->sales = $sales;
 				$statistical_new->profit = $profit;
-				$statistical_new->quantity = $quantity;
+				$statistical_new->quantity_order = $quantity;
 				$statistical_new->total_order = $total_order;
 				$statistical_new->save();
 			}

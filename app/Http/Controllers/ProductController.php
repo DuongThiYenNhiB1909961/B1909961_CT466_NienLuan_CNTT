@@ -11,6 +11,7 @@ use App\Models\Gallery;
 use App\Models\Comment;
 use App\Models\Rating;
 use App\Models\Product;
+use App\Models\Statistical;
 use Carbon\Carbon;
 use File;
 use Illuminate\Support\Facades\Redirect;
@@ -189,6 +190,26 @@ class ProductController extends Controller
         $gallery->save();
 
         Session::put('message','Thêm mỹ phẩm thành công');
+
+        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('y-m-d');
+        $statistical = Statistical::where('order_date', $order_date)->get();
+        $spend = $request->product_price_buy*$request->product_qty;
+        if($statistical){
+			$statistical_count = $statistical->count();
+		}else{
+			$statistical_count = 0;
+		}
+        if($statistical_count>0){
+            $statistical_update = Statistical::where('order_date',$order_date)->first();
+            $statistical_update->spend = $statistical_update->spend + $spend;
+            $statistical_update->save();
+        }else{
+            $statistical_new = new Statistical();
+            $statistical_new->order_date = $order_date;
+            $statistical_new->spend = $spend;
+            $statistical_new->save();
+        }
+
         return Redirect::to('add-product');
     }
     public function unactive_product($product_id){

@@ -258,7 +258,7 @@
         $(document).ready(function() {
             chart30daysorder();
            
-            var chart = new Morris.Area({
+            var chart = new Morris.Line({
                 
                 element: 'mychart',
                 // lineColors: ['#819C79', '#fc8710', '#FF6541', '#A4ADD3', '#766B56']
@@ -270,9 +270,9 @@
                 
                 xkey: 'period',
                 
-                ykeys: ['order', 'sales', 'profit', 'quantity'],
+                ykeys: ['order', 'sales', 'profit','spend', 'quantity'],
                 behaveLikeLine: true,
-                labels: ['đơn hàng', 'doanh số', 'lợi nhuận', 'số lượng']
+                labels: ['đơn hàng', 'doanh số', 'lợi nhuận','chi tiêu', 'số lượng đơn hàng']
             });
             
             function chart30daysorder(){

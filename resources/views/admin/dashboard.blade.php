@@ -74,6 +74,67 @@
             </tbody>
         </table>
     </div>
+    <div>
+        <div >
+            <p class="title_statistic">Thống Kê Doanh Thu Theo Sản Phẩm</p>
+            
+        </div>
+        
+        <div class="table-agile-info">
+            <div class="panel panel-default" >
+              <div class="table-responsive" >
+                <?php
+                    $message = Session::get('message');
+                    if($message){
+                        echo '<b class="text-danger">'.$message.'</b>';
+                        Session::put('message',null);
+                    }
+                ?>
+                <table class="table table-striped b-t b-light" id="myTable">
+                  <thead>
+                    <tr>
+                      
+                      <th>Mã mỹ phẩm</th>
+                      <th>Tên</th>
+                      <th>Ảnh</th>
+                      <th>Danh mục</th>
+                      <th>Xuất xứ</th>
+                      <th>Đã bán</th>
+                      <th>Tồn kho</th>
+                      <th>Vốn đã nhập SP</th>
+                      <th>Doanh thu</th>
+                      <th>Lợi nhuận</th>
+                      <th>Ngày nhập</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($all_product as $key => $pro)
+                       <tr>
+                      
+                      <td>{{$pro->product_id}}</td>
+                      <td>{{$pro->product_name}}</td>
+                      
+                      <td><img src="{{URL::to('public/uploads/product/'.$pro->product_image)}}" height="100px" width="100px"></td>
+                      <td>{{$pro->category_name}}</td>
+                      <td>{{$pro->brand_name}}</td>
+                      <td>{{$pro->product_sold}}</td>
+                      <td>{{$pro->product_qty}}</td>
+                      <td>{{$pro->product_price_buy*$pro->product_sold}}</td>
+                      <td>{{$pro->product_price*$pro->product_sold}}</td>
+                      <td>{{($pro->product_price*$pro->product_sold)-($pro->product_price_buy*$pro->product_sold)}}</td>
+                      <td>{{$pro->date_add_product}}</td>
+                    </tr> 
+                    @endforeach
+                    
+                  </tbody>
+                </table>
+              </div>
+              
+            </div>
+        </div>
+        
+    </div>
+    
     <div class="row">
         <div class="col-md-4 col-xs-12">
             <p class="title_statistic">Thống Kê Tổng Sản Phẩm Đơn Hàng</p>
@@ -94,5 +155,6 @@
             
         </div>
     </div>
+    
 </div>
 @endsection
