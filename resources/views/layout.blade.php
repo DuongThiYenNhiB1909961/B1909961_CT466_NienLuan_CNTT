@@ -17,7 +17,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
         <title>{{$meta_title}}</title>
         <meta name="csrf-token" content="{{csrf_token()}}">
-        <link rel="icon" href="https://cdn01.beelancer.vn/blog/wp-content/uploads/2021/07/Maquillaje-Nina-Maquillaje-Nina-Nina-Pintada-A-Mano-Ojos-De-Nina-PNG-y-PSD-para-Descargar-Gratis-_-Pngtree.jpg" type="image/x-icon">
+        <link rel="icon" href="{{asset('resources/images/logo_shop.png')}}" type="image/x-icon">
         
         <link rel="stylesheet" href="{{asset('resources/css/style.css')}}">
         <link href="{{asset('resources/css/style-responsive.css')}}" rel="stylesheet"/>
@@ -140,7 +140,7 @@
                                 <input type="text" id="keywords" name="keywords_submit" class="form-control search" placeholder="Search">
                                 <div id="search-ajax"></div>
                                 <span class="input-group-btn">
-                                <input class="btn btn-sm btn-danger" type="submit" value="Search!" style="margin-top: 4px">
+                                <input class="btn btn-sm btn-success" type="submit" value="Search!" style="margin-top: 4px">
                                 </span>
                             </div>
                             
@@ -165,7 +165,7 @@
                     <div class="rounded">
                         <div class="row">
                             <div class="col text-center m-2">
-                                <div style="font-size: 2em" class=" text-danger font-semibold"><b>CONTACT US</b></div>
+                                <div style="font-size: 2em" class="font-semibold"><b>CONTACT US</b></div>
                             </div>
                         </div>
                         <div class="pt-3">

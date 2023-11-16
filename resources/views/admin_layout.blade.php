@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <head>
         <title>Manage</title>
-        <link rel="icon" href="{{asset('https://cdn01.beelancer.vn/blog/wp-content/uploads/2021/07/Maquillaje-Nina-Maquillaje-Nina-Nina-Pintada-A-Mano-Ojos-De-Nina-PNG-y-PSD-para-Descargar-Gratis-_-Pngtree.jpg')}}" type="image/x-icon">        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="{{asset('resources/images/logo_shop.png')}}" type="image/x-icon">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />

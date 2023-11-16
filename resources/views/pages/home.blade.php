@@ -11,10 +11,12 @@
     }
 </style>
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-        {{-- <div class="">
-            <img src="resources/images/logo.jpg" class="h-10 w-20% "><b>THIÊN ĐƯỜNG LÀM ĐẸP</b>
+        <div class="row">
+            <div class="col-sm-1"><img src="resources/images/logo_shop.png" height="100px" width="100px"></div>
+            <div class="col-sm-4 text-success" style="margin-top: 36px; padding-left:24px; font-family: MV boli;"><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></div>
             
-        </div> --}}
+            
+        </div>
         <div id="carouselExampleCaptions" class="carousel slide mt-2 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -33,7 +35,7 @@
                                 @endphp
                                 <div class="carousel-item {{$i==1 ? 'active' : '' }}">
                                     <img style="height: 12cm" src="{{asset('public/uploads/slider/'.$slide->slider_image)}}" class="d-block w-100" alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
+                                    <div class="carousel-caption d-none d-md-block" style="z-index: 0">
                                         <h5 class="text-light bg dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">{{$slide->slider_name}}</h5>
                                         <p class="text-light bg dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" >{{$slide->slider_desc}}</p>
                                     </div>
@@ -116,7 +118,7 @@
                                         <div class="card" style="width: 14rem; height: 23rem;">
                                             <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top shadow" alt="">
                                             <div class="card-body">
-                                            <h6 class="card-title " style="width:height: 5rem;"><b>{{$product->product_desc}}</b></h6>
+                                            <h6 class="card-title " style="width:height: 5rem;font-size: 0.78em">{{$product->product_name}}</h6>
                                             <b><p class="card-text text-danger">{{number_format($product->product_price,0,',','.')}} đ</p></b>
                                             <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
                                             </div>

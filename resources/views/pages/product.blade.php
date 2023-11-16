@@ -19,7 +19,7 @@
         <div class="col-sm-4">
             <label for="amount"><b>Lọc Giá</b></label>
             <form>
-                <div id="slider-range"></div>
+                <div id="slider-range" style="z-index: 0;"></div>
                 <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                 <input type="hidden" name="start_price" id="start_price">
                 <input type="hidden" name="end_price" id="end_price">
@@ -54,7 +54,7 @@
           <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page" >Mỹ phẩm</li>
         </ol>
     </nav>
-    <h2 class="text-center text-warning"><b>Mỹ Phẩm</b></h2>
+    <h2 class="text-center text-danger"><b>Mỹ Phẩm</b></h2>
     <div class="row mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
         <div class="col-sm-2">
             <div class="text-center mt-5 mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">

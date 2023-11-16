@@ -8,6 +8,7 @@ use Session;
 use App\Http\Requests;
 use App\Models\Slider;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Models\Coupon;
 use Carbon\Carbon;
 use Mail;
@@ -18,23 +19,44 @@ class IndexController extends Controller
     public function load_more(Request $request){
         $data = $request->all();
         if($data['id']>0){
-            $all_product = Product::where('product_status','0')->where('product_id','<',$data['id'])->orderby('product_id','desc')->take(6)->get();
+            $all_product = Product::where('product_status','0')->where('product_id','<',$data['id'])->orderby('product_id','desc')->take(12)->get();
         }else{
-            $all_product = Product::where('product_status','0')->orderby('product_id','desc')->take(6)->get();
+            $all_product = Product::where('product_status','0')->orderby('product_id','desc')->take(12)->get();
         }
         $output = '';
         if(!$all_product -> isEmpty()){
             foreach($all_product as $key => $product){
+                $rating = Rating::where('product_id', $product->product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
+                $rating = round($rating);
                 $last_id = $product->product_id;
                 $output .= '<div class="mr-4 mb-4">
                                 <a href="'.url('/product-detail/'.$product->product_id).'" class="text-decoration-none">
                                     <div class="card" style="width: 15rem; height: 25rem;">
                                         <img src="'.asset('public/uploads/product/'.$product->product_image).'" class="card-img-top shadow" alt="">
                                         <div class="card-body">
-                                        <h6 class="card-title " style="width:height: 5rem;"><b>'.$product->product_desc.'</b></h6>
+                                        <h6 class="card-title" style="width:height: 5rem; font-size: 0.78em">'.$product->product_name.'</h6>
                                         <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ</p></b>
-                                        <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ</p>
-                                        </div>
+                                        <p class="card-text text-body" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ</p>';
+                                        for($count=1; $count<=5; $count++){
+                                            if($count <= $rating){
+                                                $color = '.color: #ffcc00;.';
+                                            }else {
+                                                $color = '.color: #ffcc00;.';
+                                            }
+                                            $output .= '
+                                            <li title="Đánh giá sao" 
+                                                id="'.$product->product_id-$count.'"
+                                                data-index="'.$count.'" 
+                                                data-product_id="'.$product->product_id.'" 
+                                                data-rating="'.$rating.'" 
+                                                class="list-inline-item"
+                                                style="cursor: pointer; {{$color}} font-size: 30px; color: #ccc;" >
+                                                &#9733;
+                                            </li>
+                                            ';
+                                        }                
+                                        $output .= '<p class="text-danger list-inline-item">'.$rating.'/5</p></div>
+                                        
                                     </div>
                                 </a>
                             </div>';
