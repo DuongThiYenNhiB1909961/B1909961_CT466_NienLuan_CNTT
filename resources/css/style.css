@@ -86,9 +86,9 @@ li.cart-hover{
     -ms-transition: all .3s ease;
     -o-transition: all .3s ease;
     transition: all .3s ease;
-    border: 1px solid #05c314;
+    border: 1px solid #c31805;
     box-shadow: none;
-    background: rgb(188 210 194) url(../images/search-icon.png) no-repeat 10px 8px;
+    background: rgb(210, 198, 188) url(../images/search-icon.png) no-repeat 10px 8px;
     padding: 0 5px 0 30px;
     color: #000;
     border-radius: 100px;

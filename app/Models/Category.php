@@ -9,7 +9,7 @@ class Category extends Model
 {
     public $timestamps = false; //set time to false
     protected $fillable = [
-    	'meta_keywords', 'slug_category_product', 'category_name', 'category_desc', 'category_status'
+    	'meta_keywords', 'slug_category_product', 'category_name', 'category_desc','product_image', 'category_status'
     ];
     protected $primaryKey = 'category_id';
  	protected $table = 'tb_category_product';

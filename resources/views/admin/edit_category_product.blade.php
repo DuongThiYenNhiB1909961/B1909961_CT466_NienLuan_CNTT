@@ -17,7 +17,7 @@
                         Session::put('message',null);
                     }
                 ?>
-                        <form role="form" action="{{URL::to('/update-category-product/'.$edit_value->category_id)}}" method="post">
+                        <form role="form" action="{{URL::to('/update-category-product/'.$edit_value->category_id)}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục</label>
@@ -39,7 +39,10 @@
                             {{$edit_value->meta_keywords}}
                             </textarea>
                         </div>
-                        
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Hình ảnh mỹ phẩm</label>
+                            <input type="file" name="category_image" class="form-control" id="exampleInputEmail1" placeholder="Hình ảnh Mỹ phẩm">
+                        </div>
                         <button type="submit"name="update_category_product" class="btn btn-info">Cập nhật danh mục</button>
                     </form>
                     </div>

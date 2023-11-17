@@ -43,6 +43,7 @@
                 </label>
               </th>
               <th>Tên danh mục</th>
+              <th>Hình ảnh</th>
               <th>Hiển thị</th>
               <th style="width:30px;"></th>
             </tr>
@@ -52,6 +53,7 @@
                <tr>
               <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
               <td>{{$cate_pro->category_name}}</td>
+              <td><img src="public/uploads/cate/{{$cate_pro->category_image}}" width="100px" height="100px"></td>
               <td>
                 <span class="text-ellipsis">
                   <?php

@@ -27,6 +27,28 @@
         </form>
     </div>
 </div>
+<h4 class="rounded-lg" >
+    <b class="mr-2 text-center"> 
+        Danh mục nổi bậc
+    </b>
+</h4>
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            @foreach($category as $key => $cate)
+            <li class="nav-item ">
+                <div class="flex items-center">
+                    <div class=" text-lg font-semibold"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="nav-link">
+                        <img src="{{asset('public/uploads/cate/'.$cate->category_image)}}" width="100px" height="110px">
+                        <b>{{$cate->category_name}}</b>
+                    </a></div>
+                </div>
+            </li>
+            @endforeach
+        </ul>
+    </div>
+</nav>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb text-danger">
       <li class="breadcrumb-item"><a href="{{asset('index')}}">Home</a></li>
@@ -41,18 +63,37 @@
         <div class="row ml-3">
             @foreach($brand_by_id as $key => $product)
             
-                <div class="ml-3 mb-3 shadow" >
-                                <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
-                                    <div class="card" style="width: 15rem; height: 25rem;">
-                                        <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top" alt="">
-                                        <div class="card-body">
-                                            <h6 class="card-title"><b>{{$product->product_desc}}</b></h6>
-                                            <b><p class="card-text text-danger">{{number_format($product->product_price).'đ'}}</p></b>
-                                            <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
-                                        </div>
-                                      </div>
-                                </a>
-                </div>
+            <div class="mb-2 shadow">
+                <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
+                    <div class="card" style="width: 14rem; height: 23rem;">
+                        <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top shadow" alt="">
+                        <div class="card-body">
+                        <h6 class="card-title " style="width:height: 5rem;font-size: 0.78em">{{$product->product_name}}</h6>
+                        <b><p class="card-text text-danger">{{number_format($product->product_price,0,',','.')}} đ</p></b>
+                        <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
+                        </div>
+                    </div>
+                    @for($count=1; $count<=5; $count++)
+                            @php
+                            if($count <= $rating){
+                                $color = 'color: #ffcc00;';
+                            }else {
+                                $color = 'color: #ccc;';
+                            }
+                            @endphp
+                            <li title="Đánh giá sao" 
+                                id="{{$product->product_id}}-{{$count}}"
+                                data-index="{{$count}}" 
+                                data-product_id="{{$product->product_id}}" 
+                                data-rating="{{$rating}}" 
+                                class="list-inline-item"
+                                style="cursor: pointer; {{$color}} font-size: 30px;" >
+                                &#9733;</li>
+
+                        @endfor
+                        <p class="text-danger list-inline-item">{{$rating}}/5</p>
+                </a>
+            </div>
         
             @endforeach
         </div>
@@ -66,7 +107,9 @@
                 <div class="panel panel-default mt-3">
                     @foreach($category as $key => $cate)
                     <div class="panel-heading">
-                        <h6 class="panel-title mr-2" style="color: rgb(175, 6, 161);"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="text-decoration-none"><b>{{$cate->category_name}}</b></a></h6>
+                        <h6 class="panel-title mr-2" style="color: rgb(175, 6, 161);"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="text-decoration-none">
+                            <b>{{$cate->category_name}}</b></a>
+                        </h6>
                     </div>
                     <hr>
                      @endforeach

@@ -29,14 +29,16 @@ class IndexController extends Controller
                 $rating = Rating::where('product_id', $product->product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
                 $rating = round($rating);
                 $last_id = $product->product_id;
-                $output .= '<div class="mr-4 mb-4">
+                $output .= '<div class="mr-4 mb-4 shadow">
                                 <a href="'.url('/product-detail/'.$product->product_id).'" class="text-decoration-none">
-                                    <div class="card" style="width: 15rem; height: 25rem;">
+                                    <div class="card" style="width: 14rem; height: 23rem;">
                                         <img src="'.asset('public/uploads/product/'.$product->product_image).'" class="card-img-top shadow" alt="">
                                         <div class="card-body">
-                                        <h6 class="card-title" style="width:height: 5rem; font-size: 0.78em">'.$product->product_name.'</h6>
-                                        <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ</p></b>
-                                        <p class="card-text text-body" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ</p>';
+                                            <h6 class="card-title" style="width:height: 5rem; font-size: 0.78em">'.$product->product_name.'</h6>
+                                            <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ</p></b>
+                                            <p class="card-text text-body" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ</p>
+                                        </div>
+                                    </div>';
                                         for($count=1; $count<=5; $count++){
                                             if($count <= $rating){
                                                 $color = '.color: #ffcc00;.';
@@ -55,9 +57,8 @@ class IndexController extends Controller
                                             </li>
                                             ';
                                         }                
-                                        $output .= '<p class="text-danger list-inline-item">'.$rating.'/5</p></div>
+                                        $output .= '<p class="text-danger list-inline-item">'.$rating.'/5</p>
                                         
-                                    </div>
                                 </a>
                             </div>';
             }
@@ -125,7 +126,14 @@ class IndexController extends Controller
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d/m/Y');
 
         $all_product = DB::table('tb_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(12); 
-        return view('pages.home')->with('now',$now)->with('coupon',$coupon)->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+
+        foreach($all_product as $key => $val){
+            $product_id = $val->product_id;
+        }
+        
+        $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
+        $rating = round($rating);
+        return view('pages.home')->with('rating',$rating)->with('now',$now)->with('coupon',$coupon)->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function introduce(Request $request){
         $meta_desc = "Mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";

@@ -16,7 +16,7 @@
                         Session::put('message',null);
                     }
                 ?>
-                        <form role="form" action="save-category-product" method="post">
+                        <form role="form" action="save-category-product" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục</label>
@@ -36,6 +36,10 @@
                             <label for="exampleInputPassword1">Từ khóa danh mục</label>
                             <textarea style="resize: none" rows="7" data-validation="length" data-validation-length="min4" 
                             data-validation-error-msg="Lam on dien it nhat 4 ky tu" class="form-control" name="category_product_keywords" placeholder="Mô tả danh mục"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Hình ảnh mỹ phẩm</label>
+                            <input type="file" name="category_image" class="form-control" id="exampleInputEmail1" placeholder="Hình ảnh Mỹ phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Hiển thị</label>

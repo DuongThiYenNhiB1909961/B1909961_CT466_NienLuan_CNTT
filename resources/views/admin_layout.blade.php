@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <head>
         <title>Manage</title>
-        <link rel="icon" href="{{asset('resources/images/logo_shop.png')}}" type="image/x-icon">
+        <link rel="icon" href="{{asset('public/uploads/cate/logo_shop.png')}}" type="image/x-icon">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />

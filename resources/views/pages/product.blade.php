@@ -31,7 +31,7 @@
     <hr>
     <h4 class="rounded-lg" >
         <b class="mr-2 text-center"> 
-            Danh Mục Nổi Bậc
+            Danh mục nổi bậc
         </b>
     </h4>
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
@@ -39,9 +39,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 @foreach($category as $key => $cate)
-                <li class="nav-item">
+                <li class="nav-item ">
                     <div class="flex items-center">
-                        <div class=" text-lg font-semibold"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="nav-link"><b>{{$cate->category_name}}</b></a></div>
+                        <div class=" text-lg font-semibold"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="nav-link">
+                            <img src="public/uploads/cate/{{$cate->category_image}}" width="100px" height="110px">
+                            <b>{{$cate->category_name}}</b>
+                        </a></div>
                     </div>
                 </li>
                 @endforeach

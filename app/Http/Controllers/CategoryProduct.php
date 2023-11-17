@@ -8,6 +8,7 @@ use Session;
 use Auth;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Rating;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 class CategoryProduct extends Controller
@@ -42,9 +43,21 @@ class CategoryProduct extends Controller
         $data['slug_category_product'] = $request->slug_category_product;
         $data['category_desc'] = $request->category_product_desc;
         $data['category_status'] = $request->category_product_status;
+        $get_image = $request->file('category_image');
         
+        if($get_image){
+            $get_name_image=$get_image->getClientOriginalName();
+            $name_image=current(explode('.',$get_name_image));
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/uploads/cate',$new_image);
+            $data['category_image']=$new_image;
+            DB::table('tb_category_product')->insert($data);
+            Session::put('message','Thêm danh mục thành công');
+            return Redirect::to('add-category-product');
+        }
+        $data['category_image']= '';
         DB::table('tb_category_product')->insert($data);
-        Session::put('message','Thêm danh mục sản phẩm thành công');
+        Session::put('message','Thêm danh mục thành công');
         return Redirect::to('add-category-product');
     }
     public function unactive_category_product($id){
@@ -72,6 +85,17 @@ class CategoryProduct extends Controller
         $data['meta_keywords'] = $request->category_product_keywords;
         $data['slug_category_product'] = $request->slug_category_product;
         $data['category_desc'] = $request->category_product_desc;
+        $get_image = $request->file('category_image');
+        if($get_image){
+            $get_name_image=$get_image->getClientOriginalName();
+            $name_image=current(explode('.',$get_name_image));
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/uploads/cate',$new_image);
+            $data['category_image']=$new_image;
+            DB::table('tb_category_product')->where('category_id',$id)->update($data);
+            Session::put('message','Cập nhật danh mục sản phẩm thành công');
+            return Redirect::to('all-category-product');
+        }
         DB::table('tb_category_product')->where('category_id',$id)->update($data);
         Session::put('message','Cập nhật danh mục sản phẩm thành công');
         return Redirect::to('all-category-product');
@@ -134,9 +158,14 @@ class CategoryProduct extends Controller
             $meta_title = $val->category_name;
             $url_canonical = $request->url(); 
         }
-
+        foreach($category_by_id as $key => $val){
+            $product_id = $val->product_id;
+        }
+        
+        $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
+        $rating = round($rating);
         return view('pages.show_cate')->with('min_price',$min_price)->with('max_price',$max_price)->with('category_by_id',$category_by_id)->with('category',$cate_product)->with('brand',$brand_product)->with('category_pro',$category_pro)
-        ->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        ->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('rating',$rating);
     }
     
 }

@@ -9,6 +9,7 @@ use Auth;
 use App\Http\Requests;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Redirect;
 class BrandProduct extends Controller
 {
@@ -129,6 +130,12 @@ class BrandProduct extends Controller
             $meta_title = $val->brand_name;
             $url_canonical = $request->url(); 
         }
-        return view('pages.show_brand')->with('min_price',$min_price)->with('max_price',$max_price)->with('category',$cate_product)->with('brand',$brand_product)->with('brand_pro',$brand_pro)->with('brand_by_id',$brand_by_id)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
+        foreach($brand_by_id as $key => $val){
+            $product_id = $val->product_id;
+        }
+        
+        $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
+        $rating = round($rating);
+        return view('pages.show_brand')->with('rating',$rating)->with('min_price',$min_price)->with('max_price',$max_price)->with('category',$cate_product)->with('brand',$brand_product)->with('brand_pro',$brand_pro)->with('brand_by_id',$brand_by_id)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
     }
 }
