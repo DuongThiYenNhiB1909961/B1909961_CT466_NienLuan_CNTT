@@ -202,10 +202,18 @@ class ProductController extends Controller
         if($statistical_count>0){
             $statistical_update = Statistical::where('order_date',$order_date)->first();
             $statistical_update->spend = $statistical_update->spend + $spend;
+            $statistical_update->sales = $statistical_update->sales;
+            $statistical_update->profit = $statistical_update->profit;
+            $statistical_update->quantity_order = $statistical_update->quantity_order;
+            $statistical_update->total_order = $statistical_update->total_order;
             $statistical_update->save();
         }else{
             $statistical_new = new Statistical();
             $statistical_new->order_date = $order_date;
+            $statistical_new->sales = 0;
+            $statistical_new->profit = 0;
+            $statistical_new->quantity_order = 0;
+            $statistical_new->total_order = 0;
             $statistical_new->spend = $spend;
             $statistical_new->save();
         }

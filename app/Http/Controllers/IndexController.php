@@ -133,7 +133,7 @@ class IndexController extends Controller
         
         $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
         $rating = round($rating);
-        return view('pages.home')->with('rating',$rating)->with('now',$now)->with('coupon',$coupon)->with('cate_product',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.home')->with('rating',$rating)->with('now',$now)->with('coupon',$coupon)->with('category',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function introduce(Request $request){
         $meta_desc = "Mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";

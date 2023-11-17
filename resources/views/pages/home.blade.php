@@ -11,12 +11,34 @@
     }
 </style>
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-        {{-- <div class="row">
+        <div class="row" style="padding-top: 12px;padding-left: 16px;">
             <div class="col-sm-1"><img src="resources/images/logoshop1.png" height="100px" width="100px"></div>
             <div class="col-sm-4 text-danger" style="margin-top: 36px; padding-left:24px; font-family: MV boli;"><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></div>
             
             
-        </div> --}}
+        </div>
+        <h5 class="rounded-lg container" >
+            <p class="mr-2 text-info" style="font-family: MV boli;"> 
+                Danh mục nổi bậc
+            </p>
+        </h5>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light text-center container">
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    @foreach($category as $key => $cate)
+                    <li class="nav-item ">
+                        <div class="flex items-center">
+                            <div class=" text-lg font-semibold"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="nav-link">
+                                <img src="public/uploads/cate/{{$cate->category_image}}" width="100px" height="110px">
+                                <p class="text-info ">{{$cate->category_name}}</p>
+                            </a></div>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </nav>
         <div id="carouselExampleCaptions" class="carousel slide mt-2 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"  data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
