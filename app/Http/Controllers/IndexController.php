@@ -211,6 +211,12 @@ class IndexController extends Controller
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $search_product = DB::table('tb_product')->where('product_name','like','%'.$keywords.'%')->get();
-        return view('pages.search')->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        foreach($search_product as $key => $val){
+            $product_id = $val->product_id;
+        }
+        
+        $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
+        $rating = round($rating);
+        return view('pages.search')->with('rating',$rating)->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
 }

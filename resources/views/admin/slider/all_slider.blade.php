@@ -50,7 +50,8 @@
               ?>
             </span></td>
             <td>
-             
+              <a href="{{URL::to('/edit-slider/'.$slide->slider_id)}}" class="active" ui-toggle-class="">
+                <i class="fa fa-pencil-square text-success text-active"></i></a>
               <a onclick="return confirm('Bạn có chắc là muốn xóa slide này ko?')" href="{{URL::to('/delete-slide/'.$slide->slider_id)}}" class="active styling-edit" ui-toggle-class="">
                 <i class="fa fa-times text-danger text"></i>
               </a>

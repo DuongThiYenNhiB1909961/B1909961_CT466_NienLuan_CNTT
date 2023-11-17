@@ -17,7 +17,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
         <title>{{$meta_title}}</title>
         <meta name="csrf-token" content="{{csrf_token()}}">
-        <link rel="icon" href="{{asset('public/uploads/cate/logo_shop.png')}}" type="image/x-icon">
+        <link rel="icon" href="{{asset('resources/images/logoshop1.png')}}" type="image/x-icon">
         
         <link rel="stylesheet" href="{{asset('resources/css/style.css')}}">
         <link href="{{asset('resources/css/style-responsive.css')}}" rel="stylesheet"/>
@@ -37,102 +37,111 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
-            
+           
         </style>
     </head>
     <body class="antialiased">
+        
         <header class="row header">
-            <nav class="banner navbar navbar-expand-lg navbar-light col-sm-6 ">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-5 justify-content-center" style="margin-left: 5%">
-                    <li class="nav-item">
-                        <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('index')}}"><i class="fa fa-home text-warning" aria-hidden="true"></i><b>Home </b></a></div>
-                    </li>
-                    <li class="nav-item ml-2">
-                        <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('introduce')}}"><i class="fa fa-book text-warning" aria-hidden="true"></i><b>Introduce</b> </a></div>
-                    </li>
-                    <li class="nav-item dropdown ml-2">
-                        <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('product')}}"><i class="fa fa-heart text-warning" aria-hidden="true"></i><b>Products</b></a></div>
-                    </li>
-                    <li class="nav-item ml-2">
-                        <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('contact')}}"><b>Contact</b></a></div>
-                    </li>
-                  </ul>
-                </div>
+            <nav class="banner_header" >
+                <div class="text-white" style="font-size: 12px">TDMP Cosmetis - Shop Mỹ Phẩm, Son Môi, Nước Hoa Chính Hãng &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-envelope text-white" aria-hidden="true"> thienduonglamdep2023@gmail.com </i>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <i class="fa fa-phone text-white" aria-hidden="true">    0969787889</i></div>
                 
             </nav>
-            
-            <nav class="banner col-sm-6">
-                <div class="shop-menu pull-right">
-                    <ul class="nav justify-content-center">
+            <br>
+                <nav class="banner navbar navbar-expand-lg navbar-light col-sm-6 ">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-5 justify-content-center" style="margin-left: 5%">
+                        <li class="nav-item">
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('index')}}"><i class="fa fa-home text-warning" aria-hidden="true"></i><b>Home </b></a></div>
+                        </li>
+                        <li class="nav-item ml-2">
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('introduce')}}"><i class="fa fa-book text-warning" aria-hidden="true"></i><b>Bài viết</b> </a></div>
+                        </li>
+                        <li class="nav-item dropdown ml-2">
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('product')}}"><i class="fa fa-heart text-warning" aria-hidden="true"></i><b>Sản phẩm</b></a></div>
+                        </li>
+                        <li class="nav-item ml-2">
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('contact')}}"><b>Liên hệ</b></a></div>
+                        </li>
+                    </ul>
+                    </div>
                     
-                        <?php
-                            $customer_id = Session::get('customer_id');
-                            $shipping_id = Session::get('shipping_id');
-                            if($customer_id != NULL && $shipping_id == NULL)
-                            {
-                        ?>
-                        <li class="nav-item">
-                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Checkout</b></a></div>
-                        </li>
-                        <?php
-                            }else if($customer_id != NULL && $shipping_id != NULL){
-                        ?>
-                        <li class="nav-item">
-                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/pill')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Checkout</b></a></div>
-                        </li>
-                        <?php
-                            }else {
-                        ?>
-                        <li class="nav-item">
-                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Checkout</b></a></div>
-                        </li>
-                        <?php
-                        }
-                        ?>
-                        <li class="nav-item cart-hover">
-                            <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/show-cart-ajax')}}">
-                            <i class="fa fa-shopping-cart text-warning" aria-hidden="true"></i>
-                            <b>Cart <span id="show-cart"></span>
-                                <div class="clearfix"></div>
-                                <span class="hover-giohang"></span>
-                                
-                            </b></a></div>
-                        </li>    
+                </nav>
+            
+                <nav class="banner col-sm-6">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav justify-content-center">
                         
-
-                        <?php
-                        $customer_id = Session::get('customer_id');
-                        if($customer_id != NULL)
-                        {
-                        ?>
-                        <li class="nav-item">
-                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/history')}}"><i class="fa fa-history text-warning" aria-hidden="true"></i><b>History</b></a></div>
-                        </li>
-                        <?php
+                            <?php
+                                $customer_id = Session::get('customer_id');
+                                $shipping_id = Session::get('shipping_id');
+                                if($customer_id != NULL && $shipping_id == NULL)
+                                {
+                            ?>
+                            <li class="nav-item">
+                                <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Thanh toán</b></a></div>
+                            </li>
+                            <?php
+                                }else if($customer_id != NULL && $shipping_id != NULL){
+                            ?>
+                            <li class="nav-item">
+                                <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/pill')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Thanh toán</b></a></div>
+                            </li>
+                            <?php
+                                }else {
+                            ?>
+                            <li class="nav-item">
+                                <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Thanh toán</b></a></div>
+                            </li>
+                            <?php
                             }
-                        ?>
-                        <?php
+                            ?>
+                            <li class="nav-item cart-hover">
+                                <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/show-cart-ajax')}}">
+                                <i class="fa fa-shopping-cart text-warning" aria-hidden="true"></i>
+                                <b>Giỏ hàng <span id="show-cart"></span>
+                                    <div class="clearfix"></div>
+                                    <span class="hover-giohang"></span>
+                                    
+                                </b></a></div>
+                            </li>    
+                            
+
+                            <?php
                             $customer_id = Session::get('customer_id');
                             if($customer_id != NULL)
                             {
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link  text-danger" href="{{asset('/logout')}}"><i class="fa fa-sign-out text-warning" aria-hidden="true"></i><b>Logout</b></a>
-                            <img width="15%" src="{{Session::get('customer_picture')}}"><b class="text-danger">{{Session::get('customer_name')}}</b> 
-                        </li>
-                        <?php
-                            }else{
-                        ?>
-                        <li class="nav-item">
-                            <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-sign-in text-warning" aria-hidden="true"></i><b>Login</b></a></div>
-                        </li>
-                        <?php
-                        }
-                        ?>
-                    </ul>
-                </div>
-            </nav><br>
+                            ?>
+                            <li class="nav-item">
+                                <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/history')}}"><i class="fa fa-history text-warning" aria-hidden="true"></i><b>Lịch sử</b></a></div>
+                            </li>
+                            <?php
+                                }
+                            ?>
+                            <?php
+                                $customer_id = Session::get('customer_id');
+                                if($customer_id != NULL)
+                                {
+                            ?>
+                            <li class="nav-item">
+                                <a class="nav-link  text-danger" href="{{asset('/logout')}}"><i class="fa fa-sign-out text-warning" aria-hidden="true"></i><b>Đăng xuất</b></a>
+                                <img width="15%" src="{{Session::get('customer_picture')}}"><b class="text-danger">{{Session::get('customer_name')}}</b> 
+                            </li>
+                            <?php
+                                }else{
+                            ?>
+                            <li class="nav-item">
+                                <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-sign-in text-warning" aria-hidden="true"></i><b>Đăng nhập</b></a></div>
+                            </li>
+                            <?php
+                            }
+                            ?>
+                        </ul>
+                        
+                    </div>
+                </nav><br>
+            {{-- </div> --}}
             <div class="sea">
                     <form action="{{asset('/search')}}" method="POST">
                         {{csrf_field()}}
@@ -140,7 +149,7 @@
                                 <input type="text" id="keywords" name="keywords_submit" class="form-control search" placeholder="Search">
                                 <div id="search-ajax"></div>
                                 <span class="input-group-btn">
-                                <input class="btn btn-sm btn-danger" type="submit" value="Search!" style="margin-top: 4px">
+                                <input class="btn btn-sm btn-danger" type="submit" value="Tìm!" style="margin-top: 4px">
                                 </span>
                             </div>
                             
@@ -150,6 +159,7 @@
             
         </header>
         <!-- Example single danger button -->
+        @yield('home')
         <div class="container yield">
             @yield('content')
             

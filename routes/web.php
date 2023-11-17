@@ -159,6 +159,8 @@ Route::post('/select-feeship',[DeliveryController::class, 'select_feeship']);
 Route::get('/list-slider',[SliderController::class, 'list_slider']);
 Route::get('/add-slider',[SliderController::class, 'add_slider']);
 Route::post('/insert-slider',[SliderController::class, 'insert_slider']);
+Route::get('/edit-slider/{slider_id}',[SliderController::class, 'edit_slider']);
+Route::post('/update-slider/{slider_id}',[SliderController::class, 'update_silder']);
 Route::get('/unactive-slide/{slide_id}',[SliderController::class, 'unactive_slide']);
 Route::get('/active-slide/{slide_id}',[SliderController::class, 'active_slide']);
 

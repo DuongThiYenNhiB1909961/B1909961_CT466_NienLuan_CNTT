@@ -41,7 +41,7 @@
                 <div class="flex items-center">
                     <div class=" text-lg font-semibold"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="nav-link">
                         <img src="{{asset('public/uploads/cate/'.$cate->category_image)}}" width="100px" height="110px">
-                        <b>{{$cate->category_name}}</b>
+                        <b class="text-info ">{{$cate->category_name}}</b>
                     </a></div>
                 </div>
             </li>

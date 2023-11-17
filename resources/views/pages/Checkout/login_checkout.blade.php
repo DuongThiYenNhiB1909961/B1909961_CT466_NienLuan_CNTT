@@ -7,7 +7,12 @@
     </ol>
   </nav>
 <div class=" shadow relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-
+    <div class="row">
+        <div class="col-sm-1"><img src="resources/images/logoshop1.png" height="100px" width="100px"></div>
+        <div class="col-sm-4 text-danger" style="margin-top: 36px; padding-left:24px; font-family: MV boli;"><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></div>
+        
+        
+    </div>
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
         <?php
                     $message = Session::get('message');

@@ -1,23 +1,23 @@
 @extends('layout')
-@section('content')
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page">Home / </li>
-    </ol>
-</nav>
+@section('home')
+<div style="margin-top: 8%">
 <style>
     .bg{
         background-color: #fdaaba;
     }
+    .carousel{
+        height: 100%;
+        padding: 10px;
+    }
 </style>
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-        <div class="row">
-            <div class="col-sm-1"><img src="resources/images/logo_shop.png" height="100px" width="100px"></div>
-            <div class="col-sm-4 text-success" style="margin-top: 36px; padding-left:24px; font-family: MV boli;"><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></div>
+        {{-- <div class="row">
+            <div class="col-sm-1"><img src="resources/images/logoshop1.png" height="100px" width="100px"></div>
+            <div class="col-sm-4 text-danger" style="margin-top: 36px; padding-left:24px; font-family: MV boli;"><b>THIÊN ĐƯỜNG LÀM ĐẸP</b></div>
             
             
-        </div>
-        <div id="carouselExampleCaptions" class="carousel slide mt-2 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" data-ride="carousel">
+        </div> --}}
+        <div id="carouselExampleCaptions" class="carousel slide mt-2 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"  data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
               <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -51,6 +51,7 @@
                 <span class="sr-only">Next</span>
             </button>
         </div>
+    <div class="container">
         <div  class="text-danger">
            <center><b>MÃ GIẢ GIÁ</b></center> 
        </div>
@@ -149,5 +150,8 @@
             </div>
         </div>
     </div>
+    </div>
+</div>
+
 <!--/recommended_items-->
 @endsection

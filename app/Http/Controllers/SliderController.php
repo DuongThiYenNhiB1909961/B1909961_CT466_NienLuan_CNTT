@@ -19,6 +19,7 @@ class SliderController extends Controller
         }
     }
     public function list_slider(){
+        $this->AuthLogin();
     	$all_slide = Slider::orderBy('slider_id','DESC')->get();
     	return view('admin.slider.all_slider')->with(compact('all_slide'));
     }
@@ -66,5 +67,31 @@ class SliderController extends Controller
     		return Redirect::to('add-slider');
         }
        	
+    }
+    public function edit_slider($slider_id){
+        $this->AuthLogin();
+        $edit_slider = DB::table('tb_slider')->where('slider_id',$slider_id)->get();
+        return view('admin.slider.edit_slider')->with('edit_slider',$edit_slider);
+    }
+    public function update_silder(Request $request, $slider_id){
+        $this->AuthLogin();
+        $data = array();
+        $data['slider_name'] = $request->slider_name;
+        $data['slider_status'] = $request->slider_status;
+        $data['slider_desc'] = $request->slider_desc;
+        $get_image = $request->file('slider_image');
+        if($get_image){
+            $get_name_image=$get_image->getClientOriginalName();
+            $name_image=current(explode('.',$get_name_image));
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/uploads/slider',$new_image);
+            $data['slider_image']=$new_image;
+            DB::table('tb_slider')->where('slider_id',$slider_id)->update($data);
+            Session::put('message','Cập nhật slider thành công');
+            return Redirect('list-slider');
+        }
+        DB::table('tb_slider')->where('slider_id',$slider_id)->update($data);
+        Session::put('message','Cập nhật slider thành công');
+        return Redirect::to('list-slider');
     }
 }
