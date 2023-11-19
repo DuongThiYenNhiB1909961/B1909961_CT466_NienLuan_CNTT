@@ -190,34 +190,6 @@ class ProductController extends Controller
         $gallery->save();
 
         Session::put('message','Thêm mỹ phẩm thành công');
-
-        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('y-m-d');
-        $statistical = Statistical::where('order_date', $order_date)->get();
-        $spend = $request->product_price_buy*$request->product_qty;
-        if($statistical){
-			$statistical_count = $statistical->count();
-		}else{
-			$statistical_count = 0;
-		}
-        if($statistical_count>0){
-            $statistical_update = Statistical::where('order_date',$order_date)->first();
-            $statistical_update->spend = $statistical_update->spend + $spend;
-            $statistical_update->sales = $statistical_update->sales;
-            $statistical_update->profit = $statistical_update->profit;
-            $statistical_update->quantity_order = $statistical_update->quantity_order;
-            $statistical_update->total_order = $statistical_update->total_order;
-            $statistical_update->save();
-        }else{
-            $statistical_new = new Statistical();
-            $statistical_new->order_date = $order_date;
-            $statistical_new->sales = 0;
-            $statistical_new->profit = 0;
-            $statistical_new->quantity_order = 0;
-            $statistical_new->total_order = 0;
-            $statistical_new->spend = $spend;
-            $statistical_new->save();
-        }
-
         return Redirect::to('add-product');
     }
     public function unactive_product($product_id){

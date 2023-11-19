@@ -75,7 +75,6 @@ class OrderController extends Controller
 				$statistical_update->profit = $statistical_update->profit + $profit;
 				$statistical_update->quantity_order = $statistical_update->quantity + $quantity;
 				$statistical_update->total_order = $statistical_update->total_order + 1;
-				$statistical_update->spend = $statistical_update->spend;
 				$statistical_update->save();
 			}else{
 				$statistical_new = new Statistical();
@@ -84,7 +83,6 @@ class OrderController extends Controller
 				$statistical_new->profit = $profit;
 				$statistical_new->quantity_order = $quantity;
 				$statistical_new->total_order = $total_order;
-				$statistical_new->spend = 0;
 				$statistical_new->save();
 			}
 		}
