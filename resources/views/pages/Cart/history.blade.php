@@ -59,16 +59,9 @@
                   @csrf
               <td>
                 
-                @if($order->order_status != 3)
+                @if($order->order_status == 0)
                     <p><textarea name="lydo" data-validation="length" data-validation-length="min10" 
                       data-validation-error-msg="Vui lòng dien it nhat 10 ky tu" cols="10" rows="3" placeholder="Lý do hủy đơn hàng" required></textarea></p>
-                    {{-- <select   class="lydo form-controll input-sm m-bot15 payment_select shadow" required>
-                      <option value="">--Lý do hủy--</option>
-                      <option value="0">Thay đổi số lượng </option>
-                      <option value="1">Thay đổi mã giảm</option>   
-                      <option value="2">Thay đổi size</option>  
-                      <option value="3">Thêm sản phẩm</option>    
-                    </select> --}}
                 @endif
               </td>
               <td>
