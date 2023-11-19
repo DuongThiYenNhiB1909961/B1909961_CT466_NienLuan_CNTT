@@ -242,13 +242,11 @@
                 load_more_product(id);
             })
         </script>
-        <div id="paypal-button"></div>
+        {{-- <div id="paypal-button"></div> --}}
         {{-- Paypal --}}
         <script src="https://www.paypalobjects.com/api/checkout.js"></script>
         <script>
             var toUSD = document.getElementById("toUSD").value;
-            var order_coupon = document.getElementById("order_coupon").value;
-            var order_fee = document.getElementById("order_fee").value;
             paypal.Button.render({
             // Configure environment
             env: 'sandbox',

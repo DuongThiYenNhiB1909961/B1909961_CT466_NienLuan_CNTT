@@ -196,7 +196,7 @@
           }
         </style>
             <div class="table-agile-info font">
-               <div class="row panel panel-default">
+              <div class="row panel panel-default">
                @foreach ($coupon as $key => $cou)
                    <div class="col-sm-3 coupon mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" >
                    <table class="table table-sm">
@@ -232,7 +232,7 @@
                        </tbody>
                    </table>
                    </div> 
-               @endforeach
+                @endforeach
                
               </div>
             </div> 
@@ -287,8 +287,8 @@
               
                           @endforeach
                           <tr class="shadow">
-                          <td colspan="3"></td>
-                            <td colspan="2">
+                          <td colspan="2"></td>
+                            <td colspan="3">
                               <ul>
                                 <div><b>Tổng tiền hàng: {{number_format($total,0,',','.')}}đ</b></div>
                                 
@@ -325,13 +325,11 @@
                                 @if(Session::get('fee'))
                                 <b>Phí Vận Chuyển 
                                   <span>{{number_format(Session::get('fee'),0,',','.')}}đ</span>
-                                  <a class="btn btn-default" href="{{url('/del-fee')}}"><b class="text-danger">X</b></a>
                                   <?php $total_after_fee = $total + Session::get('fee'); ?>
                                 </b>
                                 @elseif(!Session::get('fee'))
                                 <b>Phí Vận Chuyển 
                                   <span>{{number_format(35000,0,',','.')}}đ</span>
-                                  <a class="btn btn-default" href="{{url('/del-fee')}}"><b class="text-danger">X</b></a>
                                   <?php $total_after_fee = $total + 35000; ?>
                                 </b>
                                 @endif
@@ -359,7 +357,15 @@
                                     @endphp
                                   </b>
                                 </div>
-                                <input type="text" name="" id="" value="{{Session::get('payment_select')}}">
+                                <div>
+                                  @if(Session::get('payment_select')==0)
+                                    <b>Thanh toán khi nhận hàng</b>
+                                  @elseif(Session::get('payment_select')==1)
+                                    <b>Thanh toán qua VNPay</b>
+                                  @elseif(Session::get('payment_select')==2)
+                                    <b>Thanh toán qua PayPal</b>
+                                  @endif
+                                </div>
                                 <div class="col-md-12">
                                   <?php
                                   $customer_id = Session::get('customer_id');
@@ -367,9 +373,8 @@
                                   if(($customer_id != NULL) && ($cart != NULL))
                                   {
                                   ?>
-                                  @if(Session::get('payment_select')==0)
                                   <div class="delivery">
-                                    
+                                    @if(Session::get('payment_select')==0)
                                       <form >
                                         @csrf
                                         @if(Session::get('fee'))
@@ -385,42 +390,32 @@
                                         @else 
                                           <input type="hidden" name="order_coupon" class="order_coupon" value="no">
                                         @endif
-                                       
                                         <input type="hidden" name="totalafter" value="{{$total_after}}">
                                         <input type="button" value="Thanh Toán" name="send_order" class="btn btn-danger btn-sm mt-1 send_order">
                                       </form>
-                                   
-                                    
-                                  </div>
-                                  @elseif(Session::get('payment_select')==1)
-                                    <div class="delivery">
-                                     
+                                    @elseif(Session::get('payment_select')==1)
                                       <form action="{{url('/vnpay-checkout')}}" method="POST">
-                                        @csrf
-                                        
-                                        <input type="hidden" name="total_vnpay" value="{{$total_after}}">
-                                        <button type="submit"  name="redirect" class="vnpay btn btn-warning text-danger ml-4" style="font-size: 15px; border-radius: 15px 15px 15px 15px; margin: 0; ">
-                                          <i class="fa fa-credit-card text-danger" aria-hidden="true"></i>
-                                          <b>   VNPay</b>
-                                        </button>
-                                      </form>                                      
-                                    </div>
-
+                                          @csrf
+                                          
+                                          <input type="hidden" name="total_vnpay" value="{{$total_after}}">
+                                          <input type="button" value="Thanh Toán" name="redirect" class="vnpay btn btn-danger text-white ml-4">
+                                          {{-- <i class="fa fa-credit-card text-danger" aria-hidden="true">
+                                            <input type="button" value="Thanh Toán" name="" class="vnpay btn btn-warning text-danger ml-4" style="font-size: 15px; border-radius: 15px 15px 15px 15px; margin: 0; ">
+                                          </i> --}}
+                                      </form> 
                                     @elseif(Session::get('payment_select')==2)
-                                    <div class="delivery">
-                                      
-                                        <form>
+                                      <form>
                                         @csrf
                                           
                                           @php
                                             $toUSD = $total_after/24305;
                                           @endphp
-
                                           <div id="paypal-button"></div>
                                           <input type="hidden" id="toUSD" value="{{round($toUSD,2)}}">
                                       </form>
-                                    </div>
-                                  @endif
+                                    
+                                    @endif
+                                  </div>
                                   <?php
                                       }else{
                                   ?>
@@ -456,18 +451,5 @@
         </div>
         
     </div>
-  {{-- </form> --}}
-  {{-- @if(Session::get('cart')==true && Session::get('payment_select')==1)
-    <div class="col-md-12">
-      <form action="{{url('/vnpay-checkout')}}" method="POST">
-        @csrf
-        <input type="hidden" name="total_vnpay" value="{{$total_after}}">
-        <button type="submit"  name="redirect" class="vnpay btn btn-warning text-danger ml-4" style="font-size: 15px; border-radius: 15px 15px 15px 15px; margin: 0; ">
-          <i class="fa fa-credit-card text-danger" aria-hidden="true"></i>
-          <b>   VNPay</b>
-        </button>
-      </form>
-    </div>
-  @endif --}}
 </section>
 @endsection
