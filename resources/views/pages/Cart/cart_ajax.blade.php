@@ -173,11 +173,17 @@
              </div>
          </div> 
          <center>
-            {{-- <button class=""> --}}
+            @if(Session::get('customer_id'))
               <div class="flex items-center bg rounded">
                 <div class=" text-lg font-semibold"><a class="text-danger nav-link" href="{{asset('/checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b class="text-white">Checkout</b> </a></div>
               
               </div>
+            @else
+              <div class="flex items-center bg rounded">
+                <div class=" text-lg font-semibold"><a class="text-danger nav-link" href="{{asset('/login-checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b class="text-white">Checkout</b> </a></div>
+              
+              </div>
+            @endif
             {{-- </button> --}}
          </center>
     
