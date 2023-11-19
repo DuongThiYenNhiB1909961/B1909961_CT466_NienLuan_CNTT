@@ -175,6 +175,67 @@
             @endif
           </div>
         </div>
+        <div  class="text-danger">
+          <center><b>MÃ GIẢ GIÁ</b></center> 
+        </div>
+        <style>
+          .coupon{
+            border: 2px solid #35dccb;
+            margin: 2px 0 2px;
+            border-top-right-radius: 25%;
+            border-bottom-left-radius: 25%;
+          }
+          .date{
+            border: 2px solid #dc3554;
+            border-top-right-radius: 25%;
+            border-bottom-left-radius: 25%;
+          }
+          .font{
+            font-size: 15px;
+            margin-left: 17px;
+          }
+        </style>
+            <div class="table-agile-info font">
+               <div class="row panel panel-default">
+               @foreach ($coupon as $key => $cou)
+                   <div class="col-sm-3 coupon mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" >
+                   <table class="table table-sm">
+                       <thead>
+                       <tr>
+                           <th scope="col">{{$cou->coupon_name}}</th>
+                           <div></div>
+                           <div></div>
+                           <div></div>
+                           <th scope="col">{{$cou->coupon_date_start}}</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <tr>
+                           <td scope="row">
+                               Còn lại: {{$cou->coupon_time}}
+                               <br>
+                               <b class="text-danger">Nhập Mã Ngay</b>
+                           </td>
+                           <div></div>
+                           <div></div>
+                           <div></div>
+                           <td>
+                           <b class="text-danger">Code: {{$cou->coupon_code}}</b><br>
+                           @if($cou->coupon_date_end >= $now)
+                           <input type="button" class="text-success date" value="Còn hạn">
+                           @else
+                           <input type="button" class="text-danger date" value="Hết hạn">
+                           @endif
+           
+                           </td>
+                       </tr>
+                       </tbody>
+                   </table>
+                   </div> 
+               @endforeach
+               
+              </div>
+            </div> 
                 <?php
                     $message = Session::get('message');
                     $error = Session::get('error');

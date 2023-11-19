@@ -89,34 +89,7 @@
               <td><input type="submit" value="" name="update_qty" class="check_out btn btn-default btn-sm"></td>
               <th colspan="6">
                 <div class="text-right"><b class="text-danger">Tổng tiền hàng: {{number_format($total,0,',','.')}}đ</b></div>          
-                {{-- <div class="order-message shadow pl-2 pt-2 pb-2 mt-2">
-                  <h6>MÃ KHUYẾN MÃI/MÃ QUÀ TẶNG</h6><hr>
-                  <div style="background-color: rgb(241, 216, 216); padding: 10px; width: 70%;" class="rounded">
-                    @if(Session::get('cart'))
-                    
-                      <td colspan="2">
-                        <form method="POST" action="{{url('/checkCoupon')}}">
-                          @csrf
-                          <div class="input-group" style="margin-top: 13px">
-                            <p class="mt-1">Mã KM/Quà tặng </p>
-                            <input type="text" id="keywords" name="coupon" class="form-control rounded coupon" placeholder="Mã KM">
-                            <span class="input-group-btn">
-                              <input type="submit" value="Áp dụng" name="check_coupon" class="btn btn-info btn-sm check_coupon">
-                              <input type="submit" class="btn btn-sm btn-info check_coupon text-white" name="check_coupon"  value="Áp dụng" style="margin-top: 4px">
-                            </span>
-                              @if(Session::get('coupon'))
-                                <a class="btn btn-default check_out text-danger" href="{{url('/del-coupon')}}"><b>Xóa mã khuyến mãi</b></a>
-                              @endif  
-                            <br>
-                            
-                          </div>
-                          <i style="font-size: 15px; padding: 25%" class="text-danger">*Chỉ áp dụng được 1 mã khuyến mãi</i>
-                          
-                        </form>
-                      </td>
-                    @endif
-                  </div>
-                </div> --}}
+                
               </th>
             </tr>
             @else
