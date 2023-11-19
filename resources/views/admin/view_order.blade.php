@@ -190,9 +190,9 @@
                         @csrf
                         <select class="form-control order_status">
                           <option value="">----Chọn hình thức đơn hàng-----</option>
-                          <option id="{{$or->order_id}}" selected value="0">Chờ xác nhận</option>
-                          <option id="{{$or->order_id}}" value="1">Chưa xử lý</option>
-                          <option id="{{$or->order_id}}" value="2">Đã xử lý - Đã giao hàng</option>
+                          <option id="{{$or->order_id}}" selected value="0">Đơn hàng mới</option>
+                          <option id="{{$or->order_id}}" value="1">Đang soạn hàng</option>
+                          <option id="{{$or->order_id}}" value="2">Đã xử lý</option>
                         </select>
                       </form>
                     @elseif($or->order_status==1)
@@ -200,9 +200,9 @@
                         @csrf
                         <select class="form-control order_status">
                           <option value="">----Chọn hình thức đơn hàng-----</option>
-                          <option id="{{$or->order_id}}" selected value="0">Chờ xác nhận</option>
-                          <option id="{{$or->order_id}}" selected value="1">Chưa xử lý</option>
-                          <option id="{{$or->order_id}}" value="2">Đã xử lý - Đã giao hàng</option>
+                          <option id="{{$or->order_id}}" selected value="0">Đơn hàng mới</option>
+                          <option id="{{$or->order_id}}" selected value="1">Đang soạn hàng</option>
+                          <option id="{{$or->order_id}}" value="2">Đã xử lý</option>
                         </select>
                       </form>
                       @else
@@ -210,9 +210,9 @@
                         @csrf
                         <select class="form-control order_status">
                           <option value="">----Chọn hình thức đơn hàng-----</option>
-                          <option disabled id="{{$or->order_id}}" selected value="0">Chờ xác nhận</option>
-                          <option disabled id="{{$or->order_id}}" value="1">Chưa xử lý</option>
-                          <option id="{{$or->order_id}}" selected value="2">Đã xử lý - Đã giao hàng</option>
+                          <option disabled id="{{$or->order_id}}" selected value="0">Đơn hàng mới</option>
+                          <option disabled id="{{$or->order_id}}" value="1">Đang soạn hàng</option>
+                          <option id="{{$or->order_id}}" selected value="2">Đã xử lý</option>
                         </select>
                       </form>
 

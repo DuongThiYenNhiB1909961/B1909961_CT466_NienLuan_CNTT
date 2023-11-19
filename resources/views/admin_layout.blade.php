@@ -270,9 +270,9 @@
                 
                 xkey: 'period',
                 
-                ykeys: ['order', 'sales', 'profit','spend', 'quantity'],
+                ykeys: ['order', 'sales', 'profit', 'quantity'],
                 behaveLikeLine: true,
-                labels: ['đơn hàng', 'doanh số', 'lợi nhuận','chi tiêu', 'số lượng đơn hàng']
+                labels: ['tổng đơn hàng', 'doanh số', 'lợi nhuận', 'số lượng SP']
             });
             
             function chart30daysorder(){

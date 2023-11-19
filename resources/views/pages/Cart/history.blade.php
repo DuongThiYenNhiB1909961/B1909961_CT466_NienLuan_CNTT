@@ -47,9 +47,9 @@
                   @if($order->order_status == 0)
                     <span class="btn btn-warning">Chờ xác nhận</span>
                   @elseif($order->order_status == 1)
-                    <span class="btn btn-info">Người bán đang soạn hàng</span>
+                    <span class="btn btn-info">Chờ lấy hàng</span>
                   @elseif($order->order_status == 2)
-                    <span class="btn btn-success">Đã xử lý - chờ giao hàng</span>
+                    <span class="btn btn-success">Chờ giao hàng</span>
                   @else
                     <span class="btn btn-danger">Đã hủy đơn</span>
                   @endif
@@ -60,14 +60,15 @@
               <td>
                 
                 @if($order->order_status != 3)
-                    {{-- <p><textarea class="" id="" cols="10" rows="3" placeholder="Lý do hủy đơn hàng" required></textarea></p> --}}
-                    <select name="lydo"  class="lydo form-controll input-sm m-bot15 payment_select shadow" required>
+                    <p><textarea name="lydo" data-validation="length" data-validation-length="min10" 
+                      data-validation-error-msg="Vui lòng dien it nhat 10 ky tu" cols="10" rows="3" placeholder="Lý do hủy đơn hàng" required></textarea></p>
+                    {{-- <select   class="lydo form-controll input-sm m-bot15 payment_select shadow" required>
                       <option value="">--Lý do hủy--</option>
                       <option value="0">Thay đổi số lượng </option>
                       <option value="1">Thay đổi mã giảm</option>   
                       <option value="2">Thay đổi size</option>  
                       <option value="3">Thêm sản phẩm</option>    
-                    </select>
+                    </select> --}}
                 @endif
               </td>
               <td>
