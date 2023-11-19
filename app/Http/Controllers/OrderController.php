@@ -39,7 +39,7 @@ class OrderController extends Controller
 		}
 
 
-		if($order->order_status==2){
+		if($order->order_status==1){
 			$total_order = 0;
 			$sales = 0;
 			$profit = 0;
@@ -63,7 +63,6 @@ class OrderController extends Controller
 								$product->save();
 
 								$quantity += $qty;
-								$total_order += 1;
 								$sales += $product_price*$qty;
 								$profit += ($product_price*$qty) - ($product_price_buy*$qty);
 						}
@@ -73,7 +72,7 @@ class OrderController extends Controller
 				$statistical_update = Statistical::where('order_date',$order_date)->first();
 				$statistical_update->sales = $statistical_update->sales + $sales;
 				$statistical_update->profit = $statistical_update->profit + $profit;
-				$statistical_update->quantity_order = $statistical_update->quantity + $quantity;
+				$statistical_update->quantity_order = $statistical_update->quantity_order + $quantity;
 				$statistical_update->total_order = $statistical_update->total_order + 1;
 				$statistical_update->save();
 			}else{

@@ -205,7 +205,7 @@
                           <option id="{{$or->order_id}}" value="2">Đã xử lý</option>
                         </select>
                       </form>
-                      @else
+                      @elseif($or->order_status==2)
                       <form>
                         @csrf
                         <select class="form-control order_status">

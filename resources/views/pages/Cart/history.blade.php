@@ -65,7 +65,7 @@
                 @endif
               </td>
               <td>
-                @if($order->order_status != 3)
+                @if($order->order_status == 0)
                 <button type="button" id="{{$order->order_code}}" onclick="Huydon(this.id)" class="btn btn-danger">Hủy đơn</button>
                 @endif
                 <a href="{{asset('/history-view-order/'.$order->order_code)}}" class="active" >
