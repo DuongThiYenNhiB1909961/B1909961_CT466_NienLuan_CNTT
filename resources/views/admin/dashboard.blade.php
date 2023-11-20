@@ -140,19 +140,15 @@
             <p class="title_statistic">Thống Kê Tổng Sản Phẩm Đơn Hàng</p>
             <div id="donut"></div>
         </div>
-        <div class="col-md-6 col-xs-12">
+        <div class="col-md-8 col-xs-12">
             <p class="title_statistic">Sản Phẩm Xem Nhiều</p>
             <ol class="list-views">
                 @foreach($product_views as $key => $view)
                 <li>
-                    <a href="{{asset('/product-detail/'.$view->product_id)}}"><p style="color: brown;">{{$view->product_name}}</p> | <span style="color: black">
-                    {{$view->product_views}}</span></a>
+                    <a href="{{asset('/product-detail/'.$view->product_id)}}" style="display: inline-flex"><p style="color: brown;">{{$view->product_name}} | </p> <p class="text-info"> {{$view->product_views}} lượt xem</p></a>
                 </li>
                 @endforeach
             </ol>
-        </div>
-        <div class="col-md-2 col-xs-12">
-            
         </div>
     </div>
     
