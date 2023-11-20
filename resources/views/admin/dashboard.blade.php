@@ -18,11 +18,11 @@
         <form autocomplete="off">
             @csrf
             <div class="col-md-2">
-                <p>Từ ngày: </p><input type="text" id="datepicker" placeholder="2023-10-20" class="form-control">
+                <p>Từ ngày: </p><input type="text" id="datepicker" placeholder="20-10-2023" class="form-control">
                 <input type="button" id="dashboard_filter" class="btn btn-danger btn-sm " value="Lọc">
             </div> 
             <div class="col-md-2">
-                <p>Đến ngày: </p><input type="text" id="datepicker1" placeholder="2023-10-22" class="form-control">
+                <p>Đến ngày: </p><input type="text" id="datepicker1" placeholder="22-10-2023" class="form-control">
                 
             </div> 
             <div class="col-md-2">

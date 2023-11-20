@@ -150,7 +150,7 @@ class ProductController extends Controller
     }
     public function save_product(Request $request){
         $this->AuthLogin();
-        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('y-m-d');
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
 
         $data = array();
         $data['product_name'] = $request->product_name;

@@ -22,15 +22,15 @@ class AdminController extends Controller
 {
     public function dashboard_filter_option(Request $request){
         $data = $request->all();
-        // echo $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-y H:i:s');
+        // echo $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
 
-        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-        $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonthsNoOverflow()->toDateString();
-        $lastDayofPreviousMonth = Carbon::now()->subMonthsNoOverflow()->endOfMonth()->toDateString();
+        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->format('d-m-Y');
+        $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonthsNoOverflow()->format('d-m-Y');
+        $lastDayofPreviousMonth = Carbon::now()->subMonthsNoOverflow()->endOfMonth()->format('d-m-Y');
         
-        $sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString();
-        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        $sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->format('d-m-Y');
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->format('d-m-Y');
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
 
         if($data['dashboard_val'] == '7ngay'){
             $statis = Statistical::whereBetween('order_date',[$sub7days,$now])->orderBy('order_date','ASC')->get();
@@ -58,12 +58,12 @@ class AdminController extends Controller
     }
     public function days30Order(Request $request){
         $data = $request->all();
-        // echo $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-y H:i:s');
+        // echo $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
 
-        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(30)->toDateString();
-        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        $sub10days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(10)->format('d-m-Y');
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
 
-        $statis = Statistical::whereBetween('order_date',[$sub30days,$now])->orderBy('order_date','ASC')->get();
+        $statis = Statistical::whereBetween('order_date',[$sub10days,$now])->orderBy('order_date','ASC')->get();
 
         foreach($statis as $key => $st){
             $chart_data[] = array(
@@ -208,12 +208,12 @@ class AdminController extends Controller
         // get ip address
         $user_ip_address = $request->ip();
 
-        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-        $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonthsNoOverflow()->toDateString();
-        $lastDayofPreviousMonth = Carbon::now()->subMonthsNoOverflow()->endOfMonth()->toDateString();
+        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->format('d-m-Y');
+        $firstDayofPreviousMonth = Carbon::now()->startOfMonth()->subMonthsNoOverflow()->format('d-m-Y');
+        $lastDayofPreviousMonth = Carbon::now()->subMonthsNoOverflow()->endOfMonth()->format('d-m-Y');
         
-        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->format('d-m-Y');
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
 
 
         $visitor_of_lastmonth = Visitors::whereBetween('date_visitor',[$firstDayofPreviousMonth,$lastDayofPreviousMonth])->get();
@@ -231,7 +231,7 @@ class AdminController extends Controller
         if($visitor_count < 1){
             $visitor = new Visitors();
             $visitor->address_ip = $user_ip_address;
-            $visitor->date_visitor = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->date_visitor = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
             $visitor->save();
         }
         $visitors = Visitors::all();

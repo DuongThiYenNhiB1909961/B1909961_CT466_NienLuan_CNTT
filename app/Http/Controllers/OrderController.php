@@ -53,7 +53,7 @@ class OrderController extends Controller
 
 				$product_price = $product->product_price;
 				$product_price_buy = $product->product_price_buy;
-				$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+				$now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
 
 				foreach($data['quantity'] as $key2 => $qty){
 						if($key1 == $key2){
@@ -169,8 +169,8 @@ class OrderController extends Controller
 				$order->order_code = $data_vnpay->vnp_TxnRef;
 				
 				date_default_timezone_set('Asia/Ho_Chi_Minh');
-				$order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-				$created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+				$order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
+				$created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
 						
 				$order->order_date = $order_date;
 				$order->created_at = $created_at;
@@ -225,8 +225,8 @@ class OrderController extends Controller
 				$order->order_code = $order_code;
 				
 				date_default_timezone_set('Asia/Ho_Chi_Minh');
-				$order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-				$created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+				$order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
+				$created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
 						
 				$order->order_date = $order_date;
 				$order->created_at = $created_at;
