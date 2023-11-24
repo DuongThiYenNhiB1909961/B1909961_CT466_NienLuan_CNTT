@@ -141,7 +141,7 @@
             <div id="donut"></div>
         </div>
         <div class="col-md-8 col-xs-12">
-            <p class="title_statistic">Sản Phẩm Xem Nhiều</p>
+            <b class="" style="font-size: 20px;font-weight: bold;color: brown; margin-left:20%;">Sản Phẩm Xem Nhiều</b>
             <ol class="list-views">
                 @foreach($product_views as $key => $view)
                 <li>

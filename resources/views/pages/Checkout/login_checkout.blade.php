@@ -6,6 +6,30 @@
       <li class="breadcrumb-item active" style="border: 1px solid #dc3545;" aria-current="page">Đăng nhập</li>
     </ol>
   </nav>
+  <style>
+    
+    .login_gg{
+        border: 1px solid #000;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50%;
+        margin-right: 46%;
+        margin-top: 5px;
+    }
+    .signin{
+        border: 1px solid crimson;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: crimson;
+        margin-left: 39%;
+        margin-right: 28%;
+    }
+
+</style>
 <div class=" shadow relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
     <div class="row">
         <div class="col-sm-1"><img src="resources/images/logoshop1.png" height="100px" width="100px"></div>
@@ -43,7 +67,7 @@
                   <input type="password" name="customer_password" class="customer_password shadow form-control" id="inputName" placeholder="*******" required>
                 </div>
             </div>
-            <div class="form-group row" style="margin-left: 186px">
+            {{-- <div class="form-group row" style="margin-left: 186px">
                 <label for="colFormLabel" class="col-sm-3 col-form-label"></label>
                 <div class="col-sm-5">
                     <div class="form-check">
@@ -53,8 +77,8 @@
                         </label>
                     </div>
                 </div>
-            </div>
-
+            </div> --}}
+            <p class="signin"><input type="submit" class="btn text-white" value="Đăng nhập" name="login"></p>
             {{-- <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
                 <br/>
                 @if($errors->has('g-recaptcha-response'))
@@ -63,12 +87,14 @@
                 </span>
                 @endif --}}
         <div style="margin-left: 39%">
-            <button type="submit" class="btn btn-danger">Login</button>
+            
+            {{-- <button type="submit" class="btn btn-danger">Login</button> --}}
             <b><p>Nếu bạn chưa có tài khoản hãy</p><a class="nav-link text-danger" href="register">Register</a></b>
             
             </form>
-            <a href="{{url::to('/login-customer-google')}}"><b>Login Google</b></a>
-            <a href="{{url::to('/login-facebook-customer')}}"><b>Login Facebook</b></a>
+            <center class="login_gg"><a  href="login-customer-google"><img src="resources/images/gg.png" width="45px" height="45px"> <b>Đăng nhập với Google</b></a></center>
+            {{-- <a href="{{url::to('/login-customer-google')}}"><b>Login Google</b></a>
+            <a href="{{url::to('/login-facebook-customer')}}"><b>Login Facebook</b></a> --}}
         </div>
     </div>
 </div>

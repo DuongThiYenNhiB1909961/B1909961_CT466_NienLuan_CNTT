@@ -203,7 +203,7 @@ class AdminController extends Controller
         return view('admin_login');
     }
     public function manage(Request $request){
-        // $this->AuthLogin();
+        $this->AuthLogin();
 
         // get ip address
         $user_ip_address = $request->ip();

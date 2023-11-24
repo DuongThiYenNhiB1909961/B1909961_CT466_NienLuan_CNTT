@@ -212,7 +212,7 @@
                                             </span><br>
                                                 <textarea class="comment_content" name="comment_content" id="" cols="60" rows="5" style="border: 1px solid #000;" placeholder="Viết bình luận của bạn"></textarea>
                                                 
-                                                <br><input type="button" class="btn btn-danger pull-right send_cmt" value="Comment">
+                                                <br><input type="button" class="btn btn-danger mb-1 send_cmt" value="Comment">
                                             </div>    
                                         </form>
     
@@ -239,7 +239,8 @@
                                 </div>
                                     <br><b class="text-primary" style="margin-left: 22rem">Cảm ơn bạn đã đánh giá và bình luận.</b>
                                 @elseif(Session::get('customer_id')==null && $j<1)
-                                    <br><b class="text-primary">Chỉ có thành viên mới có thể đánh giá và bình luận.</b>
+                                    <br>
+                                    <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true" style="background: #efc88d; margin-left:30%; padding:10px;"><p  class="text-black-50 list-inline-item">    Chỉ có thành viên mới có thể đánh giá và bình luận.</p></i>
                                 @endif
                                 
                     </div>
