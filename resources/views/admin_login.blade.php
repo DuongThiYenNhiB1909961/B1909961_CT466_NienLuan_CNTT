@@ -109,7 +109,7 @@
                 <div style="margin-left: 39%">
                     
                     </form>
-                    <center class="login_gg"><a  href="login-google"><img src="resources/images/gg.png" width="45px" height="45px"> <b>Đăng nhập với Google</b></a></center>
+                    {{-- <center class="login_gg"><a  href="login-google"><img src="resources/images/gg.png" width="45px" height="45px"> <b>Đăng nhập với Google</b></a></center> --}}
                     
                 </div>
             </div>

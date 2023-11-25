@@ -92,7 +92,7 @@
             <b><p>Nếu bạn chưa có tài khoản hãy</p><a class="nav-link text-danger" href="register">Register</a></b>
             
             </form>
-            <center class="login_gg"><a  href="login-customer-google"><img src="resources/images/gg.png" width="45px" height="45px"> <b>Đăng nhập với Google</b></a></center>
+            <center class="login_gg"><a  href="login-google"><img src="resources/images/gg.png" width="45px" height="45px"> <b>Đăng nhập với Google</b></a></center>
             {{-- <a href="{{url::to('/login-customer-google')}}"><b>Login Google</b></a>
             <a href="{{url::to('/login-facebook-customer')}}"><b>Login Facebook</b></a> --}}
         </div>

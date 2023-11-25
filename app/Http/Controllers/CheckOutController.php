@@ -156,31 +156,28 @@ class CheckOutController extends Controller
     	}
     
     }
-
-    public function login_customer_google(){
-        config(['services.google.redirect' => env('GOOGLE_CLIENT_URL')]);
+    public function login_google(){
         return Socialite::driver('google')->redirect();
     }
-    public function callback_customer_google(){
-        config(['services.google.redirect' => env('GOOGLE_CLIENT_URL')]);
+    public function callback_google(){
         $users = Socialite::driver('google')->stateless()->user();
         
         $authUser = $this->findOrCreateCustomer($users,'google');
         if($authUser){
             $account_name = Customer::where('customer_id',$authUser->user)->first();
-            Session::put('customer_id',$account_name->customer_id);
-            Session::put('customer_picture',$account_name->customer_picture);
             Session::put('customer_name',$account_name->customer_name);
-        }elseif($customergg){
-            $account_name = Customer::where('customer_id',$authUser->user)->first();
+            Session::put('login_normal',true);
             Session::put('customer_id',$account_name->customer_id);
-            Session::put('customer_picture',$account_name->customer_picture);
+        }elseif($logingg){
+            $account_name = Customer::where('admin_id',$authUser->user)->first();
             Session::put('customer_name',$account_name->customer_name);
+            Session::put('login_normal',true);
+            Session::put('customer_id',$account_name->customer_id);
         }
 
-        return redirect('/checkout')->with('message', 'Đăng nhập Admin thành công');
+        return redirect('/index')->with('message', 'Đăng nhập thành viên thành công');
 
-    }
+        }
     public function findOrCreateCustomer($users,$provider){
         $authUser = SocialCustomers::where('provider_user_id', $users->id)->where('provider_user_email', $users->email)->first();
         if($authUser){
@@ -199,6 +196,7 @@ class CheckOutController extends Controller
                 'customer_name' => $users->name,
                 'customer_email' => $users->email,
                 'customer_picture' => $users->avatar,
+                'customer_address' => '',   
                 'customer_password' => '',   
                 'customer_phone' => '',
                 ]);
@@ -209,6 +207,58 @@ class CheckOutController extends Controller
         }
     
     }
+    // public function login_customer_google(){
+    //     config(['services.google.redirect' => env('GOOGLE_URL')]);
+    //     return Socialite::driver('google')->redirect();
+    // }
+    // public function callback_customer_google(){
+    //     config(['services.google.redirect' => env('GOOGLE_URL')]);
+    //     $users = Socialite::driver('google')->stateless()->user();
+        
+    //     $authUser = $this->findOrCreateCustomer($users,'google');
+    //     if($authUser){
+    //         $account_name = Customer::where('customer_id',$authUser->user)->first();
+    //         Session::put('customer_id',$account_name->customer_id);
+    //         Session::put('customer_picture',$account_name->customer_picture);
+    //         Session::put('customer_name',$account_name->customer_name);
+    //     }elseif($customergg){
+    //         $account_name = Customer::where('customer_id',$authUser->user)->first();
+    //         Session::put('customer_id',$account_name->customer_id);
+    //         Session::put('customer_picture',$account_name->customer_picture);
+    //         Session::put('customer_name',$account_name->customer_name);
+    //     }
+
+    //     return redirect('/checkout')->with('message', 'Đăng nhập Admin thành công');
+
+    // }
+    // public function findOrCreateCustomer($users,$provider){
+    //     $authUser = SocialCustomers::where('provider_user_id', $users->id)->where('provider_user_email', $users->email)->first();
+    //     if($authUser){
+    //         return $authUser;
+    //     }else{
+    //         $customergg = new SocialCustomers([
+    //             'provider_user_id' => $users->id,
+    //             'provider_user_email' => $users->email,
+    //             'provider' => strtoupper($provider)
+    //         ]);
+        
+    //         $customer = Customer::where('customer_email',$users->email)->first();
+            
+    //         if(!$customer){
+    //             $customer = Customer::create([
+    //             'customer_name' => $users->name,
+    //             'customer_email' => $users->email,
+    //             'customer_picture' => $users->avatar,
+    //             'customer_password' => '',   
+    //             'customer_phone' => '',
+    //             ]);
+    //         }
+    //         $customergg->customer()->associate($customer);
+    //         $customergg->save();
+    //         return $customergg;
+    //     }
+    
+    // }
 
     public function AuthLogin(){
         if(Session::get('login_normal')){

@@ -45,7 +45,7 @@
                                 </div>
                                  <div class="form-group">
                                     <label for="exampleInputEmail1">Phí vận chuyển</label>
-                                    <input type="text" name="fee_ship" class="form-control fee_ship" id="exampleInputEmail1" placeholder="Tên danh mục">
+                                    <input type="text" name="fee_ship" class="form-control fee_ship" id="exampleInputEmail1" placeholder="45000">
                                 </div>
                                
                                 <button type="button" name="add_delivery" class="btn btn-info add_delivery">Thêm phí vận chuyển</button>

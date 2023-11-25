@@ -131,9 +131,9 @@ Route::post('/huydon',[OrderController::class, 'huydon']);
 Route::get('/login-facebook',[AdminController::class, 'login_facebook']);
 Route::get('/admin/callback', [AdminController::class, 'callback_facebook']);
 
-//login gg
-Route::get('/login-google',[AdminController::class, 'login_google']);
-Route::get('/google/callback', [AdminController::class, 'callback_google']);
+//login ad gg
+Route::get('/login-google',[CheckOutController::class, 'login_google']);
+Route::get('/google/callback', [CheckOutController::class, 'callback_google']);
 
 //login customer gg
 Route::get('/login-customer-google',[CheckOutController::class, 'login_customer_google']);
