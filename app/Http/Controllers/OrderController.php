@@ -81,7 +81,7 @@ class OrderController extends Controller
 				$statistical_new->sales = $sales;
 				$statistical_new->profit = $profit;
 				$statistical_new->quantity_order = $quantity;
-				$statistical_new->total_order = $total_order;
+				$statistical_new->total_order = $total_order+1;
 				$statistical_new->save();
 			}
 		}
