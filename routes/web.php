@@ -43,6 +43,10 @@ Route::get('/manage',[AdminController::class, 'manage']);
 Route::post('/dashboard',[AdminController::class, 'dashboard']);
 Route::get('/logoutad',[AdminController::class, 'logoutad']);
 
+// user
+Route::get('/manage-user',[AdminController::class, 'manage_user']);
+Route::get('/delete-user/{ocustomer_id}',[AdminController::class, 'delete_user']);
+
 // filter
 Route::post('/filterbydate',[AdminController::class, 'filterbydate']);
 Route::post('/days30Order',[AdminController::class, 'days30Order']);

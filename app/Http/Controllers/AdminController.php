@@ -110,6 +110,17 @@ class AdminController extends Controller
     public function index(){
         return view('admin_login');
     }
+    public function manage_user(){
+        $this->AuthLogin();
+        $all_user = Customer::orderby('customer_id','DESC')->get();
+        return view('admin.user.manage_user')->with('all_user',$all_user);
+    }
+    public function delete_user($customer_id){
+        $this->AuthLogin();
+        $user = Customer::where('customer_id',$customer_id)->delete();
+        Session::put('message','Xóa người dùng thành công');
+        return Redirect()->Back();
+    }
     public function manage(Request $request){
         $this->AuthLogin();
 
@@ -164,43 +175,10 @@ class AdminController extends Controller
         ->with('visitor_last_month_count',$visitor_last_month_count)->with('visitor_this_month_count',$visitor_this_month_count)->with('visitor_year_count',$visitor_year_count);
     }
     public function dashboard(Request $request){
-        // $data = $request->all();
-
-        // $admin_email = $data['admin_email'];
-        // $admin_password = md5($data['admin_password']);
-        // $login = Login::where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
-        // if($login){
-        //     $login_count = $login->count();
-        //     if($login_count>0){
-        //         Session::put('admin_email',$login->admin_email);
-        //         Session::put('admin_id',$login->admin_id);
-        //         return Redirect::to('/manage');
-        //     }
-        // }else{
-        //         Session::put('message','Mật khẩu hoặc tài khoản bị sai. Vui lòng nhập lại');
-        //         return Redirect::to('/admin');
-        // }
         $data = $request->all();
 
         $admin_email = $data['admin_email'];
         $admin_password = $data['admin_password'];
-        // echo ($admin_email);
-        // echo ($admin_password);
-        // $login = Login::where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
-        // if($login){
-        //     $login_count = $login->count();
-        //     if($login_count>0){
-        //         Session::put('admin_email',$login->admin_email);
-        //         Session::put('admin_id',$login->admin_id);
-        //         return Redirect::to('/manage');
-        //     }
-        // }else{
-        //         Session::put('message','Mật khẩu hoặc tài khoản bị sai.Làm ơn nhập lại');
-        //         return Redirect::to('/admin');
-        // }
-        // $admin_email = $data['admin_email'];;
-        // // $admin_password = md5($request->admin_password);
-        // $admin_password = $data['admin_password'];;
 
         $result = DB::table('tb_admin')->where('admin_email',$admin_email)->where('admin_password',$admin_password)->first();
         if($result){

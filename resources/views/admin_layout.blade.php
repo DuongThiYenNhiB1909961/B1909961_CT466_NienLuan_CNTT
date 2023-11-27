@@ -190,12 +190,23 @@
                             </ul>
                         </li>
                         <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-book"></i>
+                                <span>Thành viên</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="{{asset('manage-user')}}">Quản Lý Thành Viên</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
                             <a href="{{asset('logoutad')}}">
                                 <i class="fa fa-key"></i>
                                 Log Out
                             </a>
                         </li>
-                    </ul>            </div>
+                    </ul>            
+                </div>
                 <!-- sidebar menu end-->
             </div>
         </aside>
