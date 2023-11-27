@@ -13,6 +13,7 @@ use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\MailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -191,3 +192,8 @@ Route::post('/add-rating',[ProductController::class, 'add_rating']);
 //Checkout online
 Route::post('/vnpay-checkout',[CheckoutController::class, 'vnpay_checkout']);
 Route::post('/confirm-paypal',[CheckoutController::class, 'confirm_paypal']);
+
+// email
+Route::get('/send-coupon',[MailController::class, 'send_coupon']);
+Route::get('/send-email',[MailController::class, 'send_email']);
+Route::get('/mail-example',[MailController::class, 'mail_example']);

@@ -5,6 +5,9 @@
     <div class="panel-heading">
       Liệt kê mã giảm giá
     </div>
+    <div>
+      <p><a class="btn btn-info" href="{{asset('/send-coupon')}}">Gửi mã giảm giá cho khách hàng VIP</a></p>
+    </div>
     <div class="table-responsive">
       <?php
                     $message = Session::get('message');

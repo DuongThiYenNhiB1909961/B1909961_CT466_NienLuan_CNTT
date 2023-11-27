@@ -36,9 +36,9 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+            'host' => env('MAIL_HOST', 'smtp.googlemail.com'),
             'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
@@ -92,8 +92,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'nhib1909961@student.ctu.edu.vn'),
-        'name' => env('MAIL_FROM_NAME', 'nhib1909961'),
+        'address' => env('MAIL_FROM_ADDRESS', 'nhib1808@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'shopbanhangcosmetis'),
     ],
 
     /*
@@ -114,11 +114,11 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
-    'stream' => [
-        'ssl' => [
-        'allow_self_signed' => true,
-        'verify_peer' => false,
-        'verify_peer_name' => false,
-        ],
-    ],
+    // 'stream' => [
+    //     'ssl' => [
+    //     'allow_self_signed' => true,
+    //     'verify_peer' => false,
+    //     'verify_peer_name' => false,
+    //     ],
+    // ],
 ];
