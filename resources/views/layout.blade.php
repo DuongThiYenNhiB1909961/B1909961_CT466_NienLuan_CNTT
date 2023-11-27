@@ -826,8 +826,8 @@
                 var cart_product_quantity = $('.cart_product_quantity_' + id).val();
                 var cart_product_qty = $('.cart_product_pty_' + id).val();
                 var _token = $('input[name="_token"]').val();
-                if(parseInt(cart_product_qty) > parseInt(cart_product_quantity)){
-                    alert('Vui lòng chọn sản phẩm nhỏ hơn ' + cart_product_quantity);
+                if(parseInt(cart_product_qty) < 0 || parseInt(cart_product_qty) > parseInt(cart_product_quantity)){
+                    alert('Số lượng thêm phải lớn hơn 0 hoặc số lượng sản phẩm nhỏ hơn ' + cart_product_quantity);
                 }else
                     {
                         $.ajax({
