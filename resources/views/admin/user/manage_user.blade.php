@@ -24,6 +24,7 @@
               <th>Số điện thoại</th>
               <th>Mặt khẩu đăng nhập</th>
               <th>Hình ảnh (nếu có)</th>
+              <th>Khách hàng VIP</th>
               <th style="width:30px;"></th>
             </tr>
           </thead>
@@ -43,10 +44,18 @@
               <td>{{$user->customer_password}}</td>
               <td>
                 @if($user->customer_picture)
-                    <img src="{{$user->customer_picture}}" alt="" width="50px" height="50px"></td>
+                    <img src="{{$user->customer_picture}}" alt="" width="50px" height="50px">
                 @else
                     <img src="{{asset('/public/uploads/product/user1.png')}}" alt="" width="50px" height="50px">
                 @endif
+              </td>
+              <td>
+                @if($user->customer_vip ==1)
+                  <p>VIP</p>
+                @else
+                  <p>Thường</p>
+                @endif
+              </td>
               <td>
                 <a onclick="return confirm('Bạn có chắc sắn muốn xóa người dùng này không?')" href="{{asset('/delete-user/'.$user->customer_id)}}" class="active" ui-toggle-class="">
                     <i class="fa fa-times text-danger text"></i></a>
