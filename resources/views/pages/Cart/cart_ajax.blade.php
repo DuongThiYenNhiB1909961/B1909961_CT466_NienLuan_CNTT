@@ -68,7 +68,7 @@
                 <p>{{number_format($cart['product_price'],0,',','.')}}đ</p>
               </th>
               <th class="cart_qty">
-                <input type="number" name="cart_qty[{{$cart['session_id']}}]" value="{{$cart['product_qty']}}" min="1">
+                <input type="number" name="cart_qty[{{$cart['session_id']}}]" value="{{$cart['product_qty']}}" min="1" style="width:40px;">
               </th>
                 
               <th class="cart_total">

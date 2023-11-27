@@ -10,12 +10,54 @@ use App\Models\Slider;
 use App\Models\Product;
 use App\Models\Rating;
 use App\Models\Coupon;
+use App\Models\Customer;
 use Carbon\Carbon;
+use Auth;
 use Mail;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 class IndexController extends Controller
 {
+    public function AuthLogin(){
+        if(Session::get('login_normal')){
+            $customer_id = Session::get('customer_id');
+        }else{
+            $customer_id = Auth::id();
+        }   
+            if($customer_id){
+                return Redirect::to('login-checkout');
+            }else{
+                return Redirect::to('/')->send();
+            }
+    }
+    public function edit_user(Request $request, $customer_id){
+        // $this->AuthLogin();
+        $meta_desc = "Cập nhật thông tin cá nhân";
+        $meta_keywords = "Cập nhật thông tin cá nhân";
+        $meta_title = "Cập nhật thông tin cá nhân";
+        $url_canonical = $request->url(); 
+
+        $edit_user = Customer::where('customer_id',$customer_id)->get();
+        return view('pages.edit_user')->with('edit_user',$edit_user)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);;
+    }
+    public function update_user(Request $request, $customer_id){
+        $this->AuthLogin();
+        $data = array();
+        $data['customer_name'] = $request->customer_name;
+        $data['customer_email'] = $request->customer_email;
+        $data['customer_address'] = $request->customer_address;
+        $data['customer_phone'] = $request->customer_phone;
+        $data['customer_password'] = $request->customer_password;
+
+        DB::table('tb_customer')->where('customer_id',$customer_id)->update($data);
+        Session::put('customer_name',$request->customer_name);
+        Session::put('customer_id', $request->customer_id);
+        Session::put('customer_email',$request->customer_email);
+        Session::put('customer_address',$request->customer_address);
+        Session::put('customer_phone',$request->customer_phone);
+        Session::put('message','Cập nhật thông tin thành công');
+        return Redirect::to('/checkout');
+    }
     public function load_more(Request $request){
         $data = $request->all();
         if($data['id']>0){
