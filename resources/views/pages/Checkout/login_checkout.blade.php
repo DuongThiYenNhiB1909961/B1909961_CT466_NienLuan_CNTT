@@ -67,17 +67,17 @@
                   <input type="password" name="customer_password" class="customer_password shadow form-control" id="inputName" placeholder="*******" required>
                 </div>
             </div>
-            {{-- <div class="form-group row" style="margin-left: 186px">
+            <div class="form-group row" style="margin-left: 190px">
                 <label for="colFormLabel" class="col-sm-3 col-form-label"></label>
                 <div class="col-sm-5">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                        Check me out
-                        </label>
-                    </div>
+                    {{-- <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                        Nhớ mật khẩu
+                    </label> --}}
+                    <a href="{{asset('/quen-mk')}}" style="font-size: 16px;">Quên mật khẩu</a>
                 </div>
-            </div> --}}
+            </div>
+            
             <p class="signin"><input type="submit" class="btn text-white" value="Đăng nhập" name="login"></p>
             {{-- <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
                 <br/>
@@ -88,13 +88,12 @@
                 @endif --}}
         <div style="margin-left: 39%">
             
-            {{-- <button type="submit" class="btn btn-danger">Login</button> --}}
             <b><p>Nếu bạn chưa có tài khoản hãy</p><a class="nav-link text-danger" href="register">Register</a></b>
             
             </form>
             <center class="login_gg"><a  href="login-google"><img src="resources/images/gg.png" width="45px" height="45px"> <b>Đăng nhập với Google</b></a></center>
-            {{-- <a href="{{url::to('/login-customer-google')}}"><b>Login Google</b></a>
-            <a href="{{url::to('/login-facebook-customer')}}"><b>Login Facebook</b></a> --}}
+            
+            {{-- <a href="{{url::to('/login-facebook-customer')}}"><b>Login Facebook</b></a> --}}
         </div>
     </div>
 </div>

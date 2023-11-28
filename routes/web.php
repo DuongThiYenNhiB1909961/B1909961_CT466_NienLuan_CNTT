@@ -197,3 +197,7 @@ Route::post('/confirm-paypal',[CheckoutController::class, 'confirm_paypal']);
 Route::get('/send-coupon',[MailController::class, 'send_coupon']);
 Route::get('/send-email',[MailController::class, 'send_email']);
 Route::get('/mail-example',[MailController::class, 'mail_example']);
+Route::get('/quen-mk',[MailController::class, 'quen_mk']);
+Route::post('/get-pass',[MailController::class, 'get_pass']);
+Route::get('/update-new-pass',[MailController::class, 'update_new_pass']);
+Route::post('/reset-new-pass',[MailController::class, 'reset_new_pass']);
