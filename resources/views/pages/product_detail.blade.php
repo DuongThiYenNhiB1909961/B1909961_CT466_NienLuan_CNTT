@@ -89,8 +89,8 @@
                         <div class="carousel-inner"><div class="">
                             <div class="row text-center ml-3 item active">
                                 @foreach($relate as $key => $lienquan)
-                                        <div class="mr-1 mb-1">
-                                            <div class="product-image-wrapper">
+                                        <div class="mr-1 mb-1 ">
+                                            <div class="product-image-wrapper shadow">
                                                 <div class="productinfo text-center">
                                                     <a href="{{URL::to('product-detail/'.$lienquan->product_id)}}" class="text-decoration-none">
                                                         <div class="card" style="width: 12rem; height: 24rem;">

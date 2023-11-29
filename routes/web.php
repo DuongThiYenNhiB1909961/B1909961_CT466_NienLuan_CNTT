@@ -93,6 +93,10 @@ Route::get('/active-product/{product_id}',[ProductController::class, 'active_pro
 
 Route::post('/save-product',[ProductController::class, 'save_product']);
 Route::post('/update-product/{product_id}',[ProductController::class, 'update_product']);
+
+Route::post('/load-more', [IndexController::class, 'load_more']);
+Route::post('/home-product',[IndexController::class, 'home_product']);
+Route::post('/lquan-product',[IndexController::class, 'lquan_product']);
 // Product_detail
 Route::get('/product-detail/{product_id}', [ProductController::class, 'product_detail']);
 

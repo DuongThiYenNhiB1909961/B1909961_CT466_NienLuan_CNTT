@@ -131,13 +131,14 @@
                 
                 </div>
             </div> 
-        <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+        <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden sm:rounded-lg">
             <h5 class="ml-3"><b>Sản Phẩm Mới Nhất</b></h5>
-            <div class="row text-center ml-3">
+            <div >
                 @foreach($all_product as $key => $product)
                 
-                    <div class="mb-2 shadow">
-                                    <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
+                    <div class="mb-2 ml-2">
+                        <div id="home_product" class="row text-center"></div>
+                                    {{-- <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
                                         <div class="card" style="width: 14rem; height: 23rem;">
                                             <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top shadow" alt="">
                                             <div class="card-body">
@@ -146,6 +147,7 @@
                                                 <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
                                             </div>
                                         </div>
+                                    @foreach($rating as $key => $ra)
                                         @for($count=1; $count<=5; $count++)
                                                 @php
                                                 if($count <= $rating){
@@ -159,13 +161,15 @@
                                                     data-index="{{$count}}" 
                                                     data-product_id="{{$product->product_id}}" 
                                                     data-rating="{{$rating}}" 
-                                                    class="list-inline-item"
+                                                    class="rating list-inline-item"
                                                     style="cursor: pointer; {{$color}} font-size: 30px;" >
                                                     &#9733;</li>
-        
-                                            @endfor
-                                            <p class="text-danger list-inline-item">{{$rating}}/5</p>
-                                    </a>
+
+                                            @endfor        
+                                        <p class="text-danger list-inline-item">{{$rating}}/5</p>
+                                        
+                                    @endforeach
+                                    </a> --}}
                     </div>
 
                 @endforeach

@@ -493,6 +493,36 @@
             let table = new DataTable('#myTable');
         </script>
         <script>
+            product_new();
+            // product_lienquan();
+            // function product_lienquan(id = ''){
+            //     $.ajax({
+            //         url: '{{url('/lquan-product')}}',
+            //         method: 'POST',
+            //         headers:{
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         },
+            //         data:{id:id},
+            //         success:function(data){
+            //             $('#lienquan_product').append(data);
+            //         } 
+            //     });
+            // }
+            function product_new(id = ''){
+                $.ajax({
+                    url: '{{url('/home-product')}}',
+                    method: 'POST',
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{id:id},
+                    success:function(data){
+                        $('#home_product').append(data);
+                    } 
+                });
+            }
+        </script>
+        <script>
             load_more_product();
             function load_more_product(id = ''){
                 $.ajax({

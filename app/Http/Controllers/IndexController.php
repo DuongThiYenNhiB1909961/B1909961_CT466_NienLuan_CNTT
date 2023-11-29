@@ -68,7 +68,7 @@ class IndexController extends Controller
         $output = '';
         if(!$all_product -> isEmpty()){
             foreach($all_product as $key => $product){
-                $rating = Rating::where('product_id', $product->product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
+                $rating = Rating::where('product_id', $product->product_id)->avg('rating');
                 $rating = round($rating);
                 $last_id = $product->product_id;
                 $output .= '<div class="mr-4 mb-4 shadow">
@@ -83,9 +83,9 @@ class IndexController extends Controller
                                     </div>';
                                         for($count=1; $count<=5; $count++){
                                             if($count <= $rating){
-                                                $color = '.color: #ffcc00;.';
+                                                $color = 'color: #ffcc00;';
                                             }else {
-                                                $color = '.color: #ffcc00;.';
+                                                $color = 'color: #ccc;';
                                             }
                                             $output .= '
                                             <li title="Đánh giá sao" 
@@ -94,12 +94,12 @@ class IndexController extends Controller
                                                 data-product_id="'.$product->product_id.'" 
                                                 data-rating="'.$rating.'" 
                                                 class="list-inline-item"
-                                                style="cursor: pointer; {{$color}} font-size: 30px; color: #ccc;" >
+                                                style="cursor: pointer;'.$color.' font-size: 30px;" >
                                                 &#9733;
                                             </li>
                                             ';
                                         }                
-                                        $output .= '<p class="text-danger list-inline-item">'.$rating.'/5</p>
+                                        $output .= '<p class="text-danger list-inline-item" style="font-size:17px">'.$rating.'/5</p>
                                         
                                 </a>
                             </div>';
@@ -119,6 +119,51 @@ class IndexController extends Controller
                                 </button>
                             </center>
                             </div>';
+        }
+        echo $output;
+    }
+    public function home_product(Request $request){
+        $all_product = Product::where('product_status','0')->orderby('product_id','desc')->take(12)->get();
+        $output = '';
+        if(!$all_product -> isEmpty()){
+            foreach($all_product as $key => $product){
+                $rating = Rating::where('product_id', $product->product_id)->avg('rating');
+                $rating = round($rating);
+                $last_id = $product->product_id;
+                $output .= '<div class="mr-4 mb-4 shadow">
+                                <a href="'.url('/product-detail/'.$product->product_id).'" class="text-decoration-none">
+                                    <div class="card" style="width: 14rem; height: 23rem;">
+                                        <img src="'.asset('public/uploads/product/'.$product->product_image).'" class="card-img-top shadow" alt="">
+                                        <div class="card-body">
+                                            <h6 class="card-title" style="width:height: 5rem; font-size: 0.78em">'.$product->product_name.'</h6>
+                                            <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ</p></b>
+                                            <p class="card-text text-body" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ</p>
+                                        </div>
+                                    </div>';
+                                        for($count=1; $count<=5; $count++){
+                                            if($count <= $rating){
+                                                $color = 'color: #ffcc00;';
+                                            }else {
+                                                $color = 'color: #ccc;';
+                                            }
+                                            $output .= '
+                                            <li title="Đánh giá sao" 
+                                                id="'.$product->product_id-$count.'"
+                                                data-index="'.$count.'" 
+                                                data-product_id="'.$product->product_id.'" 
+                                                data-rating="'.$rating.'" 
+                                                class="list-inline-item"
+                                                style="cursor: pointer;'.$color.' font-size: 30px;" >
+                                                &#9733;
+                                            </li>
+                                            ';
+                                        }                
+                                        $output .= '<p class="text-danger list-inline-item" style="font-size:17px">'.$rating.'/5</p>
+                                        
+                                </a>
+                            </div>';
+            }
+            
         }
         echo $output;
     }
@@ -167,13 +212,12 @@ class IndexController extends Controller
         $coupon = Coupon::orderby('coupon_id','DESC')->get();
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d/m/Y');
 
-        $all_product = DB::table('tb_product')->where('product_status','0')->orderby(DB::raw('RAND()'))->paginate(12); 
-
+        $all_product = Product::where('product_status','0')->orderby('product_id','desc')->take(12)->get();
         foreach($all_product as $key => $val){
             $product_id = $val->product_id;
         }
         
-        $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
+        $rating = Rating::where('product_id', $product_id)->avg('rating');
         $rating = round($rating);
         return view('pages.home')->with('rating',$rating)->with('now',$now)->with('coupon',$coupon)->with('category',$cate_product)->with('brand_product',$brand_product)->with('all_product',$all_product)->with('slider',$slider)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
@@ -257,7 +301,7 @@ class IndexController extends Controller
             $product_id = $val->product_id;
         }
         
-        $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
+        $rating = Rating::where('product_id', $product_id)->avg('rating');
         $rating = round($rating);
         return view('pages.search')->with('rating',$rating)->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
