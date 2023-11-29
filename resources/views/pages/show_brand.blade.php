@@ -99,23 +99,6 @@
         </div>
     </div>
         <div class="col-sm-2">
-            <div class="text-center mt-1 shadow">
-                <h5><b class="text-danger mr-2 text-center"> 
-                    Danh Mục
-                </b></h5>
-                <hr>
-                <div class="panel panel-default mt-3">
-                    @foreach($category as $key => $cate)
-                    <div class="panel-heading">
-                        <h6 class="panel-title mr-2" style="color: rgb(175, 6, 161);"><a href="{{URL::to('category/'.$cate->slug_category_product)}}" class="text-decoration-none">
-                            <b>{{$cate->category_name}}</b></a>
-                        </h6>
-                    </div>
-                    <hr>
-                     @endforeach
-                </div>
-               
-            </div>
             <div class="text-center mt-5 shadow">
                 <h5><b class="text-danger mr-2">Xuất Xứ</b></h5>
                 <hr>

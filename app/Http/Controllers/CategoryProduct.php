@@ -162,7 +162,7 @@ class CategoryProduct extends Controller
             $product_id = $val->product_id;
         }
         
-        $rating = Rating::where('product_id', $product_id)->where('customer_id',Session::get('customer_id'))->avg('rating');
+        $rating = Rating::where('product_id', $product_id)->avg('rating');
         $rating = round($rating);
         return view('pages.show_cate')->with('min_price',$min_price)->with('max_price',$max_price)->with('category_by_id',$category_by_id)->with('category',$cate_product)->with('brand',$brand_product)->with('category_pro',$category_pro)
         ->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('rating',$rating);
