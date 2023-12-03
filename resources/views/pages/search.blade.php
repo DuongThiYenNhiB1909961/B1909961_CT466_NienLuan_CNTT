@@ -39,7 +39,7 @@
                                 data-product_id="{{$product->product_id}}" 
                                 data-rating="{{$rating}}" 
                                 class="list-inline-item"
-                                style="cursor: pointer; {{$color}} font-size: 30px;" >
+                                style="cursor: pointer; {{$color}} font-size: 15px;" >
                                 &#9733;</li>
 
                         @endfor

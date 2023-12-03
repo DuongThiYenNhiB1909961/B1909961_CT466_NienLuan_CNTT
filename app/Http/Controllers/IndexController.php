@@ -181,7 +181,7 @@ class IndexController extends Controller
                                                 data-product_id="'.$product->product_id.'" 
                                                 data-rating="'.$rating.'" 
                                                 class="list-inline-item"
-                                                style="cursor: pointer;'.$color.' font-size: 30px;" >
+                                                style="cursor: pointer;'.$color.' font-size: 20px;" >
                                                 &#9733;
                                             </li>
                                             ';
@@ -280,40 +280,48 @@ class IndexController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        // $min_price = Product::min('product_price');
-        // $max_price = Product::max('product_price');
-        // $max_add = $max_price + 500000;
+        $min_price = Product::min('product_price');
+        $max_price = Product::max('product_price');
+        $max_add = $max_price + 500000;
 
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
 
-        // if(isset($_GET['sort_by'])){
-        //     $sort_by = $_GET['sort_by'];
-        //     if($sort_by == 'giam_dan'){
-        //         $all_product = Product::where('product_status','0')->orderby('product_price','desc')->get();
-        //     }
-        //     elseif($sort_by == 'tang_dan'){
-        //         $all_product = Product::where('product_status','0')->orderby('product_price','asc')->get();
-        //     }
-        //     elseif($sort_by == 'az'){
-        //         $all_product = Product::where('product_status','0')->orderby('product_name','asc')->get();
-        //     }
-        //     elseif($sort_by == 'za'){
-        //         $all_product = Product::where('product_status','0')->orderby('product_name','desc')->get();
-        //     }
+        if(isset($_GET['sort_by'])){
+            $sort_by = $_GET['sort_by'];
+            if($sort_by == 'giam_dan'){
+                $all_product = Product::where('product_status','0')->orderby('product_price','desc')->get();
+            }
+            elseif($sort_by == 'tang_dan'){
+                $all_product = Product::where('product_status','0')->orderby('product_price','asc')->get();
+            }
+            elseif($sort_by == 'az'){
+                $all_product = Product::where('product_status','0')->orderby('product_name','asc')->get();
+            }
+            elseif($sort_by == 'za'){
+                $all_product = Product::where('product_status','0')->orderby('product_name','desc')->get();
+            }
+        }
+        elseif(isset($_GET['start_price']) && $_GET['end_price']){
+            $min = $_GET['start_price'];
+            $max = $_GET['end_price'];
+
+            $all_product = Product::where('product_status','0')->whereBetween('tb_product.product_price',[$min, $max])->orderBy('tb_product.product_price','ASC')->paginate(6)->appends(request()->query());            
+
+        }else{
+            $all_product = Product::where('product_status','0')->orderby('product_id','desc')->get();
+        }
+        // if($data['id']>0){
+        //     $all_product = Product::where('product_status','0')->where('product_id','<',$data['id'])->orderby('product_id','desc')->take(12)->get();
         // }
-        // elseif(isset($_GET['start_price']) && $_GET['end_price']){
-        //     $min = $_GET['start_price'];
-        //     $max = $_GET['end_price'];
-
-        //     $all_product = Product::where('product_status','0')->whereBetween('tb_product.product_price',[$min, $max])->orderBy('tb_product.product_price','ASC')->paginate(6)->appends(request()->query());            
-
-        // }else{
-        //     $all_product = Product::where('product_status','0')->orderby('product_id','desc')->get();
-        // }
-
+        foreach($all_product as $key =>  $pro){
+            $id = $pro->product_id;
+        }
+        $customer_id=Session::get('customer_id');
+        $rating = Rating::where('product_id', $id)->where('customer_id',$customer_id)->avg('rating');
+        $rating = round($rating);
         return view('pages.product')
-        ->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        ->with('category',$cate_product)->with('all_product',$all_product)->with('rating',$rating)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function search(Request $request){
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";
@@ -329,7 +337,8 @@ class IndexController extends Controller
             $product_id = $val->product_id;
         }
         
-        $rating = Rating::where('product_id', $product_id)->avg('rating');
+        $customer_id=Session::get('customer_id');
+        $rating = Rating::where('product_id', $product_id)->where('customer_id',$customer_id)->avg('rating');
         $rating = round($rating);
         return view('pages.search')->with('rating',$rating)->with('category',$cate_product)->with('brand',$brand_product)->with('search_product',$search_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
