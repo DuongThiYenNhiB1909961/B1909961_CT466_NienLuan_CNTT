@@ -288,9 +288,9 @@
                           @endforeach
                           <tr class="shadow">
                           <td colspan="2"></td>
-                            <td colspan="3">
+                            <td colspan="4">
                               <ul>
-                                <div><b>Tổng tiền hàng: {{number_format($total,0,',','.')}}đ</b></div>
+                                <b><p style="float: left">Tổng tiền hàng: </p> <p class="text-right">{{number_format($total,0,',','.')}}đ</p></b>
                                 
                                 <div>
                                 @if(Session::get('coupon'))
@@ -306,9 +306,9 @@
                                           $total_after_coupon = $total - $totalCoupon;
                                           @endphp
                                         </p>
-                                        Mã giảm {{$cou['coupon_number']}}%: {{number_format($totalCoupon,0,',','.')}}đ
+                                        <p style="float: left">Mã giảm {{$cou['coupon_number']}}%: </p><p class="text-right">{{number_format($totalCoupon,0,',','.')}}đ</p>
                                       @elseif($cou['coupon_condition']==2)
-                                      <p >Mã giảm {{number_format($cou['coupon_number'],0,',','.')}}K</p>
+                                      <p style="float: left">Mã giảm: </p><p class="text-right">{{number_format($cou['coupon_number'],0,',','.')}}K</p>
                                         <p>
                                           @php 
                                           $total_after_coupon = $total - $cou['coupon_number'];
@@ -323,47 +323,51 @@
                                 </div>
                                 <div>
                                 @if(Session::get('fee'))
-                                <b>Phí Vận Chuyển 
-                                  <span>{{number_format(Session::get('fee'),0,',','.')}}đ</span>
+                                <b><p style="float: left">Phí Vận Chuyển:  </p>
+                                  <p class="text-right"><span>{{number_format(Session::get('fee'),0,',','.')}}đ</span></p>
                                   <?php $total_after_fee = $total + Session::get('fee'); ?>
                                 </b>
                                 @elseif(!Session::get('fee'))
-                                <b>Phí Vận Chuyển 
-                                  <span>{{number_format(35000,0,',','.')}}đ</span>
+                                <b><p style="float: left">Phí Vận Chuyển:  </p>
+                                  <p class="text-right"><span>{{number_format(35000,0,',','.')}}đ</span></p>
                                   <?php $total_after_fee = $total + 35000; ?>
                                 </b>
                                 @endif
                                 </div>
                                 <div>
-                                  <b>
-                                    Thanh Toán: 
-                                    @php 
-                                      if(Session::get('fee') && !Session::get('coupon')){
-                                        $total_after = $total_after_fee;
-                                        echo number_format($total_after,0,',','.').'đ';
-                                      }elseif(!Session::get('fee') && Session::get('coupon')){
-                                        $total_after = $total_after_coupon;
-                                        $total_after = $total_after + Session::get('fee',35000);
-                                        echo number_format($total_after,0,',','.').'đ';
-                                      }elseif(Session::get('fee') && Session::get('coupon')){
-                                        $total_after = $total_after_coupon;
-                                        $total_after = $total_after + Session::get('fee');
-                                        echo number_format($total_after,0,',','.').'đ';
-                                      }elseif(!Session::get('fee') && !Session::get('coupon')){
-                                        $total_after = $total + Session::get('fee',35000);
-                                        echo number_format($total_after,0,',','.').'đ';
-                                      }
-
-                                    @endphp
+                                  <b><p style="float: left">Thanh Toán: </p>
+                                    
+                                  
+                                      @if(Session::get('fee') && !Session::get('coupon'))
+                                        <?php $total_after = $total_after_fee; ?>
+                                        
+                                        <p class="text-right">{{number_format($total_after,0,',','.')}}đ</p>
+                                      @elseif(!Session::get('fee') && Session::get('coupon'))
+                                        <?php $total_after = $total_after_coupon;
+                                        $total_after = $total_after + Session::get('fee',35000); ?>
+                                       
+                                        <p class="text-right">{{number_format($total_after,0,',','.')}}đ</p> 
+                                      @elseif(Session::get('fee') && Session::get('coupon'))
+                                        <?php $total_after = $total_after_coupon;
+                                        $total_after = $total_after + Session::get('fee'); ?>
+                                        
+                                        <p class="text-right">{{number_format($total_after,0,',','.')}}đ</p> 
+                                      @elseif(!Session::get('fee') && !Session::get('coupon'))
+                                        <?php $total_after = $total + Session::get('fee',35000); ?>
+                                        
+                                        <p class="text-right">{{number_format($total_after,0,',','.')}}đ</p> 
+                                      
+                                      @endif
+                                    
                                   </b>
                                 </div>
                                 <div>
                                   @if(Session::get('payment_select')==0)
-                                    <b>Thanh toán khi nhận hàng</b>
+                                    <p >(Thanh toán khi nhận hàng)</p>
                                   @elseif(Session::get('payment_select')==1)
-                                    <b>Thanh toán qua VNPay</b>
+                                    <p>(Thanh toán qua VNPay)</p>
                                   @elseif(Session::get('payment_select')==2)
-                                    <b>Thanh toán qua PayPal</b>
+                                    <p>(Thanh toán qua PayPal)</p>
                                   @endif
                                 </div>
                                 <div class="col-md-12">
