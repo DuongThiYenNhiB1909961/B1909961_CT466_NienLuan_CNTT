@@ -138,38 +138,7 @@
                 
                     <div class="mb-2 ml-2">
                         <div id="home_product" class="row text-center"></div>
-                                    {{-- <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
-                                        <div class="card" style="width: 14rem; height: 23rem;">
-                                            <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top shadow" alt="">
-                                            <div class="card-body">
-                                                <h6 class="card-title " style="width:height: 5rem;font-size: 0.78em">{{$product->product_name}}</h6>
-                                                <b><p class="card-text text-danger">{{number_format($product->product_price,0,',','.')}} đ</p></b>
-                                                <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
-                                            </div>
-                                        </div>
-                                    @foreach($rating as $key => $ra)
-                                        @for($count=1; $count<=5; $count++)
-                                                @php
-                                                if($count <= $rating){
-                                                    $color = 'color: #ffcc00;';
-                                                }else {
-                                                    $color = 'color: #ccc;';
-                                                }
-                                                @endphp
-                                                <li title="Đánh giá sao" 
-                                                    id="{{$product->product_id}}-{{$count}}"
-                                                    data-index="{{$count}}" 
-                                                    data-product_id="{{$product->product_id}}" 
-                                                    data-rating="{{$rating}}" 
-                                                    class="rating list-inline-item"
-                                                    style="cursor: pointer; {{$color}} font-size: 30px;" >
-                                                    &#9733;</li>
-
-                                            @endfor        
-                                        <p class="text-danger list-inline-item">{{$rating}}/5</p>
-                                        
-                                    @endforeach
-                                    </a> --}}
+                                    
                     </div>
 
                 @endforeach

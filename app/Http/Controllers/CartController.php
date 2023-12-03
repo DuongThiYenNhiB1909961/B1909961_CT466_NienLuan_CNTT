@@ -46,12 +46,14 @@ class CartController extends Controller
         echo $output;
     }
     public function show_cart_number(){
-        $count = 0;
+        // $count = 0;
         $count = count(Session::get('cart'));
         $output = '';
-        
+        if(Session::get('cart')){
             $output .= '<span class="badges">'.$count.'</span>';
-        
+        }else{
+            $output .= '<span class="badges">0</span>';
+        }
                   
         echo $output;
     }

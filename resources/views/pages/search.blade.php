@@ -20,8 +20,9 @@
                         <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top shadow" alt="">
                         <div class="card-body">
                             <h6 class="card-title " style="width:height: 5rem;font-size: 0.78em">{{$product->product_name}}</h6>
-                            <b><p class="card-text text-danger">{{number_format($product->product_price,0,',','.')}} đ</p></b>
+                            <b><p class="card-text text-danger">{{number_format($product->product_price,0,',','.')}} đ <span class="badges">-{{number_format(100-($product->product_price*100/$product->product_price_real),0,',','.')}}%</span></p></b>
                             <p class="card-text text-danger" style="font-size: 15px; text-decoration-line: line-through">{{number_format($product->product_price_real,0,',','.')}} đ</p>
+                            <p class="card-text text-body" style="font-size: 12px; ">Đã bán: {{$product->product_sold}}</p>
                         </div>
                     </div>
                     @for($count=1; $count<=5; $count++)

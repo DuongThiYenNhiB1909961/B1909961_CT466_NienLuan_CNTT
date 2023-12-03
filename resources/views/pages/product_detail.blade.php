@@ -99,7 +99,8 @@
                                                             <h6 class="card-title "><b>{{$lienquan->product_name}}</b></h6>
                                                             <b><p class="card-text text-danger">{{number_format($lienquan->product_price).'đ'}}</p></b>
                                                             <p class="mt-2" style="font-size: 15px; text-decoration-line: line-through">{{number_format($lienquan->product_price_real,0,',','.')}} đ</p>
-                                                            </div>
+                                                            <p class="card-text text-body" style="font-size: 12px; ">Đã bán: {{$product->product_sold}}</p>
+                                                        </div>
 
                                                         </div>
                                                     </a>

@@ -31,7 +31,7 @@ class IndexController extends Controller
             }
     }
     public function edit_user(Request $request, $customer_id){
-        // $this->AuthLogin();
+        $this->AuthLogin();
         $meta_desc = "Cập nhật thông tin cá nhân";
         $meta_keywords = "Cập nhật thông tin cá nhân";
         $meta_title = "Cập nhật thông tin cá nhân";
@@ -58,13 +58,38 @@ class IndexController extends Controller
         Session::put('message','Cập nhật thông tin thành công');
         return Redirect::to('/checkout');
     }
-    public function load_more(Request $request){
-        $data = $request->all();
-        if($data['id']>0){
-            $all_product = Product::where('product_status','0')->where('product_id','<',$data['id'])->orderby('product_id','desc')->take(12)->get();
-        }else{
-            $all_product = Product::where('product_status','0')->orderby('product_id','desc')->take(12)->get();
+    public function load_more(){
+        // $data = $request->all();
+        if(isset($_GET['sort_by'])){
+            $sort_by = $_GET['sort_by'];
+            if($sort_by == 'giam_dan'){
+                $all_product = Product::where('product_status','0')->orderby('product_price','desc')->get();
+            }
+            elseif($sort_by == 'tang_dan'){
+                $all_product = Product::where('product_status','0')->orderby('product_price','asc')->get();
+            }
+            elseif($sort_by == 'az'){
+                $all_product = Product::where('product_status','0')->orderby('product_name','asc')->get();
+            }
+            elseif($sort_by == 'za'){
+                $all_product = Product::where('product_status','0')->orderby('product_name','desc')->get();
+            }
         }
+        elseif(isset($_GET['start_price']) && $_GET['end_price']){
+            $min = $_GET['start_price'];
+            $max = $_GET['end_price'];
+
+            $all_product = Product::where('product_status','0')->whereBetween('tb_product.product_price',[$min, $max])->orderBy('tb_product.product_price','ASC')->paginate(6)->appends(request()->query());            
+
+        }else{
+            $all_product = Product::where('product_status','0')->orderby('product_id','desc')->get();
+        }
+
+        // if(isset($_GET['sort_by'])){
+        //     $all_product = Product::where('product_status','0')->where('product_id','<',$data['id'])->orderby('product_id','desc')->take(12)->get();
+        // }else{
+        //     $all_product = Product::where('product_status','0')->orderby('product_id','desc')->take(12)->get();
+        // }
         $output = '';
         if(!$all_product -> isEmpty()){
             foreach($all_product as $key => $product){
@@ -77,8 +102,9 @@ class IndexController extends Controller
                                         <img src="'.asset('public/uploads/product/'.$product->product_image).'" class="card-img-top shadow" alt="">
                                         <div class="card-body">
                                             <h6 class="card-title" style="width:height: 5rem; font-size: 0.78em">'.$product->product_name.'</h6>
-                                            <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ</p></b>
+                                            <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ <span class="badges">-'.number_format(100-($product->product_price*100/$product->product_price_real),0,',','.'). '%</span></p></b>
                                             <p class="card-text text-body" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ</p>
+                                            <p class="card-text text-body" style="font-size: 12px; ">Đã bán: '.$product->product_sold.'</p>
                                         </div>
                                     </div>';
                                         for($count=1; $count<=5; $count++){
@@ -111,7 +137,8 @@ class IndexController extends Controller
                                 </button>
                             </center>
                             </div>';
-        }else{
+        }
+        else{
             $output .= '<br><div id="load_more" style="text-align: center; margin: 0 auto;}">
                             <center>
                                 <button class="" name="load_more_button">
@@ -136,8 +163,9 @@ class IndexController extends Controller
                                         <img src="'.asset('public/uploads/product/'.$product->product_image).'" class="card-img-top shadow" alt="">
                                         <div class="card-body">
                                             <h6 class="card-title" style="width:height: 5rem; font-size: 0.78em">'.$product->product_name.'</h6>
-                                            <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ</p></b>
-                                            <p class="card-text text-body" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ</p>
+                                            <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ <span class="badges">-'.number_format(100-($product->product_price*100/$product->product_price_real),0,',','.'). '%</span></p></b>
+                                            <p class="card-text text-body" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ </p>
+                                            <p class="card-text text-body" style="font-size: 12px; ">Đã bán: '.$product->product_sold.'</p>
                                         </div>
                                     </div>';
                                         for($count=1; $count<=5; $count++){
@@ -252,40 +280,40 @@ class IndexController extends Controller
         $meta_title = "Mỹ phẩm chính hãng, an tâm sử dụng làm đẹp";
         $url_canonical = $request->url(); 
 
-        $min_price = Product::min('product_price');
-        $max_price = Product::max('product_price');
-        $max_add = $max_price + 500000;
+        // $min_price = Product::min('product_price');
+        // $max_price = Product::max('product_price');
+        // $max_add = $max_price + 500000;
 
         $cate_product = DB::table('tb_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tb_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
 
-        if(isset($_GET['sort_by'])){
-            $sort_by = $_GET['sort_by'];
-            if($sort_by == 'giam_dan'){
-                $all_product = Product::where('product_status','0')->orderby('product_price','desc')->get();
-            }
-            elseif($sort_by == 'tang_dan'){
-                $all_product = Product::where('product_status','0')->orderby('product_price','asc')->get();
-            }
-            elseif($sort_by == 'az'){
-                $all_product = Product::where('product_status','0')->orderby('product_name','asc')->get();
-            }
-            elseif($sort_by == 'za'){
-                $all_product = Product::where('product_status','0')->orderby('product_name','desc')->get();
-            }
-        }
-        elseif(isset($_GET['start_price']) && $_GET['end_price']){
-            $min = $_GET['start_price'];
-            $max = $_GET['end_price'];
+        // if(isset($_GET['sort_by'])){
+        //     $sort_by = $_GET['sort_by'];
+        //     if($sort_by == 'giam_dan'){
+        //         $all_product = Product::where('product_status','0')->orderby('product_price','desc')->get();
+        //     }
+        //     elseif($sort_by == 'tang_dan'){
+        //         $all_product = Product::where('product_status','0')->orderby('product_price','asc')->get();
+        //     }
+        //     elseif($sort_by == 'az'){
+        //         $all_product = Product::where('product_status','0')->orderby('product_name','asc')->get();
+        //     }
+        //     elseif($sort_by == 'za'){
+        //         $all_product = Product::where('product_status','0')->orderby('product_name','desc')->get();
+        //     }
+        // }
+        // elseif(isset($_GET['start_price']) && $_GET['end_price']){
+        //     $min = $_GET['start_price'];
+        //     $max = $_GET['end_price'];
 
-            $all_product = Product::where('product_status','0')->whereBetween('tb_product.product_price',[$min, $max])->orderBy('tb_product.product_price','ASC')->paginate(6)->appends(request()->query());            
+        //     $all_product = Product::where('product_status','0')->whereBetween('tb_product.product_price',[$min, $max])->orderBy('tb_product.product_price','ASC')->paginate(6)->appends(request()->query());            
 
-        }else{
-            $all_product = Product::where('product_status','0')->orderby('product_id','desc')->get();
-        }
+        // }else{
+        //     $all_product = Product::where('product_status','0')->orderby('product_id','desc')->get();
+        // }
 
-        return view('pages.product')->with('min_price',$min_price)->with('max_price',$max_price)->with('max_add',$max_add)
-        ->with('category',$cate_product)->with('brand',$brand_product)->with('all_product',$all_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+        return view('pages.product')
+        ->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
     public function search(Request $request){
         $meta_desc = "Chuyên cung cấp các loại mỹ phẩm chính hãng, đa dạng về mẫu mã và công dụng";

@@ -46,9 +46,11 @@ Route::get('/logoutad',[AdminController::class, 'logoutad']);
 
 // user
 Route::get('/manage-user',[AdminController::class, 'manage_user']);
-Route::get('/delete-user/{ocustomer_id}',[AdminController::class, 'delete_user']);
+Route::get('/delete-user/{customer_id}',[AdminController::class, 'delete_user']);
 Route::get('/edit-user/{customer_id}',[IndexController::class, 'edit_user']);
 Route::post('/update-user/{customer_id}',[IndexController::class, 'update_user']);
+Route::get('/sua-userad/{user_id}',[AdminController::class, 'sua_userad']);
+Route::post('/update-userad/{user_id}',[AdminController::class, 'update_userad']);
 
 // filter
 Route::post('/filterbydate',[AdminController::class, 'filterbydate']);
