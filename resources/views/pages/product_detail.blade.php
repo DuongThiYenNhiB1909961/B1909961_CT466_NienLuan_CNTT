@@ -173,8 +173,9 @@
                                         @endif
                                     @endfor
                                 @endforeach
-                                    @if(Session::get('customer_id') && $j<1) 
-
+                                @foreach($com as $key => $cmt)
+                                    {{-- @if($cmt->customer_id==Session::get('customer_id') && $j<1)  --}}
+                                    @if($cmt->customer_id==Session::get('customer_id') && $cmt->product_id==$product->product_id && $j<1 && $order->order_status==2) 
                                     
                                     <b style="margin-left: 14rem">Đánh giá <p class="text-danger list-inline-item">{{$rating}}/5</p> sao</b>
                                         <ul class="list-inline-item" title="Average Rating">
@@ -217,33 +218,33 @@
                                             </div>    
                                         </form>
     
-                                @elseif(Session::get('customer_id') && $j>1)
-                                <div style="margin-left: 22rem">
-                                    @for($count=1; $count<=5; $count++)
-                                        @php
-                                        if($count <= $rating){
-                                            $color = 'color: #ffcc00;';
-                                        }else {
-                                            $color = 'color: #ccc;';
-                                        }
-                                        @endphp
-                                        <li title="Đánh giá sao" 
-                                            id="{{$product->product_id}}-{{$count}}"
-                                            data-index="{{$count}}" 
-                                            data-product_id="{{$product->product_id}}" 
-                                            data-rating="{{$rating}}" 
-                                            class="list-inline-item"
-                                            style="cursor: pointer; {{$color}} font-size: 30px;" >
-                                            &#9733;</li>
+                                    @elseif(Session::get('customer_id') && $j>1)
+                                    <div style="margin-left: 22rem">
+                                        @for($count=1; $count<=5; $count++)
+                                            @php
+                                            if($count <= $rating){
+                                                $color = 'color: #ffcc00;';
+                                            }else {
+                                                $color = 'color: #ccc;';
+                                            }
+                                            @endphp
+                                            <li title="Đánh giá sao" 
+                                                id="{{$product->product_id}}-{{$count}}"
+                                                data-index="{{$count}}" 
+                                                data-product_id="{{$product->product_id}}" 
+                                                data-rating="{{$rating}}" 
+                                                class="list-inline-item"
+                                                style="cursor: pointer; {{$color}} font-size: 30px;" >
+                                                &#9733;</li>
 
-                                    @endfor
-                                </div>
-                                    <br><b class="text-primary" style="margin-left: 22rem">Cảm ơn bạn đã đánh giá và bình luận.</b>
-                                @elseif(Session::get('customer_id')==null && $j<1)
-                                    <br>
-                                    <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true" style="background: #efc88d; margin-left:30%; padding:10px;"><p  class="text-black-50 list-inline-item">    Chỉ có thành viên mới có thể đánh giá và bình luận.</p></i>
-                                @endif
-                                
+                                        @endfor
+                                    </div>
+                                        <br><b class="text-primary" style="margin-left: 22rem">Cảm ơn bạn đã đánh giá và bình luận.</b>
+                                    @elseif(Session::get('customer_id')==null && $j<1)
+                                        <br>
+                                        <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true" style="background: #efc88d; margin-left:30%; padding:10px;"><p  class="text-black-50 list-inline-item">    Chỉ có thành viên mới có thể đánh giá và bình luận.</p></i>
+                                    @endif
+                                @endforeach 
                     </div>
                 </div>
             </div>

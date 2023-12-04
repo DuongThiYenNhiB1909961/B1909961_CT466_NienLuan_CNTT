@@ -133,7 +133,7 @@ Route::post('/confirm-order', [CheckOutController::class, 'confirm_order']);
 
 //Order
 Route::get('/manage-order',[OrderController::class, 'manage_order']);
-Route::get('/view-order/{order_code}',[OrderController::class, 'view_order']);
+Route::get('/view-order/{order_id}',[OrderController::class, 'view_order']);
 Route::post('/update-inventory-qty',[OrderController::class, 'update_inventory_qty']);
 Route::get('/delete-order/{order_code}',[OrderController::class, 'delete_order']);
 Route::get('/history',[OrderController::class, 'History']);

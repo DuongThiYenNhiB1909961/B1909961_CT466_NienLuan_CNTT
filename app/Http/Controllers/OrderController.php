@@ -29,6 +29,7 @@ class OrderController extends Controller
 		$order = Order::find($data['order_id']);
 		$order->order_status = $data['order_status'];
 		$order->save();
+		
 
 		$order_date = $order->order_date;
 		$statistical = Statistical::where('order_date', $order_date)->get();
@@ -84,20 +85,25 @@ class OrderController extends Controller
 				$statistical_new->total_order = $total_order+1;
 				$statistical_new->save();
 			}
+
 		}
+		
 	}
     public function manage_order(){
         $all_order = Order::orderby('created_at','DESC')->get();
         return view('admin.manage_order')->with('all_order',$all_order);
     }
-    public function view_order($order_code){
-        $order_details = OrderDetails::with('product')->where('order_code',$order_code)->get();
-		$order = Order::where('order_code',$order_code)->get();
+    public function view_order($order_id){
+        $order = Order::where('order_id',$order_id)->get();
+		
+		
 		foreach($order as $key => $ord){
+			$order_code = $ord->order_code;
 			$customer_id = $ord->customer_id;
 			$shipping_id = $ord->shipping_id;
 			$order_status = $ord->order_status;
 		}
+		$order_details = OrderDetails::with('product')->where('order_code',$order_code)->get();
 		$cus = Customer::where('customer_id', $customer_id)->first();
 		// $customer = Customer::where('customer_id',$customer_id)->first();
 		$shipping = Shipping::where('shipping_id',$shipping_id)->first();
@@ -114,9 +120,9 @@ class OrderController extends Controller
 			$coupon_condition = 2;
 			$coupon_number = 0;
 		}
-		
+		$code = $order_code;
 		return view('admin.view_order')->with(compact('order_details','cus','shipping','order_details',
-		'coupon_condition','coupon_number','order','order_status'));
+		'coupon_condition','coupon_number','order','order_status','code'));
 
         }
 		public function delete_order($order_code){
@@ -175,12 +181,12 @@ class OrderController extends Controller
 				$order->order_date = $order_date;
 				$order->created_at = $created_at;
 				$order->save();
-		
 				
 				if(Session::get('cart')==true){
 					foreach(Session::get('cart') as $key => $cart){
 						$order_details = new OrderDetails;
 						$order_details->order_code = $data_vnpay->vnp_TxnRef;
+						$order_details->customer_id = Session::get('customer_id');
 						$order_details->product_id = $cart['product_id'];
 						$order_details->product_name = $cart['product_name'];
 						$order_details->product_price = $cart['product_price'];
@@ -245,6 +251,7 @@ class OrderController extends Controller
 					foreach(Session::get('cart') as $key => $cart){
 						$order_details = new OrderDetails;
 						$order_details->order_code = $order_code;
+						$order_details->customer_id = Session::get('customer_id');
 						$order_details->product_id = $cart['product_id'];
 						$order_details->product_name = $cart['product_name'];
 						$order_details->product_price = $cart['product_price'];

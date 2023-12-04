@@ -408,61 +408,61 @@ class CheckOutController extends Controller
         //     return Redirect::to('/login-checkout');
         // }
     }
-    public function confirm_paypal(){
-        $data = $request->all();
+    // public function confirm_paypal(){
+    //     $data = $request->all();
 
-        if(Session::get('coupon')){
-            $coupon = Coupon::where('coupon_code', $data['order_coupon'])->first();
-            $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
-            $coupon->coupon_time = $coupon->coupon_time - 1;
-            $coupon->save();
-        }
+    //     if(Session::get('coupon')){
+    //         $coupon = Coupon::where('coupon_code', $data['order_coupon'])->first();
+    //         $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+    //         $coupon->coupon_time = $coupon->coupon_time - 1;
+    //         $coupon->save();
+    //     }
        
 
-        $shipping = new Shipping();
-        $shipping->shipping_name = Session::get('shipping_name');
-        $shipping->shipping_email = Session::get('shipping_email');
-        $shipping->shipping_address = Session::get('shipping_address');
-        $shipping->shipping_phone = Session::get('shipping_phone');
-        $shipping->shipping_note = Session::get('shipping_note');
-        $shipping->shipping_method = Session::get('shipping_method');
-        $shipping->save();
-        $shipping_id = $shipping->shipping_id;
+    //     $shipping = new Shipping();
+    //     $shipping->shipping_name = Session::get('shipping_name');
+    //     $shipping->shipping_email = Session::get('shipping_email');
+    //     $shipping->shipping_address = Session::get('shipping_address');
+    //     $shipping->shipping_phone = Session::get('shipping_phone');
+    //     $shipping->shipping_note = Session::get('shipping_note');
+    //     $shipping->shipping_method = Session::get('shipping_method');
+    //     $shipping->save();
+    //     $shipping_id = $shipping->shipping_id;
 
-        $order_code = substr(md5(microtime()),rand(0,26),5);
+    //     $order_code = substr(md5(microtime()),rand(0,26),5);
 
-        $order = new Order();
-        $order->customer_id = Session::get('customer_id');
-        $order->shipping_id = $shipping_id;
-        $order->order_status = 0;
-        $order->order_code = $order_code;
+    //     $order = new Order();
+    //     $order->customer_id = Session::get('customer_id');
+    //     $order->shipping_id = $shipping_id;
+    //     $order->order_status = 0;
+    //     $order->order_code = $order_code;
         
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-        $created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+    //     date_default_timezone_set('Asia/Ho_Chi_Minh');
+    //     $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+    //     $created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
                 
-        $order->order_date = $order_date;
-        $order->created_at = $created_at;
-        $order->save();
+    //     $order->order_date = $order_date;
+    //     $order->created_at = $created_at;
+    //     $order->save();
 
         
-        if(Session::get('cart')==true){
-            foreach(Session::get('cart') as $key => $cart){
-                $order_details = new OrderDetails;
-                $order_details->order_code = $order_code;
-                $order_details->product_id = $cart['product_id'];
-                $order_details->product_name = $cart['product_name'];
-                $order_details->product_price = $cart['product_price'];
-                $order_details->product_sales_quantity = $cart['product_qty'];
-                $order_details->coupon =  $data['order_coupon'];
-                $order_details->feeship = $data['order_fee'];
-                $order_details->save();
-            }
-         }
-        Session::forget('coupon');
-        Session::forget('fee');
-        Session::forget('cart');
-    }
+    //     if(Session::get('cart')==true){
+    //         foreach(Session::get('cart') as $key => $cart){
+    //             $order_details = new OrderDetails;
+    //             $order_details->order_code = $order_code;
+    //             $order_details->product_id = $cart['product_id'];
+    //             $order_details->product_name = $cart['product_name'];
+    //             $order_details->product_price = $cart['product_price'];
+    //             $order_details->product_sales_quantity = $cart['product_qty'];
+    //             $order_details->coupon =  $data['order_coupon'];
+    //             $order_details->feeship = $data['order_fee'];
+    //             $order_details->save();
+    //         }
+    //      }
+    //     Session::forget('coupon');
+    //     Session::forget('fee');
+    //     Session::forget('cart');
+    // }
     public function confirm_order(Request $request){
         $data = $request->all();
 
@@ -505,6 +505,8 @@ class CheckOutController extends Controller
             foreach(Session::get('cart') as $key => $cart){
                 $order_details = new OrderDetails;
                 $order_details->order_code = $order_code;
+                $order_details->customer_id = Session::get('customer_id');
+                $order_details->order_status = 0;
                 $order_details->product_id = $cart['product_id'];
                 $order_details->product_name = $cart['product_name'];
                 $order_details->product_price = $cart['product_price'];

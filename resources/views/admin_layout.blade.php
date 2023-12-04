@@ -67,7 +67,7 @@
                 <!-- user login dropdown start-->
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <img alt="" src="resources/images/4.png">
+                        <img alt="" src="{{asset('resources/images/4.png')}}">
                         <span class="username">
                             <?php
                             if(Session::get('login_normal')){

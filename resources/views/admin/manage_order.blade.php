@@ -53,7 +53,7 @@
                 @endif
               </td>
               <td>
-                <a href="{{asset('/view-order/'.$order->order_code)}}" class="active" >
+                <a href="{{asset('/view-order/'.$order->order_id)}}" class="active" >
                     <i class="fa fa-pencil-square text-success text-active"></i></a>
                 <a onclick="return confirm('Bạn có chắc sắn muốn xóa nó không?')" href="{{asset('/delete-order/'.$order->order_code)}}" class="active" ui-toggle-class="">
                     <i class="fa fa-times text-danger text"></i></a>

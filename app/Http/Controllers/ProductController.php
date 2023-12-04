@@ -11,6 +11,8 @@ use App\Models\Gallery;
 use App\Models\Comment;
 use App\Models\Rating;
 use App\Models\Product;
+use App\Models\OrderDetails;
+use App\Models\Order;
 use App\Models\Statistical;
 use Carbon\Carbon;
 use File;
@@ -284,6 +286,15 @@ class ProductController extends Controller
         $rating_id = Rating::where('product_id', $product_id)->get();
         $rating = Rating::where('product_id', $product_id)->avg('rating');
         $rating = round($rating);
-        return view('pages.product_detail')->with('cate_slug',$cate_slug)->with('product_cate',$product_cate)->with('rating_id',$rating_id)->with('rating',$rating)->with('gallery',$gallery)->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
+
+        // danh gia
+        $com = OrderDetails::where('customer_id',$customer_id)->where('product_id', $product_id)->orderby('order_code','desc')->get();
+        foreach($com as $key => $cmt){
+            $order_code = $cmt->order_code;
+        }
+        $order = Order::where('order_code',$order_code)->first();
+        return view('pages.product_detail')->with('order',$order)->with('com',$com)->with('cate_slug',$cate_slug)->with('product_cate',$product_cate)->with('rating_id',$rating_id)->with('rating',$rating)
+        ->with('gallery',$gallery)->with('relate',$relate_product)->with('category',$cate_product)->with('brand',$brand_product)->with('detail_product',$detail_product)
+        ->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
     }
 }

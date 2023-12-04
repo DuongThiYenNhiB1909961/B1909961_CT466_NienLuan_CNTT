@@ -318,7 +318,7 @@ class IndexController extends Controller
             $id = $pro->product_id;
         }
         $customer_id=Session::get('customer_id');
-        $rating = Rating::where('product_id', $id)->where('customer_id',$customer_id)->avg('rating');
+        $rating = Rating::where('product_id', $id)->where('customer_id',Session::get('customer_id'))->avg('rating');
         $rating = round($rating);
         return view('pages.product')
         ->with('category',$cate_product)->with('all_product',$all_product)->with('rating',$rating)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical);
