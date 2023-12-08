@@ -282,13 +282,13 @@ class ProductController extends Controller
         ->join('tb_brand','tb_brand.brand_id','=','tb_product.brand_id')
         ->where('tb_category_product.category_id',$category_id)->get();
 
-        $customer_id = Session::get('customer_id');
+        // $customer_id=Session::get('customer_id');
         $rating_id = Rating::where('product_id', $product_id)->get();
         $rating = Rating::where('product_id', $product_id)->avg('rating');
         $rating = round($rating);
 
         // danh gia
-        $com = OrderDetails::where('customer_id',$customer_id)->where('product_id', $product_id)->orderby('order_code','desc')->get();
+        $com = OrderDetails::orderby('order_code','desc')->get();
         foreach($com as $key => $cmt){
             $order_code = $cmt->order_code;
         }

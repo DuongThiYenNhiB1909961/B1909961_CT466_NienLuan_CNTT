@@ -493,8 +493,8 @@ class CheckOutController extends Controller
         $order->order_code = $order_code;
         
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
-        $created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
+        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
                 
         $order->order_date = $order_date;
         $order->created_at = $created_at;
@@ -506,7 +506,6 @@ class CheckOutController extends Controller
                 $order_details = new OrderDetails;
                 $order_details->order_code = $order_code;
                 $order_details->customer_id = Session::get('customer_id');
-                $order_details->order_status = 0;
                 $order_details->product_id = $cart['product_id'];
                 $order_details->product_name = $cart['product_name'];
                 $order_details->product_price = $cart['product_price'];

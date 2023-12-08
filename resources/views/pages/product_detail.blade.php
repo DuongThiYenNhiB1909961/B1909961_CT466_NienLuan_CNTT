@@ -40,7 +40,13 @@
                                             </div>
                                             <div class="col-sm">
                                                 <h6 style="font-size: 15px text-alight"><b>Dung tích: </b>{{$product->product_capacity}}</h6>
-                                                <h6 style="font-size: 15px text-alight"><b>Tình trạng: </b></h6>
+                                                <h6 style="font-size: 15px text-alight"><b>Tình trạng: </b>
+                                                    @if($product->product_qty>0)
+                                                        Còn hàng
+                                                    @else
+                                                        Hết hàng
+                                                    @endif
+                                                </h6>
                                             </div>
                                         </div>
                                         
