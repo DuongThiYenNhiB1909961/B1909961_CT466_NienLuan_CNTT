@@ -21,14 +21,14 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nơi Xuất Xứ</label>
                             <input type="text" data-validation="length" data-validation-length="min3" 
-                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên xuất xứ">
+                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Nơi xuất xứ">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Slug</label>
+                            <label for="exampleInputEmail1">Tên xuất xứ</label>
                             <input type="text" name="slug_brand_product" class="form-control" id="exampleInputEmail1" placeholder="Tên xuất xứ">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Keywords Xuất Xứ</label>
+                            <label for="exampleInputEmail1">Từ khóa Xuất Xứ</label>
                             <input type="text" data-validation="length" data-validation-length="min3" 
                             data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="brand_product_keywords" class="form-control" id="exampleInputEmail1" placeholder="Brand keywords">
                         </div>

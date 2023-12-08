@@ -417,7 +417,7 @@
                     <form action="{{asset('/search')}}" method="POST">
                         {{csrf_field()}}
                             <div class="input-group" style="margin-top: 13px">
-                                <input type="text" id="keywords" name="keywords_submit" class="form-control" placeholder="Search" style="border: 2px solid #000">
+                                <input type="text" id="keywords" name="keywords_submit" class="form-control" placeholder="Bạn cần tìm mỹ phẩm?" style="border: 2px solid #000">
                                 <div id="search-ajax"></div>
                                 <span class="input-group-btn">
                                 <input class="btn btn-sm btn-danger list-inline-item" type="submit" value="Tìm!" style="margin-top: 4px">
@@ -461,13 +461,14 @@
                                 </div>
                                 
                                 <div class="col-sm">
-                                    <i class="text-danger"><b>Map</b></i>
-                                    <p>Thời gian mở cửa từ 9h đến 22h các ngày trong tuần</p>
+                                    {{-- <i class="text-danger"><b>Map</b></i> --}}
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.841454377069!2d105.76804037387961!3d10.02993897252123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0895a51d60719%3A0x9d76b0035f6d53d0!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBD4bqnbiBUaMah!5e0!3m2!1svi!2s!4v1702018489999!5m2!1svi!2s"
+                                     width="600" height="300" style="border:0;" ></iframe>
                                 </div>
                             </div>
                         </div>
                         <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0 pt-2">
-                            <i><b>Mọi ý kiến góp ý xin gửi về theo địa chỉ email thienduonglamdep2023@gmail.com</b></i>
+                            <i>Mọi ý kiến góp ý xin gửi về theo địa chỉ email thienduonglamdep2023@gmail.com</i>
                         </div>
                     </div>
                 </div>

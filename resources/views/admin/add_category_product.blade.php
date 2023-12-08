@@ -19,12 +19,12 @@
                         <form role="form" action="save-category-product" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tên danh mục</label>
+                            <label for="exampleInputEmail1">Danh mục</label>
                             <input type="text" data-validation="length" data-validation-length="min3" 
-                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="category_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
+                            data-validation-error-msg="Lam on dien it nhat 3 ky tu" name="category_product_name" class="form-control" id="exampleInputEmail1" placeholder="Danh mục">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Slug</label>
+                            <label for="exampleInputEmail1">Tên danh mục</label>
                             <input type="text" name="slug_category_product" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                         </div>
                         <div class="form-group">

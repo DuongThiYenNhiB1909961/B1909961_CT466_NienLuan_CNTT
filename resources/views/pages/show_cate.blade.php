@@ -63,7 +63,7 @@
         <div class="row ml-3">
             @foreach($category_by_id as $key => $product)
             
-            <div class="mb-2 shadow">
+            <div class="mr-4 mb-4 shadow">
                 <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
                     <div class="card" style="width: 14rem; height: 23rem;">
                         <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top shadow" alt="">
@@ -100,7 +100,7 @@
         </div>
     </div>
     <div class="col-sm-2">
-        <div class="text-center mt-5 shadow">
+        <div class="text-center mt-5 shadow" style="width:100%">
             <h5 ><b class="text-danger mr-2">Xuất Xứ</b></h5>
             <hr>
             <div class="panel panel-default mt-3">

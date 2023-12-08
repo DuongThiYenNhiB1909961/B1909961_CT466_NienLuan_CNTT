@@ -79,7 +79,7 @@
                 
                 @foreach($all_product as $key => $product)
                     
-                    <div class="mb-2 shadow">
+                    <div class="mr-4 mb-4 shadow">
                         <a href="{{URL::to('product-detail/'.$product->product_id)}}" class="text-decoration-none">
                             <div class="card" style="width: 14rem; height: 23rem;">
                                 <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" class="card-img-top shadow" alt="">

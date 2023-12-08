@@ -101,7 +101,7 @@ Route::post('/home-product',[IndexController::class, 'home_product']);
 Route::post('/lquan-product',[IndexController::class, 'lquan_product']);
 // Product_detail
 Route::get('/product-detail/{product_id}', [ProductController::class, 'product_detail']);
-
+Route::get('/hover-pro', [CartController::class, 'hover_sp']);
 // cart
 Route::post('/save-cart', [CartController::class, 'save_cart']);
 Route::post('/add-cart-ajax', [CartController::class, 'add_cart_ajax']);
