@@ -21,9 +21,14 @@ class CartController extends Controller
         $output = '';
         if($count>0){
             
-            $output .= '<ul class="hover-cart">';
+            $output .= '<ul class="hover-cart"> 
+        <li><center>
+            <a class="all-cart" href="'.asset('/show-cart-ajax').'" style="font-size:12px; color:#e39797;">
+                Xem giỏ hàng
+            </a>
+        </center></li>';
             foreach(Session::get('cart') as $key => $value){
-                $output .= '<li><a href="">
+                $output .= '<li><a href="'.asset('/show-cart-ajax').'">
                                     <img src="'.asset('public/uploads/product/'.$value['product_image']).'">
                                     <p class="text-danger" style="font-size:15px;">'.number_format($value['product_price'],0,',','.').'vnđ</p>
                                     <p class="text-danger" style="font-size:15px;">Số lượng: '.$value['product_qty'].'</p>
@@ -33,6 +38,7 @@ class CartController extends Controller
                                     <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                 </a>
                                 </center>
+                               
                             </li>';
             }
                 $output .= '</ul>';

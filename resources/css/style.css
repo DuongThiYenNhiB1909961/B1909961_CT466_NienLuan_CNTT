@@ -69,6 +69,7 @@ header, footer{
     z-index: 9999;
     background: bisque;
     padding: 0;
+    width: 160%;
 }
 li.cart-hover:hover .hover-cart{
     display: inherit;

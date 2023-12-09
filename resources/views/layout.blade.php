@@ -313,7 +313,7 @@
                             
                             <li class="nav-item cart-hover">
                                 <div class=" text-lg font-semibold"><a class="nav-link  text-danger" title="Giỏ hàng" href="{{asset('/show-cart-ajax')}}">
-                                <i class="fa fa-shopping-cart text-warning" aria-hidden="true"></i>
+                                <i class="fa fa-cart-plus text-warning" aria-hidden="true"></i>
                                 <span id="show-cart"></span>
                                     <div class="clearfix"></div>
                                     <span class="hover-giohang"></span>
