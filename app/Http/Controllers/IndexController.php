@@ -195,6 +195,52 @@ class IndexController extends Controller
         }
         echo $output;
     }
+    public function quantam_product(Request $request){
+        $all_product = Product::where('product_status','0')->orderby('product_views','desc')->take(20)->get();
+        $output = '';
+        if(!$all_product -> isEmpty()){
+            foreach($all_product as $key => $product){
+                $rating = Rating::where('product_id', $product->product_id)->avg('rating');
+                $rating = round($rating);
+                $last_id = $product->product_id;
+                $output .= '<div class="mr-4 mb-4 shadow">
+                                <a href="'.url('/product-detail/'.$product->product_id).'" class="text-decoration-none">
+                                    <div class="card" style="width: 14rem; height: 23rem;">
+                                        <img src="'.asset('public/uploads/product/'.$product->product_image).'" class="card-img-top shadow" alt="">
+                                        <div class="card-body">
+                                            <h6 class="card-title" style="width:height: 5rem; font-size: 0.78em">'.$product->product_name.'</h6>
+                                            <b><p class="card-text text-danger">'.number_format($product->product_price,0,',','.').' đ <span class="badges">-'.number_format(100-($product->product_price*100/$product->product_price_real),0,',','.'). '%</span></p></b>
+                                            <p class="card-text text-body" style="font-size: 15px; text-decoration-line: line-through">'.number_format($product->product_price_real,0,',','.').' đ </p>
+                                            <p class="card-text text-body" style="font-size: 12px; ">Đã bán: '.$product->product_sold.'</p>
+                                        </div>
+                                    </div>';
+                                        for($count=1; $count<=5; $count++){
+                                            if($count <= $rating){
+                                                $color = 'color: #ffcc00;';
+                                            }else {
+                                                $color = 'color: #ccc;';
+                                            }
+                                            $output .= '
+                                            <li title="Đánh giá sao" 
+                                                id="'.$product->product_id-$count.'"
+                                                data-index="'.$count.'" 
+                                                data-product_id="'.$product->product_id.'" 
+                                                data-rating="'.$rating.'" 
+                                                class="list-inline-item"
+                                                style="cursor: pointer;'.$color.' font-size: 20px;" >
+                                                &#9733;
+                                            </li>
+                                            ';
+                                        }                
+                                        $output .= '<p class="text-danger list-inline-item" style="font-size:17px">'.$rating.'/5</p>
+                                        
+                                </a>
+                            </div>';
+            }
+            
+        }
+        echo $output;
+    }
     public function send_mail(){
         //send mail
                $to_name = "Nhi admin";

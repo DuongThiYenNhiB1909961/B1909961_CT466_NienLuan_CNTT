@@ -131,13 +131,26 @@
                 
                 </div>
             </div> 
-        <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden sm:rounded-lg">
+        <div class="bg-white">
             <h5 class="ml-3"><b>Sản Phẩm Mới Nhất</b></h5>
             <div >
                 @foreach($all_product as $key => $product)
                 
-                    <div class="mb-2 ml-2">
+                    <div class="">
                         <div id="home_product" class="row text-center"></div>
+                                    
+                    </div>
+
+                @endforeach
+            </div>
+        </div>
+        <div class="bg-white">
+            <h5 class="ml-3"><b>Sản Phẩm Quan Tâm Nhiều Nhất</b></h5>
+            <div >
+                @foreach($all_product as $key => $product)
+                
+                    <div class="">
+                        <div id="quantam_product" class="row text-center"></div>
                                     
                     </div>
 

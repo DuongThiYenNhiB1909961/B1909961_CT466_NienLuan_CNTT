@@ -460,6 +460,20 @@
         </script>
         <script>
             product_new();
+            product_quantam();
+            function product_quantam(id = ''){
+                $.ajax({
+                    url: '{{url('/quantam-product')}}',
+                    method: 'POST',
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{id:id},
+                    success:function(data){
+                        $('#quantam_product').append(data);
+                    } 
+                });
+            }
             function product_new(id = ''){
                 $.ajax({
                     url: '{{url('/home-product')}}',

@@ -99,6 +99,7 @@ Route::post('/update-product/{product_id}',[ProductController::class, 'update_pr
 Route::post('/load-more', [IndexController::class, 'load_more']);
 Route::post('/home-product',[IndexController::class, 'home_product']);
 Route::post('/lquan-product',[IndexController::class, 'lquan_product']);
+Route::post('/quantam-product',[IndexController::class, 'quantam_product']);
 // Product_detail
 Route::get('/product-detail/{product_id}', [ProductController::class, 'product_detail']);
 Route::get('/hover-pro', [CartController::class, 'hover_sp']);
