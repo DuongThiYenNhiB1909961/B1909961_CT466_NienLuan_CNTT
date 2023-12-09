@@ -293,76 +293,41 @@
                             <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('index')}}"><i class="fa fa-home text-warning" aria-hidden="true"></i><b>Home </b></a></div>
                         </li>
                         <li class="nav-item ml-2">
-                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('introduce')}}"><i class="fa fa-book text-warning" aria-hidden="true"></i><b>Bài viết</b> </a></div>
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('introduce')}}"><i class="fa fa-book text-warning" aria-hidden="true"></i><b>Tin tức</b> </a></div>
                         </li>
                         <li class="nav-item dropdown ml-2">
                             <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('product')}}"><i class="fa fa-heart text-warning" aria-hidden="true"></i><b>Sản phẩm</b></a></div>
                         </li>
                         <li class="nav-item ml-2">
-                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('contact')}}"><b>Liên hệ</b></a></div>
+                            <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('contact')}}"><i class="fa fa-volume-control-phone text-warning" aria-hidden="true"></i><b>Liên hệ</b></a></div>
                         </li>
                     </ul>
                     </div>
                     
                 </nav>
             
-                <nav class="banner col-sm-6">
+                <nav class="banner col-sm-6" style="float: right">
                     <div class="shop-menu pull-right">
                         <ul class="nav justify-content-center">
                         
-                            <?php
-                                $customer_id = Session::get('customer_id');
-                                $shipping_id = Session::get('shipping_id');
-                                if($customer_id != NULL && $shipping_id == NULL)
-                                {
-                            ?>
-                            <li class="nav-item">
-                                <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Thanh toán</b></a></div>
-                            </li>
-                            <?php
-                                }else if($customer_id != NULL && $shipping_id != NULL){
-                            ?>
-                            <li class="nav-item">
-                                <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/pill')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Thanh toán</b></a></div>
-                            </li>
-                            <?php
-                                }else {
-                            ?>
-                            <li class="nav-item">
-                                <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-credit-card-alt text-warning" aria-hidden="true"></i><b>Thanh toán</b></a></div>
-                            </li>
-                            <?php
-                            }
-                            ?>
+                            
                             <li class="nav-item cart-hover">
-                                <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/show-cart-ajax')}}">
+                                <div class=" text-lg font-semibold"><a class="nav-link  text-danger" title="Giỏ hàng" href="{{asset('/show-cart-ajax')}}">
                                 <i class="fa fa-shopping-cart text-warning" aria-hidden="true"></i>
-                                <b>Giỏ hàng <span id="show-cart"></span>
+                                <span id="show-cart"></span>
                                     <div class="clearfix"></div>
                                     <span class="hover-giohang"></span>
                                     
-                                </b></a></div>
+                                </a></div>
                             </li>    
-                            
-
-                            <?php
-                            $customer_id = Session::get('customer_id');
-                            if($customer_id != NULL)
-                            {
-                            ?>
-                            <li class="nav-item">
-                                <div class=" text-lg font-semibold"><a class="nav-link text-danger" href="{{asset('/history')}}"><i class="fa fa-history text-warning" aria-hidden="true"></i><b>Lịch sử</b></a></div>
-                            </li>
-                            <?php
-                                }
-                            ?>
+                        
                             <?php
                                 $customer_id = Session::get('customer_id');
                                 if($customer_id != NULL)
                                 {
                             ?>
                             <li class="nav-item">
-                                <a class="nav-link  text-danger" href="{{asset('/logout')}}"><i class="fa fa-sign-out text-warning" aria-hidden="true"></i><b>Đăng xuất</b></a>
+                                <a class="nav-link  text-danger" title="Đăng xuất" href="{{asset('/logout')}}"><i class="fa fa-sign-out text-warning" aria-hidden="true"></i></a>
                                 {{-- <img width="15%" src="{{Session::get('customer_picture')}}"><b class="text-danger">{{Session::get('customer_name')}}</b>  --}}
                                 <div class="top-nav clearfix">
                                     <!--search & user info start-->
@@ -371,7 +336,7 @@
                                         <!-- user login dropdown start-->
                                         <li class="dropdown">
                                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                                {{-- <img alt="" src="resources/images/4.png"> --}}
+                                                <img alt="" src="{{asset('resources/images/4.png')}}">
                                                 <span class="username">
                                                     <?php
                                                     if(Session::get('login_normal')){
@@ -389,7 +354,7 @@
                                             </a>
                                             <ul class="dropdown-menu extended logout">
                                                 <li><a href="{{asset('/edit-user/'.$customer_id)}}"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                                                
+                                                <li><a href="{{asset('/history')}}"><i class="fa fa-history" aria-hidden="true"></i>Lịch sử</a></li>
                                             </ul>
                                             
                                         </li>
@@ -403,7 +368,7 @@
                                 }else{
                             ?>
                             <li class="nav-item">
-                                <div class=" text-lg font-semibold"><a class="nav-link  text-danger" href="{{asset('/login-checkout')}}"><i class="fa fa-sign-in text-warning" aria-hidden="true"></i><b>Đăng nhập</b></a></div>
+                                <div class=" text-lg font-semibold"><a class="nav-link  text-danger" title="Đăng nhập" href="{{asset('/login-checkout')}}"><i class="fa fa-sign-in text-warning" aria-hidden="true"></i></a></div>
                             </li>
                             <?php
                             }

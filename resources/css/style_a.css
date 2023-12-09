@@ -7,7 +7,7 @@ html, body{
 	font-family: Arial, Helvetica, sans-serif;
     font-size: 100%;
     overflow-x: hidden;
-    background: url(../images/bg2.jpg) no-repeat 0px 0px;
+    /* background: url(../images/bg2.jpg) no-repeat 0px 0px; */
 	background-size:cover;
 }
 body a{
@@ -42,7 +42,8 @@ body a:hover{
     width:240px;
     height:100%;
     position:fixed;
-    background:url(../images/bgad1.jpg) no-repeat 0px 0px;
+    /* background:url(../images/bgad1.jpg) no-repeat 0px 0px; */
+    background-color: green;
 	background-size:cover;
     -webkit-transition:all .3s ease-in-out;
     -moz-transition:all .3s ease-in-out;
@@ -225,7 +226,7 @@ ul.sidebar-menu li a.active i {
     left:0;
     right:0;
     z-index:1002;
-    background:url(../images/bgad1.jpg) no-repeat 0px 0px;
+    /* background:url(../images/bgad1.jpg) no-repeat 0px 0px; */
 	background-size:cover;
     -webkit-transition:all .3s ease-in-out;
     -moz-transition:all .3s ease-in-out;
@@ -246,7 +247,7 @@ ul.sidebar-menu li a.active i {
     width:100%;
 }
 .brand {
-    background:url(../images/bgad1.jpg) no-repeat 0px 0px;
+    /* background:url(../images/bgad1.jpg) no-repeat 0px 0px; */
 	background-size:cover;
     float:left;
     width:240px;
@@ -609,7 +610,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     float:left;
     margin-top:23px;
     margin-left:-15px;
-    background:#8b5c7e;
+    background:#6fb8eb;
     border-radius:50%;
     -webkit-border-radius:50%;
     width:32px;
