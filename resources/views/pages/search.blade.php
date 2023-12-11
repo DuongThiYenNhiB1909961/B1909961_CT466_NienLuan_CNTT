@@ -25,6 +25,7 @@
                             <p class="card-text text-body" style="font-size: 12px; ">Đã bán: {{$product->product_sold}}</p>
                         </div>
                     </div>
+                    <center>
                     @for($count=1; $count<=5; $count++)
                             @php
                             if($count <= $rating){
@@ -43,7 +44,7 @@
                                 &#9733;</li>
 
                         @endfor
-                        <p class="text-danger list-inline-item">{{$rating}}/5</p>
+                    </center>  
                 </a>
             </div>
         

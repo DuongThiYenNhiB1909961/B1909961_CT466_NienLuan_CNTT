@@ -353,7 +353,11 @@
                                                 <b class="caret"></b>
                                             </a>
                                             <ul class="dropdown-menu extended logout">
-                                                <li><a href="{{asset('/edit-user/'.$customer_id)}}"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                                                @if(Session::get('customer_id'))
+                                                    <li><a href="{{asset('/edit-user/'.$customer_id)}}"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                                                @else
+                                                    <li><a href="{{asset('/login-checkout')}}"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                                                @endif
                                                 <li><a href="{{asset('/history')}}"><i class="fa fa-history" aria-hidden="true"></i>Lịch sử</a></li>
                                             </ul>
                                             
@@ -844,6 +848,9 @@
                             hover_cart();
                         } 
                         });
+                        window.setTimeout(function(){ 
+                            window.location.href = "{{url('/product')}}";
+                        } ,1000);
                     }
                 
             });

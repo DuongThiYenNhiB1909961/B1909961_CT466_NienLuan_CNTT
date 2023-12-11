@@ -31,7 +31,6 @@ class IndexController extends Controller
             }
     }
     public function edit_user(Request $request, $customer_id){
-        $this->AuthLogin();
         $meta_desc = "Cập nhật thông tin cá nhân";
         $meta_keywords = "Cập nhật thông tin cá nhân";
         $meta_title = "Cập nhật thông tin cá nhân";

@@ -33,9 +33,9 @@ class CheckOutController extends Controller
         $data = $request->all();
         $code_checkout = rand(00,9999);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://nhiduongcosmetic.com/My_Project_NL/history";
-        $vnp_TmnCode = "ZU3N7DTF";//Mã website tại VNPAY 
-        $vnp_HashSecret = "IQHXBDDEGRVHPRHLRBLVVYZREIZSYFEI"; //Chuỗi bí mật
+        $vnp_Returnurl = "http://nhiduongcosmetic.com/My_Project_NL/";
+        $vnp_TmnCode = "5J16RWXU";//Mã website tại VNPAY 
+        $vnp_HashSecret = "IHBTAQQXMMIPPIOUTDUIKAZFMMRMFDYA"; //Chuỗi bí mật
         
         $vnp_TxnRef = $code_checkout; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = 'Thanh toán đơn hàng test';

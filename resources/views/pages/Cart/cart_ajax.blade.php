@@ -35,11 +35,11 @@
         <table class="table table-striped b-t b-light rounded-lg">
           <thead >
             <tr class="bg-warning text-white ">
-              <th>Tên</th>
+              <th>Tên sản phẩm</th>
               <th>Hình ảnh</th>
               <th>Giá</th>
-              <th>Số lượng</th>
-              <th>Thành tiền</th>
+              <th>SL</th>
+              <th>Tổng</th>
               <th>
                 <a href="{{asset('/del-all-product')}}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-danger bi bi-trash3-fill" viewBox="0 0 16 16">
